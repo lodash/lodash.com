@@ -1,0 +1,13 @@
+title: lodash
+url: https://lodash.github.io
+baseurl: /
+
+defaults:
+  - scope:
+      path: ''
+    values:
+      layout: base
+
+include:
+  - '_css'
+  - '_js'
