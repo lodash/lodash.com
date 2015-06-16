@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" id="{{ page.id }}">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }}</title>
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="feed alternate" type="application/atom+xml" href="https://github.com/lodash/lodash/commits/master.atom">
+  <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+ </head>
+ <body>
+{{ content }}
+  <footer></footer>
+  <script src="/assets/js/lodash.js"></script>
+  <script>_gaq=[['_setAccount','UA-6065217-64'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='https://www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ </body>
+</html>
