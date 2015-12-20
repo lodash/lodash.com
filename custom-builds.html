@@ -65,6 +65,7 @@ title: lodash custom builds
    <li>The <code>modularize</code> command uses the first `exports` values as its module format, ignoring subsequent values.</li>
    <li>Unless specified by <code>-o</code> or <code>--output</code> all files created are saved to the current working directory</li>
    <li>Node.js 0.10.8-0.10.11 <a href="https://github.com/joyent/node/issues/5622">have</a> <a href="https://github.com/joyent/node/issues/5688">bugs</a> preventing minified builds</li>
+   <li>If building with <code>include=chain</code>, you must also include <code>value</code>; e.g. <code>include=chain,value</code>.</li>
   </ul>
 
   <p>The following options are also supported:</p>
