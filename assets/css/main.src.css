@@ -88,13 +88,13 @@ pre .br0, pre .sy0, pre .kw1 { color:#ddd; }
 
 /* large viewports */
 @media (min-width:960px) {
-  #docs body { box-shadow:none; height:100%; margin:0; }
+  #docs body { box-shadow:none; height:100%; margin:0; overflow: hidden; }
   #docs a[href="#docs"], #docs footer { display:none; }
   #docs h1 { position:fixed; background-color: #fff; top:0; left:0; right:0; z-index:1; }
   #docs h3 a { display:block; position:relative; visibility:hidden; top:-4em; /* equal to negative of (.doc-container padding-top) + (h3 margin-top) */ }
   #docs .toc-container { background:#fff; bottom:0; left:0; overflow-y:scroll; overflow-x:hidden; position:fixed; top:3.5em; white-space:nowrap; width:20%; -webkit-overflow-scrolling:touch; }
   #docs .toc-container h2, #docs .toc-container ul { margin-top:0; padding:0 10px; }
-  #docs .doc-container { background:#fff; width:80%; margin-left:20%; padding-top:3.5em; }
+  #docs .doc-container { background:#fff; width:80%; margin-left:20%; margin-top:3.5em; overflow-x: hidden; overflow-y: scroll; height: 100%; -webkit-overflow-scrolling:touch; }
   #docs .doc-container .first-heading { margin-top:0; }
 }
 
