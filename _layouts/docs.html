@@ -1,0 +1,38 @@
+---
+layout: base
+bodyClass: 'documentation'
+---
+
+<header>
+  <div class="container">
+    <div class="header-section logo-section">
+      <div class="logo">
+        <a href="/"><img src="/assets/img/lodash.svg"></a>
+      </div>
+      <div class="header-group">
+        <h1>lodash
+          <select name="version" id="version">
+            <option value="" {% if page.version == blank %}selected{% endif %} disabled>Version</option>
+            <option value="v4.13.1" {% if page.version == 'v4.13.1' %} selected {% endif %}>v4.13.1</option>
+            <option value="v4.13.0" {% if page.version == 'v4.13.0' %} selected {% endif %}>v4.13.0</option>
+          </select>
+        </h1>
+      </div>
+    </div>
+    <div class="header-section mobile-menu">
+      <a href="javascript:void(0);"><i class="fa fa-bars" aria-hidden="true"></i>Menu</a>
+    </div>
+  </div>
+</header>
+<div class="doc-main">
+  {{ content }}
+</div>
+
+<script src="https://fb.me/react-15.1.0.min.js"></script>
+<script src="https://fb.me/react-dom-15.1.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script type="text/babel" src="/assets/js/docs.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="https://embed.tonicdev.com"></script>
+

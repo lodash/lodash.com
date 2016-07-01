@@ -4,4 +4,6 @@ defaults:
   - scope:
       path: ''
     values:
-      layout: base
+      layout: default
+
+latestRelease: 4.13.1
