@@ -1,22 +1,24 @@
 ---
 id: custom-builds
 title: lodash custom builds
+layout: default
 ---
-  <hgroup>
-   <h1><a href="/">lodash</a> <span>v3.9.3</span></h1>
-   <h2>Custom builds</h2>
-  </hgroup>
 
+<section>
+  <h1>Custom builds</h1>
   <p>Custom builds make it easy to create lightweight versions of lodash containing only the features you need. To top it off, we handle all function dependency &amp; alias mapping for you. Review the <a href="https://github.com/lodash/lodash/wiki/build-differences">build differences</a> &amp; pick the one that’s right for you.</p>
   <p>Using Grunt? We also provide a <a href="https://npmjs.org/package/grunt-lodash">Grunt plugin</a> to build lodash as part of your Gruntfile.</p>
   <p>The <code>lodash</code> command-line utility is available when <a href="https://npmjs.org/package/lodash-cli">lodash-cli</a> is installed as a global package:<pre><code>$ {sudo -H} npm i -g npm<br>$ {sudo -H} npm i -g lodash-cli<br>$ lodash -h</code></pre></p>
   <p><strong>Note:</strong> Uninstall older versions <em>before</em> installing <code>lodash-cli</code>.</p>
+</section>
 
-  <ul class="multiline-items">
+<section>
+  <h2>Build types</h2>
+  <ul class="chevron">
    <li>Compat builds, with support for old &amp; new environments, are created using the <code>compat</code> modifier. <em>(default)</em>
     <pre><code>lodash compat</code></pre>
    </li>
-   <li>Modern builds, tailored for newer environments with <a href="https://es5.github.io/">ES5</a>/<a href="ttps://people.mozilla.org/~jorendorff/es6-draft.html">ES6</a> support, are created using the <code>modern</code> modifier.
+   <li>Modern builds, tailored for newer environments with <a href="https://es5.github.io/">ES5</a>/<a href="https://people.mozilla.org/~jorendorff/es6-draft.html">ES6</a> support, are created using the <code>modern</code> modifier.
     <pre><code>lodash modern</code></pre>
    </li>
    <li>Strict builds, with <a href="https://es5.github.io/#C">ES strict mode</a> enabled, are created using the <code>strict</code> modifier.
@@ -26,9 +28,11 @@ title: lodash custom builds
     <pre><code>lodash modularize</code></pre>
    </li>
   </ul>
+</section>
 
-  <p>Build commands:</p>
-  <ul class="multiline-items">
+<section>
+  <h2>Build commands:</h2>
+  <ul class="chevron">
    <li>Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories are <em>“array”</em>, <em>“chain”</em>, <em>“collection”</em>, <em>“date”</em>, <em>“function”</em>, <em>“lang”</em>, <em>“object”</em>, <em>“number”</em>, <em>“string”</em>, &amp; <em>“utility”</em>.
     <pre><code>lodash category<span class="sy0">=</span>collection<span class="sy0">,</span>function</code></pre>
    </li>
@@ -58,7 +62,10 @@ title: lodash custom builds
     <pre><code>lodash moduleId<span class="sy0">=</span>underscore</code></pre>
    </li>
   </ul>
-  <p><strong>Notes:</strong></p>
+</section>
+
+<section>
+  <h2><strong>Notes:</strong></h2>
   <ul>
    <li>All commands except <code>compat</code> &amp; <code>modern</code> may be combined</li>
    <li>The <code>exports</code> values <em>“es”</em> &amp; <em>“npm”</em> may only be used in conjunction with the <code>modularize</code> command</li>
@@ -78,3 +85,4 @@ title: lodash custom builds
    <li><code>-s</code>, <code>--silent</code> ............... Skip status updates normally logged to the console</li>
    <li><code>-V</code>, <code>--version</code> ............. Output current version of lodash</li>
   </ul>
+</section>
