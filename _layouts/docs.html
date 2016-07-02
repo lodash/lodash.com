@@ -12,10 +12,11 @@ bodyClass: 'documentation'
       <div class="header-group">
         <h1>lodash
           <select name="version" id="version">
-            <option value="" {% if page.version == blank %}selected{% endif %} disabled>Version</option>
-            <option value="v4.13.1" {% if page.version == 'v4.13.1' %} selected {% endif %}>v4.13.1</option>
-            <option value="v3.10.1" {% if page.version == 'v3.10.1' %} selected {% endif %}>v3.10.1</option>
-            <option value="v2.4.2" {% if page.version == 'v2.4.2' %} selected {% endif %}>v2.4.2</option>
+            <option value="" {% if page.version == null %}selected{% endif %} disabled>Version</option>
+            {% for release in site.releases %}
+              {% assign version = release | prepend: 'v' %}
+              <option value="{{ version }}" {% if page.version == version %}selected{% endif %}>{{ version }}</option>
+            {% endfor %}
           </select>
         </h1>
       </div>
@@ -36,4 +37,3 @@ bodyClass: 'documentation'
 
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script src="https://embed.tonicdev.com"></script>
-
