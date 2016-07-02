@@ -534,15 +534,16 @@ a.anchor {
   }
 }
 
+.deep-link a:first-child {
+  display: none;
+}
+
 .deep-link a {
+  display: block;
+  position: relative;
   color: inherit;
   border: 0;
-
-   &:hover {
-     cursor: default;
-     border: 0;
-     color: inherit;
-   }
+  top: -1.8em;
 }
 
 ul.secondary-links {
