@@ -22,8 +22,4 @@ The lodash website.
 
 1. Generate the new documentation by running `npm run doc:sitehtml` in the `lodash/lodash` repo and copying the file over.
 1. Update the `latestRelease` variable in `_config.yml`.
-1. Add an option for the new version to the version selector in `_layouts/docs.html`. E.g.:
-
-    ```html
-    <option value="v4.13.0" {% if page.version == 'v4.13.0' %} selected {% endif %}>v4.13.0</option>
-    ```
+1. Update the `releases` variable in `_config.yml`.
