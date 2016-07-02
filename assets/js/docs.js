@@ -16,11 +16,11 @@ const Menu = React.createClass({
   componentWillMount: function() {
     // Before component mounts, use the initial html for initial state
     let content = menuElem.children;
-    content = _.map(content, (elem) => {
+    content = _.map(content, elem => {
       return {
         title: elem.querySelector('h2 code').innerText,
         expanded: true,
-        functions: _.map(elem.querySelectorAll('ul li a'), (val) => {
+        functions: _.map(elem.querySelectorAll('ul li a'), val => {
           return {
             name: val.innerText,
             href: val.getAttribute('href'),
@@ -35,12 +35,11 @@ const Menu = React.createClass({
   },
 
   onChangeExpanded: function(title) {
-    const content = this.state.content.map((val) => {
-      if (val.title === title) {
-        val.expanded = !val.expanded;
+    const content = this.state.content.map(value => {
+      if (value.title === title) {
+        value.expanded = !value.expanded;
       }
-
-      return val;
+      return value;
     });
 
     this.setState({
@@ -67,7 +66,7 @@ const Menu = React.createClass({
   },
 
   render: function() {
-    const {content, searchVal} = this.state;
+    const { content, searchVal } = this.state;
 
     const filtered =
       content
@@ -75,16 +74,15 @@ const Menu = React.createClass({
           // If search is for collection title, return collection
           if (collection.title.toLowerCase().includes(searchVal.toLowerCase())) {
             return collection;
-          } else {
-            // Else if search is for func, return matching functions
-            return {
-              title: collection.title,
-              expanded: collection.expanded,
-              functions: collection.functions.filter(
-                func => func.name.toLowerCase().includes(searchVal.toLowerCase())
-              ),
-            };
           }
+          // Else if search is for func, return matching functions
+          return {
+            title: collection.title,
+            expanded: collection.expanded,
+            functions: collection.functions.filter(
+              func => func.name.toLowerCase().includes(searchVal.toLowerCase())
+            ),
+          };
         })
         .filter(collection => collection.functions.length > 0);
 
@@ -104,13 +102,13 @@ const Menu = React.createClass({
             ? ''
             : <ul>
                 {
-                  collection.functions.map((func) => {
+                  collection.functions.map(func => {
                     return (
                       <li>
                         <a
-                          href={func.href}
-                          onClick={this.onClickFuncName}>
-                          <code>{func.name}</code>
+                          href={ func.href }
+                          onClick={ this.onClickFuncName }>
+                          <code>{ func.name }</code>
                         </a>
                       </li>
                     );
@@ -129,8 +127,8 @@ const Menu = React.createClass({
           <input
             type="search"
             placeholder="Search"
-            value={this.state.searchVal}
-            onChange={this.onChangeSearch.bind(this) } />
+            value={ this.state.searchVal }
+            onChange={ this.onChangeSearch.bind(this) } />
         </div>
         {collections}
       </div>
@@ -143,7 +141,7 @@ ReactDOM.render(
   menuElem
 );
 
-_.forEach(replElems, (pre) => {
+_.forEach(replElems, pre => {
   const button = document.createElement('a');
   const parent = pre.parentElement;
 
@@ -152,7 +150,7 @@ _.forEach(replElems, (pre) => {
   parent.appendChild(button);
   parent.style.position = 'relative';
 
-  button.addEventListener('click', (evt) => {
+  button.addEventListener('click', () => {
     const source = [requireLodash, pre.innerText].join('\n\n');
 
     pre.style.minHeight = pre.scrollHeight + 'px';
@@ -168,23 +166,20 @@ _.forEach(replElems, (pre) => {
         // specify the source of the notebook
         source: source,
 
-        onLoad: (notebook) => {
-          notebook.evaluate(null);
-        },
+        onLoad: notebook => notebook.evaluate(null),
       });
     }, 500);
 
   });
 });
 
-mobileMenu.addEventListener('click', (e) => {
+mobileMenu.addEventListener('click', () => {
   menuElem.classList.toggle('open');
 });
 
 versionElem.addEventListener('change', e => {
   const { value } = e.target;
-
   if (value) {
-    window.location.href = `/docs/${value}`;
+    location.href = `/docs/${ value }`;
   }
 });
