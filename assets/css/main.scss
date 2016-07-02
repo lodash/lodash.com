@@ -534,15 +534,23 @@ a.anchor {
   }
 }
 
-.deep-link a:first-child {
+.deep-link a {
+  color: inherit;
+  border: 0;
+  &:hover {
+    cursor: default;
+    border: 0;
+    color: inherit;
+  }
+}
+
+h3.deep-link a:first-child {
   display: none;
 }
 
-.deep-link a {
+h3.deep-link a {
   display: block;
   position: relative;
-  color: inherit;
-  border: 0;
   top: -2rem;
 }
 
