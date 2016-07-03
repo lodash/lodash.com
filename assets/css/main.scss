@@ -507,7 +507,6 @@ body.layout-docs {
   }
 
   header {
-    position: static;
     min-height: 56px;
     padding: 0;
   }
@@ -657,9 +656,7 @@ pre.repl + .btn-repl {
   }
 }
 
-[id^="user-content-arguments"],
-[id^="user-content-returns"],
-[id^="user-content-since"] {
+.doc-container h4 {
   & + ol code,
   & + ol em,
   & + p em {
