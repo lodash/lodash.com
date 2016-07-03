@@ -505,6 +505,17 @@ body.layout-docs {
   .doc-main {
     flex: 1 1 auto;
   }
+
+  header {
+    position: static;
+    min-height: 56px;
+    padding: 0;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .mobile-menu {
