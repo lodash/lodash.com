@@ -150,8 +150,8 @@ _.forEach(replElems, pre => {
   parent.appendChild(button);
   parent.style.position = 'relative';
 
-  button.addEventListener('click', () => {
-    const source = [requireLodash, pre.innerText].join('\n\n');
+  button.addEventListener('click', (evt) => {
+    const source = [pre.innerText].join('\n\n');
 
     pre.style.minHeight = pre.scrollHeight + 'px';
     pre.innerHTML = '';
@@ -165,6 +165,8 @@ _.forEach(replElems, pre => {
 
         // specify the source of the notebook
         source: source,
+        
+        preamble: "var _ = require(\"lodash@" +versionElem.value.substr(1) +"\")",
 
         onLoad: notebook => notebook.evaluate(null),
       });
