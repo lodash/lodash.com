@@ -330,7 +330,7 @@ pre,
   background: $codeBg;
   color: $codeColor;
   margin: 0;
-  overflow-x: scroll;
+  overflow-x: auto;
   -webkit-overflow-scrolling:touch;
   position: relative;
   transition: all 0.4s ease;
@@ -345,6 +345,9 @@ pre,
 
   &.repl {
     background: $foreground;
+    margin: 0 -36px;
+    padding: 0 36px;
+    overflow-x: hidden;
   }
 }
 pre.intro {
