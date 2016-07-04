@@ -1,8 +1,8 @@
 ;(function() {
-  var menuElem = document.querySelector('.toc-container'),
+  var menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
-      replElems = document.querySelectorAll('.highlight.js'),
-      versionElem = document.getElementById('version');
+      repls = document.querySelectorAll('.highlight.js'),
+      versionSelect = document.getElementById('version');
 
   var requireLodash = "const _ = require('lodash');";
 
@@ -18,7 +18,7 @@
 
     'componentWillMount': function() {
       // Before component mounts, use the initial html for initial state.
-      var content = _.map(menuElem.children, function(node) {
+      var content = _.map(menuEl.children, function(node) {
         return {
           'title': node.querySelector('h2 code').innerText,
           'expanded': true,
@@ -59,7 +59,7 @@
       var _this = this;
 
       // Close mobile menu.
-      menuElem.classList.remove('open');
+      menuEl.classList.remove('open');
 
       // Empty search box.
       _.defer(function() {
@@ -153,10 +153,10 @@
 
   ReactDOM.render(
     React.createElement(Menu, null),
-    menuElem
+    menuEl
   );
 
-  _.forEach(replElems, function(pre) {
+  _.forEach(repls, function(pre) {
     var button = document.createElement('a'),
         parent = pre.parentElement;
 
@@ -191,10 +191,10 @@
   });
 
   mobileMenu.addEventListener('click', function() {
-    menuElem.classList.toggle('open');
+    menuEl.classList.toggle('open');
   });
 
-  versionElem.addEventListener('change', function(e) {
+  versionSelect.addEventListener('change', function(e) {
     var value = e.target.value;
     if (value) {
       location.href = '/docs/' + value;
