@@ -194,8 +194,12 @@
 
   versionSelect.addEventListener('change', function(e) {
     var value = e.target.value;
+
     if (value) {
-      location.href = '/docs/' + value;
+      location.href =
+        value === '1.3.1'
+        ? 'https://github.com/lodash/lodash/blob/1.3.1/doc/README.md'
+        : '/docs/' + value;
     }
   });
 }());
