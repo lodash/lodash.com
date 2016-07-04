@@ -4,8 +4,6 @@
       repls = document.querySelectorAll('.highlight.js'),
       versionSelect = document.getElementById('version');
 
-  var requireLodash = "const _ = require('lodash');";
-
   var Menu = React.createClass({
     'displayName': 'Menu',
 
@@ -166,8 +164,7 @@
     parent.style.position = 'relative';
 
     button.addEventListener('click', function() {
-      var source = [requireLodash, pre.innerText].join('\n\n');
-
+      var source = pre.innerText + '\n\n';
       pre.style.minHeight = pre.scrollHeight + 'px';
       pre.innerHTML = '';
       pre.classList.add('repl');
@@ -176,12 +173,9 @@
         parent.removeChild(button);
 
         var notebook = Tonic.createNotebook({
-          // The parent element for the new notebook.
           'element': pre,
-
-          // Specify the source of the notebook.
+          'preamble': 'var _ = require("lodash@' + versionSelect.value.slice(1) +'")',
           'source': source,
-
           'onLoad': function(notebook) {
             notebook.evaluate(null);
           }
