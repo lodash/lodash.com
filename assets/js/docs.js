@@ -12,7 +12,7 @@
     'getInitialState': function() {
       return {
         'content': [],
-        'searchVal': ''
+        'searchValue': ''
       };
     },
 
@@ -51,7 +51,7 @@
 
     'onChangeSearch': function(e) {
       this.setState({
-        'searchVal': e.target.value
+        'searchValue': e.target.value
       });
     },
 
@@ -64,7 +64,7 @@
       // Empty search box.
       _.defer(function() {
         _this.setState({
-          'searchVal': ''
+          'searchValue': ''
         });
       });
     },
@@ -72,13 +72,13 @@
     'render': function() {
       var _this = this,
           content = this.state.content,
-          searchVal = this.state.searchVal,
-          lowerSearchVal = searchVal.toLowerCase();
+          searchValue = this.state.searchValue,
+          lowerSearchValue = searchValue.toLowerCase();
 
       var filtered = _(content)
         .map(function(collection) {
           // If search is for collection title, return collection.
-          if (_.includes(collection.title.toLowerCase(), lowerSearchVal)) {
+          if (_.includes(collection.title.toLowerCase(), lowerSearchValue)) {
             return collection;
           }
           // Else if search is for func, return matching functions.
@@ -86,7 +86,7 @@
             'title': collection.title,
             'expanded': collection.expanded,
             'functions': _.filter(collection.functions, function(func) {
-              return _.includes(func.name.toLowerCase(), lowerSearchVal);
+              return _.includes(func.name.toLowerCase(), lowerSearchValue);
             })
           };
         })
@@ -142,7 +142,7 @@
           React.createElement('input', {
             'type': 'search',
             'placeholder': 'Search',
-            'value': this.state.searchVal,
+            'value': this.state.searchValue,
             'onChange': _.bind(this.onChangeSearch, this)
           })
         ),
