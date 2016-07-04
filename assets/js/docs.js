@@ -38,7 +38,7 @@
 
     'onChangeExpanded': function(title) {
       var content = _.map(this.state.content, function(value) {
-        if (value.title === title) {
+        if (value.title == title) {
           value.expanded = !value.expanded;
         }
         return value;
