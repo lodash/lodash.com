@@ -4,6 +4,10 @@
       repls = document.querySelectorAll('.highlight.js'),
       versionSelect = document.getElementById('version');
 
+  function search(string, target) {
+    return _.includes(string.toLowerCase(), target.toLowerCase());
+  }
+
   var Menu = React.createClass({
     'displayName': 'Menu',
 
@@ -70,21 +74,20 @@
     'render': function() {
       var _this = this,
           content = this.state.content,
-          searchValue = this.state.searchValue,
-          lowerSearchValue = searchValue.toLowerCase();
+          searchValue = this.state.searchValue;
 
       var filtered = _(content)
         .map(function(collection) {
           // If search is for a collection title, return collection.
-          if (_.includes(collection.title.toLowerCase(), lowerSearchValue)) {
+          if (search(collection.title, searchValue)) {
             return collection;
           }
           // Else if search is for a function, return matching functions.
           return {
             'title': collection.title,
             'expanded': collection.expanded,
-            'functions': _.filter(collection.functions, function(func) {
-              return _.includes(func.name.toLowerCase(), lowerSearchValue);
+            'functions': _.filter(collection.functions, function(data) {
+              return search(data.name, searchValue);
             })
           };
         })
@@ -108,20 +111,20 @@
           !collection.expanded ? '' : React.createElement(
             'ul',
             null,
-            _.map(collection.functions, function(object) {
+            _.map(collection.functions, function(data) {
               return React.createElement(
                 'li',
                 null,
                 React.createElement(
                   'a',
                   {
-                    'href': object.href,
+                    'href': data.href,
                     'onClick': _this.onClickFuncName
                   },
                   React.createElement(
                     'code',
                     null,
-                    object.name
+                    data.name
                   )
                 )
               );
