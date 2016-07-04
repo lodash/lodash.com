@@ -75,11 +75,11 @@
 
       var filtered = _(content)
         .map(function(collection) {
-          // If search is for collection title, return collection.
+          // If search is for a collection title, return collection.
           if (_.includes(collection.title.toLowerCase(), lowerSearchValue)) {
             return collection;
           }
-          // Else if search is for func, return matching functions.
+          // Else if search is for a function, return matching functions.
           return {
             'title': collection.title,
             'expanded': collection.expanded,
@@ -108,20 +108,20 @@
           !collection.expanded ? '' : React.createElement(
             'ul',
             null,
-            _.map(collection.functions, function(func) {
+            _.map(collection.functions, function(object) {
               return React.createElement(
                 'li',
                 null,
                 React.createElement(
                   'a',
                   {
-                    'href': func.href,
+                    'href': object.href,
                     'onClick': _this.onClickFuncName
                   },
                   React.createElement(
                     'code',
                     null,
-                    func.name
+                    object.name
                   )
                 )
               );
@@ -136,10 +136,12 @@
         React.createElement(
           'div',
           { 'className': 'search' },
-          React.createElement('span', { 'className': 'fa fa-search' }),
+          React.createElement('span', {
+            'className': 'fa fa-search'
+          }),
           React.createElement('input', {
-            'type': 'search',
             'placeholder': 'Search',
+            'type': 'search',
             'value': this.state.searchValue,
             'onChange': _.bind(this.onChangeSearch, this)
           })
@@ -172,12 +174,12 @@
       _.delay(function() {
         parent.removeChild(button);
 
-        var notebook = Tonic.createNotebook({
+        Tonic.createNotebook({
           'element': pre,
           'preamble': 'var _ = require("lodash@' + versionSelect.value.slice(1) +'")',
           'source': source,
           'onLoad': function(notebook) {
-            notebook.evaluate(null);
+            notebook.evaluate();
           }
         });
       }, 500);
