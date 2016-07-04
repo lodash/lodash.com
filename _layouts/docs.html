@@ -14,8 +14,7 @@ bodyClass: 'documentation'
           <select id="version">
             <option value="" {% if page.version == null %}selected{% endif %} disabled>Version</option>
             {% for release in site.releases %}
-              {% assign version = release | prepend: 'v' %}
-              <option value="{{ version }}" {% if page.version == version %}selected{% endif %}>{{ version }}</option>
+              <option value="{{ release }}" {% if page.version == release %}selected{% endif %}>v{{ release }}</option>
             {% endfor %}
           </select>
         </h1>

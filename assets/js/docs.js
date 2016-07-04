@@ -176,7 +176,7 @@
 
         Tonic.createNotebook({
           'element': pre,
-          'preamble': 'var _ = require("lodash@' + versionSelect.value.slice(1) +'")',
+          'preamble': 'var _ = require("lodash@' + versionSelect.value +'")',
           'source': source,
           'onLoad': function(notebook) {
             notebook.evaluate();
