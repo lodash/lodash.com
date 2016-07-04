@@ -2,6 +2,7 @@
   var menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       repls = document.querySelectorAll('.highlight.js'),
+      version = location.pathname.match(/[\d.]+$/)[0],
       versionSelect = document.getElementById('version');
 
   function search(string, target) {
@@ -159,7 +160,14 @@
     menuEl
   );
 
-  _.forEach(repls, function(pre) {
+  _.each(versionSelect.options, function(option) {
+    if (option.value == version) {
+      option.selected = true;
+      return false;
+    }
+  });
+
+  _.each(repls, function(pre) {
     var button = document.createElement('a'),
         parent = pre.parentElement;
 
