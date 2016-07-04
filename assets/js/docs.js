@@ -176,6 +176,7 @@
 
         Tonic.createNotebook({
           'element': pre,
+          'nodeVersion': '*',
           'preamble': 'var _ = require("lodash@' + versionSelect.value +'")',
           'source': source,
           'onLoad': function(notebook) {
