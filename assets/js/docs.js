@@ -164,7 +164,7 @@
     parent.style.position = 'relative';
 
     button.addEventListener('click', function() {
-      var source = pre.innerText + '\n\n';
+      var source = pre.innerText;
       pre.style.minHeight = pre.scrollHeight + 'px';
       pre.innerHTML = '';
       pre.classList.add('repl');
