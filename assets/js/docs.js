@@ -6,12 +6,10 @@ const menuElem = document.querySelector('.toc-container'),
 const requireLodash = "const _ = require('lodash');";
 
 const Menu = React.createClass({
-  getInitialState: () => {
-    return {
-      content: [],
-      searchVal: '',
-    }
-  },
+  getInitialState: () => ({
+    content: [],
+    searchVal: ''
+  }),
 
   componentWillMount: function() {
     // Before component mounts, use the initial html for initial state
@@ -20,12 +18,10 @@ const Menu = React.createClass({
       return {
         title: elem.querySelector('h2 code').innerText,
         expanded: true,
-        functions: _.map(elem.querySelectorAll('ul li a'), val => {
-          return {
-            name: val.innerText,
-            href: val.getAttribute('href'),
-          }
-        }),
+        functions: _.map(elem.querySelectorAll('ul li a'), value => ({
+          name: value.innerText,
+          href: value.getAttribute('href')
+        }))
       }
     });
 
@@ -81,7 +77,7 @@ const Menu = React.createClass({
             expanded: collection.expanded,
             functions: collection.functions.filter(
               func => func.name.toLowerCase().includes(searchVal.toLowerCase())
-            ),
+            )
           };
         })
         .filter(collection => collection.functions.length > 0);
@@ -133,7 +129,7 @@ const Menu = React.createClass({
         {collections}
       </div>
     );
-  },
+  }
 });
 
 ReactDOM.render(
@@ -169,7 +165,6 @@ _.forEach(replElems, pre => {
         onLoad: notebook => notebook.evaluate(null),
       });
     }, 500);
-
   });
 });
 
