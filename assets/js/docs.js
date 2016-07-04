@@ -1,180 +1,203 @@
-const menuElem = document.querySelector('.toc-container'),
+;(function() {
+  var menuElem = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       replElems = document.querySelectorAll('.highlight.js'),
       versionElem = document.getElementById('version');
 
-const requireLodash = "const _ = require('lodash');";
+  var requireLodash = "const _ = require('lodash');";
 
-const Menu = React.createClass({
-  getInitialState: () => ({
-    content: [],
-    searchVal: ''
-  }),
+  var Menu = React.createClass({
+    'displayName': 'Menu',
 
-  componentWillMount: function() {
-    // Before component mounts, use the initial html for initial state
-    let content = menuElem.children;
-    content = _.map(content, elem => {
+    'getInitialState': function() {
       return {
-        title: elem.querySelector('h2 code').innerText,
-        expanded: true,
-        functions: _.map(elem.querySelectorAll('ul li a'), value => ({
-          name: value.innerText,
-          href: value.getAttribute('href')
-        }))
-      }
-    });
+        'content': [],
+        'searchVal': ''
+      };
+    },
 
-    this.setState({
-      content: content,
-    });
-  },
-
-  onChangeExpanded: function(title) {
-    const content = this.state.content.map(value => {
-      if (value.title === title) {
-        value.expanded = !value.expanded;
-      }
-      return value;
-    });
-
-    this.setState({
-      content: content
-    });
-  },
-
-  onChangeSearch: function(e) {
-    this.setState({
-      searchVal: e.target.value,
-    });
-  },
-
-  onClickFuncName: function() {
-    // Close mobile menu
-    menuElem.classList.remove('open');
-
-    // Empty search box
-    _.defer(() => {
-      this.setState({
-        searchVal: ''
+    'componentWillMount': function() {
+      // Before component mounts, use the initial html for initial state.
+      var content = _.map(menuElem.children, function(node) {
+        return {
+          'title': node.querySelector('h2 code').innerText,
+          'expanded': true,
+          'functions': _.map(node.querySelectorAll('ul li a'), function(anchor) {
+            return {
+              'name': anchor.innerText,
+              'href': anchor.getAttribute('href')
+            };
+          })
+        };
       });
-    });
-  },
 
-  render: function() {
-    const { content, searchVal } = this.state;
+      this.setState({
+        'content': content
+      });
+    },
 
-    const filtered =
-      content
-        .map(collection => {
-          // If search is for collection title, return collection
-          if (collection.title.toLowerCase().includes(searchVal.toLowerCase())) {
+    'onChangeExpanded': function(title) {
+      var content = _.map(this.state.content, function(value) {
+        if (value.title === title) {
+          value.expanded = !value.expanded;
+        }
+        return value;
+      });
+
+      this.setState({
+        'content': content
+      });
+    },
+
+    'onChangeSearch': function(e) {
+      this.setState({
+        'searchVal': e.target.value
+      });
+    },
+
+    'onClickFuncName': function() {
+      var _this = this;
+
+      // Close mobile menu.
+      menuElem.classList.remove('open');
+
+      // Empty search box.
+      _.defer(function() {
+        _this.setState({
+          'searchVal': ''
+        });
+      });
+    },
+
+    'render': function() {
+      var _this = this,
+          content = this.state.content,
+          searchVal = this.state.searchVal,
+          lowerSearchVal = searchVal.toLowerCase();
+
+      var filtered = _(content)
+        .map(function(collection) {
+          // If search is for collection title, return collection.
+          if (_.includes(collection.title.toLowerCase(), lowerSearchVal)) {
             return collection;
           }
-          // Else if search is for func, return matching functions
+          // Else if search is for func, return matching functions.
           return {
-            title: collection.title,
-            expanded: collection.expanded,
-            functions: collection.functions.filter(
-              func => func.name.toLowerCase().includes(searchVal.toLowerCase())
-            )
+            'title': collection.title,
+            'expanded': collection.expanded,
+            'functions': _.filter(collection.functions, function(func) {
+              return _.includes(func.name.toLowerCase(), lowerSearchVal);
+            })
           };
         })
-        .filter(collection => collection.functions.length > 0);
+        .filter('functions.length')
+        .value();
 
-    const collections = filtered.map(collection => {
-      return (
-        <div>
-          <h2>
-            <span
-              className={ collection.expanded ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o' }
-              style={{ marginRight: 10, fontSize: 14, cursor: 'pointer' }}
-              onClick={this.onChangeExpanded.bind(this, collection.title)}>
-            </span>
-            {collection.title}
-          </h2>
-          {
-            !collection.expanded
-            ? ''
-            : <ul>
-                {
-                  collection.functions.map(func => {
-                    return (
-                      <li>
-                        <a
-                          href={ func.href }
-                          onClick={ this.onClickFuncName }>
-                          <code>{ func.name }</code>
-                        </a>
-                      </li>
-                    );
-                  })
-                }
-              </ul>
-          }
-        </div>
-      )
-    });
-
-    return (
-      <div>
-        <div className="search">
-          <span className="fa fa-search"></span>
-          <input
-            type="search"
-            placeholder="Search"
-            value={ this.state.searchVal }
-            onChange={ this.onChangeSearch.bind(this) } />
-        </div>
-        {collections}
-      </div>
-    );
-  }
-});
-
-ReactDOM.render(
-  <Menu />,
-  menuElem
-);
-
-_.forEach(replElems, pre => {
-  const button = document.createElement('a');
-  const parent = pre.parentElement;
-
-  button.classList.add('btn-repl');
-  button.innerText = 'Try in REPL';
-  parent.appendChild(button);
-  parent.style.position = 'relative';
-
-  button.addEventListener('click', () => {
-    const source = [requireLodash, pre.innerText].join('\n\n');
-
-    pre.style.minHeight = pre.scrollHeight + 'px';
-    pre.innerHTML = '';
-    pre.classList.add('repl');
-
-    _.delay(() => {
-      parent.removeChild(button);
-      const notebook = Tonic.createNotebook({
-        // the parent element for the new notebook
-        element: pre,
-
-        // specify the source of the notebook
-        source: source,
-
-        onLoad: notebook => notebook.evaluate(null),
+      var collections = _.map(filtered, function(collection) {
+        return React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'h2',
+            null,
+            React.createElement('span', {
+              'className': collection.expanded ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
+              'style': { 'marginRight': 10, 'fontSize': 14, 'cursor': 'pointer' },
+              'onClick': _.bind(_this.onChangeExpanded, _this, collection.title)
+            }),
+            collection.title
+          ),
+          !collection.expanded ? '' : React.createElement(
+            'ul',
+            null,
+            _.map(collection.functions, function(func) {
+              return React.createElement(
+                'li',
+                null,
+                React.createElement(
+                  'a',
+                  {
+                    'href': func.href,
+                    'onClick': _this.onClickFuncName
+                  },
+                  React.createElement(
+                    'code',
+                    null,
+                    func.name
+                  )
+                )
+              );
+            })
+          )
+        );
       });
-    }, 500);
+
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          { 'className': 'search' },
+          React.createElement('span', { 'className': 'fa fa-search' }),
+          React.createElement('input', {
+            'type': 'search',
+            'placeholder': 'Search',
+            'value': this.state.searchVal,
+            'onChange': _.bind(this.onChangeSearch, this)
+          })
+        ),
+        collections
+      );
+    }
   });
-});
 
-mobileMenu.addEventListener('click', () => {
-  menuElem.classList.toggle('open');
-});
+  ReactDOM.render(
+    React.createElement(Menu, null),
+    menuElem
+  );
 
-versionElem.addEventListener('change', e => {
-  const { value } = e.target;
-  if (value) {
-    location.href = `/docs/${ value }`;
-  }
-});
+  _.forEach(replElems, function(pre) {
+    var button = document.createElement('a'),
+        parent = pre.parentElement;
+
+    button.classList.add('btn-repl');
+    button.innerText = 'Try in REPL';
+    parent.appendChild(button);
+    parent.style.position = 'relative';
+
+    button.addEventListener('click', function() {
+      var source = [requireLodash, pre.innerText].join('\n\n');
+
+      pre.style.minHeight = pre.scrollHeight + 'px';
+      pre.innerHTML = '';
+      pre.classList.add('repl');
+
+      _.delay(function() {
+        parent.removeChild(button);
+
+        var notebook = Tonic.createNotebook({
+          // The parent element for the new notebook.
+          'element': pre,
+
+          // Specify the source of the notebook.
+          'source': source,
+
+          'onLoad': function(notebook) {
+            notebook.evaluate(null);
+          }
+        });
+      }, 500);
+    });
+  });
+
+  mobileMenu.addEventListener('click', function() {
+    menuElem.classList.toggle('open');
+  });
+
+  versionElem.addEventListener('change', function(e) {
+    var value = e.target.value;
+    if (value) {
+      location.href = '/docs/' + value;
+    }
+  });
+}());
