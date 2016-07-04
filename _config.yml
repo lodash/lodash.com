@@ -1,5 +1,3 @@
-title: lodash
-
 defaults:
   - scope:
       path: ''
