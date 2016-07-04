@@ -190,7 +190,8 @@
     });
   });
 
-  mobileMenu.addEventListener('click', function() {
+  mobileMenu.addEventListener('click', function(e) {
+    e.preventDefault();
     menuEl.classList.toggle('open');
   });
 
