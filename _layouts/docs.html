@@ -11,7 +11,7 @@ bodyClass: 'documentation'
       </div>
       <div class="header-group">
         <h1>lodash
-          <select name="version" id="version">
+          <select id="version">
             <option value="" {% if page.version == null %}selected{% endif %} disabled>Version</option>
             {% for release in site.releases %}
               {% assign version = release | prepend: 'v' %}
