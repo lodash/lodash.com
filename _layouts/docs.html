@@ -16,6 +16,10 @@ bodyClass: 'documentation'
             {% for release in site.releases %}
               <option value="{{ release }}" {% if page.version == release %}selected{% endif %}>v{{ release }}</option>
             {% endfor %}
+            {% unless site.releases contains page.version %}
+              <option value="{{ page.version }}" selected>v{{ page.version }}</option>
+            {% endunless %}
+            <option value="1.3.1">v1.3.1</option>
           </select>
         </h1>
       </div>
