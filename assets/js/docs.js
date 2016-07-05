@@ -2,7 +2,7 @@
   var menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       repls = document.querySelectorAll('.highlight.js'),
-      version = location.pathname.match(/[\d.]+$/)[0],
+      version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
   function search(string, target) {
