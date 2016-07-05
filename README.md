@@ -19,5 +19,4 @@ The Lodash website.
 ## Incrementing the Lodash Version
 
 1. Generate new documentation by running `npm run doc:sitehtml` in the `lodash/lodash` repo & copying it over.
-2. Update the `latestRelease` variable in `_config.yml`.
-3. Update the `releases` variable in `_config.yml`.
+2. Update the `release` field in `_config.yml`.

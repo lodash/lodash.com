@@ -4,8 +4,9 @@ defaults:
     values:
       layout: default
 
-latestRelease: 4.13.1
+release: &release 4.13.1
+
 releases:
-  - 4.13.1
+  - *release
   - 3.10.1
   - 2.4.2
