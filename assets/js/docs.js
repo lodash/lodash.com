@@ -6,7 +6,7 @@
       versionSelect = document.getElementById('version');
 
   function search(string, target) {
-    return _.includes(string.toLowerCase(), target.toLowerCase());
+    return string.toLowerCase().indexOf(target.toLowerCase()) > -1;
   }
 
   var Menu = React.createClass({
@@ -92,7 +92,9 @@
             })
           };
         })
-        .filter('functions.length')
+        .reject(function(collection) {
+          return _.isEmpty(collection.functions);
+        })
         .value();
 
       var collections = _.map(filtered, function(collection) {
