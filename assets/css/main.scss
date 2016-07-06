@@ -370,18 +370,23 @@ ul.space-bottom-20 > li {
 }
 
 /* social */
-#social {
+#social,
+#social .btn-gh,
+#social .btn-twitter-follow,
+#social .btn-twitter-share {
   height: 20px;
 }
 
-#social .twitter-follow-button {
-  width: 127px !important;
+#social .btn-gh {
+  width: 105px;
 }
 
-#social .twitter-follow-button,
-.twitter-share-button {
-  font-size: 0.8em;
-  vertical-align: top;
+#social .btn-twitter-follow {
+  width: 120px;
+}
+
+#social .btn-twitter-share {
+  width: 95px;
 }
 
 /*
