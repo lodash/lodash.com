@@ -1,9 +1,3 @@
-defaults:
-  - scope:
-      path: ''
-    values:
-      layout: default
-
 release: &release 4.13.1
 
 releases:
