@@ -599,21 +599,21 @@ pre.repl + .btn-repl {
  */
 .source.js {
   .string {
-    color: rgb(74,178,53);
+    color: rgb(74, 178, 53);
   }
 
   .modifier,
   .type,
   .constant.numeric {
-    color: rgb(255,233,43);
+    color: rgb(255, 233, 43);
   }
 
   .delimiter.method + span {
-    color: rgb(109,157,226);
+    color: rgb(109, 157, 226);
   }
 
   .comment {
-    color: rgb(175,175,174);
+    color: rgb(175, 175, 174);
   }
 }
 
@@ -621,7 +621,7 @@ pre.repl + .btn-repl {
   & + ol code,
   & + ol em,
   & + p em {
-    color: rgb(42,123,255)
+    color: rgb(42, 123, 255)
   }
 
   & + ol {
