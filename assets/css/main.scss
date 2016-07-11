@@ -1,12 +1,12 @@
 ---
 ---
 
-/*
+/**
  *  Imports
  */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css');
 
-/*
+/**
  *  Variables
  */
 
@@ -322,7 +322,7 @@ pre.repl {
   background: $foreground;
 }
 
-/*
+/**
  *  Homepage Styles
  */
 
@@ -363,7 +363,7 @@ pre.repl {
   width: 95px;
 }
 
-/*
+/**
  *  Documentation Styles
  */
 
@@ -598,7 +598,7 @@ pre.repl + .btn-repl {
   opacity: 0;
 }
 
-/*
+/**
  *  Syntax Highlighting
  */
 .source.js {
@@ -621,7 +621,7 @@ pre.repl + .btn-repl {
   }
 }
 
-/*
+/**
  *  Media Queries
  */
 @media (min-width: $screen-sm) {
