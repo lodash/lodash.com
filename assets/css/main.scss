@@ -432,6 +432,7 @@ ul#download-links {
     flex: none;
     width: calc(200px + 2.5rem);
     height: 100%;
+    white-space: nowrap;
     top: 0;
     right: 0;
     position: absolute;
