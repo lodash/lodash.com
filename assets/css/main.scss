@@ -40,27 +40,27 @@ html, body, h1, h2, p {
 
 html {
   background: $background;
-  height: 100%;
   color: $defaultColor;
   font-size: 100%;
+  height: 100%;
 }
 
 body {
-  font-size: 1em;
   font-family: $fontFamily;
+  font-size: 1em;
   min-height: 100%;
   overflow: auto;
 }
 
 h1, h2, h3, h4, h5, h6, ul, ol, p {
-  margin-top: 1rem;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 a {
-  text-decoration: none;
-  color: $linkColor;
   border-bottom: 1px solid lighten($defaultColor, 50%);
+  color: $linkColor;
+  text-decoration: none;
 
   &:hover {
     border-bottom-color: $defaultColor;
@@ -76,12 +76,12 @@ h1, h2, h3, h4, h5, h6 {
 
 button,
 a.btn {
-  border: none;
-  padding: 10px 25px;
   background: $actionBg;
-  color: $linkColor;
+  border: none;
   border-radius: 5px;
+  color: $linkColor;
   font-size: 0.8em;
+  padding: 10px 25px;
 
   &.primary {
     background: $actionColor;
@@ -95,28 +95,28 @@ button + button,
 }
 
 .search {
-  width: 100%;
   position: relative;
+  width: 100%;
 
   .fa-search {
+    font-size: 15px;
+    left: 7px;
     position: absolute;
     top: 3px;
-    left: 7px;
-    font-size: 15px;
   }
 
   input {
     border: 0;
     border-bottom: 2px solid lighten($defaultColor, 50%);
-    padding: 5px 0;
-    font-size: 0.8em;
     font-family: $fontFamily;
-    width: 100%;
+    font-size: 0.8em;
+    padding: 5px 0;
     text-indent: 30px;
+    width: 100%;
 
     &:focus {
-      outline: none;
       border-bottom-color: lighten($defaultColor, 25%);
+      outline: none;
     }
   }
 }
@@ -124,27 +124,27 @@ button + button,
 input[type=search] {
   border: 0;
   border-bottom: 2px solid lighten($defaultColor, 50%);
-  padding: 5px 0;
-  font-size: 0.8em;
   font-family: $fontFamily;
+  font-size: 0.8em;
+  padding: 5px 0;
   width: 100%;
 
   &:focus {
-    outline: none;
     border-bottom-color: lighten($defaultColor, 25%);
+    outline: none;
   }
 }
 
 select {
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: $defaultColor;
   background-color: $background;
   background-image: none;
   border: 1px solid $background;
   border-radius: 5px;
+  color: $defaultColor;
+  font-size: 14px;
+  height: 34px;
+  line-height: 1.42857143;
+  padding: 6px 12px;
 
   &:focus {
     border-color: $actionColor;
@@ -166,8 +166,8 @@ ul {
   }
 
   li pre {
-    margin-top: 1rem;
     margin-bottom: 2.5rem;
+    margin-top: 1rem;
   }
 }
 
@@ -182,18 +182,18 @@ ul.chevron li {
 
 header {
   background: $foreground;
-  padding: 1rem 0;
   box-shadow: 0 0 1.5em $shadow;
   min-height: 80px;
   overflow: hidden;
+  padding: 1rem 0;
   position: relative;
   z-index: 2;
 
   > .container {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .header-section {
@@ -205,8 +205,8 @@ header {
   }
 
   .header-section.logo-section {
-    flex: 3;
     justify-content: flex-start;
+    flex: 3;
   }
 
   .header-section.mobile-menu {
@@ -214,12 +214,12 @@ header {
   }
 
   .logo {
+    border-right: 3px solid lighten($defaultColor, 50%);
     flex-shrink: 1;
     height: 80px;
-    width: 80px;
     margin-right: 1rem;
     padding: 0 1rem 0 0;
-    border-right: 3px solid lighten($defaultColor, 50%);
+    width: 80px;
 
     img {
       height: 100%;
@@ -232,8 +232,8 @@ header {
   }
 
   .header-group {
-    flex-shrink: 3;
     overflow: hidden;
+    flex-shrink: 3;
 
     h1, h2 {
       font-size: 1em;
@@ -252,15 +252,15 @@ header {
 }
 
 .container {
-  max-width: $screen-lg-max;
   margin: 0 auto;
+  max-width: $screen-lg-max;
 }
 
 .container.main {
   background: $foreground;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
   box-shadow: 0 0 0.5em $shadow;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
   overflow: hidden;
 }
 
@@ -292,15 +292,14 @@ pre, code {
 pre,
 .highlight.js {
   background: $codeBg;
+  box-sizing: border-box;
   color: $codeColor;
-  margin: 0;
+  margin: 0 -999rem;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  padding: 2rem 999rem;
   position: relative;
   transition: all 0.4s ease;
-  box-sizing: border-box;
-  margin: 0 -999rem;
-  padding: 2rem 999rem;
+  -webkit-overflow-scrolling: touch;
 
   > pre {
     margin: 0;
@@ -310,8 +309,8 @@ pre,
   &.repl {
     background: $foreground;
     margin: 0 -36px;
-    padding: 0 36px;
     overflow-x: hidden;
+    padding: 0 36px;
   }
 }
 
@@ -367,8 +366,8 @@ ul#download-links {
   padding: 0;
 
   li {
-    padding: 0;
     line-height: 1.75;
+    padding: 0;
   }
 
   .fa {
@@ -382,27 +381,27 @@ ul#download-links {
  */
 
 .doc-main {
-  display: flex;
-  width: 100%;
   background: $foreground;
-  position: relative;
+  display: flex;
   overflow: hidden;
+  position: relative;
+  width: 100%;
 
   .toc-container {
     background: $foreground;
     box-sizing: border-box;
-    padding: 2.5rem;
-    overflow-y: auto;
-    z-index: 1;
     flex: none;
-    width: calc(200px + 2.5rem);
     height: 100%;
-    white-space: nowrap;
-    top: 0;
-    right: 0;
+    overflow-y: auto;
+    padding: 2.5rem;
     position: absolute;
-    transition: all 0.5s ease;
+    right: 0;
+    top: 0;
     transform: translateX(100%);
+    transition: all 0.5s ease;
+    white-space: nowrap;
+    width: calc(200px + 2.5rem);
+    z-index: 1;
 
     &.open {
       transform: none;
@@ -455,8 +454,8 @@ ul#download-links {
   }
 
   > div > div {
-    padding: 0.5rem 0;
     margin-bottom: 5rem;
+    padding: 0.5rem 0;
     position: relative;
 
     h3, pre {
@@ -485,8 +484,8 @@ body.layout-docs {
   }
 
   .logo {
-    width: 40px;
     height: 40px;
+    width: 40px;
   }
 }
 
@@ -502,9 +501,9 @@ body.layout-docs {
 }
 
 a.anchor {
+  border: 0;
   color: lighten($defaultColor, 25%);
   margin-right: 1rem;
-  border: 0;
 
   &:hover {
     color: $defaultColor;
@@ -519,19 +518,19 @@ h3 a {
   top: -2rem;
 
   &:hover {
-    cursor: default;
     border: 0;
     color: inherit;
+    cursor: default;
   }
 }
 
 ul.secondary-links {
-  list-style: none;
   font-size: 0.7em;
+  list-style: none;
 
   li {
-    padding-left: 0;
     display: inline;
+    padding-left: 0;
 
     a {
       color: lighten($defaultColor, 50%);
@@ -553,8 +552,8 @@ ul.secondary-links {
   }
 
   > div > h2 {
-    margin-top: 1.5rem;
     margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
 
     code {
       font-family: $fontFamily;
@@ -566,8 +565,8 @@ ul.secondary-links {
     margin-top: 0.5rem;
 
     li a {
-      color: lighten($defaultColor, 25%);
       border: 0;
+      color: lighten($defaultColor, 25%);
       font-size: 0.8em;
 
       &:hover {
@@ -582,12 +581,12 @@ ul.secondary-links {
 }
 
 .btn-repl {
-  position: absolute;
   bottom: 1.5rem;
-  right: 0;
-  transition: all 0.25s ease;
   color: $foreground;
   font-size: 0.8rem;
+  position: absolute;
+  right: 0;
+  transition: all 0.25s ease;
 }
 
 pre.repl + .btn-repl {
@@ -636,13 +635,13 @@ pre.repl + .btn-repl {
 
 @media (min-width: $screen-sm) {
   .doc-main .toc-container {
+    box-shadow: 0 0 0.5em $shadow;
     flex: 3 3 0;
     height: auto;
     min-width: 180px;
-    box-shadow: 0 0 0.5em $shadow;
     position: relative;
-    transition: none;
     transform: none;
+    transition: none;
   }
 
   .mobile-menu {
