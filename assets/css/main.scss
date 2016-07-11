@@ -9,8 +9,6 @@
 /**
  *  Variables
  */
-
-// Colors
 $actionBg: #cde3ff;
 $actionColor: #3491ff;
 $background: #eeeeee;
@@ -21,10 +19,8 @@ $foreground: #ffffff;
 $linkColor: #5572b8;
 $shadow: #9da5ab;
 
-// Font
 $fontFamily: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-// Breakpoints
 $screen-sm: 768px;
 $screen-md: 992px;
 $screen-lg: 1200px;
@@ -33,6 +29,9 @@ $screen-sm-max: ($screen-sm - 1);
 $screen-md-max: ($screen-md - 1);
 $screen-lg-max: ($screen-lg - 1);
 
+/**
+ *  Default Styles
+ */
 html, body, h1, h2, p {
   margin: 0;
   padding: 0;
@@ -260,7 +259,6 @@ ul.chevron li {
 /**
  *  Homepage Styles
  */
-
 body.layout-default {
   pre.intro {
     font-size: 1.2em;
@@ -307,7 +305,6 @@ body.layout-default {
 /**
  *  Documentation Styles
  */
-
 body.layout-docs {
   display: flex;
   flex-direction: column;
