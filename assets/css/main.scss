@@ -117,13 +117,13 @@ header {
     padding: 0 1rem 0 0;
     width: 80px;
 
+    a {
+      border: none;
+    }
+
     img {
       height: 100%;
       width: 100%;
-    }
-
-    a {
-      border: none;
     }
   }
 
@@ -181,16 +181,16 @@ pre,
   transition: all 0.4s ease;
   -webkit-overflow-scrolling: touch;
 
-  > pre {
-    margin: 0;
-    padding: 0;
-  }
-
   &.repl {
     background: $foreground;
     margin: 0 -36px;
     overflow-x: hidden;
     padding: 0 36px;
+  }
+
+  > pre {
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -356,35 +356,6 @@ body.layout-docs {
     }
   }
 
-  .container {
-    max-width: 100%;
-  }
-
-  .logo {
-    height: 40px;
-    width: 40px;
-  }
-
-  .mobile-menu {
-    a {
-      border: 0;
-      color: $defaultColor;
-
-      i {
-        margin-right: 10px;
-      }
-    }
-  }
-}
-
-.doc-main {
-  background: $foreground;
-  display: flex;
-  flex: 1 1 auto;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-
   .btn-repl {
     bottom: 1.5rem;
     color: $foreground;
@@ -394,11 +365,28 @@ body.layout-docs {
     transition: all 0.25s ease;
   }
 
+  .container {
+    max-width: 100%;
+  }
+
   .doc-container {
     flex: 14 14 0;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 1.5rem 2.5rem;
+
+    &:after {
+      background: lightgrey;
+      content: '';
+      display: none;
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: all 0.5s ease;
+      width: 100%;
+    }
 
     > div > div {
       margin-bottom: 5rem;
@@ -454,105 +442,117 @@ body.layout-docs {
     pre.repl + .btn-repl {
       opacity: 0;
     }
+  }
 
-    &:after {
-      background: lightgrey;
-      content: '';
-      display: none;
-      height: 100%;
-      left: 0;
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      transition: all 0.5s ease;
-      width: 100%;
+  .doc-main {
+    background: $foreground;
+    display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .logo {
+    height: 40px;
+    width: 40px;
+  }
+
+  .mobile-menu {
+    a {
+      border: 0;
+      color: $defaultColor;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.toc-container {
+  background: $foreground;
+  box-sizing: border-box;
+  flex: none;
+  height: 100%;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease;
+  white-space: nowrap;
+  width: calc(200px + 2.5rem);
+  z-index: 1;
+
+  &.open {
+    transform: none;
+  }
+
+  > div > h2 {
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+
+    code {
+      font-family: $fontFamily;
     }
   }
 
-  .toc-container {
-    background: $foreground;
-    box-sizing: border-box;
-    flex: none;
-    height: 100%;
-    overflow-y: auto;
-    padding: 2.5rem;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateX(100%);
-    transition: all 0.5s ease;
-    white-space: nowrap;
-    width: calc(200px + 2.5rem);
-    z-index: 1;
+  ul {
+    border-left: 1px dotted lighten($defaultColor, 25%);
+    margin-top: 0.5rem;
 
-    > div > h2 {
-      margin-bottom: 0.5rem;
-      margin-top: 1.5rem;
+    li a {
+      border: 0;
+      color: lighten($defaultColor, 25%);
+      font-size: 0.8em;
+
+      &:hover {
+        color: $defaultColor;
+      }
 
       code {
-        font-family: $fontFamily;
-      }
-    }
-
-    ul {
-      border-left: 1px dotted lighten($defaultColor, 25%);
-      margin-top: 0.5rem;
-
-      li a {
-        border: 0;
         color: lighten($defaultColor, 25%);
-        font-size: 0.8em;
-
-        &:hover {
-          color: $defaultColor;
-        }
-
-        code {
-          color: lighten($defaultColor, 25%);
-        }
       }
     }
+  }
 
-    &.open {
-      transform: none;
-    }
+  .first-heading {
+    margin-top: 0;
+  }
 
-    .first-heading {
-      margin-top: 0;
-    }
+  .search {
+    position: relative;
+    width: 100%;
 
-    .search {
-      position: relative;
+    input {
+      border: 0;
+      border-bottom: 2px solid lighten($defaultColor, 50%);
+      font-family: $fontFamily;
+      font-size: 0.8em;
+      padding: 5px 0;
+      text-indent: 30px;
       width: 100%;
 
-      input {
-        border: 0;
-        border-bottom: 2px solid lighten($defaultColor, 50%);
-        font-family: $fontFamily;
-        font-size: 0.8em;
-        padding: 5px 0;
-        text-indent: 30px;
-        width: 100%;
-
-        &:focus {
-          border-bottom-color: lighten($defaultColor, 25%);
-          outline: none;
-        }
-      }
-
-      .fa-search {
-        font-size: 15px;
-        left: 7px;
-        position: absolute;
-        top: 3px;
+      &:focus {
+        border-bottom-color: lighten($defaultColor, 25%);
+        outline: none;
       }
     }
-  }
 
-  .toc-container.open + .doc-container:after {
-    display: block;
-    opacity: 0.5;
+    .fa-search {
+      font-size: 15px;
+      left: 7px;
+      position: absolute;
+      top: 3px;
+    }
   }
+}
+
+.toc-container.open + .doc-container:after {
+  display: block;
+  opacity: 0.5;
 }
 
 /**
