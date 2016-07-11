@@ -64,7 +64,7 @@ a {
   }
 }
 
-button, a.btn {
+a.btn {
   background: $actionBg;
   border: none;
   border-radius: 5px;
@@ -72,15 +72,14 @@ button, a.btn {
   font-size: 0.8em;
   padding: 10px 25px;
 
+  & + & {
+    margin-left: 10px;
+  }
+
   &.primary {
     background: $actionColor;
     color: $foreground;
   }
-}
-
-button + button,
-.btn + .btn {
-  margin-left: 10px;
 }
 
 h1, h2, h3, h4, h5, h6 {
