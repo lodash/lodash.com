@@ -64,8 +64,7 @@ a {
   }
 }
 
-button,
-a.btn {
+button, a.btn {
   background: $actionBg;
   border: none;
   border-radius: 5px;
@@ -165,13 +164,11 @@ header {
   }
 }
 
-pre,
-code {
+pre, code {
   font-family: Consolas, Courier New, monospace;
 }
 
-pre,
-.highlight.js {
+pre, .highlight.js {
   background: $codeBg;
   box-sizing: border-box;
   color: $codeColor;
@@ -396,8 +393,7 @@ html.docs {
       padding: 0.5rem 0;
       position: relative;
 
-      h3,
-      pre {
+      h3, pre {
         margin: 0 -999rem;
         padding: 2rem 999rem;
       }
