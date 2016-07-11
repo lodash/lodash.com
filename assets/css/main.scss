@@ -305,10 +305,12 @@ html.home {
 /**
  *  Documentation Styles
  */
-body.layout-docs {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+html.docs {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   a.anchor {
     border: 0;
@@ -582,7 +584,7 @@ body.layout-docs {
  *  Media Queries
  */
 @media (min-width: $screen-sm) {
-  body.layout-docs {
+  html.docs {
     .mobile-menu {
       display: none;
     }
@@ -609,7 +611,7 @@ body.layout-docs {
     }
   }
 
-  body.layout-docs {
+  html.docs {
     .btn-repl {
       display: none;
     }
