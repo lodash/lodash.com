@@ -15,6 +15,8 @@ $background: #eee;
 $codeBg: #0d152a;
 $codeColor: #ddd;
 $defaultColor: #5f5f5f;
+$defaultLiteColor: lighten($defaultColor, 40%);
+$defaultNearColor: lighten($defaultColor, 20%);
 $foreground: #fff;
 $linkColor: #5572b8;
 $shadow: #9da5ab;
@@ -52,12 +54,12 @@ body {
 }
 
 a {
-  border-bottom: 1px solid lighten($defaultColor, 50%);
+  border-bottom: 1px solid $defaultLiteColor;
   color: $linkColor;
   text-decoration: none;
 
   &:hover {
-    border-bottom-color: $defaultColor;
+    border-bottom-color: $defaultNearColor;
     cursor: pointer;
   }
 }
@@ -110,7 +112,7 @@ header {
   }
 
   .logo {
-    border-right: 3px solid lighten($defaultColor, 50%);
+    border-right: 3px solid $defaultLiteColor;
     flex-shrink: 1;
     height: 80px;
     margin-right: 1rem;
@@ -141,7 +143,7 @@ header {
       font-size: 1.4em;
 
       span {
-        color: lighten($defaultColor, 45%);
+        color: $defaultLiteColor;
       }
     }
   }
@@ -314,7 +316,7 @@ html.docs {
 
   a.anchor {
     border: 0;
-    color: lighten($defaultColor, 25%);
+    color: $defaultNearColor;
     margin-right: 1rem;
 
     &:hover {
@@ -477,7 +479,7 @@ html.docs {
 
     input {
       border: 0;
-      border-bottom: 2px solid lighten($defaultColor, 50%);
+      border-bottom: 2px solid $defaultLiteColor;
       font-family: $fontFamily;
       font-size: 0.8em;
       padding: 5px 0;
@@ -485,7 +487,7 @@ html.docs {
       width: 100%;
 
       &:focus {
-        border-bottom-color: lighten($defaultColor, 25%);
+        border-bottom-color: $defaultNearColor;
         outline: none;
       }
     }
@@ -528,12 +530,12 @@ html.docs {
     }
 
     ul {
-      border-left: 1px dotted lighten($defaultColor, 25%);
+      border-left: 1px dotted $defaultLiteColor;
       margin-top: 0.5rem;
 
       li a {
         border: 0;
-        color: lighten($defaultColor, 25%);
+        color: $defaultNearColor;
         font-size: 0.8em;
 
         &:hover {
@@ -541,7 +543,7 @@ html.docs {
         }
 
         code {
-          color: lighten($defaultColor, 25%);
+          color: $defaultNearColor;
         }
       }
     }
