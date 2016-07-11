@@ -134,17 +134,16 @@ header {
     overflow: hidden;
 
     h1, h2 {
-      font-size: 1em;
       margin: 0;
       vertical-align: middle;
     }
 
     h1 {
       font-size: 1.4em;
+    }
 
-      span {
-        color: $defaultLiteColor;
-      }
+    h2 {
+      font-size: 1em;
     }
   }
 
