@@ -415,28 +415,6 @@ h3 a {
   }
 }
 
-ul.secondary-links {
-  font-size: 0.7em;
-  list-style: none;
-
-  li {
-    display: inline;
-    padding-left: 0;
-
-    a {
-      color: lighten($defaultColor, 50%);
-
-      &:hover {
-        color: $defaultColor;
-      }
-    }
-  }
-
-  li + li {
-    margin-left: 10px;
-  }
-}
-
 .btn-repl {
   bottom: 1.5rem;
   color: $foreground;
