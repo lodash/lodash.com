@@ -78,7 +78,8 @@ a.btn {
   border-radius: 5px;
   color: $linkColor;
   font-size: 0.8em;
-  padding: 10px 25px;
+  line-height: 1;
+  padding: 17px 25px;
 
   & + & {
     margin-left: 10px;
@@ -112,12 +113,16 @@ h1, h2, h3, h4, h5, h6, ul, ol, p {
   margin-top: 1rem;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2rem;
+}
+
 header {
   background: $foreground;
-  box-shadow: 0 0 1.5em $shadow;
+  box-shadow: 0 0 1.4em $shadow;
   min-height: 80px;
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   position: relative;
   z-index: 2;
 
@@ -129,7 +134,7 @@ header {
   }
 
   .logo {
-    border-right: 3px solid $defaultLiteColor;
+    border-right: 2px solid $defaultLiteColor;
     flex-shrink: 1;
     height: 80px;
     margin-right: 1rem;
@@ -266,10 +271,11 @@ ul.chevron li {
 
 .container.main {
   background: $foreground;
-  box-shadow: 0 0 0.5em $shadow;
+  box-shadow: 0 4px 1.5em -0.25em $shadow;
   margin-bottom: 2rem;
   margin-top: 2rem;
   overflow: hidden;
+  padding-bottom: 2rem;
 }
 
 /**
@@ -408,7 +414,7 @@ html.docs {
     }
 
     > div > div {
-      margin-bottom: 5rem;
+      margin-bottom: 6rem;
       padding: 0.5rem 0;
       position: relative;
 
@@ -497,7 +503,7 @@ html.docs {
       border: 0;
       border-bottom: 2px solid $defaultLiteColor;
       font-size: 0.8em;
-      padding: 5px 0;
+      padding: 10px 0;
       text-indent: 30px;
       width: 100%;
 
@@ -512,7 +518,7 @@ html.docs {
       font-size: 15px;
       left: 7px;
       position: absolute;
-      top: 3px;
+      top: 9px;
     }
   }
 
