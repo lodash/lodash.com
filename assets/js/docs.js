@@ -20,7 +20,7 @@
     },
 
     'componentWillMount': function() {
-      // Before component mounts, use the initial html for initial state.
+      // Before component mounts, use the initial HTML for its state.
       var content = _.map(menuEl.children, function(node) {
         return {
           'title': node.querySelector('h2 code').innerText,
