@@ -60,13 +60,13 @@ body {
 }
 
 a {
-  box-shadow: inset 0 -1px 0 0 $linkUnderline;
+  border-bottom: 1px solid $linkUnderline;
   color: $linkColor;
   padding-bottom: 3px;
   text-decoration: none;
 
   &:hover {
-    box-shadow: inset 0 -1px 0 0 darken($linkUnderline, 20%);
+    border-bottom-color: darken($linkUnderline, 20%);
     color: darken($linkColor, 20%);
     cursor: pointer;
   }
@@ -142,7 +142,7 @@ header {
     width: 80px;
 
     a {
-      box-shadow: none;
+      border: none;
     }
 
     img {
@@ -336,7 +336,7 @@ html.docs {
   }
 
   a.anchor {
-    border: 0;
+    border: none;
     color: $defaultNearColor;
     margin-right: 1rem;
 
@@ -346,14 +346,14 @@ html.docs {
   }
 
   h3 a {
-    box-shadow: none;
+    border: none;
     color: inherit;
     display: block;
     position: relative;
     top: -2rem;
 
     &:hover {
-      box-shadow: none;
+      border: none;
       color: inherit;
       cursor: default;
     }
@@ -486,7 +486,7 @@ html.docs {
 
   .mobile-menu {
     a {
-      box-shadow: none;
+      border: none;
       color: $defaultColor;
 
       i {
@@ -500,7 +500,7 @@ html.docs {
     width: 100%;
 
     input {
-      border: 0;
+      border: none;
       border-bottom: 2px solid $defaultLiteColor;
       font-size: 0.8em;
       padding: 10px 0;
@@ -560,7 +560,7 @@ html.docs {
       margin-top: 0.5rem;
 
       li a {
-        box-shadow: none;
+        border: none;
         color: $altColor;
         font-size: 0.8em;
 
