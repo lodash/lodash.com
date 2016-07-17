@@ -593,10 +593,6 @@ html.docs {
     color: #86b9f5;
   }
 
-  .string {
-    color: #62d543;
-  }
-
   .constant.numeric,
   .modifier,
   .type {
@@ -604,8 +600,9 @@ html.docs {
   }
 }
 
-.code {
-  .st0 {
+.text.html,
+.source.js {
+  .string {
     color: #62d543;
   }
 }
