@@ -39,6 +39,7 @@ a.btn {
   font-size: 0.8em;
   line-height: 1;
   padding: 17px 25px;
+  white-space: nowrap;
 
   & + & {
     margin-left: 10px;
