@@ -546,12 +546,12 @@ html.docs {
       margin-bottom: 0.5rem;
       margin-top: 1.5rem;
 
-      span {
-        vertical-align: middle;
-      }
-
       code {
         font-family: $fontFamily;
+      }
+
+      span {
+        vertical-align: middle;
       }
     }
 
