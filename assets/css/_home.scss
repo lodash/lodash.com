@@ -40,4 +40,14 @@ html.home {
   #social .btn-twitter-share {
     width: 95px;
   }
+
+  footer {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 0.75em;
+
+    .fa-heart {
+      color: #e12e2e;
+    }
+  }
 }
