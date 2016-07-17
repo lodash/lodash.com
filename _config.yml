@@ -4,3 +4,6 @@ releases:
   - *release
   - 3.10.1
   - 2.4.2
+
+sass:
+  sass_dir: assets/css

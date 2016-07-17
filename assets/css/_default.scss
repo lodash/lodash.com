@@ -1,0 +1,241 @@
+/**
+ *  Default Styles
+ */
+html, body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: $background;
+  color: $defaultColor;
+  font-size: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: $fontFamily;
+  font-size: 1em;
+  line-height: 1.5;
+  min-height: 100%;
+  overflow: auto;
+}
+
+a {
+  box-shadow: inset 0 -1px 0 0 $linkUnderline;
+  color: $linkColor;
+  padding-bottom: 3px;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow: inset 0 -1px 0 0 darken($linkUnderline, 20%);
+    color: darken($linkColor, 20%);
+    cursor: pointer;
+  }
+}
+
+a.btn {
+  background: $btnBg;
+  border: none;
+  border-radius: 5px;
+  color: $linkColor;
+  font-size: 0.8em;
+  line-height: 1;
+  padding: 17px 25px;
+
+  & + & {
+    margin-left: 10px;
+  }
+
+  &:hover,
+  &:focus {
+    background: darken($btnBg, 7.5%);
+    color: darken($btnColor, 7.5%);
+  }
+
+  &.primary {
+    background: $btnPrimaryBg;
+    color: $btnPrimaryColor;
+
+    &:hover,
+    &:focus {
+      background: darken($btnPrimaryBg, 10%);
+    }
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $defaultColor;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+h1, h2, h3, h4, h5, h6, ul, ol, p {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2rem;
+}
+
+header {
+  background: $foreground;
+  box-shadow: 0 0 1.4em $shadow;
+  min-height: 80px;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  position: relative;
+  z-index: 2;
+
+  > .container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .logo {
+    border-right: 2px solid $defaultLiteColor;
+    flex-shrink: 1;
+    height: 80px;
+    margin-right: 1rem;
+    padding: 0 1rem 0 0;
+    width: 80px;
+
+    a {
+      box-shadow: none;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .header-group {
+    flex-shrink: 3;
+    overflow: hidden;
+
+    h1, h2 {
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    h1 {
+      font-size: 1.4em;
+    }
+
+    h2 {
+      font-size: 1em;
+    }
+  }
+
+  .header-section {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 0.5rem 1rem;
+  }
+
+  .header-section.logo-section {
+    flex: 3;
+    justify-content: flex-start;
+  }
+
+  .header-section.mobile-menu {
+    justify-content: flex-end;
+  }
+}
+
+pre, code {
+  font-family: Consolas, Courier New, monospace;
+}
+
+pre, .highlight.js {
+  background: $codeBg;
+  box-sizing: border-box;
+  color: $codeColor;
+  margin: 0 -999rem;
+  overflow-x: auto;
+  padding: 2rem 999rem;
+  position: relative;
+  transition: all 0.4s ease;
+  -webkit-overflow-scrolling: touch;
+
+  &.repl {
+    background: $foreground;
+    margin: 0 -36px;
+    overflow-x: hidden;
+    padding: 0 36px;
+  }
+
+  > pre {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+section {
+  padding: 0.5rem 2.5rem;
+
+  &.code {
+    background: $codeBg;
+    color: $codeColor;
+  }
+
+  &.method-header {
+    background: $background;
+  }
+
+  &:not(:first) {
+    margin-top: 1rem;
+  }
+
+  &:not(:last) {
+    margin-bottom: 1rem;
+  }
+}
+
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+
+  li {
+    padding-left: 1rem;
+  }
+
+  li + li {
+    padding-top: 0.5rem;
+  }
+
+  li pre {
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+  }
+}
+
+ul.chevron li {
+  text-indent: -0.75rem;
+
+  &:before {
+    content: "\203A";
+    padding-right: 0.5rem;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: $screen-lg-max;
+}
+
+.container.main {
+  background: $foreground;
+  box-shadow: 0 4px 1.5em -0.25em $shadow;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  overflow: hidden;
+  padding-bottom: 2rem;
+}
