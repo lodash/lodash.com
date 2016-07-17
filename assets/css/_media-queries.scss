@@ -1,0 +1,57 @@
+/**
+ *  Media Queries
+ */
+@media (min-width: $screen-sm) {
+  html.docs {
+    .mobile-menu {
+      display: none;
+    }
+
+    .toc-container {
+      box-shadow: 0 0 0.5em $shadow;
+      flex: 3 3 0;
+      height: auto;
+      min-width: 180px;
+      position: relative;
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  header {
+    min-height: 60px;
+
+    .logo {
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  html.docs {
+    .btn-repl {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $screen-md-max) {
+  section {
+    padding: 0.5rem 1rem;
+  }
+
+  .container.main {
+    margin: 1rem;
+  }
+}
+
+@media (max-width: $screen-lg-max) {
+  html {
+    font-size: 12px;
+  }
+
+  .container.main {
+    margin: 2rem;
+  }
+}

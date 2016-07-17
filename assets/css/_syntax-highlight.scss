@@ -1,0 +1,25 @@
+/**
+ *  Syntax Highlighting
+ */
+.source.js {
+  .comment {
+    color: #b9b9b9;
+  }
+
+  .delimiter.method + span {
+    color: #86b9f5;
+  }
+
+  .constant.numeric,
+  .modifier,
+  .type {
+    color: #fee937;
+  }
+}
+
+.text.html,
+.source.js {
+  .string {
+    color: #62d543;
+  }
+}
