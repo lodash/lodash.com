@@ -192,9 +192,7 @@
           'nodeVersion': '*',
           'preamble': 'var _ = require("lodash@' + versionSelect.value +'")',
           'source': source,
-          'onLoad': function(notebook) {
-            notebook.evaluate();
-          }
+          'onLoad': _.method('evaluate')
         });
       }, 500);
     });
