@@ -106,15 +106,13 @@ h1, h2, h3, h4, h5, h6 {
   color: $defaultColor;
   font-weight: 400;
   letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
-h1, h2, h3, h4, h5, h6, ul, ol, p {
+ul, ol, p {
   margin-bottom: 1rem;
   margin-top: 1rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 2rem;
 }
 
 header {
