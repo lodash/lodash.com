@@ -1,0 +1,46 @@
+/**
+ *  Homepage Styles
+ */
+html.home {
+  pre.intro {
+    font-size: 1.2em;
+  }
+
+  #download-links {
+    list-style: none;
+    padding: 0;
+
+    li {
+      line-height: 1.75;
+      padding: 0;
+    }
+
+    .fa {
+      color: $altColor;
+      margin-right: 10px;
+    }
+  }
+
+  #social {
+    margin-bottom: 0;
+  }
+
+  #social,
+  #social .btn-gh,
+  #social .btn-twitter-follow,
+  #social .btn-twitter-share {
+    height: 26px;
+  }
+
+  #social .btn-gh {
+    width: 105px;
+  }
+
+  #social .btn-twitter-follow {
+    width: 120px;
+  }
+
+  #social .btn-twitter-share {
+    width: 95px;
+  }
+}
