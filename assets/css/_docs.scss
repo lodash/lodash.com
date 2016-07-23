@@ -92,6 +92,20 @@ html.docs {
         margin: 0 -999rem;
         padding: 2rem 999rem;
       }
+
+      h3 + p a:first-child {
+        display: none;
+      }
+
+      h3 + p a {
+        color: #bababa;
+        font-size: 14px;
+        margin-right: 15px;
+
+        &:hover {
+          color: darken(#bababa, 15%);
+        }
+      }
     }
 
     div {
