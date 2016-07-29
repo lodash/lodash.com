@@ -77,7 +77,7 @@ ul, ol, p {
 
 header {
   background: $foreground;
-  box-shadow: 0 0 1.4em $shadow;
+  box-shadow: 0 0 1.4rem $shadow;
   min-height: 80px;
   overflow: hidden;
   padding: 0.5rem 0;
@@ -119,11 +119,11 @@ header {
     }
 
     h1 {
-      font-size: 1.4em;
+      font-size: 1.4rem;
     }
 
     h2 {
-      font-size: 1em;
+      font-size: 1rem;
     }
   }
 
@@ -229,7 +229,7 @@ ul.chevron li {
 
 .container.main {
   background: $foreground;
-  box-shadow: 0 4px 1.5em -0.25em $shadow;
+  box-shadow: 0 4px 1.5rem -0.25rem $shadow;
   margin-bottom: 2rem;
   margin-top: 2rem;
   overflow: hidden;
