@@ -192,7 +192,8 @@
           'nodeVersion': '*',
           'preamble': [
             'var _ = require("lodash@' + versionSelect.value + '");',
-            '_.assign(global, require("lodash-doc-globals"));'
+            '_.assign(global, require("lodash-doc-globals"));',
+            'Object.observe = _.noop;'
           ].join('\n'),
           'source': source,
           'onLoad': function(notebook) {
