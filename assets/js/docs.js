@@ -190,7 +190,10 @@
         Tonic.createNotebook({
           'element': pre,
           'nodeVersion': '*',
-          'preamble': 'var _ = require("lodash@' + versionSelect.value +'")',
+          'preamble': [
+            'var _ = require("lodash@' + versionSelect.value + '");',
+            '_.assign(global, require("lodash-doc-globals"));'
+          ].join('\n'),
           'source': source,
           'onLoad': _.method('evaluate')
         });
