@@ -195,7 +195,9 @@
             '_.assign(global, require("lodash-doc-globals"));'
           ].join('\n'),
           'source': source,
-          'onLoad': _.method('evaluate')
+          'onLoad': function(notebook) {
+            notebook.evaluate();
+          }
         });
       }, 500);
     });
