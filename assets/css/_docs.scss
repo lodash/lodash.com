@@ -15,17 +15,15 @@ html.docs {
     }
   }
 
-  h3 a {
-    border: none;
-    color: inherit;
-    display: block;
-    position: relative;
-    top: -2rem;
+  h3 {
+    a {
+      border-bottom: 0;
+      padding-right: 0.5rem;
+      visibility: hidden;
+    }
 
-    &:hover {
-      border: none;
-      color: inherit;
-      cursor: default;
+    &:hover a {
+      visibility: inherit;
     }
   }
 
@@ -91,10 +89,6 @@ html.docs {
       h3, pre {
         margin: 0 -999rem;
         padding: 2rem 999rem;
-      }
-
-      h3 + p a:first-child {
-        display: none;
       }
 
       h3 + p a {
