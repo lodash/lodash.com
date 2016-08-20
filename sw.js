@@ -7,10 +7,15 @@ var CACHE_KEY = 'cache-v{{ site.time | replace:" ","" | replace:":","" | replace
 
 var prefetch = [
 {% for release in site.releases %}
+  '/docs/{{ release }}',
   '/docs/{{ release }}.html',
   'https://rawgit.com/lodash/lodash/{{ release }}/lodash.js',
 {% endfor %}
+  '/',
+  '/index.html',
+  '/404',
   '/404.html',
+  '/custom-builds',
   '/custom-builds.html',
   '/favicon.ico',
   '/assets/js/docs.js',
