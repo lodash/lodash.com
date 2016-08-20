@@ -18,6 +18,7 @@ var prefetch = [
   '/custom-builds',
   '/custom-builds.html',
   '/favicon.ico',
+  '/assets/css/main.css',
   '/assets/js/docs.js',
   'https://embed.tonicdev.com/',
   'https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/css/font-awesome.min.css',
