@@ -28,10 +28,6 @@ var prefetch = [
   'https://npmcdn.com/react-dom@{{ site.react.version }}/dist/react-dom.min.js'
 ];
 
-var skipCache = [
-  'google-analytics.com'
-];
-
 addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
@@ -59,15 +55,9 @@ addEventListener('activate', event =>
 addEventListener('fetch', event =>
   event.respondWith(
     caches.open(CACHE_KEY).then(cache =>
-      cache.match(event.request).then(response =>
-        response || fetch(event.request).then(response => {
-          if (!skipCache.some(entry => event.request.url.includes(entry))) {
-            cache.put(event.request, response.clone());
-          }
-          return response;
-        })
+      cache.match(event.request)
+        .then(response => response || fetch(event.request))
         .catch(error => console.log(`fetch failed: ${ event.request.url }`, error))
-      )
     )
   )
 );
