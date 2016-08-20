@@ -75,6 +75,16 @@ ul, ol, p {
   margin-top: 1rem;
 }
 
+footer {
+  font-size: 0.75rem;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .fa-heart {
+    color: #e12e2e;
+  }
+}
+
 header {
   background: $foreground;
   box-shadow: 0 0 1.4rem $shadow;
