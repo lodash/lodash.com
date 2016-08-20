@@ -19,9 +19,11 @@ var prefetch = [
   '/custom-builds.html',
   '/favicon.ico',
   '/assets/css/main.css',
+  '/assets/img/lodash.svg',
   '/assets/js/docs.js',
   'https://embed.tonicdev.com/',
   'https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/css/font-awesome.min.css',
+  'https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/fonts/fontawesome-webfont.woff2?v={{ site.fontawesome.version }}',
   'https://npmcdn.com/react@{{ site.react.version }}/dist/react.min.js',
   'https://npmcdn.com/react-dom@{{ site.react.version }}/dist/react-dom.min.js'
 ];
