@@ -12,3 +12,8 @@ react_version:
 sass:
   sass_dir:
     assets/css
+
+exclude:
+  - CNAME
+  - LICENSE
+  - "*.md"
