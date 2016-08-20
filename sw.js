@@ -35,7 +35,7 @@ addEventListener('install', event =>
       Promise.all(prefetch.map(entry =>
         cache
           .add(new Request(entry, { 'mode': 'no-cors' }))
-          .catch(error => console.log('prefetch failed: ' + entry, error))
+          .catch(error => console.log(`prefetch failed: ${ entry }`, error))
       ))
     )
   ]))
@@ -62,7 +62,7 @@ addEventListener('fetch', event =>
           }
           return response;
         })
-        .catch(error => console.log('fetch failed: ' + event.request.url, error))
+        .catch(error => console.log(`fetch failed: ${ event.request.url }`, error))
       )
     )
   )
