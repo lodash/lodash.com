@@ -6,8 +6,13 @@ releases:
   - 3.10.1
   - 2.4.2
 
-react_version:
-  15.3.1
+fontawesome:
+  version:
+    4.6.3
+
+react:
+  version:
+    15.3.1
 
 sass:
   sass_dir:

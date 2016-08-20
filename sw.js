@@ -20,8 +20,9 @@ var prefetch = [
   '/favicon.ico',
   '/assets/js/docs.js',
   'https://embed.tonicdev.com/',
-  'https://npmcdn.com/react@{{ site.react_version }}/dist/react.min.js',
-  'https://npmcdn.com/react-dom@{{ site.react_version }}/dist/react-dom.min.js'
+  'https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/css/font-awesome.min.css',
+  'https://npmcdn.com/react@{{ site.react.version }}/dist/react.min.js',
+  'https://npmcdn.com/react-dom@{{ site.react.version }}/dist/react-dom.min.js'
 ];
 
 var skipCache = [

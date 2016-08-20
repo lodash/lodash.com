@@ -1,7 +1,7 @@
 ---
 ---
 
-@import url('https://cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css');
+@import url('https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/css/font-awesome.min.css');
 
 @import 'variables';
 @import 'default';
