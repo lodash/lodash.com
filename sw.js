@@ -18,7 +18,7 @@ var prefetch = [
   'https://npmcdn.com/react-dom@15.3.1/dist/react-dom.min.js'
 ];
 
-var nocache = [
+var skipCache = [
   'google-analytics.com'
 ];
 
@@ -49,7 +49,7 @@ addEventListener('fetch', event =>
     caches.open(CACHE_KEY).then(cache =>
       cache.match(event.request).then(response =>
         response || fetch(event.request).then(response => {
-          if (!nocache.some(entry => event.request.url.includes(entry))) {
+          if (!skipCache.some(entry => event.request.url.includes(entry))) {
             cache.put(event.request, response.clone());
           }
           return response;
