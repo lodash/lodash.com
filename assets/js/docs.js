@@ -1,7 +1,7 @@
 ;(function() {
   var menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
-      repls = document.querySelectorAll('.highlight.js'),
+      replBtns = [],
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
@@ -169,40 +169,43 @@
     }
   });
 
-  _.each(repls, function(pre) {
-    var button = document.createElement('a'),
-        parent = pre.parentElement;
+  if (navigator.onLine) {
+    _.each(document.querySelectorAll('.highlight.js'), function(pre) {
+      var button = document.createElement('a'),
+          parent = pre.parentElement;
 
-    button.classList.add('btn-repl');
-    button.innerText = 'Try in REPL';
-    parent.appendChild(button);
-    parent.style.position = 'relative';
+      button.classList.add('btn-repl');
+      button.innerText = 'Try in REPL';
+      parent.appendChild(button);
+      parent.style.position = 'relative';
 
-    button.addEventListener('click', function() {
-      var source = pre.innerText;
-      pre.style.minHeight = pre.scrollHeight + 'px';
-      pre.innerHTML = '';
-      pre.classList.add('repl');
+      button.addEventListener('click', function() {
+        var source = pre.innerText;
+        pre.style.minHeight = pre.scrollHeight + 'px';
+        pre.innerHTML = '';
+        pre.classList.add('repl');
 
-      _.delay(function() {
-        parent.removeChild(button);
+        _.delay(function() {
+          parent.removeChild(button);
+          Tonic.createNotebook({
+            'element': pre,
+            'nodeVersion': '*',
+            'preamble': [
+              'var _ = require("lodash@' + versionSelect.value + '");',
+              '_.assign(global, require("lodash-doc-globals"));',
+              'Object.observe = _.noop;'
+            ].join('\n'),
+            'source': source,
+            'onLoad': function(notebook) {
+              notebook.evaluate();
+            }
+          });
+        }, 500);
+      });
 
-        Tonic.createNotebook({
-          'element': pre,
-          'nodeVersion': '*',
-          'preamble': [
-            'var _ = require("lodash@' + versionSelect.value + '");',
-            '_.assign(global, require("lodash-doc-globals"));',
-            'Object.observe = _.noop;'
-          ].join('\n'),
-          'source': source,
-          'onLoad': function(notebook) {
-            notebook.evaluate();
-          }
-        });
-      }, 500);
+      replBtns.push(button);
     });
-  });
+  }
 
   mobileMenu.addEventListener('click', function(e) {
     e.preventDefault();
@@ -216,5 +219,17 @@
         ? 'https://github.com/lodash/lodash/blob/1.3.1/doc/README.md'
         : '/docs/' + value;
     }
+  });
+
+  addEventListener('offline', function() {
+    _.each(replBtns, function(button) {
+      button.style.display = 'none';
+    });
+  });
+
+  addEventListener('online', function() {
+    _.each(replBtns, function(button) {
+      button.style.display = '';
+    });
   });
 }());
