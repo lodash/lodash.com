@@ -37,7 +37,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(CACHE_KEY).then(cache =>
       Promise.all(prefetch.map(entry =>
-        fetch(entry, { 'mode': 'no-cors' })
+        fetch(entry, { 'mode': `${ /\.woff/.test(entry) ? '' : 'no-' }cors` })
           .then(response => cache.put(entry, response))
           .catch(error => console.log(`prefetch failed: ${ entry }`, error))
       ))
