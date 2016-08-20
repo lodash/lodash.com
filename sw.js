@@ -12,6 +12,7 @@ var prefetch = [
 {% endfor %}
   '/404.html',
   '/custom-builds.html',
+  '/favicon.ico',
   '/assets/js/docs.js',
   'https://embed.tonicdev.com/',
   'https://npmcdn.com/react@{{ site.react_version }}/dist/react.min.js',
