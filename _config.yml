@@ -1,9 +1,14 @@
-release: &release 4.15.0
+release:
+  &release 4.15.0
 
 releases:
   - *release
   - 3.10.1
   - 2.4.2
 
+react_version:
+  15.3.1
+
 sass:
-  sass_dir: assets/css
+  sass_dir:
+    assets/css

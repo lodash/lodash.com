@@ -14,8 +14,8 @@ var prefetch = [
   '/custom-builds.html',
   '/assets/js/docs.js',
   'https://embed.tonicdev.com/',
-  'https://npmcdn.com/react@15.3.1/dist/react.min.js',
-  'https://npmcdn.com/react-dom@15.3.1/dist/react-dom.min.js'
+  'https://npmcdn.com/react@{{ site.react_version }}/dist/react.min.js',
+  'https://npmcdn.com/react-dom@{{ site.react_version }}/dist/react-dom.min.js'
 ];
 
 var skipCache = [
