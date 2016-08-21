@@ -102,16 +102,6 @@ html.docs {
       }
     }
 
-    div {
-      &:not(:first) {
-        margin-top: 1rem;
-      }
-
-      &:not(:last) {
-        margin-bottom: 1rem;
-      }
-    }
-
     h3 {
       background: $background;
     }
