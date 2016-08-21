@@ -184,24 +184,7 @@ pre, .highlight {
 }
 
 section {
-  padding: 0.5rem 2.5rem;
-
-  &.code {
-    background: $codeBg;
-    color: $codeColor;
-  }
-
-  &.method-header {
-    background: $background;
-  }
-
-  &:not(:first) {
-    margin-top: 1rem;
-  }
-
-  &:not(:last) {
-    margin-bottom: 1rem;
-  }
+  padding: 0 2.5rem;
 }
 
 ul {

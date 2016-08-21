@@ -3,6 +3,13 @@ html.home {
     font-size: 1.2rem;
   }
 
+  section {
+    &:first-of-type {
+      background: $codeBg;
+      color: $codeColor;
+    }
+  }
+
   #download-links {
     list-style: none;
     padding: 0;
