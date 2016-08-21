@@ -20,6 +20,12 @@ sass:
   style:
     compressed
 
+compress_html:
+  clippings: all
+  comments:  all
+  endings:   all
+  startings: [html, head, body, tbody]
+
 exclude:
   - CNAME
   - LICENSE
