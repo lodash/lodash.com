@@ -185,6 +185,14 @@ pre, .highlight {
 
 section {
   padding: 0 2.5rem;
+
+  &:not(:first-of-type) {
+    margin-top: 1rem;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
 }
 
 ul {
