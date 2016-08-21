@@ -6,21 +6,17 @@
 var CACHE_KEY = 'cache-v{{ site.time | replace:" ","" | replace:":","" | replace:"-","" }}';
 
 var prefetch = [
+{% for file in site.static_files %}
+  '{{ file.path }}',
+{% endfor %}
+{% for page in site.html_pages %}
+  '{{ page.url | replace:".html","" }}',
+  '/{{ page.path }}',
+{% endfor %}
 {% for release in site.releases %}
-  '/docs/{{ release }}',
-  '/docs/{{ release }}.html',
   'https://rawgit.com/lodash/lodash/{{ release }}/lodash.js',
 {% endfor %}
-  '/',
-  '/index.html',
-  '/404',
-  '/404.html',
-  '/custom-builds',
-  '/custom-builds.html',
-  '/favicon.ico',
   '/assets/css/main.css',
-  '/assets/img/lodash.svg',
-  '/assets/js/docs.js',
   'https://embed.tonicdev.com/',
   'https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/css/font-awesome.min.css',
   'https://cdn.jsdelivr.net/fontawesome/{{ site.fontawesome.version }}/fonts/fontawesome-webfont.woff2?v={{ site.fontawesome.version }}',
