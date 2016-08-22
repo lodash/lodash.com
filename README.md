@@ -7,12 +7,12 @@ The Lodash website.
 1. Clone the repository locally.
 
 2. Install the `github-pages` gem.
-    ```sh
+    ```shell
     $ gem install github-pages
     ```
 
 3. Build & run from the repository’s directory.
-    ```sh
+    ```shell
     $ jekyll serve
     ```
 
