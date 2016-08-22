@@ -40,7 +40,7 @@
       });
     },
 
-    'onChangeExpanded': function(title) {
+    'onChangeExpanded': function(event, title) {
       var content = _.map(this.state.content, function(value) {
         if (value.title == title) {
           value.expanded = !value.expanded;
@@ -108,7 +108,7 @@
             React.createElement('span', {
               'className': collection.expanded ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
               'style': { 'marginRight': 10, 'fontSize': 14, 'cursor': 'pointer' },
-              'onClick': _.bind(_this.onChangeExpanded, _this, collection.title)
+              'onClick': _.bind(_this.onChangeExpanded, _this, _, collection.title)
             }),
             collection.title
           ),
