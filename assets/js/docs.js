@@ -52,9 +52,9 @@
       });
     },
 
-    'onChangeSearch': function(e) {
+    'onChangeSearch': function(event) {
       this.setState({
-        'searchValue': e.target.value
+        'searchValue': event.target.value
       });
     },
 
@@ -207,13 +207,13 @@
     });
   }
 
-  mobileMenu.addEventListener('click', function(e) {
-    e.preventDefault();
+  mobileMenu.addEventListener('click', function(event) {
+    event.preventDefault();
     menuEl.classList.toggle('open');
   });
 
-  versionSelect.addEventListener('change', function(e) {
-    var value = e.target.value;
+  versionSelect.addEventListener('change', function(event) {
+    var value = event.target.value;
     if (value) {
       location.href = value === '1.3.1'
         ? 'https://github.com/lodash/lodash/blob/1.3.1/doc/README.md'
