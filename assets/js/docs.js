@@ -1,5 +1,6 @@
 ;(function() {
-  var menuEl = document.querySelector('.toc-container'),
+  var docs = document.querySelector('.doc-container'),
+      menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       replBtns = [],
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
@@ -83,7 +84,7 @@
           if (search(collection.title, searchValue)) {
             return collection;
           }
-          // Else if search is for a function, return matching functions.
+          // If search is for a function, return matching functions.
           return {
             'title': collection.title,
             'expanded': collection.expanded,
@@ -207,11 +208,18 @@
     });
   }
 
+  // Open the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
     event.preventDefault();
     menuEl.classList.toggle('open');
   });
 
+  // Close the mobile menu.
+  docs.addEventListener('click', function() {
+    menuEl.classList.remove('open');
+  });
+
+  // Change the documentation URL.
   versionSelect.addEventListener('change', function(event) {
     var value = event.target.value;
     if (value) {
@@ -221,6 +229,7 @@
     }
   });
 
+  // Toggle REPL buttons for online status.
   addEventListener('offline', function() {
     _.each(replBtns, function(button) {
       button.style.display = 'none';
