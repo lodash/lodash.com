@@ -28,7 +28,7 @@
           'functions': _.map(node.querySelectorAll('ul li a'), function(anchor) {
             return {
               'name': anchor.innerText,
-              'href': anchor.getAttribute('href')
+              'href': anchor.href
             };
           })
         };
