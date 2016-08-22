@@ -4,85 +4,80 @@ title: Lodash custom builds
 layout: default
 ---
 
+{% raw %}
 <section>
-  <h1>Custom builds</h1>
-  <p>Custom builds make it easy to create lightweight versions of lodash containing only the features you need. To top it off, we handle all function dependency &amp; alias mapping for you. Review the <a href="https://github.com/lodash/lodash/wiki/build-differences">build differences</a> &amp; pick the one that’s right for you.</p>
-  <p>Using Grunt? We also provide a <a href="https://npmjs.org/package/grunt-lodash">Grunt plugin</a> to build lodash as part of your Gruntfile.</p>
-  <p>The <code>lodash</code> command-line utility is available when <a href="https://npmjs.org/package/lodash-cli">lodash-cli</a> is installed as a global package:<pre><code>$ {sudo -H} npm i -g npm<br>$ {sudo -H} npm i -g lodash-cli<br>$ lodash -h</code></pre></p>
-  <p><strong>Note:</strong> Uninstall older versions <em>before</em> installing <code>lodash-cli</code>.</p>
+  <h1>Custom Builds</h1>
+  <p>Custom builds make it easy to create lightweight versions of Lodash containing only the features you need. To top it off, we handle all function dependency &amp; alias mapping for you. Review the <a href="https://github.com/lodash/lodash/wiki/build-differences">build differences</a> &amp; pick the one that’s right for you.</p>
+  <p>The Lodash command-line interface is available when <a href="https://npmjs.org/package/lodash-cli"><code>lodash-cli</code></a> is installed as a global package:
+  <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>$&#xA0;{sudo&#xA0;-H}&#xA0;npm&#xA0;i&#xA0;-g&#xA0;npm</span></span></div><div class="line"><span class="source shell"><span>$&#xA0;{sudo&#xA0;-H}&#xA0;npm&#xA0;i&#xA0;-g&#xA0;lodash-cli</span></span></div><div class="line"><span class="source shell"><span>$&#xA0;lodash&#xA0;-h</span></span></div></pre></div></p>
 </section>
 
 <section>
-  <h2>Build types</h2>
+  <h2>Build Types</h2>
   <ul class="chevron">
-   <li>Compat builds, with support for old &amp; new environments, are created using the <code>compat</code> modifier. <em>(default)</em>
-    <pre><code>lodash compat</code></pre>
-   </li>
-   <li>Modern builds, tailored for newer environments with <a href="https://es5.github.io/">ES5</a>/<a href="https://people.mozilla.org/~jorendorff/es6-draft.html">ES6</a> support, are created using the <code>modern</code> modifier.
-    <pre><code>lodash modern</code></pre>
-   </li>
-   <li>Strict builds, with <a href="https://es5.github.io/#C">ES strict mode</a> enabled, are created using the <code>strict</code> modifier.
-    <pre><code>lodash strict</code></pre>
-   </li>
-   <li>Modularized builds, splitting lodash into modules, are created using the <code>modularize</code> modifier.
-    <pre><code>lodash modularize</code></pre>
-   </li>
+    <li>Core builds, that are 4 kB, are created using the <code>core</code> modifier.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;core</span></span></div></pre></div>
+    </li>
+    <li>Strict builds, with <a href="http://www.ecma-international.org/ecma-262/7.0/#sec-strict-mode-of-ecmascript">ES strict mode</a> enabled, are created using the <code>strict</code> modifier.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;strict</span></span></div></pre></div>
+    </li>
+    <li>Modularized builds, with Lodash split into modules, are created using the <code>modularize</code> modifier.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;modularize</span></span></div></pre></div>
+    </li>
   </ul>
 </section>
 
 <section>
-  <h2>Build commands:</h2>
+  <h2>Build Commands:</h2>
   <ul class="chevron">
-   <li>Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories are <em>“array”</em>, <em>“chain”</em>, <em>“collection”</em>, <em>“date”</em>, <em>“function”</em>, <em>“lang”</em>, <em>“object”</em>, <em>“number”</em>, <em>“string”</em>, &amp; <em>“utility”</em>.
-    <pre><code>lodash category<span class="sy0">=</span>collection<span class="sy0">,</span>function</code></pre>
-   </li>
-   <li>Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“es”</em>, <em>“global”</em>, <em>“iojs”</em>, <em>“node”</em>, <em>“npm”</em>, <em>“none”</em>, &amp; <em>“umd”</em>.
-    <pre><code>lodash exports<span class="sy0">=</span>amd<span class="sy0">,</span>commonjs<span class="sy0">,</span>iojs</code></pre>
-   </li>
-   <li>Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps lodash.
-    <pre><code>lodash iife<span class="sy0">=</span><span class="st0">&quot;!function(window,undefined){ %output% }(this)&quot;</span></code></pre>
-   </li>
-   <li>Use the <code>include</code> command to pass comma separated names of functions to include in the build.
-    <pre><code>lodash include<span class="sy0">=</span>each<span class="sy0">,</span>filter<span class="sy0">,</span>map</code></pre>
-   </li>
-   <li>Use the <code>minus</code> command to pass comma separated function/category names to remove from the build.
-    <pre><code>lodash modern minus<span class="sy0">=</span>result<span class="sy0">,</span>shuffle</code></pre>
-   </li>
-   <li>Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
-    <pre><code>lodash category=array plus<span class="sy0">=</span>random<span class="sy0">,</span>template</code></pre>
-   </li>
-   <li>Use the <code>template</code> command to pass the file path pattern used to match template files to precompile.<br>
-    <strong>Note:</strong> Precompiled templates are assigned to the <code>_.<span class="me1">templates</span></code> object.
-    <pre><code>lodash template<span class="sy0">=</span><span class="st0">&quot;./*.jst&quot;</span></code></pre>
-   </li>
-   <li>Use the <code>settings</code> command to pass template settings used when precompiling templates.
-    <pre><code>lodash settings<span class="sy0">=</span><span class="st0">&quot;{interpolate:/\{\{([\s\S]+?)\}\}/g}&quot;</span></code></pre>
-   </li>
-   <li class="last-item">Use the <code>moduleId</code> command to specify the AMD module ID for lodash or the module ID used to include lodash in compiled templates. Use “none” as the module ID to create compiled templates without a dependency on lodash.
-    <pre><code>lodash moduleId<span class="sy0">=</span>underscore</code></pre>
-   </li>
+    <li>Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories are <em>“array”</em>, <em>“collection”</em>, <em>“date”</em>, <em>“function”</em>, <em>“lang”</em>, <em>“object”</em>, <em>“number”</em>, <em>“seq”</em>, <em>“string”</em>, &amp; <em>“util”</em>.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;category=collection,function</span></span></div></pre></div>
+    </li>
+    <li>Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“es”</em>, <em>“global”</em>, <em>“node”</em>, <em>“npm”</em>, <em>“none”</em>, &amp; <em>“umd”</em>.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;exports=amd,node</span></span></div></pre></div>
+    </li>
+    <li>Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps Lodash.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;iife=</span><span class="string quoted double shell"><span class="punctuation definition string begin shell"><span>&quot;</span></span><span>!function(window,undefined){%output%}(this)</span><span class="punctuation definition string end shell"><span>&quot;</span></span></span></span></div></pre></div>
+    </li>
+    <li>Use the <code>include</code> command to pass comma separated names of functions to include in the build.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;include=each,filter,map</span></span></div></pre></div>
+    </li>
+    <li>Use the <code>minus</code> command to pass comma separated function/category names to remove from the build.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;minus=result,shuffle</span></span></div></pre></div>
+    </li>
+    <li>Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;category=array&#xA0;plus=random,template</span></span></div></pre></div>
+    </li>
+    <li>Use the <code>template</code> command to pass the file path pattern used to match template files to precompile.<br><strong>Note:</strong> Precompiled templates are assigned to the <code>_.<span class="me1">templates</span></code> object.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;template=</span><span class="string quoted double shell"><span class="punctuation definition string begin shell"><span>&quot;</span></span><span>./*.jst</span><span class="punctuation definition string end shell"><span>&quot;</span></span></span></span></div></pre></div>
+    </li>
+    <li>Use the <code>settings</code> command to pass template settings used when precompiling templates.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;settings=</span><span class="string quoted double shell"><span class="punctuation definition string begin shell"><span>&quot;</span></span><span>{interpolate:/\{\{([sS]+?)\}\}/g}</span><span class="punctuation definition string end shell"><span>&quot;</span></span></span></span></div></pre></div>
+    </li>
+    <li class="last-item">Use the <code>moduleId</code> command to specify the AMD module ID for Lodash or the module ID used to include Lodash in compiled templates.<br>Use “none” as the module ID to create compiled templates without a dependency on Lodash.
+      <div class="highlight shell"><pre class="editor editor-colors"><div class="line"><span class="source shell"><span>lodash&#xA0;moduleId=underscore</span></span></div></pre></div>
+    </li>
   </ul>
 </section>
 
 <section>
-  <h2><strong>Notes:</strong></h2>
-  <ul>
-   <li>All commands except <code>compat</code> &amp; <code>modern</code> may be combined</li>
-   <li>The <code>exports</code> values <em>“es”</em> &amp; <em>“npm”</em> may only be used in conjunction with the <code>modularize</code> command</li>
-   <li>The <code>modularize</code> command uses the first `exports` values as its module format, ignoring subsequent values.</li>
-   <li>Unless specified by <code>-o</code> or <code>--output</code> all files created are saved to the current working directory</li>
-   <li>Node.js 0.10.8-0.10.11 <a href="https://github.com/joyent/node/issues/5622">have</a> <a href="https://github.com/joyent/node/issues/5688">bugs</a> preventing minified builds</li>
+  <h2>Notes:</h2>
+  <ul class="chevron">
+    <li>The <code>exports</code> values <em>“es”</em> &amp; <em>“npm”</em> may only be used in conjunction with the <code>modularize</code> command</li>
+    <li>The <code>modularize</code> command uses the first <code>exports</code> values as its module format, ignoring subsequent values</li>
+    <li>Unless specified by <code>-o</code> or <code>--output</code> all files created are saved to the current working directory</li>
   </ul>
 
   <p>The following options are also supported:</p>
   <ul>
-   <li><code>-c</code>, <code>--stdout</code> ................ Write output to standard output</li>
-   <li><code>-d</code>, <code>--development</code> ..... Write only the non-minified development output</li>
-   <li><code>-h</code>, <code>--help</code> .................... Display help information</li>
-   <li><code>-m</code>, <code>--source-map</code> ....... Generate a source map using an optional source map URL</li>
-   <li><code>-o</code>, <code>--output</code> ................ Write output to a given path/filename</li>
-   <li><code>-p</code>, <code>--production</code> ....... Write only the minified production output</li>
-   <li><code>-s</code>, <code>--silent</code> ............... Skip status updates normally logged to the console</li>
-   <li><code>-V</code>, <code>--version</code> ............. Output current version of lodash</li>
+    <li><code>-c</code>, <code>--stdout</code> ................ Write output to standard output</li>
+    <li><code>-d</code>, <code>--development</code> ..... Write only the non-minified development output</li>
+    <li><code>-h</code>, <code>--help</code> .................... Display help information</li>
+    <li><code>-m</code>, <code>--source-map</code> ....... Generate a source map using an optional source map URL</li>
+    <li><code>-o</code>, <code>--output</code> ................ Write output to a given path/filename</li>
+    <li><code>-p</code>, <code>--production</code> ....... Write only the minified production output</li>
+    <li><code>-s</code>, <code>--silent</code> ............... Skip status updates normally logged to the console</li>
+    <li><code>-V</code>, <code>--version</code> ............. Output current version of Lodash</li>
   </ul>
 </section>
+{% endraw %}
