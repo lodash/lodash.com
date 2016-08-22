@@ -155,6 +155,15 @@ header {
   }
 }
 
+pre {
+  &.repl {
+    background: $foreground;
+    margin: 0 -36px;
+    overflow-x: hidden;
+    padding: 0 36px;
+  }
+}
+
 pre, code {
   font-family: Consolas, Courier New, monospace;
 }
@@ -163,24 +172,10 @@ pre, .highlight {
   background: $codeBg;
   box-sizing: border-box;
   color: $codeColor;
-  margin: 0 -999rem;
   overflow-x: auto;
-  padding: 2rem 999rem;
   position: relative;
   transition: all 0.4s ease;
   -webkit-overflow-scrolling: touch;
-
-  &.repl {
-    background: $foreground;
-    margin: 0 -36px;
-    overflow-x: hidden;
-    padding: 0 36px;
-  }
-
-  > pre {
-    margin: 0;
-    padding: 0;
-  }
 }
 
 section {
@@ -221,6 +216,10 @@ ul.chevron li {
     content: "\203A";
     padding-right: 0.5rem;
   }
+
+  .highlight {
+    text-indent: 0;
+  }
 }
 
 .container {
@@ -235,4 +234,14 @@ ul.chevron li {
   margin-top: 2rem;
   overflow: hidden;
   padding-bottom: 2rem;
+}
+
+.highlight {
+  margin: 0 -999rem;
+  padding: 2rem 999rem;
+
+  pre {
+    margin: 0;
+    padding: 0;
+  }
 }
