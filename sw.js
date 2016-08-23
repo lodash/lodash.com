@@ -52,7 +52,7 @@ addEventListener('install', event =>
                 cache.put(uri, response);
               })
               // Prefetch failed.
-              .catch(event => console.log(`prefetch failed: ${ uri }`, error))
+              .catch(error => console.log(`prefetch failed: ${ uri }`, error))
           );
       }))
     )
