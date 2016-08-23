@@ -26,8 +26,7 @@ var prefetch = [
 
 /*----------------------------------------------------------------------------*/
 
-addEventListener('install', event => {
-  const now = Date.now();
+addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
     caches.open(CACHE_KEY).then(cache =>
@@ -35,10 +34,10 @@ addEventListener('install', event => {
         // Use cache-bust query until cache modes are supported in Chrome.
         // Only add to same-origin requests to avoid potential 403 responses.
         // See https://github.com/mjackson/npm-http-server/issues/44.
-        const url = new URL(uri, location.href);
-        const input = url.origin == location.origin
-          ? (url.search += `${ url.search ? '&' : '?' }cache-bust=${ now }`, url.href)
-          : uri;
+        const input = new URL(uri, location.href);
+        input.search += input.origin == location.origin
+          ? `${ input.search ? '&' : '?' }${ CACHE_KEY }`
+          : '';
 
         // Attempt to prefetch and cache with 'cors'.
         return fetch(input)
@@ -58,7 +57,7 @@ addEventListener('install', event => {
       }))
     )
   ]))
-});
+);
 
 addEventListener('activate', event =>
   event.waitUntil(Promise.all([
