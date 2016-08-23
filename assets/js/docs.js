@@ -170,43 +170,43 @@
     }
   });
 
-  if (navigator.onLine) {
-    _.each(document.querySelectorAll('.highlight.js'), function(pre) {
-      var button = document.createElement('a'),
-          parent = pre.parentElement;
+  _.each(document.querySelectorAll('.highlight.js'), function(pre) {
+    var button = document.createElement('a'),
+        parent = pre.parentElement;
 
-      button.classList.add('btn-repl');
-      button.innerText = 'Try in REPL';
-      parent.appendChild(button);
-      parent.style.position = 'relative';
+    button.classList.add('btn-repl');
+    button.innerText = 'Try in REPL';
+    button.style.display = navigator.onLine ? '' : 'none';
 
-      button.addEventListener('click', function() {
-        var source = pre.innerText;
-        pre.style.minHeight = pre.scrollHeight + 'px';
-        pre.innerHTML = '';
-        pre.classList.add('repl');
+    parent.appendChild(button);
+    parent.style.position = 'relative';
 
-        _.delay(function() {
-          parent.removeChild(button);
-          Tonic.createNotebook({
-            'element': pre,
-            'nodeVersion': '*',
-            'preamble': [
-              'var _ = require("lodash@' + versionSelect.value + '");',
-              '_.assign(global, require("lodash-doc-globals"));',
-              'Object.observe = _.noop;'
-            ].join('\n'),
-            'source': source,
-            'onLoad': function(notebook) {
-              notebook.evaluate();
-            }
-          });
-        }, 500);
-      });
+    button.addEventListener('click', function() {
+      var source = pre.innerText;
+      pre.style.minHeight = pre.scrollHeight + 'px';
+      pre.innerHTML = '';
+      pre.classList.add('repl');
 
-      replBtns.push(button);
+      _.delay(function() {
+        parent.removeChild(button);
+        Tonic.createNotebook({
+          'element': pre,
+          'nodeVersion': '*',
+          'preamble': [
+            'var _ = require("lodash@' + versionSelect.value + '");',
+            '_.assign(global, require("lodash-doc-globals"));',
+            'Object.observe = _.noop;'
+          ].join('\n'),
+          'source': source,
+          'onLoad': function(notebook) {
+            notebook.evaluate();
+          }
+        });
+      }, 500);
     });
-  }
+
+    replBtns.push(button);
+  });
 
   // Open the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
