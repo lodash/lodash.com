@@ -44,11 +44,11 @@ addEventListener('install', event =>
     caches.open(CACHE_KEY).then(cache =>
       Promise.all(prefetch.map(entry =>
         // Attempt to prefetch and cache with 'cors'.
-        fetch(entry, { 'mode': 'cors' })
+        fetch(entry, { 'cache': 'no-cache', 'mode': 'cors' })
           .then(response => isOk(response.status) && cache.put(entry, response))
           .catch(() =>
             // Fallback to prefetch and cache with 'no-cors'.
-            fetch(entry, { 'mode': 'no-cors' })
+            fetch(entry, { 'cache': 'no-cache', 'mode': 'no-cors' })
               .then(response => {
                 if (!isOk(response.status)) {
                   throw new TypeError('Response status is !ok');
