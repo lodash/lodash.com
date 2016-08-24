@@ -24,6 +24,17 @@ var prefetch = [
   'https://npmcdn.com/react-dom@{{ site.react.version }}/dist/react-dom.min.js'
 ];
 
+function toInput(uri) {
+  // Use cache-bust query until cache modes are supported in Chrome.
+  // Only add to same-origin requests to avoid potential 403 responses.
+  // See https://github.com/mjackson/npm-http-server/issues/44.
+  const input = new URL(uri, location.href);
+  if (input.origin == location.origin) {
+    input.search += `${ input.search ? '&' : '?' }${ CACHE_KEY }`;
+  }
+  return input;
+}
+
 /*----------------------------------------------------------------------------*/
 
 addEventListener('install', event =>
@@ -31,13 +42,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(CACHE_KEY).then(cache =>
       Promise.all(prefetch.map(uri => {
-        // Use cache-bust query until cache modes are supported in Chrome.
-        // Only add to same-origin requests to avoid potential 403 responses.
-        // See https://github.com/mjackson/npm-http-server/issues/44.
-        const input = new URL(uri, location.href);
-        input.search += input.origin == location.origin
-          ? `${ input.search ? '&' : '?' }${ CACHE_KEY }`
-          : '';
+        const input = toInput(uri);
 
         // Attempt to prefetch and cache with 'cors'.
         return fetch(input)
@@ -75,9 +80,20 @@ addEventListener('fetch', event =>
   event.respondWith(
     caches.open(CACHE_KEY).then(cache =>
       // Respond with cached request if available.
-      cache.match(event.request)
-        .then(response => response || fetch(event.request))
+      cache.match(event.request).then(response => {
+        if (response || !prefetch.includes(event.request.url)) {
+          return response || fetch(event.request);
+        }
+        // Retry caching if missed during prefetch.
+        const input = toInput(event.request.url);
+        return fetch(new Request(input, event.request)).then(response => {
+          if (response.ok || !response.status) {
+            cache.put(event.request, response.clone());
+          }
+          return response;
+        })
         .catch(error => console.log(`fetch failed: ${ event.request.url }`, error))
+      })
     )
   )
 );
