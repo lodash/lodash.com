@@ -92,7 +92,11 @@ addEventListener('fetch', event =>
           }
           return response;
         })
-        .catch(error => console.log(`fetch failed: ${ event.request.url }`, error))
+        .catch(error => {
+          // Respond with a 400 "Bad Request" status.
+          console.log(`fetch failed: ${ event.request.url }`, error);
+          return new Response(new Blob, { 'status': 400 });
+        })
       })
     )
   )
