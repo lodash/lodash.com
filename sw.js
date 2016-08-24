@@ -43,7 +43,6 @@ addEventListener('install', event =>
     caches.open(CACHE_KEY).then(cache =>
       Promise.all(prefetch.map(uri => {
         const input = toInput(uri);
-
         // Attempt to prefetch and cache with 'cors'.
         return fetch(input)
           .then(response => response.ok && cache.put(uri, response))
