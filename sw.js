@@ -24,15 +24,23 @@ var prefetch = [
   'https://npmcdn.com/react-dom@{{ site.react.version }}/dist/react-dom.min.js'
 ];
 
-function toInput(uri) {
+/**
+ * Converts `uri` to a `URL` object with a cache-bust query appended for
+ * same-origin requests.
+ *
+ * @private
+ * @param {uri} string The URI to convert.
+ * @returns {Object} Returns the converted `URL` object.
+ */
+function toURL(uri) {
   // Use cache-bust query until cache modes are supported in Chrome.
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
-  const input = new URL(uri, location.href);
-  if (input.origin == location.origin) {
-    input.search += `${ input.search ? '&' : '?' }${ CACHE_KEY }`;
+  const result = new URL(uri, location.href);
+  if (result.origin == location.origin) {
+    result.search += `${ result.search ? '&' : '?' }${ CACHE_KEY }`;
   }
-  return input;
+  return result;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -42,7 +50,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(CACHE_KEY).then(cache =>
       Promise.all(prefetch.map(uri => {
-        const input = toInput(uri);
+        const input = toURL(uri);
         // Attempt to prefetch and cache with 'cors'.
         return fetch(input)
           .then(response => response.ok && cache.put(uri, response))
@@ -84,7 +92,7 @@ addEventListener('fetch', event =>
           return response || fetch(event.request);
         }
         // Retry caching if missed during prefetch.
-        const input = toInput(event.request.url);
+        const input = toURL(event.request.url);
         return fetch(new Request(input, event.request)).then(response => {
           if (response.ok || !response.status) {
             cache.put(event.request, response.clone());
