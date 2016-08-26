@@ -29,7 +29,8 @@
           'functions': _.map(node.querySelectorAll('ul li a'), function(anchor) {
             return {
               'name': anchor.innerText,
-              'href': anchor.href
+              'href': anchor.href,
+              'visible': true
             };
           })
         };
@@ -78,30 +79,40 @@
           content = this.state.content,
           searchValue = this.state.searchValue;
 
-      var filtered = _(content)
-        .map(function(collection) {
-          // If search is for a collection title, return collection.
-          if (search(collection.title, searchValue)) {
-            return collection;
-          }
-          // If search is for a function, return matching functions.
-          return {
-            'title': collection.title,
-            'expanded': collection.expanded,
-            'functions': _.filter(collection.functions, function(data) {
-              return search(data.name, searchValue);
-            })
-          };
-        })
-        .reject(function(collection) {
-          return _.isEmpty(collection.functions);
-        })
-        .value();
+      var filtered =
+        _(content)
+          .map(function(collection) {
+            var result = {
+              'title': collection.title,
+              'expanded': collection.expanded,
+              'visible': search(collection.title, searchValue),
+              'functions': _.map(collection.functions, function(data) {
+                data.visible = search(collection.title, searchValue) || search(data.name, searchValue);
+                return data;
+              })
+            };
+
+            // The collection is visible if searchValue matches the title
+            // or if there are visible functions
+            result.visible =
+              search(collection.title, searchValue) ||
+              _.filter(result.functions, function(data) {
+                return data.visible;
+              }).length;
+
+            return result;
+          })
+          .reject(function(collection) {
+            return _.isEmpty(collection.functions);
+          })
+          .value();
 
       var collections = _.map(filtered, function(collection) {
         return React.createElement(
           'div',
-          null,
+          {
+            'className': collection.visible ? '' : 'hidden'
+          },
           React.createElement(
             'h2',
             null,
@@ -112,13 +123,17 @@
             }),
             collection.title
           ),
-          !collection.expanded ? '' : React.createElement(
+          React.createElement(
             'ul',
-            null,
+            {
+              'className': collection.expanded ? '' : 'hidden'
+            },
             _.map(collection.functions, function(data) {
               return React.createElement(
                 'li',
-                null,
+                {
+                  'className': data.visible ? '' : 'hidden'
+                },
                 React.createElement(
                   'a',
                   {
