@@ -143,6 +143,10 @@ html.docs {
     width: 100%;
   }
 
+  .hidden {
+    display: none;
+  }
+
   .logo {
     height: 40px;
     width: 40px;
@@ -206,31 +210,11 @@ html.docs {
       transform: none;
     }
 
-    // Transition effects
-    > div > div,
-    ul li,
-    ul {
-      transition: opacity 1s ease, max-height 1s ease, padding 1s ease;
-      max-height: 3000px;
-
-      &.hidden {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-    }
-
     // Weird CSS rule to ensure that no page jank when search bar loads
     > div {
       &:first-child:not(.search):not(.react-menu-container) {
         margin-top: calc(1.5rem + 37px);
       }
-    }
-
-    ul li {
-      max-height: 40px;
     }
 
     div > h2 {
@@ -245,6 +229,10 @@ html.docs {
     ul {
       border-left: 1px dashed #dcdcdc;
       margin-top: 0.5rem;
+
+      li {
+        max-height: 40px;
+      }
 
       li a {
         border: none;
