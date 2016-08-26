@@ -154,7 +154,9 @@
 
       return React.createElement(
         'div',
-        null,
+        {
+          'className': 'react-menu-container'
+        },
         React.createElement(
           'div',
           { 'className': 'search' },

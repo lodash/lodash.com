@@ -222,11 +222,18 @@ html.docs {
       }
     }
 
+    // Weird CSS rule to ensure that no page jank when search bar loads
+    > div {
+      &:first-child:not(.search):not(.react-menu-container) {
+        margin-top: calc(1.5rem + 37px);
+      }
+    }
+
     ul li {
       max-height: 40px;
     }
 
-    > div > h2 {
+    div > h2 {
       margin-bottom: 0.5rem;
       margin-top: 1.5rem;
 
