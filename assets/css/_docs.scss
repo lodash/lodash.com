@@ -206,6 +206,26 @@ html.docs {
       transform: none;
     }
 
+    // Transition effects
+    > div > div,
+    ul li,
+    ul {
+      transition: opacity 1s ease, max-height 1s ease, padding 1s ease;
+      max-height: 3000px;
+
+      &.hidden {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
+    ul li {
+      max-height: 40px;
+    }
+
     > div > h2 {
       margin-bottom: 0.5rem;
       margin-top: 1.5rem;
