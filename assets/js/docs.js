@@ -82,25 +82,14 @@
       var filtered =
         _(content)
           .map(function(collection) {
-            var result = {
-              'title': collection.title,
-              'expanded': collection.expanded,
-              'visible': search(collection.title, searchValue),
-              'functions': _.map(collection.functions, function(data) {
-                data.visible = search(collection.title, searchValue) || search(data.name, searchValue);
-                return data;
-              })
-            };
-
             // The collection is visible if searchValue matches the title
-            // or if there are visible functions
-            result.visible =
-              search(collection.title, searchValue) ||
-              _.filter(result.functions, function(data) {
-                return data.visible;
-              }).length;
-
-            return result;
+            // or if there are visible functions.
+            var visable = collection.visible = search(collection.title, searchValue);
+            _.each(collection.functions, function(data) {
+              data.visible = visable || search(data.name, searchValue);
+              collection.visible || (collection.visible = data.visible);
+            });
+            return collection;
           })
           .reject(function(collection) {
             return _.isEmpty(collection.functions);
