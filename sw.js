@@ -91,9 +91,13 @@ addEventListener('fetch', event =>
         if (response || !prefetch.includes(event.request.url)) {
           return response || fetch(event.request);
         }
-        // Retry caching if missed during prefetch.
         const input = toURL(event.request.url);
-        return fetch(new Request(input, event.request)).then(response => {
+        const request = input.origin == location.origin
+          ? new Request(input, event.request)
+          : event.request;
+
+        // Retry caching if missed during prefetch.
+        return fetch(request).then(response => {
           if (response.ok || !response.status) {
             cache.put(event.request, response.clone());
           }
