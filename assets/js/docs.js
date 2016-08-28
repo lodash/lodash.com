@@ -98,7 +98,7 @@
 
       var isCollectionEmpty = _.every(filtered, { 'visible': false });
 
-      var collections = .map(filtered, function(collection) {
+      var collections = _.map(filtered, function(collection) {
         return React.createElement(
           'div',
           {
