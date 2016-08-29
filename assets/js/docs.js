@@ -96,6 +96,8 @@
           })
           .value();
 
+      var isCollectionEmpty = _.every(filtered, { 'visible': false });
+
       var collections = _.map(filtered, function(collection) {
         return React.createElement(
           'div',
@@ -159,7 +161,13 @@
             'onChange': _.bind(this.onChangeSearch, this)
           })
         ),
-        collections
+        collections,
+        isCollectionEmpty
+          ? React.createElement('div', {
+              'className': 'empty-state'
+            },
+            'Sorry, no matches.')
+          : null
       );
     }
   });

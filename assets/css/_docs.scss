@@ -248,6 +248,12 @@ html.docs {
     .first-heading {
       margin-top: 0;
     }
+
+    .empty-state {
+      color: #bababa;
+      margin-top: 1.5rem;
+      font-size: 14px;
+    }
   }
 
   .toc-container.open + .doc-container:after {
