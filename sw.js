@@ -25,22 +25,28 @@ var prefetch = [
 ];
 
 /**
- * Converts `uri` to a `URL` object with a cache-bust query appended for
- * same-origin requests.
+ * Appends a cache-bust query to same-origin URIs and requests.
  *
  * @private
- * @param {uri} string The URI to convert.
- * @returns {Object} Returns the converted `URL` object.
+ * @param {*} resource The resource to cache bust.
+ * @returns {*} Returns the cache busted resource.
  */
-function toURL(uri) {
+function cacheBust(resource) {
+  const isReq = resource instanceof Request;
+  const isStr = typeof resource == 'string';
+  const url = new URL(isReq ? resource.url : resource, location.href);
+
   // Use cache-bust query until cache modes are supported in Chrome.
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
-  const result = new URL(uri, location.href);
-  if (result.origin == location.origin) {
-    result.search += `${ result.search ? '&' : '?' }${ CACHE_KEY }`;
+  if (url.origin == location.origin) {
+    url.search += `${ url.search ? '&' : '?' }${ CACHE_KEY }`;
+    if (isReq) {
+      return  new Request(url, resource);
+    }
+    return isStr ? url.href : url;
   }
-  return result;
+  return resource;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -50,7 +56,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(CACHE_KEY).then(cache =>
       Promise.all(prefetch.map(uri => {
-        const input = toURL(uri);
+        const input = cacheBust(uri);
         // Attempt to prefetch and cache with 'cors'.
         return fetch(input)
           .then(response => response.ok && cache.put(uri, response))
@@ -91,13 +97,9 @@ addEventListener('fetch', event =>
         if (response || !prefetch.includes(event.request.url)) {
           return response || fetch(event.request);
         }
-        const input = toURL(event.request.url);
-        const request = input.origin == location.origin
-          ? new Request(input, event.request)
-          : event.request;
-
+        const input = cacheBust(event.request);
         // Retry caching if missed during prefetch.
-        return fetch(request).then(response => {
+        return fetch(input).then(response => {
           if (response.ok || !response.status) {
             cache.put(event.request, response.clone());
           }
