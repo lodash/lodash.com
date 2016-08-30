@@ -80,28 +80,27 @@
           searchValue = this.state.searchValue,
           searchFound = false;
 
-      var content = this.state.content
-        .map(function(collection) {
-          // The collection is visible if `searchValue` matches its title
-          // or any of its function entries.
-          var matched = search(collection.get('title'), searchValue),
-              visible = matched;
+      var content = this.state.content.map(function(collection) {
+        // The collection is visible if `searchValue` matches its title
+        // or any of its function entries.
+        var matched = search(collection.get('title'), searchValue),
+            visible = matched;
 
-          return collection
-            .update('functions', function(functions) {
-              return functions.map(function(entry) {
-                var entryVis = (
-                  matched ||
-                  search(entry.get('name'), searchValue) ||
-                  search(entry.get('href').slice(1), searchValue)
-                );
-                visible || (visible = entryVis);
-                searchFound || (searchFound = entryVis);
-                return entry.set('visible', entryVis);
-              });
-            })
-            .set('visible', visible);
-        });
+        return collection
+          .update('functions', function(functions) {
+            return functions.map(function(entry) {
+              var entryVis = (
+                matched ||
+                search(entry.get('name'), searchValue) ||
+                search(entry.get('href').slice(1), searchValue)
+              );
+              visible || (visible = entryVis);
+              searchFound || (searchFound = entryVis);
+              return entry.set('visible', entryVis);
+            });
+          })
+          .set('visible', visible);
+      });
 
       var elements = content.map(function(collection) {
         return React.createElement(
