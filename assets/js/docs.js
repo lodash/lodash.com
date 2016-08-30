@@ -30,7 +30,9 @@
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
-      return this.state.searchFound || !this.state.content.equals(nextState.content);
+      return nextState.searchFound &&
+        (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
+          !this.state.content.equals(nextState.content));
     },
 
     'componentWillMount': function() {
@@ -93,16 +95,12 @@
     },
 
     'onClickFuncName': function() {
-      var _this = this;
-
       // Close mobile menu.
       menuEl.classList.remove('open');
 
       // Empty search box.
-      _.defer(function() {
-        _this.setState({
-          'searchValue': ''
-        });
+      this.setState({
+        'searchValue': ''
       });
     },
 
