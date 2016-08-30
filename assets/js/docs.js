@@ -249,7 +249,7 @@
   versionSelect.addEventListener('change', function(event) {
     var value = event.target.value;
     if (value) {
-      location.href = value === '1.3.1'
+      location.href = value == '1.3.1'
         ? 'https://github.com/lodash/lodash/blob/1.3.1/doc/README.md'
         : '/docs/' + value;
     }
