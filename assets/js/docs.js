@@ -90,7 +90,11 @@
           return collection
             .update('functions', function(functions) {
               return functions.map(function(entry) {
-                var entryVis = matched || search(entry.get('name'), searchValue);
+                var entryVis = (
+                  matched ||
+                  search(entry.get('name'), searchValue) ||
+                  search(entry.get('href').slice(1), searchValue)
+                );
                 visible || (visible = entryVis);
                 searchFound || (searchFound = entryVis);
                 return entry.set('visible', entryVis);
