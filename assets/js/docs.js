@@ -15,42 +15,37 @@
 
     'getInitialState': function() {
       return {
-        'content': [],
+        'content': new Immutable.List,
         'searchValue': ''
       };
     },
 
     'componentWillMount': function() {
       // Before component mounts, use the initial HTML for its state.
-      var content = _.map(menuEl.children, function(node) {
-        return {
-          'title': node.querySelector('h2 code').innerText,
-          'expanded': true,
-          'functions': _.map(node.querySelectorAll('ul li a'), function(anchor) {
-            return {
-              'name': anchor.innerText,
-              'href': anchor.href,
-              'visible': true
-            };
-          })
-        };
-      });
-
       this.setState({
-        'content': content
+        'content': Immutable.fromJS(_.map(menuEl.children, function(node) {
+          return {
+            'title': node.querySelector('h2 code').innerText,
+            'expanded': true,
+            'functions': _.map(node.querySelectorAll('ul li a'), function(anchor) {
+              return {
+                'name': anchor.innerText,
+                'href': anchor.href,
+                'visible': true
+              };
+            })
+          };
+        }))
       });
     },
 
     'onChangeExpanded': function(event, title) {
-      var content = _.map(this.state.content, function(value) {
-        if (value.title == title) {
-          value.expanded = !value.expanded;
-        }
-        return value;
-      });
-
       this.setState({
-        'content': content
+        'content': this.state.content.map(function(collection) {
+          return collection.get('title') == title
+            ? collection.set('expanded', !collection.expanded)
+            : collection;
+        })
       });
     },
 
@@ -79,32 +74,36 @@
           content = this.state.content,
           searchValue = this.state.searchValue;
 
-      var filtered =
-        _(content)
-          .map(function(collection) {
-            // The collection is visible if searchValue matches the title
-            // or if there are visible functions.
-            var visable = collection.visible = search(collection.title, searchValue);
-            _.each(collection.functions, function(data) {
-              data.visible = visable || search(data.name, searchValue);
-              collection.visible || (collection.visible = data.visible);
-            });
-            return collection;
-          })
-          .reject(function(collection) {
-            return _.isEmpty(collection.functions);
-          })
-          .value();
+      var filtered = content
+        .map(function(collection) {
+          // The collection is visible if searchValue matches the title
+          // or if there are visible functions.
+          var matched = search(collection.get('title'), searchValue),
+              visible = matched;
 
-      var noMatch = _.every(filtered, function(collection) {
-        return !collection.visible;
+          return collection
+            .update('functions', function(functions) {
+              return functions.map(function(entry) {
+                var entryVis = matched || search(entry.get('name'), searchValue);
+                visible || (visible = entryVis);
+                return entry.set('visible', entryVis);
+              })
+            })
+            .set('visible', visible);
+        })
+        .filterNot(function(collection) {
+          return collection.get('functions').isEmpty();
+        });
+
+      var matched = filtered.some(function(collection) {
+        return collection.get('visible');
       });
 
-      var collections = _.map(filtered, function(collection) {
+      var collections = filtered.map(function(collection) {
         return React.createElement(
           'div',
           {
-            'className': collection.visible ? '' : 'hidden'
+            'className': collection.get('visible') ? '' : 'hidden'
           },
           React.createElement(
             'h2',
@@ -112,33 +111,33 @@
             React.createElement(
               'span',
               {
-                'className': collection.expanded ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
-                'onClick': _.bind(_this.onChangeExpanded, _this, _, collection.title)
+                'className': collection.get('expanded') ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
+                'onClick': _.bind(_this.onChangeExpanded, _this, _, collection.get('title'))
               }
             ),
-            collection.title
+            collection.get('title')
           ),
           React.createElement(
             'ul',
             {
-              'className': collection.expanded ? '' : 'hidden'
+              'className': collection.get('expanded') ? '' : 'hidden'
             },
-            _.map(collection.functions, function(data) {
+            collection.get('functions').map(function(entry) {
               return React.createElement(
                 'li',
                 {
-                  'className': data.visible ? '' : 'hidden'
+                  'className': entry.get('visible') ? '' : 'hidden'
                 },
                 React.createElement(
                   'a',
                   {
-                    'href': data.href,
+                    'href': entry.get('href'),
                     'onClick': _this.onClickFuncName
                   },
                   React.createElement(
                     'code',
                     null,
-                    data.name
+                    entry.get('name')
                   )
                 )
               );
@@ -177,7 +176,7 @@
         React.createElement(
           'div',
           {
-            'className': noMatch ? 'empty-state' : 'hidden'
+            'className': matched ? 'hidden' : 'empty-state'
           },
           'Sorry, no matches.'
         )
