@@ -43,7 +43,7 @@
       this.setState({
         'content': this.state.content.map(function(collection) {
           return collection.get('title') == title
-            ? collection.set('expanded', !collection.expanded)
+            ? collection.set('expanded', !collection.get('expanded'))
             : collection;
         })
       });
