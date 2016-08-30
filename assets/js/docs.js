@@ -104,6 +104,7 @@
       });
 
       var elements = content.map(function(collection) {
+        var title = collection.get('title');
         return React.createElement(
           'div',
           {
@@ -116,10 +117,12 @@
               'span',
               {
                 'className': collection.get('expanded') ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
-                'onClick': _.bind(_this.onChangeExpanded, _this, _, collection.get('title'))
+                'onClick': function(event) {
+                  return _this.onChangeExpanded(event, title);
+                }
               }
             ),
-            collection.get('title')
+            title
           ),
           React.createElement(
             'ul',
