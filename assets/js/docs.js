@@ -96,7 +96,9 @@
           })
           .value();
 
-      var isCollectionEmpty = _.every(filtered, { 'visible': false });
+      var noMatch = _.every(filtered, function(collection) {
+        return !collection.visible;
+      });
 
       var collections = _.map(filtered, function(collection) {
         return React.createElement(
@@ -107,11 +109,13 @@
           React.createElement(
             'h2',
             null,
-            React.createElement('span', {
-              'className': collection.expanded ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
-              'style': { 'marginRight': 10, 'fontSize': 14, 'cursor': 'pointer' },
-              'onClick': _.bind(_this.onChangeExpanded, _this, _, collection.title)
-            }),
+            React.createElement(
+              'span',
+              {
+                'className': collection.expanded ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
+                'onClick': _.bind(_this.onChangeExpanded, _this, _, collection.title)
+              }
+            ),
             collection.title
           ),
           React.createElement(
@@ -150,30 +154,39 @@
         },
         React.createElement(
           'div',
-          { 'className': 'search' },
-          React.createElement('span', {
-            'className': 'fa fa-search'
-          }),
-          React.createElement('input', {
-            'placeholder': 'Search',
-            'type': 'search',
-            'value': this.state.searchValue,
-            'onChange': _.bind(this.onChangeSearch, this)
-          })
+          {
+            'className': 'search'
+          },
+          React.createElement(
+            'span',
+            {
+              'className': 'fa fa-search'
+            }
+          ),
+          React.createElement(
+            'input',
+            {
+              'placeholder': 'Search',
+              'type': 'search',
+              'value': this.state.searchValue,
+              'onChange': _.bind(this.onChangeSearch, this)
+            }
+          )
         ),
         collections,
-        isCollectionEmpty
-          ? React.createElement('div', {
-              'className': 'empty-state'
-            },
-            'Sorry, no matches.')
-          : null
+        React.createElement(
+          'div',
+          {
+            'className': noMatch ? 'empty-state' : 'hidden'
+          },
+          'Sorry, no matches.'
+        )
       );
     }
   });
 
   ReactDOM.render(
-    React.createElement(Menu, null),
+    React.createElement(Menu),
     menuEl
   );
 

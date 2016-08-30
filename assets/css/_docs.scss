@@ -245,14 +245,20 @@ html.docs {
       }
     }
 
-    .first-heading {
-      margin-top: 0;
+    .fa-minus-square-o, .fa-plus-square-o {
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 1rem;
     }
 
     .empty-state {
       color: #bababa;
       margin-top: 1.5rem;
       font-size: 14px;
+    }
+
+    .first-heading {
+      margin-top: 0;
     }
   }
 
