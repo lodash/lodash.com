@@ -6,8 +6,14 @@
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
+  function collapseSpaces(string) {
+    return string.replace(/\s+/g, '');
+  }
+
   function search(string, target) {
-    return string.toLowerCase().indexOf(target.toLowerCase()) > -1;
+    string = collapseSpaces(string.toLowerCase());
+    target = collapseSpaces(target.toLowerCase());
+    return string.indexOf(target) > -1;
   }
 
   var Menu = React.createClass({
