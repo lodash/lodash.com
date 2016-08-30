@@ -67,10 +67,10 @@
       var searchValue = event.target.value,
           searchFound = false;
 
-      // The collection is visible if `searchValue` matches its title or any
-      // of its function entries.
       this.setState({
         'content': this.state.content.map(function(collection) {
+          // The collection is visible if `searchValue` matches its title or
+          // any of its function entries.
           var found = search(collection.get('title'), searchValue),
               visible = found;
 
