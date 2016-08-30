@@ -33,6 +33,7 @@
           return {
             'title': node.querySelector('h2 code').innerText,
             'expanded': true,
+            'visible': true,
             'functions': _.map(node.querySelectorAll('ul li a'), function(anchor) {
               return {
                 'name': anchor.innerText,
