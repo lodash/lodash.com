@@ -76,8 +76,8 @@
 
       var filtered = content
         .map(function(collection) {
-          // The collection is visible if searchValue matches the title
-          // or if there are visible functions.
+          // The collection is visible if `searchValue` matches its title
+          // or any of its function entries.
           var matched = search(collection.get('title'), searchValue),
               visible = matched;
 
