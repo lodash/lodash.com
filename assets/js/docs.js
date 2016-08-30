@@ -46,12 +46,10 @@
       });
     },
 
-    'onChangeExpanded': function(event, title) {
+    'onChangeExpanded': function(event, index) {
       this.setState({
-        'content': this.state.content.map(function(collection) {
-          return collection.get('title') == title
-            ? collection.set('expanded', !collection.get('expanded'))
-            : collection;
+        'content': this.state.content.update(index, function(collection) {
+          return collection.set('expanded', !collection.get('expanded'));
         })
       });
     },
@@ -103,7 +101,7 @@
           .set('visible', visible);
       });
 
-      var elements = content.map(function(collection) {
+      var elements = content.map(function(collection, index) {
         var title = collection.get('title');
         return React.createElement(
           'div',
@@ -118,7 +116,7 @@
               {
                 'className': collection.get('expanded') ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
                 'onClick': function(event) {
-                  return _this.onChangeExpanded(event, title);
+                  return _this.onChangeExpanded(event, index);
                 }
               }
             ),
