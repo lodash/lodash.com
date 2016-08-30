@@ -87,7 +87,7 @@
                 var entryVis = matched || search(entry.get('name'), searchValue);
                 visible || (visible = entryVis);
                 return entry.set('visible', entryVis);
-              })
+              });
             })
             .set('visible', visible);
         })
