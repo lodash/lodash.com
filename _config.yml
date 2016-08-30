@@ -10,6 +10,10 @@ fontawesome:
   version:
     4.6.3
 
+immutable:
+  version:
+    3.8.1
+
 react:
   version:
     15.3.1

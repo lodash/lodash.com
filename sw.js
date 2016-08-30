@@ -20,6 +20,7 @@ var prefetch = [
   'https://embed.tonicdev.com/',
   'https://unpkg.com/font-awesome@{{ site.fontawesome.version }}/css/font-awesome.min.css',
   'https://unpkg.com/font-awesome@{{ site.fontawesome.version }}/fonts/fontawesome-webfont.woff2?v={{ site.fontawesome.version }}',
+  'https://unpkg.com/immutable@{{ site.immutable.version }}/dist/immutable.min.js',
   'https://unpkg.com/react@{{ site.react.version }}/dist/react.min.js',
   'https://unpkg.com/react-dom@{{ site.react.version }}/dist/react-dom.min.js'
 ];
