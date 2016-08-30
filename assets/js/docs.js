@@ -171,7 +171,7 @@
               'placeholder': 'Search',
               'type': 'search',
               'value': this.state.searchValue,
-              'onChange': _.bind(this.onChangeSearch, this)
+              'onChange': this.onChangeSearch
             }
           )
         ),
