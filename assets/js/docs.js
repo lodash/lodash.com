@@ -71,10 +71,10 @@
 
     'render': function() {
       var _this = this,
-          content = this.state.content,
-          searchValue = this.state.searchValue;
+          searchValue = this.state.searchValue,
+          searchFound = false;
 
-      var filtered = content
+      var content = this.state.content
         .map(function(collection) {
           // The collection is visible if `searchValue` matches its title
           // or any of its function entries.
@@ -86,20 +86,14 @@
               return functions.map(function(entry) {
                 var entryVis = matched || search(entry.get('name'), searchValue);
                 visible || (visible = entryVis);
+                searchFound || (searchFound = entryVis);
                 return entry.set('visible', entryVis);
               });
             })
             .set('visible', visible);
-        })
-        .filterNot(function(collection) {
-          return collection.get('functions').isEmpty();
         });
 
-      var matched = filtered.some(function(collection) {
-        return collection.get('visible');
-      });
-
-      var collections = filtered.map(function(collection) {
+      var elements = content.map(function(collection) {
         return React.createElement(
           'div',
           {
@@ -172,11 +166,11 @@
             }
           )
         ),
-        collections,
+        elements,
         React.createElement(
           'div',
           {
-            'className': matched ? 'hidden' : 'empty-state'
+            'className': searchFound ? 'hidden' : 'empty-state'
           },
           'Sorry, no matches.'
         )
