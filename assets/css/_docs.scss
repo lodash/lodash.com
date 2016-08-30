@@ -210,11 +210,9 @@ html.docs {
       transform: none;
     }
 
-    // Weird CSS rule to ensure that no page jank when search bar loads
-    > div {
-      &:first-child:not(.search):not(.react-menu-container) {
-        margin-top: calc(1.5rem + 37px);
-      }
+    // Offset top to avoid page jank when the search bar loads.
+    > div:first-child:not(.search):not(.react-menu-container) {
+      margin-top: calc(1.5rem + 37px);
     }
 
     div > h2 {
@@ -245,12 +243,6 @@ html.docs {
       }
     }
 
-    .fa-minus-square-o, .fa-plus-square-o {
-      cursor: pointer;
-      font-size: 14px;
-      margin-right: 1rem;
-    }
-
     .empty-state {
       color: #bababa;
       margin-top: 1.5rem;
@@ -259,6 +251,12 @@ html.docs {
 
     .first-heading {
       margin-top: 0;
+    }
+
+    .fa-minus-square-o, .fa-plus-square-o {
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 0.5rem;
     }
   }
 
