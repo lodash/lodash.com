@@ -10,10 +10,12 @@
     return string.replace(/\s+/g, '');
   }
 
+  function normalize(string) {
+    return collapseSpaces(string.toLowerCase());
+  }
+
   function search(string, target) {
-    string = collapseSpaces(string.toLowerCase());
-    target = collapseSpaces(target.toLowerCase());
-    return string.indexOf(target) > -1;
+    return normalize(string).indexOf(normalize(target)) > -1;
   }
 
   var Menu = React.createClass({
@@ -22,8 +24,13 @@
     'getInitialState': function() {
       return {
         'content': new Immutable.List,
-        'searchValue': ''
+        'searchValue': '',
+        'searchFound': true
       };
+    },
+
+    'shouldComponentUpdate': function(nextProps, nextState) {
+      return this.state.searchFound || !this.state.content.equals(nextState.content);
     },
 
     'componentWillMount': function() {
@@ -55,8 +62,33 @@
     },
 
     'onChangeSearch': function(event) {
+      var searchValue = event.target.value,
+          searchFound = false;
+
+      // The collection is visible if `searchValue` matches its title or any
+      // of its function entries.
       this.setState({
-        'searchValue': event.target.value
+        'content': this.state.content.map(function(collection) {
+          var found = search(collection.get('title'), searchValue),
+              visible = found;
+
+          return collection
+            .update('functions', function(functions) {
+              return functions.map(function(entry) {
+                var entryVis = (
+                  found ||
+                  search(entry.get('name'), searchValue) ||
+                  search(entry.get('href').slice(1), searchValue)
+                );
+                visible || (visible = entryVis);
+                searchFound || (searchFound = entryVis);
+                return entry.set('visible', entryVis);
+              });
+            })
+            .set('visible', visible);
+        }),
+        'searchFound': searchFound,
+        'searchValue': searchValue
       });
     },
 
@@ -75,33 +107,9 @@
     },
 
     'render': function() {
-      var _this = this,
-          searchValue = this.state.searchValue,
-          searchFound = false;
+      var _this = this;
 
-      var content = this.state.content.map(function(collection) {
-        // The collection is visible if `searchValue` matches its title
-        // or any of its function entries.
-        var matched = search(collection.get('title'), searchValue),
-            visible = matched;
-
-        return collection
-          .update('functions', function(functions) {
-            return functions.map(function(entry) {
-              var entryVis = (
-                matched ||
-                search(entry.get('name'), searchValue) ||
-                search(entry.get('href').slice(1), searchValue)
-              );
-              visible || (visible = entryVis);
-              searchFound || (searchFound = entryVis);
-              return entry.set('visible', entryVis);
-            });
-          })
-          .set('visible', visible);
-      });
-
-      var elements = content.map(function(collection, index) {
+      var elements = this.state.content.map(function(collection, index) {
         var title = collection.get('title');
         return React.createElement(
           'div',
@@ -181,7 +189,7 @@
         React.createElement(
           'div',
           {
-            'className': searchFound ? 'hidden' : 'empty-state'
+            'className': this.state.searchFound ? 'hidden' : 'empty-state'
           },
           'Sorry, no matches.'
         )
