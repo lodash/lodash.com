@@ -30,7 +30,7 @@
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
-      return nextState.searchFound &&
+      return (this.state.searchFound || nextState.searchFound) &&
         (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
           !this.state.content.equals(nextState.content));
     },
