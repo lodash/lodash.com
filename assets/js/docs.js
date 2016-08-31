@@ -16,6 +16,18 @@
     return string.replace(/\s+/g, '');
   }
 
+  function isClick(event){
+    if (event.type == 'click') {
+      return true;
+    }
+    var key = event.key || event.keyIdentifier;
+    if (key == ' ') {
+      event.preventDefault();
+      return true;
+    }
+    return key == 'Enter';
+  }
+
   function normalize(string) {
     return collapseSpaces(string.toLowerCase());
   }
@@ -121,6 +133,13 @@
 
       var elements = this.state.content.map(function(collection, index) {
         var title = collection.get('title');
+
+        var expanderClick = function(event) {
+          if (isClick(event)) {
+            _this.onChangeExpanded(event, index);
+          }
+        };
+
         return React.createElement(
           'div',
           {
@@ -131,12 +150,12 @@
             'h2',
             null,
             React.createElement(
-              'span',
+              'i',
               {
                 'className': className('fa', collection.get('expanded') ? 'fa-minus-square-o' : 'fa-plus-square-o'),
-                'onClick': function(event) {
-                  return _this.onChangeExpanded(event, index);
-                }
+                'tabIndex': 0,
+                'onClick': expanderClick,
+                'onKeyPress': expanderClick
               }
             ),
             title
@@ -182,8 +201,9 @@
             'className': 'search'
           },
           React.createElement(
-            'span',
+            'i',
             {
+              'aria-hidden': true,
               'className': 'fa fa-search'
             }
           ),
