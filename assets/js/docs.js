@@ -132,7 +132,7 @@
       var _this = this;
 
       var elements = this.state.content.map(function(collection, index) {
-        var title = collection.get('title');
+        var expanded = collection.get('expanded');
 
         var expanderClick = function(event) {
           if (isClick(event)) {
@@ -152,13 +152,14 @@
             React.createElement(
               'i',
               {
-                'className': className('fa', collection.get('expanded') ? 'fa-minus-square-o' : 'fa-plus-square-o'),
+                'className': className('fa', expanded ? 'fa-minus-square-o' : 'fa-plus-square-o'),
                 'tabIndex': 0,
+                'title': (expanded ? 'Collapse' : 'Expand') + ' Category',
                 'onClick': expanderClick,
                 'onKeyPress': expanderClick
               }
             ),
-            title
+            collection.get('title')
           ),
           React.createElement(
             'ul',
