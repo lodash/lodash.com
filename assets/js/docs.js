@@ -38,15 +38,15 @@
     'componentWillMount': function() {
       // Before component mounts, use the initial HTML for its state.
       this.setState({
-        'content': Immutable.fromJS(_.map(menuEl.children, function(node, index) {
+        'content': Immutable.fromJS(_.map(menuEl.children, function(node, key) {
           return {
-            'key': index,
+            'key': key,
             'title': node.querySelector('h2 code').innerText,
             'expanded': true,
             'visible': true,
-            'functions': _.map(node.querySelectorAll('ul li a'), function(anchor, subIndex) {
+            'functions': _.map(node.querySelectorAll('ul li a'), function(anchor, subKey) {
               return {
-                'key': index + ':' + subIndex,
+                'key': key + ':' + subKey,
                 'name': anchor.innerText,
                 'href': anchor.href,
                 'visible': true
