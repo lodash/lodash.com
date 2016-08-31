@@ -101,24 +101,6 @@ header {
     justify-content: space-between;
   }
 
-  .logo {
-    border-right: 2px solid $defaultLiteColor;
-    flex-shrink: 1;
-    height: 80px;
-    margin-right: 1rem;
-    padding: 0 1rem 0 0;
-    width: 80px;
-
-    a {
-      border: none;
-    }
-
-    img {
-      height: 100%;
-      width: 100%;
-    }
-  }
-
   .header-group {
     flex-shrink: 3;
     overflow: hidden;
@@ -152,6 +134,25 @@ header {
 
   .header-section.mobile-menu {
     justify-content: flex-end;
+  }
+
+  .logo {
+    border-right: 2px solid $defaultLiteColor;
+    flex-shrink: 1;
+    height: 80px;
+    margin-right: 1rem;
+    padding: 0 1rem 0 0;
+    width: 80px;
+
+    a {
+      background: url(/assets/img/lodash.svg) no-repeat;
+      background-size: contain;
+      border: none;
+      display: block;
+      height: 100%;
+      text-indent: -1000px;
+      width: 100%;
+    }
   }
 }
 
