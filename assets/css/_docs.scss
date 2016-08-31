@@ -93,7 +93,7 @@ html.docs {
 
       h3 + p a {
         color: #bababa;
-        font-size: 14px;
+        font-size: 0.9rem;
         margin-right: 15px;
 
         &:hover {
@@ -246,7 +246,7 @@ html.docs {
     .empty-state {
       color: #bababa;
       margin-top: 1.5rem;
-      font-size: 14px;
+      font-size: 0.9em;
     }
 
     .first-heading {
@@ -256,7 +256,7 @@ html.docs {
     .fa-minus-square-o, .fa-plus-square-o {
       cursor: pointer;
       font-size: 14px;
-      margin-right: 0.5rem;
+      margin-right: 0.7rem;
     }
   }
 
