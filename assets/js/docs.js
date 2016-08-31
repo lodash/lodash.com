@@ -6,6 +6,10 @@
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
+  function className() {
+    return _.slice(arguments).join(' ');
+  }
+
   function collapseSpaces(string) {
     return string.replace(/\s+/g, '');
   }
@@ -16,6 +20,10 @@
 
   function search(string, target) {
     return normalize(string).indexOf(normalize(target)) > -1;
+  }
+
+  function toggleHidden(map, property) {
+    return map.get(property) ? '' : 'hidden';
   }
 
   var Menu = React.createClass({
@@ -115,7 +123,7 @@
           'div',
           {
             'key': collection.get('key'),
-            'className': collection.get('visible') ? '' : 'hidden'
+            'className': toggleHidden(collection, 'visible')
           },
           React.createElement(
             'h2',
@@ -123,7 +131,7 @@
             React.createElement(
               'span',
               {
-                'className': collection.get('expanded') ? 'fa fa-minus-square-o' : 'fa fa-plus-square-o',
+                'className': className('fa', collection.get('expanded') ? 'fa-minus-square-o' : 'fa-plus-square-o'),
                 'onClick': function(event) {
                   return _this.onChangeExpanded(event, index);
                 }
@@ -134,14 +142,14 @@
           React.createElement(
             'ul',
             {
-              'className': collection.get('expanded') ? '' : 'hidden'
+              'className': toggleHidden(collection, 'expanded')
             },
             collection.get('functions').map(function(entry) {
               return React.createElement(
                 'li',
                 {
                   'key': entry.get('key'),
-                  'className': entry.get('visible') ? '' : 'hidden'
+                  'className': toggleHidden(entry, 'visible')
                 },
                 React.createElement(
                   'a',
@@ -191,7 +199,7 @@
         React.createElement(
           'div',
           {
-            'className': this.state.searchFound ? 'hidden' : 'empty-state'
+            'className': className('empty-state', this.state.searchFound ? 'hidden' : '')
           },
           'Sorry, no matches.'
         )
