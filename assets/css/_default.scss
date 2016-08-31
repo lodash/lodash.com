@@ -94,7 +94,7 @@ header {
   position: relative;
   z-index: 2;
 
-  > .container {
+  .container {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -103,7 +103,6 @@ header {
 
   .header-group {
     flex-shrink: 3;
-    overflow: hidden;
 
     h1, h2 {
       margin: 0;
