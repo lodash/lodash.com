@@ -1,4 +1,6 @@
 ;(function() {
+  'use strict';
+
   var docs = document.querySelector('.doc-container'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
