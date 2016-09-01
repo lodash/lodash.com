@@ -1,4 +1,5 @@
 ---
+regenerate: true
 ---
 
 'use strict';
