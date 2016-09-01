@@ -243,27 +243,24 @@
     }
   });
 
-  _.each(document.querySelectorAll('.highlight.js'), function(pre) {
+  _.each(document.querySelectorAll('.highlight.js'), function(div) {
     var button = document.createElement('a'),
-        parent = pre.parentElement;
+        parent = div.parentNode;
 
     button.classList.add('btn-repl');
     button.innerText = 'Try in REPL';
     button.style.display = navigator.onLine ? '' : 'none';
 
     parent.appendChild(button);
-    parent.style.position = 'relative';
 
     button.addEventListener('click', function() {
-      var source = pre.innerText;
-      pre.style.minHeight = pre.scrollHeight + 'px';
-      pre.innerHTML = '';
-      pre.classList.add('repl');
-
       _.delay(function() {
+        var source = div.innerText;
+        parent.removeChild(div);
         parent.removeChild(button);
+
         Tonic.createNotebook({
-          'element': pre,
+          'element': parent,
           'nodeVersion': '*',
           'preamble': [
             'var _ = require("lodash@' + versionSelect.value + '");',
@@ -272,6 +269,11 @@
           ].join('\n'),
           'source': source,
           'onLoad': function(notebook) {
+            var iframe = parent.lastElementChild,
+                height = iframe.style.height;
+
+            iframe.style.cssText = 'height:' + height;
+            iframe.classList.add('repl');
             notebook.evaluate();
           }
         });
