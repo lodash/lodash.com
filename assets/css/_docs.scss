@@ -66,6 +66,7 @@ html.docs {
     overflow-x: hidden;
     overflow-y: auto;
     padding: 1.5rem 2.5rem;
+    transform: translateZ(0);
 
     &:after {
       background: lightgrey;
@@ -195,7 +196,7 @@ html.docs {
     position: absolute;
     right: 0;
     top: 0;
-    transform: translateX(100%);
+    transform: translateX(100%) translateZ(0);
     transition: all 0.5s ease;
     white-space: nowrap;
     width: calc(200px + 2.5rem);
