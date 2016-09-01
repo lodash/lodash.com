@@ -14,7 +14,7 @@ var prefetch = [
   '/{{ page.path }}',
 {% endfor %}
 {% for release in site.releases %}
-  'https://rawgit.com/lodash/lodash/{{ release }}/lodash.js',
+  'https://cdn.jsdelivr.net/lodash/{{ release }}/lodash.min.js',
 {% endfor %}
   '/assets/css/main.css',
   'https://embed.tonicdev.com/',
