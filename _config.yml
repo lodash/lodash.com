@@ -33,3 +33,6 @@ compress_html:
 exclude:
   - LICENSE
   - "*.md"
+
+gems:
+  - jekyll-redirect-from

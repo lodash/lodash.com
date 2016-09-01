@@ -6,14 +6,16 @@ The Lodash website.
 
 1. Clone the repository locally.
 
-2. Install the `github-pages` gem.
+2. Install the application gems:
+
     ```shell
-    $ gem install github-pages
+    $ bundle install
     ```
 
-3. Build & run from the repository’s directory.
+3. Build & run from the repository’s directory:
+
     ```shell
-    $ jekyll serve
+    $ jekyll serve --incremental
     ```
 
 ## Incrementing the Lodash Version
