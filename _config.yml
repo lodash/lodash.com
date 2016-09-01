@@ -34,3 +34,6 @@ exclude:
   - Gemfile
   - LICENSE
   - "*.md"
+
+include:
+  - _redirects
