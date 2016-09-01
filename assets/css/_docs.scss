@@ -85,7 +85,8 @@ html.docs {
       padding: 0.5rem 0;
       position: relative;
 
-      h3, pre {
+      h3 {
+        background-color: $background;
         margin: 0 -999rem;
         padding: 2rem 999rem;
       }
@@ -120,12 +121,11 @@ html.docs {
       }
     }
 
-    pre.repl {
-      background: $foreground;
-    }
-
-    pre.repl + .btn-repl {
-      opacity: 0;
+    .repl {
+      background-color: transparent;
+      margin: 0px 0px 0px calc(-75px);
+      padding: 0;
+      width: calc(100% + 175px);
     }
   }
 

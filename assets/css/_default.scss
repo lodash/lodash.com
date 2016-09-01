@@ -155,26 +155,8 @@ header {
   }
 }
 
-pre {
-  &.repl {
-    background: $foreground;
-    margin: 0 -36px;
-    overflow-x: hidden;
-    padding: 0 36px;
-  }
-}
-
 pre, code {
   font-family: Consolas, Courier New, monospace;
-}
-
-pre, .highlight {
-  background: $codeBg;
-  box-sizing: border-box;
-  color: $codeColor;
-  overflow-x: auto;
-  position: relative;
-  -webkit-overflow-scrolling: touch;
 }
 
 section {
@@ -231,8 +213,14 @@ ul.chevron li {
 }
 
 .highlight {
+  background-color: $codeBg;
+  box-sizing: border-box;
+  color: $codeColor;
   margin: 0 -999rem;
+  overflow-x: auto;
   padding: 2rem 999rem;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
 
   pre {
     margin: 0;
