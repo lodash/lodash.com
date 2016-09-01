@@ -5,11 +5,12 @@
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       replBtns = [],
+      slice = Array.prototype.slice,
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
   function className() {
-    return _.slice(arguments).join(' ');
+    return slice.call(arguments).join(' ');
   }
 
   function collapseSpaces(string) {
