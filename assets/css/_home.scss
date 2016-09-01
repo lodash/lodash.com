@@ -27,24 +27,24 @@ html.home {
 
   #social {
     margin-bottom: 0;
-  }
 
-  #social,
-  #social .btn-gh,
-  #social .btn-twitter-follow,
-  #social .btn-twitter-share {
-    height: 26px;
-  }
+    &,
+    .btn-gh,
+    .btn-twitter-follow,
+    .btn-twitter-share {
+      height: 26px;
+    }
 
-  #social .btn-gh {
-    width: 105px;
-  }
+    .btn-gh {
+      width: 105px;
+    }
 
-  #social .btn-twitter-follow {
-    width: 120px;
-  }
+    .btn-twitter-follow {
+      width: 120px;
+    }
 
-  #social .btn-twitter-share {
-    width: 95px;
+    .btn-twitter-share {
+      width: 95px;
+    }
   }
 }
