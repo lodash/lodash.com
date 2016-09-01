@@ -6,9 +6,9 @@ The Lodash website.
 
 1. Clone the repository locally.
 
-2. Install the `github-pages` gem.
+2. Install gems.
     ```shell
-    $ gem install github-pages
+    $ bundle install
     ```
 
 3. Build & run from the repository’s directory.
