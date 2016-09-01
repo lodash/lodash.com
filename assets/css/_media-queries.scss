@@ -45,7 +45,7 @@
 
 @media (max-width: $screen-lg-max) {
   html {
-    font-size: 0.75rem;
+    font-size: 0.875rem; // makes body text 14px: 14/16 = 0.875
   }
 
   .container.main {
