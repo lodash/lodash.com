@@ -31,6 +31,5 @@ compress_html:
   startings: [html, head, body, tbody]
 
 exclude:
-  - CNAME
   - LICENSE
   - "*.md"
