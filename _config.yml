@@ -31,5 +31,6 @@ compress_html:
   startings: [html, head, body, tbody]
 
 exclude:
+  - Gemfile
   - LICENSE
   - "*.md"
