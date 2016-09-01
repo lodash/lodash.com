@@ -101,10 +101,6 @@ html.docs {
       }
     }
 
-    h3 {
-      background: $background;
-    }
-
     h4 {
       & + ol code,
       & + ol em,
@@ -134,7 +130,7 @@ html.docs {
   }
 
   .doc-main {
-    background: $foreground;
+    background-color: $foreground;
     display: flex;
     flex: 1 1 auto;
     overflow: hidden;
@@ -190,7 +186,7 @@ html.docs {
   }
 
   .toc-container {
-    background: $foreground;
+    background-color: $foreground;
     box-sizing: border-box;
     flex: none;
     height: 100%;

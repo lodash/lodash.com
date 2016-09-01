@@ -4,7 +4,7 @@ html, body, h1, h2, p {
 }
 
 html {
-  background: $background;
+  background-color: $background;
   color: $defaultColor;
   font-size: 100%;
   height: 100%;
@@ -32,7 +32,7 @@ a {
 }
 
 a.btn {
-  background: $btnBg;
+  background-color: $btnBg;
   border: none;
   border-radius: 5px;
   color: $linkColor;
@@ -47,17 +47,17 @@ a.btn {
 
   &:hover,
   &:focus {
-    background: darken($btnBg, 7.5%);
+    background-color: darken($btnBg, 7.5%);
     color: darken($btnColor, 7.5%);
   }
 
   &.primary {
-    background: $btnPrimaryBg;
+    background-color: $btnPrimaryBg;
     color: $btnPrimaryColor;
 
     &:hover,
     &:focus {
-      background: darken($btnPrimaryBg, 10%);
+      background-color: darken($btnPrimaryBg, 10%);
     }
   }
 }
@@ -86,7 +86,7 @@ footer {
 }
 
 header {
-  background: $foreground;
+  background-color: $foreground;
   box-shadow: 0 0 1.4rem $shadow;
   min-height: 80px;
   overflow: hidden;
@@ -222,7 +222,7 @@ ul.chevron li {
 }
 
 .container.main {
-  background: $foreground;
+  background-color: $foreground;
   box-shadow: 0 4px 1.5rem -0.25rem $shadow;
   margin-bottom: 2rem;
   margin-top: 2rem;
