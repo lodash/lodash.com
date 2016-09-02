@@ -74,6 +74,23 @@
       });
     },
 
+    'componentDidMount': function() {
+      document.addEventListener('keydown', this.handleDocumentKeyDown);
+    },
+
+    'componentWillUnmount': function() {
+      document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    },
+
+    'handleDocumentKeyDown': function(e) {
+        // Has the user pressed `/`?
+        if (e.which === 191) {
+          this.searchNode.focus();
+          // Don't actually type a `/` in the input.
+          e.preventDefault();
+        }
+    },
+
     'onChangeExpanded': function(event, index) {
       this.setState({
         'content': this.state.content.update(index, function(collection) {
@@ -192,6 +209,10 @@
         );
       });
 
+      var searchRefCallback = function(node) {
+        _this.searchNode = node;
+      };
+
       return React.createElement(
         'div',
         {
@@ -215,7 +236,8 @@
               'placeholder': 'Search',
               'type': 'search',
               'value': this.state.searchValue,
-              'onChange': this.onChangeSearch
+              'onChange': this.onChangeSearch,
+              'ref': searchRefCallback
             }
           )
         ),
