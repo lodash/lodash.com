@@ -91,17 +91,8 @@
         }
     },
 
-    'onChangeExpanded': function(event, index) {
-      this.setState({
-        'content': this.state.content.update(index, function(collection) {
-          return collection.set('expanded', !collection.get('expanded'));
-        })
-      });
-    },
-
-    'onChangeSearch': function(event) {
-      var searchValue = event.target.value,
-          searchFound = false;
+    'handleSearchChange': function(searchValue) {
+      var searchFound = false;
 
       this.setState({
         'content': this.state.content.map(function(collection) {
@@ -130,14 +121,25 @@
       });
     },
 
+    'onChangeExpanded': function(event, index) {
+      this.setState({
+        'content': this.state.content.update(index, function(collection) {
+          return collection.set('expanded', !collection.get('expanded'));
+        })
+      });
+    },
+
+    'onChangeSearch': function(event) {
+      var searchValue = event.target.value;
+      this.handleSearchChange(searchValue);
+    },
+
     'onClickFuncName': function() {
       // Close mobile menu.
       menuEl.classList.remove('open');
 
       // Empty search box.
-      this.setState({
-        'searchValue': ''
-      });
+      this.handleSearchChange('');
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
