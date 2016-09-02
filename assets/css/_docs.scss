@@ -194,6 +194,7 @@ html.docs {
     height: 100%;
     overflow-y: auto;
     padding: 2.5rem;
+    padding-right: 1.5rem;
     position: absolute;
     right: 0;
     top: 0;
@@ -233,7 +234,7 @@ html.docs {
       li a {
         border: none;
         color: $altColor;
-        font-size: 0.8em;
+        font-size: 0.875rem;
 
         &:hover {
           color: darken($altColor, 50%);
