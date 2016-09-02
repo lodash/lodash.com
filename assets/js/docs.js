@@ -30,7 +30,7 @@
   }
 
   function normalize(string) {
-    return collapseSpaces(string.toLowerCase());
+    return string ? collapseSpaces(string.toLowerCase()) : '';
   }
 
   function search(string, target) {
