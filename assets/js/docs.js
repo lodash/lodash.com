@@ -58,13 +58,13 @@
         'content': Immutable.fromJS(_.map(menuEl.children, function(node, key) {
           return {
             'key': key,
-            'title': node.querySelector('h2 code').innerText,
+            'title': node.querySelector('h2 code').textContent,
             'expanded': true,
             'visible': true,
             'functions': _.map(node.querySelectorAll('ul li a'), function(anchor, subKey) {
               return {
                 'key': key + ':' + subKey,
-                'name': anchor.innerText,
+                'name': anchor.textContent,
                 'href': anchor.href,
                 'visible': true
               };
@@ -260,6 +260,7 @@
     menuEl
   );
 
+  // Select current doc version.
   _.each(versionSelect.options, function(option) {
     if (option.value == version) {
       option.selected = true;
@@ -267,46 +268,48 @@
     }
   });
 
-  _.each(document.querySelectorAll('.highlight.js'), function(div) {
-    var button = document.createElement('a'),
-        parent = div.parentNode;
+  // Add REPL buttons.
+  if ('innerText' in docs) {
+    _.each(docs.querySelectorAll('.highlight.js'), function(div) {
+      var button = document.createElement('a'),
+          parent = div.parentNode;
 
-    button.classList.add('btn-repl');
-    button.innerText = 'Try in REPL';
-    button.style.display = navigator.onLine ? '' : 'none';
+      button.classList.add('btn-repl');
+      button.textContent = 'Try in REPL';
+      button.style.display = navigator.onLine ? '' : 'none';
 
-    parent.appendChild(button);
+      parent.appendChild(button);
 
-    button.addEventListener('click', function() {
-      _.delay(function() {
-        var source = div.innerText;
-        parent.removeChild(div);
-        parent.removeChild(button);
+      button.addEventListener('click', function() {
+        _.delay(function() {
+          var source = div.innerText;
+          parent.removeChild(div);
+          parent.removeChild(button);
 
-        Tonic.createNotebook({
-          'element': parent,
-          'nodeVersion': '*',
-          'preamble': [
-            'var _ = require("lodash@' + versionSelect.value + '");',
-            '_.assign(global, require("lodash-doc-globals"));',
-            'Object.observe = _.noop;'
-          ].join('\n'),
-          'source': source,
-          'onLoad': function(notebook) {
-            var iframe = parent.lastElementChild,
-                height = iframe.style.height;
+          Tonic.createNotebook({
+            'element': parent,
+            'nodeVersion': '*',
+            'preamble': [
+              'var _ = require("lodash@' + versionSelect.value + '");',
+              '_.assign(global, require("lodash-doc-globals"));',
+              'Object.observe = _.noop;'
+            ].join('\n'),
+            'source': source,
+            'onLoad': function(notebook) {
+              var iframe = parent.lastElementChild,
+                  height = iframe.style.height;
 
-            iframe.style.cssText = 'height:' + height;
-            iframe.classList.add('repl');
-            notebook.evaluate();
-          }
-        });
-      }, 500);
+              iframe.style.cssText = 'height:' + height;
+              iframe.classList.add('repl');
+              notebook.evaluate();
+            }
+          });
+        }, 500);
+      });
+
+      replBtns.push(button);
     });
-
-    replBtns.push(button);
-  });
-
+  }
   // Open the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
     event.preventDefault();
