@@ -16,6 +16,7 @@ layout: compress
   {% if pageURL != docsURL %}
   <link rel="prerender" href="/docs/{{ site.release }}">
   {% endif %}
+  <link rel="dns-prefetch" href="https://static.tonicdev.net/">
   {% if jekyll.environment == "production" %}
   <script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js")</script>
   {% endif %}
