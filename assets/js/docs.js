@@ -82,13 +82,13 @@
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
     },
 
-    'handleDocumentKeyDown': function(e) {
-        // Has the user pressed `/`?
-        if (e.which === 191) {
-          this.searchNode.focus();
-          // Don't actually type a `/` in the input.
-          e.preventDefault();
-        }
+    'handleDocumentKeyDown': function(event) {
+      var key = event.key || event.keyIdentifier;
+      if (key == '/') {
+        // Don't actually type a `/` in the input.
+        event.preventDefault();
+        this.searchNode.focus();
+      }
     },
 
     'handleSearchChange': function(searchValue) {
@@ -151,6 +151,10 @@
     'render': function() {
       var _this = this;
 
+      var searchRefCallback = function(node) {
+        _this.searchNode = node;
+      };
+
       var elements = this.state.content.map(function(collection, index) {
         var expanded = collection.get('expanded');
 
@@ -210,10 +214,6 @@
           )
         );
       });
-
-      var searchRefCallback = function(node) {
-        _this.searchNode = node;
-      };
 
       return React.createElement(
         'div',
