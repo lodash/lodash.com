@@ -22,7 +22,7 @@
       return true;
     }
     var key = event.key || event.keyIdentifier;
-    if (key == ' ') {
+    if (key == ' ' || key == 'U+0020') {
       event.preventDefault();
       return true;
     }
@@ -84,7 +84,7 @@
 
     'handleDocumentKeyDown': function(event) {
       var key = event.key || event.keyIdentifier;
-      if (key == '/') {
+      if (key == '/' || key == 'U+002F') {
         // Don't actually type a `/` in the input.
         event.preventDefault();
         this.searchNode.focus();
