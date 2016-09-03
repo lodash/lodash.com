@@ -281,30 +281,26 @@
       parent.appendChild(button);
 
       button.addEventListener('click', function() {
-        _.delay(function() {
-          var source = div.innerText;
-          parent.removeChild(div);
-          parent.removeChild(button);
+        var source = div.innerText;
+        parent.removeChild(div);
+        parent.removeChild(button);
 
-          Tonic.createNotebook({
-            'element': parent,
-            'nodeVersion': '*',
-            'preamble': [
-              'var _ = require("lodash@' + versionSelect.value + '");',
-              '_.assign(global, require("lodash-doc-globals"));',
-              'Object.observe = _.noop;'
-            ].join('\n'),
-            'source': source,
-            'onLoad': function(notebook) {
-              var iframe = parent.lastElementChild,
-                  height = iframe.style.height;
-
-              iframe.style.cssText = 'height:' + height;
-              iframe.classList.add('repl');
-              notebook.evaluate();
-            }
-          });
-        }, 500);
+        Tonic.createNotebook({
+          'element': parent,
+          'nodeVersion': '*',
+          'preamble': [
+            'var _ = require("lodash@' + versionSelect.value + '");',
+            '_.assign(global, require("lodash-doc-globals"));',
+            'Object.observe = _.noop;'
+          ].join('\n'),
+          'source': source,
+          'onLoad': function(notebook) {
+            var iframe = parent.lastElementChild;
+            iframe.style.cssText = 'height:' + iframe.style.height;
+            iframe.classList.add('repl');
+            notebook.evaluate();
+          }
+        });
       });
 
       replBtns.push(button);
