@@ -130,8 +130,7 @@
     },
 
     'onChangeSearch': function(event) {
-      var searchValue = event.target.value;
-      this.handleSearchChange(searchValue);
+      this.handleSearchChange(event.target.value);
     },
 
     'onClickFuncName': function() {
