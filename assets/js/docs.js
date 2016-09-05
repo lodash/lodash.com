@@ -134,11 +134,15 @@
     },
 
     'onClickFuncName': function() {
+      var _this = this;
+
       // Close mobile menu.
       menuEl.classList.remove('open');
 
       // Empty search box.
-      this.handleSearchChange('');
+      _.defer(function() {
+        _this.handleSearchChange('');
+      });
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
