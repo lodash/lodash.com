@@ -1,0 +1,21 @@
+{
+  "name": "lodash.github.io",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "bundle exec jekyll build && gulp build"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cli": "^1.2.2",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-newer": "^1.2.0",
+    "gulp-svgmin": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1",
+    "uglify-js": "^2.7.3"
+  }
+}

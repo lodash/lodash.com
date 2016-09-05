@@ -3,4 +3,5 @@
 .sass-cache
 *.lock
 *.log
-_site/
+node_modules
+_site

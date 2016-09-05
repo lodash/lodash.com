@@ -1,0 +1,62 @@
+'use strict';
+
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const pump = require('pump');
+
+const cssnano = require('gulp-cssnano');
+const htmlmin = require('gulp-htmlmin');
+const newer = require('gulp-newer');
+const svgmin = require('gulp-svgmin');
+const uglify = require('gulp-uglify');
+
+const cb = e => e && console.log(e);
+const base = './';
+const opts = { base };
+
+gulp.task('build-css', function() {
+  pump([
+    gulp.src('_site/assets/css/*.css', opts),
+    newer(base),
+    cssnano(),
+    gulp.dest(base)
+  ], cb);
+});
+
+gulp.task('build-js', function() {
+  pump([
+    gulp.src('_site/**/*.js', opts),
+    newer(base),
+    babel({ 'presets': ['es2015'] }),
+    uglify(),
+    gulp.dest(base)
+  ], cb);
+});
+
+gulp.task('build-svg', function() {
+  pump([
+    gulp.src('_site/assets/img/*.svg', opts),
+    newer(base),
+    svgmin(),
+    gulp.dest(base)
+  ], cb);
+});
+
+gulp.task('build-html', function() {
+  pump([
+    gulp.src('_site/**/*.html', opts),
+    newer(base),
+    htmlmin({
+      'collapseBooleanAttributes': true,
+      'collapseWhitespace': true,
+      'removeAttributeQuotes': true,
+      'removeComments': true,
+      'removeEmptyAttributes': true,
+      'removeOptionalTags': true,
+      'removeRedundantAttributes': true
+    }),
+    gulp.dest(base)
+  ], cb);
+});
+
+gulp.task('build', ['build-css', 'build-js', 'build-svg', 'build-html']);

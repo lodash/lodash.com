@@ -23,9 +23,13 @@ sass:
     assets/css
 
 exclude:
+  - node_modules
   - Gemfile
+  - gulpfile.js
   - LICENSE
+  - "*.log"
   - "*.md"
+  - "*.toml"
 
 include:
   - _redirects
