@@ -14,7 +14,6 @@
     "gulp-cli": "^1.2.2",
     "gulp-cssnano": "^2.1.2",
     "gulp-htmlmin": "^2.0.0",
-    "gulp-newer": "^1.2.0",
     "gulp-svgmin": "^1.2.2",
     "gulp-uglify": "^2.0.0",
     "pump": "^1.0.1",
