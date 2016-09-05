@@ -27,6 +27,7 @@ exclude:
   - Gemfile
   - gulpfile.js
   - LICENSE
+  - "*.json"
   - "*.log"
   - "*.md"
   - "*.toml"
