@@ -9,20 +9,20 @@ layout: default
   <h1>Custom Builds</h1>
   <p>Custom builds make it easy to create lightweight versions of Lodash containing only the features you need. To top it off, we handle all function dependency &amp; alias mapping for you. Review the <a href="https://github.com/lodash/lodash/wiki/build-differences">build differences</a> &amp; pick the one that’s right for you.</p>
   <p>The Lodash command-line interface is available when <a href="https://npmjs.org/package/lodash-cli"><code>lodash-cli</code></a> is installed as a global package:
-  <div class="highlight shell"><pre><div><span class="source shell">$&#xA0;npm&#xA0;i&#xA0;-g&#xA0;npm</span></div><div><span class="source shell">$&#xA0;npm&#xA0;i&#xA0;-g&#xA0;lodash-cli</span></div><div><span class="source shell">$&#xA0;lodash&#xA0;-h</span></div></pre></div></p>
+  <div class="highlight shell"><pre><div>$&#xA0;npm&#xA0;i&#xA0;-g&#xA0;npm</div><div>$&#xA0;npm&#xA0;i&#xA0;-g&#xA0;lodash-cli</div><div>$&#xA0;lodash&#xA0;-h</div></pre></div></p>
 </section>
 
 <section>
   <h2>Build Types</h2>
   <ul class="chevron">
     <li>Core builds, that are 4 kB, are created using the <code>core</code> modifier.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;core</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;core</pre></div>
     </li>
     <li>Strict builds, with <a href="http://www.ecma-international.org/ecma-262/7.0/#sec-strict-mode-of-ecmascript">ES strict mode</a> enabled, are created using the <code>strict</code> modifier.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;strict</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;strict</pre></div>
     </li>
     <li>Modularized builds, with Lodash split into modules, are created using the <code>modularize</code> modifier.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;modularize</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;modularize</pre></div>
     </li>
   </ul>
 </section>
@@ -31,31 +31,31 @@ layout: default
   <h2>Build Commands:</h2>
   <ul class="chevron">
     <li>Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories are <em>“array”</em>, <em>“collection”</em>, <em>“date”</em>, <em>“function”</em>, <em>“lang”</em>, <em>“object”</em>, <em>“number”</em>, <em>“seq”</em>, <em>“string”</em>, &amp; <em>“util”</em>.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;category=collection,function</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;category=collection,function</pre></div>
     </li>
     <li>Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“es”</em>, <em>“global”</em>, <em>“node”</em>, <em>“npm”</em>, <em>“none”</em>, &amp; <em>“umd”</em>.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;exports=amd,node</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;exports=amd,node</pre></div>
     </li>
     <li>Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps Lodash.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;iife=<span class=string><span class=string>&quot;</span>\!function(window,undefined){%output%}(this)<span class=string>&quot;</span></span></span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;iife=&quot;\!function(window,undefined){%output%}(this)&quot;</pre></div>
     </li>
     <li>Use the <code>include</code> command to pass comma separated names of functions to include in the build.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;include=each,filter,map</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;include=each,filter,map</pre></div>
     </li>
     <li>Use the <code>minus</code> command to pass comma separated function/category names to remove from the build.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;minus=result,shuffle</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;minus=result,shuffle</pre></div>
     </li>
     <li>Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;category=array&#xA0;plus=random,template</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;category=array&#xA0;plus=random,template</pre></div>
     </li>
     <li>Use the <code>template</code> command to pass the file path pattern used to match template files to precompile.<br><strong>Note:</strong> Precompiled templates are assigned to the <code>_.<span class="me1">templates</span></code> object.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;template=<span class=string><span class=string>&quot;</span>./*.jst<span class=string>&quot;</span></span></span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;template=&quot;./*.jst&quot;</pre></div>
     </li>
     <li>Use the <code>settings</code> command to pass template settings used when precompiling templates.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;settings=<span class=string><span class=string>&quot;</span>{interpolate:/\{\{([sS]+?)\}\}/g}<span class=string>&quot;</span></span></span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;settings=&quot;{interpolate:/\{\{([sS]+?)\}\}/g}&quot;</pre></div>
     </li>
     <li class="last-item">Use the <code>moduleId</code> command to specify the AMD module ID for Lodash or the module ID used to include Lodash in compiled templates.<br>Use “none” as the module ID to create compiled templates without a dependency on Lodash.
-      <div class="highlight shell"><pre><div><span class="source shell">lodash&#xA0;moduleId=underscore</span></div></pre></div>
+      <div class="highlight shell"><pre>lodash&#xA0;moduleId=underscore</pre></div>
     </li>
   </ul>
 </section>

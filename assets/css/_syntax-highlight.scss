@@ -1,24 +1,29 @@
 /**
  *  Syntax Highlighting
  */
-.source.js {
+.highlight.js {
   .comment {
     color: #b9b9b9;
   }
 
-  .delimiter.method + span {
-    color: #86b9f5;
-  }
-
-  .constant.numeric,
+  .numeric,
   .modifier,
   .type {
     color: #fee937;
   }
+
+  .name,
+  .support {
+    color: #86b9f5;
+  }
+
+  .console {
+    color: #ddd;
+  }
 }
 
-.text.html,
-.source.js {
+.highlight.html,
+.highlight.js {
   .string {
     color: #62d543;
   }
