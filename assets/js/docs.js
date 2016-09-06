@@ -242,7 +242,8 @@
               'type': 'search',
               'value': this.state.searchValue,
               'onChange': this.onChangeSearch,
-              'ref': searchRefCallback
+              'ref': searchRefCallback,
+              'autoFocus': true
             }
           )
         ),
