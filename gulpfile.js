@@ -9,7 +9,6 @@ const htmlmin = require('gulp-htmlmin');
 const svgmin = require('gulp-svgmin');
 const uglify = require('gulp-uglify');
 
-const cb = e => e && console.log(e);
 const base = './';
 const opts = { base };
 
@@ -18,7 +17,7 @@ gulp.task('build-css', () =>
     gulp.src('_site/assets/css/*.css', opts),
     cssnano(),
     gulp.dest(base)
-  ], cb)
+  ])
 );
 
 gulp.task('build-js', () =>
@@ -27,7 +26,7 @@ gulp.task('build-js', () =>
     babel({ 'presets': ['es2015'] }),
     uglify(),
     gulp.dest(base)
-  ], cb)
+  ])
 );
 
 gulp.task('build-svg', () =>
@@ -35,7 +34,7 @@ gulp.task('build-svg', () =>
     gulp.src('_site/assets/img/*.svg', opts),
     svgmin(),
     gulp.dest(base)
-  ], cb)
+  ])
 );
 
 gulp.task('build-html', () =>
@@ -51,7 +50,7 @@ gulp.task('build-html', () =>
       'removeRedundantAttributes': true
     }),
     gulp.dest(base)
-  ], cb)
+  ])
 );
 
 gulp.task('build', ['build-css', 'build-js', 'build-svg', 'build-html']);
