@@ -238,6 +238,7 @@
           React.createElement(
             'input',
             {
+              'autoFocus': true,
               'placeholder': 'Search',
               'type': 'search',
               'value': this.state.searchValue,
