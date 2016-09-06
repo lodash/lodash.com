@@ -13,32 +13,32 @@ const cb = e => e && console.log(e);
 const base = './';
 const opts = { base };
 
-gulp.task('build-css', function() {
+gulp.task('build-css', () =>
   pump([
     gulp.src('_site/assets/css/*.css', opts),
     cssnano(),
     gulp.dest(base)
-  ], cb);
-});
+  ], cb)
+);
 
-gulp.task('build-js', function() {
+gulp.task('build-js', () =>
   pump([
     gulp.src('_site/**/*.js', opts),
     babel({ 'presets': ['es2015'] }),
     uglify(),
     gulp.dest(base)
-  ], cb);
-});
+  ], cb)
+);
 
-gulp.task('build-svg', function() {
+gulp.task('build-svg', () =>
   pump([
     gulp.src('_site/assets/img/*.svg', opts),
     svgmin(),
     gulp.dest(base)
-  ], cb);
-});
+  ], cb)
+);
 
-gulp.task('build-html', function() {
+gulp.task('build-html', () =>
   pump([
     gulp.src('_site/**/*.html', opts),
     htmlmin({
@@ -51,7 +51,7 @@ gulp.task('build-html', function() {
       'removeRedundantAttributes': true
     }),
     gulp.dest(base)
-  ], cb);
-});
+  ], cb)
+);
 
 gulp.task('build', ['build-css', 'build-js', 'build-svg', 'build-html']);
