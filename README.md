@@ -6,14 +6,14 @@ The Lodash website.
 
 1. Clone the repository locally.
 
-2. Install gems.
+2. Install [required gems](http://bundler.io/) in the repository directory.
     ```shell
     $ bundle install
     ```
 
-3. Build & run from the repository’s directory.
+3. Build & run.
     ```shell
-    $ jekyll serve
+    $ bundle exec jekyll serve
     ```
 
 ## Incrementing the Lodash Version
