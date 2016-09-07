@@ -79,18 +79,23 @@ html.docs {
 
       h3 {
         background-color: $background;
+        font-weight: 700;
         margin: 0 -999rem;
         padding: 3.2rem 999rem;
       }
 
       h3 + p a {
-        color: #bababa;
+        color: #9e9e9e;
         font-size: 1.4rem;
         margin-right: 1.6rem;
 
         &:hover {
-          color: darken(#bababa, 15%);
+          color: darken(#9e9e9e, 15%);
         }
+      }
+
+      h4 {
+        font-weight: 700;
       }
     }
 
@@ -220,11 +225,11 @@ html.docs {
 
       li a {
         border: none;
-        color: $altColor;
+        color: $defaultColor;
         font-size: 1.4rem;
 
         &:hover {
-          color: darken($altColor, 50%);
+          color: darken($defaultColor, 50%);
         }
       }
     }
