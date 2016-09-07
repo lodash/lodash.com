@@ -238,7 +238,7 @@
           React.createElement(
             'input',
             {
-              'autoFocus': true,
+              'autoFocus': getComputedStyle(mobileMenu.parentNode).display == 'none',
               'placeholder': 'Search',
               'type': 'search',
               'value': this.state.searchValue,
