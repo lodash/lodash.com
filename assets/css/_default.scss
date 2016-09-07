@@ -1,13 +1,18 @@
+html {
+  background-color: $background;
+  box-sizing: border-box;
+  color: $defaultColor;
+  font-size: 100%;
+  height: 100%;
+}
+
 html, body, h1, h2, p {
   margin: 0;
   padding: 0;
 }
 
-html {
-  background-color: $background;
-  color: $defaultColor;
-  font-size: 100%;
-  height: 100%;
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
@@ -136,6 +141,7 @@ header {
 
   .logo {
     border-right: 2px solid $defaultLiteColor;
+    box-sizing: content-box;
     flex-shrink: 1;
     height: 80px;
     margin-right: 1rem;
@@ -213,7 +219,6 @@ ul.chevron li {
 
 .highlight {
   background-color: $codeBg;
-  box-sizing: border-box;
   color: $codeColor;
   margin: 0 -999rem;
   overflow-x: auto;
