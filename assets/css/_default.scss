@@ -2,7 +2,8 @@ html {
   background-color: $background;
   box-sizing: border-box;
   color: $defaultColor;
-  font-size: 100%;
+  // Sets the base font-size to 10px, so any rem manipulation operates as base 10, ie. 2.4rem = 24px
+  font-size: 62.5%; // 10 / 16
   height: 100%;
 }
 
@@ -17,7 +18,7 @@ html, body, h1, h2, p {
 
 body {
   font-family: $fontFamily;
-  font-size: 1em;
+  font-size: 1.6rem;
   line-height: 1.5;
   min-height: 100%;
   overflow: auto;
@@ -41,7 +42,7 @@ a.btn {
   border: none;
   border-radius: 5px;
   color: $linkColor;
-  font-size: 0.8em;
+  font-size: 1.3rem;
   line-height: 1;
   padding: 17px 25px;
   white-space: nowrap;
@@ -71,18 +72,18 @@ h1, h2, h3, h4, h5, h6 {
   color: $defaultColor;
   font-weight: 400;
   letter-spacing: 0.5px;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-bottom: 1.6rem;
+  margin-top: 3.2rem;
 }
 
 ul, ol, p {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-bottom: 1.6rem;
+  margin-top: 1.6rem;
 }
 
 footer {
-  font-size: 0.75rem;
-  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 3.2rem;
   text-align: center;
 
   .fa-heart {
@@ -92,8 +93,8 @@ footer {
 
 header {
   background-color: $foreground;
-  box-shadow: 0 0 1.4rem $shadow;
-  padding: 0.5rem 0;
+  box-shadow: 0 0 2.25rem $shadow;
+  padding: 0.8rem 0;
   position: relative;
   z-index: 2;
 
@@ -113,11 +114,11 @@ header {
     }
 
     h1 {
-      font-size: 1.4rem;
+      font-size: 2.2rem;
     }
 
     h2 {
-      font-size: 1rem;
+      font-size: 1.6rem;
     }
   }
 
@@ -126,7 +127,7 @@ header {
     display: flex;
     flex: 1 1 auto;
     justify-content: center;
-    margin: 0.5rem 1rem;
+    margin: 0.8rem 1.6rem;
   }
 
   .header-section.logo-section {
@@ -143,8 +144,8 @@ header {
     box-sizing: content-box;
     flex-shrink: 1;
     height: 80px;
-    margin-right: 1rem;
-    padding: 0 1rem 0 0;
+    margin-right: 1.6rem;
+    padding: 0 1.6rem 0 0;
     width: 80px;
 
     a {
@@ -165,14 +166,14 @@ pre, code {
 }
 
 section {
-  padding: 0 2.5rem;
+  padding: 0 4rem;
 
   &:not(:first-of-type) {
-    margin-top: 1rem;
+    margin-top: 1.6rem;
   }
 
   &:not(:last-of-type) {
-    margin-bottom: 1rem;
+    margin-bottom: 1.6rem;
   }
 }
 
@@ -182,20 +183,20 @@ ul {
   padding-left: 0;
 
   li {
-    padding-left: 1rem;
+    padding-left: 1.6rem;
   }
 
   li + li {
-    padding-top: 0.5rem;
+    padding-top: 0.8rem;
   }
 }
 
 ul.chevron li {
-  text-indent: -0.75rem;
+  text-indent: -1.2rem;
 
   &:before {
     content: "\203A";
-    padding-right: 0.5rem;
+    padding-right: 0.8rem;
   }
 
   .highlight {
@@ -210,11 +211,11 @@ ul.chevron li {
 
 .container.main {
   background-color: $foreground;
-  box-shadow: 0 4px 1.5rem -0.25rem $shadow;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  box-shadow: 0 4px 2.4rem -0.4rem $shadow;
+  margin-bottom: 3.2rem;
+  margin-top: 3.2rem;
   overflow: hidden;
-  padding-bottom: 2rem;
+  padding-bottom: 3.2rem;
 }
 
 .highlight {
@@ -222,7 +223,7 @@ ul.chevron li {
   color: $codeColor;
   margin: 0 -999rem;
   overflow-x: auto;
-  padding: 2rem 999rem;
+  padding: 3.2rem 999rem;
   position: relative;
   -webkit-overflow-scrolling: touch;
 
