@@ -5,16 +5,6 @@ html.docs {
     height: 100%;
   }
 
-  a.anchor {
-    border: none;
-    color: $defaultNearColor;
-    margin-right: 1rem;
-
-    &:hover {
-      color: $defaultColor;
-    }
-  }
-
   h3 {
     a {
       border-bottom: 0;
@@ -243,10 +233,6 @@ html.docs {
       color: #bababa;
       margin-top: 1.5rem;
       font-size: 0.9em;
-    }
-
-    .first-heading {
-      margin-top: 0;
     }
 
     .fa-minus-square-o, .fa-plus-square-o {

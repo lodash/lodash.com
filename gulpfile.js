@@ -6,6 +6,7 @@ const pump = require('pump');
 
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
+const purify = require('gulp-purifycss');
 const svgmin = require('gulp-svgmin');
 const uglify = require('gulp-uglify');
 
@@ -15,6 +16,7 @@ const opts = { base };
 gulp.task('build-css', () =>
   pump([
     gulp.src('_site/assets/css/*.css', opts),
+    purify(['_site/assets/js/*.js', './_site/**/*.html'], { 'rejected': true }),
     cssnano(),
     gulp.dest(base)
   ])
