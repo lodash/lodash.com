@@ -1,12 +1,12 @@
 ---
 ---
 
-@import url('https://unpkg.com/font-awesome@{{ site.fontawesome.version }}/css/font-awesome.min.css');
+@import url("https://unpkg.com/font-awesome@{{ site.fontawesome.version }}/css/font-awesome.min.css");
 
-@import 'variables';
-@import 'default';
-@import 'home';
-@import 'custom-builds';
-@import 'docs';
-@import 'syntax-highlight';
-@import 'media-queries';
+@import "variables";
+@import "default";
+@import "home";
+@import "custom-builds";
+@import "docs";
+@import "syntax-highlight";
+@import "media-queries";
