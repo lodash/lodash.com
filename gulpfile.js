@@ -7,7 +7,6 @@ const pump = require('pump');
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
 const purify = require('gulp-purifycss');
-const svgmin = require('gulp-svgmin');
 const uglify = require('gulp-uglify');
 
 const base = './';
@@ -31,14 +30,6 @@ gulp.task('build-js', () =>
   ])
 );
 
-gulp.task('build-svg', () =>
-  pump([
-    gulp.src('_site/assets/img/*.svg', opts),
-    svgmin(),
-    gulp.dest(base)
-  ])
-);
-
 gulp.task('build-html', () =>
   pump([
     gulp.src('_site/**/*.html', opts),
@@ -55,4 +46,4 @@ gulp.task('build-html', () =>
   ])
 );
 
-gulp.task('build', ['build-css', 'build-js', 'build-svg', 'build-html']);
+gulp.task('build', ['build-css', 'build-js', 'build-html']);
