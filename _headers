@@ -1,12 +1,45 @@
 ---
-hints: [
-  '<https://unpkg.com/>; rel=preconnect; pr=1.0 crossorigin',
-  '</docs/{{ site.release }}>; rel=prerender; pr=1.0',
-  '<https://maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25 crossorigin',
-  '<https://static.tonicdev.net/>; rel=dns-prefetch; pr=0.25 crossorigin',
-  '<https://use.typekit.net/>; rel=dns-prefetch; pr=0.25 crossorigin',
-]
+hints:
+  all: [
+    '<https://unpkg.com/>; rel=preconnect; pr=1.0; crossorigin',
+    '<https://tonicdev.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<https://maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<https://static.tonicdev.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
+    '<https://p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<https://use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
+  ]
+  docs: [
+    '</assets/js/docs.js>; rel=preload; as=script; pr=1.0',
+    '<https://embed.tonicdev.com>; rel=preload; as=script; pr=1.0; crossorigin'
+  ]
 ---
 
+{% assign all = page.hints.all %}
+{% assign version = site.fontawesome.version %}
+
+{% assign hint = "<https://unpkg.com/font-awesome@" | append:version | append:"/css/font-awesome.min.css>; rel=preload; as=style; pr=1.0; crossorigin" %}
+{% assign all = all | push:hint %}
+
+{% assign hint = "<https://unpkg.com/font-awesome@" | append:version | append:"/fonts/fontawesome-webfont.woff2?v=" | append:version | append:"; rel=preload; as=font; pr=1.0; crossorigin" %}
+{% assign all = all | push:hint %}
+
+{% assign docs = page.hints.docs %}
+{% assign version = site.immutable.version %}
+
+{% assign hint = "<https://unpkg.com/immutable@" | append:version | append:"/dist/immutable.min.js>; rel=preload; as=script; pr=1.0; crossorigin" %}
+{% assign docs = docs | push:hint %}
+
+{% assign version = site.react.version %}
+
+{% assign hint = "https://unpkg.com/react@" | append:version | append:"/dist/react.min.js>; rel=preload; as=script; pr=1.0; crossorigin" %}
+{% assign docs = docs | push:hint %}
+
+{% assign hint = "https://unpkg.com/react-dom@" | append:version | append:"}/dist/react-dom.min.js>; rel=preload; as=script; pr=1.0; crossorigin" %}
+{% assign docs = docs | push:hint %}
+
 /*
-  Link: {{ page.hints | join:", " }}
+  Link: {{ all | join:", " }}
+
+/docs/*
+  Link: {{ docs | join:", " }}
