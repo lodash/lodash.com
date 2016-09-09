@@ -33,6 +33,7 @@ exclude:
   - "*.toml"
 
 include:
+  - _headers
   - _redirects
 
 incremental: true

@@ -1,0 +1,12 @@
+---
+hints: [
+  '<https://unpkg.com/>; rel=preconnect; pr=1.0 crossorigin',
+  '</docs/{{ site.release }}>; rel=prerender; pr=1.0',
+  '<https://maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25 crossorigin',
+  '<https://static.tonicdev.net/>; rel=dns-prefetch; pr=0.25 crossorigin',
+  '<https://use.typekit.net/>; rel=dns-prefetch; pr=0.25 crossorigin',
+]
+---
+
+/*
+  Link: {{ page.hints | join:", " }}
