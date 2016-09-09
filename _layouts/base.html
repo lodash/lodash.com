@@ -14,9 +14,9 @@
   {% assign pageURL = page.url | replace:".html","" %}
   {% assign docsURL = "/docs/" | append:site.release %}
   {% if pageURL != docsURL %}
-  <link rel="prerender" href="/docs/{{ site.release }}">
+  <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
-  <link rel="dns-prefetch" href="https://static.tonicdev.net/">
+  <link rel="dns-prefetch" href="https://static.tonicdev.net/" pr="0.25">
   {% if jekyll.environment == "production" %}
   <script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js")</script>
   {% endif %}
