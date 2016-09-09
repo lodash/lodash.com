@@ -24,7 +24,7 @@
 <body class="layout-{{ page.layout }}">
   {{ content }}
   {% if jekyll.environment == "production" %}
-  <script>_gaq=[["_setAccount","UA-6065217-64"],["_trackPageview"]],navigator.onLine&&function(e,t){var a=e.createElement(t),c=e.getElementsByTagName(t)[0];a.src="https://www.google-analytics.com/ga.js",c.parentNode.insertBefore(a,c)}(document,"script")</script>
+  <script>navigator.onLine&&function(e,a){this[GoogleAnalyticsObject=a]={l:Date.now(),q:[["create","UA-6065217-64","auto"],["send","pageview"]]};var t=e.createElement("script");t.src="https://www.google-analytics.com/analytics.js",e.head.appendChild(t)}(document,"_ga")</script>
   {% endif %}
 </body>
 </html>
