@@ -1,7 +1,9 @@
 ---
 ---
 
-@import url("https://unpkg.com/font-awesome@{{ site.fontawesome.version }}/css/font-awesome.min.css");
+{% for href in site.vendor.css %}
+@import url("{{ href }}");
+{% endfor %}
 
 @import "variables";
 @import "default";

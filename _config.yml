@@ -6,17 +6,19 @@ releases:
   - 3.10.1
   - 2.4.2
 
-fontawesome:
-  version:
-    4.6.3
-
-immutable:
-  version:
-    3.8.1
-
-react:
-  version:
-    15.3.1
+vendor: {
+  "css": [
+    "https://unpkg.com/font-awesome@4.6.3/css/font-awesome.min.css"
+  ],
+  "font": [
+    "https://unpkg.com/font-awesome@4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3"
+  ],
+  "js": [
+    "https://unpkg.com/immutable@3.8.1/dist/immutable.min.js",
+    "https://unpkg.com/react@15.3.1/dist/react.min.js",
+    "https://unpkg.com/react-dom@15.3.1/dist/react-dom.min.js"
+  ]
+}
 
 sass:
   sass_dir:

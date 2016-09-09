@@ -16,27 +16,22 @@ hints:
 ---
 
 {% assign all = page.hints.all %}
-{% assign version = site.fontawesome.version %}
-
-{% assign hint = "<https://unpkg.com/font-awesome@" | append:version | append:"/css/font-awesome.min.css>; rel=preload; as=style; pr=1.0; crossorigin" %}
-{% assign all = all | push:hint %}
-
-{% assign hint = "<https://unpkg.com/font-awesome@" | append:version | append:"/fonts/fontawesome-webfont.woff2?v=" | append:version | append:"; rel=preload; as=font; pr=1.0; crossorigin" %}
-{% assign all = all | push:hint %}
-
 {% assign docs = page.hints.docs %}
-{% assign version = site.immutable.version %}
 
-{% assign hint = "<https://unpkg.com/immutable@" | append:version | append:"/dist/immutable.min.js>; rel=preload; as=script; pr=1.0; crossorigin" %}
-{% assign docs = docs | push:hint %}
+{% for href in site.vendor.css %}
+  {% assign hint = "<" | append:href | append:">; rel=preload; as=style; pr=1.0; crossorigin" %}
+  {% assign all = all | push:hint %}
+{% endfor %}
 
-{% assign version = site.react.version %}
+{% for href in site.vendor.font %}
+  {% assign hint = "<" | append:href | append:">; rel=preload; as=font; pr=1.0; crossorigin" %}
+  {% assign all = all | push:hint %}
+{% endfor %}
 
-{% assign hint = "https://unpkg.com/react@" | append:version | append:"/dist/react.min.js>; rel=preload; as=script; pr=1.0; crossorigin" %}
-{% assign docs = docs | push:hint %}
-
-{% assign hint = "https://unpkg.com/react-dom@" | append:version | append:"}/dist/react-dom.min.js>; rel=preload; as=script; pr=1.0; crossorigin" %}
-{% assign docs = docs | push:hint %}
+{% for href in site.vendor.js %}
+  {% assign hint = "<" | append:href | append:">; rel=preload; as=script; pr=1.0; crossorigin" %}
+  {% assign docs = docs | push:hint %}
+{% endfor %}
 
 /*
   Link: {{ all | join:", " }}
