@@ -22,26 +22,41 @@ hints:
 {% assign docs = page.hints.docs %}
 {% assign home = page.hints.home %}
 
+{% comment %}
+Add resource hints for site-wide css.
+{% endcomment %}
 {% for href in site.vendor.css %}
   {% assign hint = '<' | append:href | append:'>; rel=preload; as=style; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
+{% comment %}
+Add resource hints for site-wide fonts.
+{% endcomment %}
 {% for href in site.vendor.font %}
   {% assign hint = '<' | append:href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
+{% comment %}
+Add site-wide hints to docs and homepage hints.
+{% endcomment %}
 {% for hint in all %}
   {% assign docs = docs | push:hint %}
   {% assign home = home | push:hint %}
 {% endfor %}
 
+{% comment %}
+Add resource hints for docs.
+{% endcomment %}
 {% for href in site.vendor.js %}
   {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0; crossorigin' %}
   {% assign docs = docs | push:hint %}
 {% endfor %}
 
+{% comment %}
+Add link headers for non-doc pages.
+{% endcomment %}
 {% for page in site.html_pages %}
   {% assign parts = page.url | split:'/' %}
   {% if parts.size == 2 %}
@@ -50,11 +65,17 @@ hints:
   {% endif %}
 {% endfor %}
 
+{% comment %}
+Add link headers for the homepage.
+{% endcomment %}
 /
   Link: {{ home | join:', ' }}
 
 /index*
   Link: {{ home | join:', ' }}
 
+{% comment %}
+Add link header for doc pages.
+{% endcomment %}
 /docs/*
   Link: {{ docs | join:', ' }}
