@@ -96,6 +96,7 @@ header {
   background-color: $foreground;
   box-shadow: 0 0 2.25rem $shadow;
   padding: 0.8rem 0;
+  position: relative;
   z-index: 2;
 
   .container {
@@ -216,6 +217,7 @@ ul.chevron li {
   margin-top: 3.2rem;
   overflow: hidden;
   padding-bottom: 3.2rem;
+  position: relative;
 }
 
 .highlight {
