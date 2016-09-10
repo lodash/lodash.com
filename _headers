@@ -18,7 +18,6 @@ hints:
     '<https://platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
 ---
-
 {% assign all = page.hints.all %}
 {% assign docs = page.hints.docs %}
 {% assign home = page.hints.home %}
@@ -43,14 +42,19 @@ hints:
   {% assign docs = docs | push:hint %}
 {% endfor %}
 
-/*.html
+{% for page in site.html_pages %}
+  {% assign parts = page.url | split:"/" %}
+  {% if parts.size == 2 %}
+{{ page.url | replace:".html","*" }}
   Link: {{ all | join:", " }}
-
-/docs/*.html
-  Link: {{ docs | join:", " }}
+  {% endif %}
+{% endfor %}
 
 /
   Link: {{ home | join:", " }}
 
-/index.html
+/index*
   Link: {{ home | join:", " }}
+
+/docs/*
+  Link: {{ docs | join:", " }}
