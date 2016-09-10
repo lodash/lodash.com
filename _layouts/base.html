@@ -6,9 +6,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEVMaXExk//ImxjuAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYCAO1P8DIQYGABGNAvvo3s3iAAAAAElFTkSuQmCC">
   <title>{{ page.title }}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <meta name="theme-color" content="#3492ff">
+  <meta name="msapplication-TileColor" content="#3492ff">
+  <meta name="msapplication-TileImage" content="/assets/images/mstile-150x150.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Lodash">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Lodash">
+  <link rel="apple-touch-icon" href="/assets/images/apple-icon-192x192.jpg">
+  <link rel="icon" sizes="192x192" href="/assets/images/icon-192x192.png">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEVMaXExk//ImxjuAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYCAO1P8DIQYGABGNAvvo3s3iAAAAAElFTkSuQmCC">
   <link rel="feed" type="application/atom+xml" href="https://github.com/lodash/lodash/commits/master.atom">
   {% if page.url contains "/docs/" %}
   <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
@@ -19,6 +29,7 @@
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
   <link rel="stylesheet" href="/assets/css/main.css?v={% include BUILD_ID %}">
+  <link rel="manifest" href="/manifest.json">
   {% if jekyll.environment == "production" %}
   <script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js")</script>
   {% endif %}

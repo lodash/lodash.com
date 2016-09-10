@@ -1,0 +1,36 @@
+{
+	"name": "Lodash",
+	"short_name": "Lodash",
+	"icons": [
+		{
+			"src": "assets/images/icon-128x128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/images/icon-142x142.png",
+			"sizes": "142x142",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/images/icon-152x152.png",
+			"sizes": "152x152",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/images/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/images/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"start_url": "index.html",
+	"display": "standalone",
+	"theme_color": "#3492ff",
+	"background_color": "#ffffff",
+	"orientation": "portrait"
+}
