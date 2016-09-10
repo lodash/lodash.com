@@ -4,6 +4,8 @@
 
 const CACHE_KEY = '{% include CACHE_KEY %}';
 
+const reBusted = RegExp(`[?&]${ CACHE_KEY }(?=&|$)`);
+
 const prefetch = [
 {% for file in site.static_files %}
   '{{ file.path }}',
@@ -41,7 +43,9 @@ function cacheBust(resource) {
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
   if (url.origin == location.origin) {
-    url.search += `${ url.search ? '&' : '?' }${ CACHE_KEY }`;
+    if (!reBusted.test(url.search)) {
+      url.search += `${ url.search ? '&' : '?' }${ CACHE_KEY }`;
+    }
     if (isReq) {
       return  new Request(url, resource);
     }
