@@ -35,11 +35,11 @@
 
 @media (max-width: $screen-md-max) {
   section {
-    padding: 0.8rem 1.6rem;
+    padding: 0.8rem 2.8rem;
   }
 
   .container.main {
-    margin: 1.6rem;
+    margin: 2rem;
   }
 }
 
@@ -48,9 +48,5 @@
     // Makes the font-size 8.75px
     // thus scaling body to 14px: 8.75px * 1.6 = 14px
     font-size: 54.6875%; // 0.625 * 14 / 16
-  }
-
-  .container.main {
-    margin: 3.2rem;
   }
 }
