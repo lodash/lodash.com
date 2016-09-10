@@ -13,11 +13,11 @@
       versionSelect = document.getElementById('version');
 
   function Searcher(pattern) {
-    this._engine = new BitapSearcher(pattern, { 'threshold': 0.35 });
+    this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
   }
 
   Searcher.prototype.isMatch = function(text) {
-    return this._engine.search(' ' + text + ' ').isMatch;
+    return this.__engine__.search(' ' + text + ' ').isMatch;
   };
 
   function className() {
