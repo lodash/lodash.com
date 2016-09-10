@@ -65,7 +65,7 @@ html.docs {
       display: none;
       height: 100%;
       left: 0;
-      opacity: 0;
+      opacity: 0.5;
       position: absolute;
       top: 0;
       width: 100%;
@@ -248,6 +248,5 @@ html.docs {
 
   .toc-container.open + .doc-container:after {
     display: block;
-    opacity: 0.5;
   }
 }
