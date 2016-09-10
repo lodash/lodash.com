@@ -2,9 +2,9 @@
 ---
 'use strict';
 
-var CACHE_KEY = '{% include CACHE_KEY %}';
+const CACHE_KEY = '{% include CACHE_KEY %}';
 
-var prefetch = [
+const prefetch = [
 {% for file in site.static_files %}
   '{{ file.path }}',
 {% endfor %}
