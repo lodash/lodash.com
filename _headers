@@ -13,10 +13,15 @@ hints:
     '</assets/js/docs.js>; rel=preload; as=script; pr=1.0',
     '<https://embed.tonicdev.com>; rel=preload; as=script; pr=1.0; crossorigin'
   ]
+  home: [
+    '<https://ghbtns.com/>; rel=dns-prefetch; pr=1.0; crossorigin',
+    '<https://platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
+  ]
 ---
 
 {% assign all = page.hints.all %}
 {% assign docs = page.hints.docs %}
+{% assign home = page.hints.home %}
 
 {% for href in site.vendor.css %}
   {% assign hint = "<" | append:href | append:">; rel=preload; as=style; pr=1.0; crossorigin" %}
@@ -26,6 +31,11 @@ hints:
 {% for href in site.vendor.font %}
   {% assign hint = "<" | append:href | append:">; rel=preload; as=font; pr=1.0; crossorigin" %}
   {% assign all = all | push:hint %}
+{% endfor %}
+
+{% for hint in all %}
+  {% assign docs = docs | push:hint %}
+  {% assign home = home | push:hint %}
 {% endfor %}
 
 {% for href in site.vendor.js %}
@@ -38,3 +48,9 @@ hints:
 
 /docs/*
   Link: {{ docs | join:", " }}
+
+/
+  Link: {{ home | join:", " }}
+
+/index.html
+  Link: {{ home | join:", " }}
