@@ -17,7 +17,7 @@
   }
 
   Searcher.prototype.isMatch = function(text) {
-    return this.__engine__.search(' ' + text + ' ').isMatch;
+    return this.__engine__.search(text).isMatch;
   };
 
   function className() {
