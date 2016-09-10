@@ -2,7 +2,8 @@ html {
   background-color: $background;
   box-sizing: border-box;
   color: $defaultColor;
-  // Sets the base font-size to 10px, so any rem manipulation operates as base 10, ie. 2.4rem = 24px
+  // Set font-size to 10px, from the default of 16px,
+  // so any rem manipulation operates as base 10 (e.g. 2.4rem is 24px).
   font-size: 62.5%; // 10 / 16
   height: 100%;
 }
