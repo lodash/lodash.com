@@ -2,9 +2,9 @@
 ---
 'use strict';
 
-const CACHE_KEY = '{% include CACHE_KEY %}';
+const BUILD_ID = '{% include BUILD_ID %}';
 
-const reBusted = RegExp(`[?&]${ CACHE_KEY }(?=&|$)`);
+const reBusted = RegExp(`[?&]${ BUILD_ID }(?=&|$)`);
 
 const prefetch = [
 {% for file in site.static_files %}
@@ -22,8 +22,8 @@ const prefetch = [
   '{{ href }}',
   {% endfor %}
 {% endfor %}
-  '/assets/js/docs.js?' + CACHE_KEY,
-  '/assets/css/main.css?' + CACHE_KEY,
+  `/assets/js/docs.js?${ BUILD_ID }`,
+  `/assets/css/main.css?${ BUILD_ID }`,
   'https://embed.tonicdev.com/'
 ];
 
@@ -44,7 +44,7 @@ function cacheBust(resource) {
   // See https://github.com/mjackson/npm-http-server/issues/44.
   if (url.origin == location.origin) {
     if (!reBusted.test(url.search)) {
-      url.search += `${ url.search ? '&' : '?' }${ CACHE_KEY }`;
+      url.search += `${ url.search ? '&' : '?' }${ BUILD_ID }`;
     }
     if (isReq) {
       return  new Request(url, resource);
@@ -59,7 +59,7 @@ function cacheBust(resource) {
 addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
-    caches.open(CACHE_KEY).then(cache =>
+    caches.open(BUILD_ID).then(cache =>
       Promise.all(prefetch.map(uri => {
         const input = cacheBust(uri);
         // Attempt to prefetch and cache with 'cors'.
@@ -88,7 +88,7 @@ addEventListener('activate', event =>
     // Delete old caches.
     caches.keys().then(keys =>
       Promise.all(keys.map(key =>
-        key == CACHE_KEY || caches.delete(key)
+        key == BUILD_ID || caches.delete(key)
       ))
     )
   ]))
@@ -96,7 +96,7 @@ addEventListener('activate', event =>
 
 addEventListener('fetch', event =>
   event.respondWith(
-    caches.open(CACHE_KEY).then(cache =>
+    caches.open(BUILD_ID).then(cache =>
       // Respond with cached request if available.
       cache.match(event.request).then(response => {
         if (response || !prefetch.includes(event.request.url)) {
