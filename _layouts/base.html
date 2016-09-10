@@ -18,7 +18,7 @@
   {% if pageURL != docsURL %}
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
-  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/main.css?{% include CACHE_KEY %}">
   {% if jekyll.environment == "production" %}
   <script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js")</script>
   {% endif %}

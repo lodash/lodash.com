@@ -35,5 +35,5 @@ layout: base
 {% for href in site.vendor.js %}
 <script src="{{ href }}"></script>
 {% endfor %}
-<script src="/assets/js/docs.js"></script>
+<script src="/assets/js/docs.js?{% include CACHE_KEY %}"></script>
 <script src="https://embed.tonicdev.com"></script>

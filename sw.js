@@ -1,10 +1,8 @@
 ---
-regenerate: true
 ---
-
 'use strict';
 
-var CACHE_KEY = 'cache-v{{ site.time | replace:" ","" | replace:":","" | replace:"-","" | replace:"+","" }}';
+var CACHE_KEY = '{% include CACHE_KEY %}';
 
 var prefetch = [
 {% for file in site.static_files %}
@@ -22,7 +20,8 @@ var prefetch = [
   '{{ href }}',
   {% endfor %}
 {% endfor %}
-  '/assets/css/main.css',
+  '/assets/js/docs.js?' + CACHE_KEY,
+  '/assets/css/main.css?' + CACHE_KEY,
   'https://embed.tonicdev.com/'
 ];
 
