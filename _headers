@@ -43,10 +43,10 @@ hints:
   {% assign docs = docs | push:hint %}
 {% endfor %}
 
-/*
+/*.html
   Link: {{ all | join:", " }}
 
-/docs/*
+/docs/*.html
   Link: {{ docs | join:", " }}
 
 /
