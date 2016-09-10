@@ -4,8 +4,6 @@
 
 const BUILD_ID = '{% include BUILD_ID %}';
 
-const reBusted = RegExp(`[?&]${ BUILD_ID }(?=&|$)`);
-
 const prefetch = [
 {% for file in site.static_files %}
   '{{ file.path }}',
@@ -22,8 +20,8 @@ const prefetch = [
   '{{ href }}',
   {% endfor %}
 {% endfor %}
-  `/assets/js/docs.js?${ BUILD_ID }`,
-  `/assets/css/main.css?${ BUILD_ID }`,
+  `/assets/js/docs.js?v=${ BUILD_ID }`,
+  `/assets/css/main.css?v=${ BUILD_ID }`,
   'https://embed.tonicdev.com/'
 ];
 
@@ -43,8 +41,8 @@ function cacheBust(resource) {
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
   if (url.origin == location.origin) {
-    if (!reBusted.test(url.search)) {
-      url.search += `${ url.search ? '&' : '?' }${ BUILD_ID }`;
+    if (!url.searchParams.has('v')) {
+      url.searchParams.set('v', BUILD_ID);
     }
     if (isReq) {
       return  new Request(url, resource);
