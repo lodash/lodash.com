@@ -23,12 +23,12 @@ hints:
 {% assign home = page.hints.home %}
 
 {% for href in site.vendor.css %}
-  {% assign hint = "<" | append:href | append:">; rel=preload; as=style; pr=1.0; crossorigin" %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=style; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
 {% for href in site.vendor.font %}
-  {% assign hint = "<" | append:href | append:">; rel=preload; as=font; pr=1.0; crossorigin" %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
@@ -38,23 +38,23 @@ hints:
 {% endfor %}
 
 {% for href in site.vendor.js %}
-  {% assign hint = "<" | append:href | append:">; rel=preload; as=script; pr=1.0; crossorigin" %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0; crossorigin' %}
   {% assign docs = docs | push:hint %}
 {% endfor %}
 
 {% for page in site.html_pages %}
-  {% assign parts = page.url | split:"/" %}
+  {% assign parts = page.url | split:'/' %}
   {% if parts.size == 2 %}
-{{ page.url | replace:".html","*" }}
-  Link: {{ all | join:", " }}
+{{ page.url | replace:'.html','*' }}
+  Link: {{ all | join:', ' }}
   {% endif %}
 {% endfor %}
 
 /
-  Link: {{ home | join:", " }}
+  Link: {{ home | join:', ' }}
 
 /index*
-  Link: {{ home | join:", " }}
+  Link: {{ home | join:', ' }}
 
 /docs/*
-  Link: {{ docs | join:", " }}
+  Link: {{ docs | join:', ' }}
