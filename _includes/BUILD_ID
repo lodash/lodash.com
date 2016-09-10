@@ -1,1 +1,1 @@
-{{ site.time | replace:" ","" | replace:":","" | replace:"-","" | replace:"+","" }}
+{{ site.time | replace:" ","" | replace:":","" | replace:"-","" | replace:"+0000","" | replace:"+","" }}
