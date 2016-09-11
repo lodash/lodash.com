@@ -3,13 +3,22 @@
 ;(function() {
   'use strict';
 
-  var docs = document.querySelector('.doc-container'),
+  var BitapSearcher = new Fuse().options.searchFn,
+      docs = document.querySelector('.doc-container'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       replBtns = [],
       slice = Array.prototype.slice,
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
+
+  function Searcher(pattern) {
+    this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
+  }
+
+  Searcher.prototype.isMatch = function(text) {
+    return this.__engine__.search(text).isMatch;
+  };
 
   function className() {
     return slice.call(arguments).join(' ');
@@ -33,10 +42,6 @@
 
   function normalize(string) {
     return collapseSpaces(string.toLowerCase());
-  }
-
-  function search(string, target) {
-    return normalize(string).indexOf(normalize(target)) > -1;
   }
 
   function toggleHidden(map, property) {
@@ -94,13 +99,14 @@
     },
 
     'handleSearchChange': function(searchValue) {
-      var searchFound = false;
+      var searcher = new Searcher(searchValue),
+          searchFound = false;
 
       this.setState({
         'content': this.state.content.map(function(collection) {
           // The collection is visible if `searchValue` matches its title or
           // any of its function entries.
-          var found = search(collection.get('title'), searchValue),
+          var found = !searchValue || searcher.isMatch(collection.get('title')),
               visible = found;
 
           return collection
@@ -108,8 +114,8 @@
               return functions.map(function(entry) {
                 var entryVis = (
                   found ||
-                  search(entry.get('name'), searchValue) ||
-                  search(entry.get('href').slice(1), searchValue)
+                  searcher.isMatch(entry.get('name')) ||
+                  searcher.isMatch(entry.get('href').split('#')[1])
                 );
                 visible || (visible = entryVis);
                 searchFound || (searchFound = entryVis);
