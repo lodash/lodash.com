@@ -30,7 +30,7 @@ exclude:
   - Gemfile
   - gulpfile.js
   - LICENSE
-  - "*.json"
+  - "package.json"
   - "*.log"
   - "*.md"
   - "*.toml"
