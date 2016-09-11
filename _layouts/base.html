@@ -10,6 +10,7 @@
   <title>{{ page.title }}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
   <link rel="feed" type="application/atom+xml" href="https://github.com/lodash/lodash/commits/master.atom">
+  <link rel="manifest" href="/manifest.json">
   {% if page.url contains "/docs/" %}
   <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
   {% endif %}
