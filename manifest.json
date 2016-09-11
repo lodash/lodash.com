@@ -1,16 +1,55 @@
 {
   "name": "Lodash",
   "short_name": "Lodash",
-  "icons": [
-    {
-      "src": "/assets/img/lodash.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    }
-  ],
   "background_color": "#fff",
   "display": "standalone",
   "orientation": "portrait",
   "start_url": "https://lodash.com/",
-  "theme_color": "#3492ff"
+  "theme_color": "#3492ff",
+  "icons": [
+    {
+      "src": "/icon/icon-48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/icon/icon-72.png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/icon/icon-76.png",
+      "sizes": "76x76"
+    },
+    {
+      "src": "/icon/icon-96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/icon/icon-120.png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "/icon/icon-144.png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/icon/icon-152.png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "/icon/icon-180.png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "/icon/icon-192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon/icon-512.png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/assets/img/lodash.svg",
+      "sizes": "any"
+    }
+  ]
 }
