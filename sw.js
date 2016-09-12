@@ -4,7 +4,7 @@
 
 const BUILD_ID = '{% include BUILD_ID %}';
 
-const prefetch = [
+const prefetch = [...new Set([
 {% for file in site.static_files %}
   '{{ file.path }}',
 {% endfor %}
@@ -20,10 +20,11 @@ const prefetch = [
   '{{ href }}',
   {% endfor %}
 {% endfor %}
+  '/manifest.json',
   `/assets/js/docs.js?v=${ BUILD_ID }`,
   `/assets/css/main.css?v=${ BUILD_ID }`,
   'https://embed.tonicdev.com/'
-];
+])];
 
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
