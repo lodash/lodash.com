@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('lodash');
-const path = require('path');
 
 const gulp = require('gulp');
 const babel = require('gulp-babel');
@@ -17,8 +16,8 @@ const uglify = require('gulp-uglify');
 
 const base = './';
 const cb = e => e && console.log(e.message);
+const icons = require('./icons');
 const opts = { base };
-const manifest = require('./manifest.json');
 
 /*----------------------------------------------------------------------------*/
 
@@ -49,23 +48,16 @@ gulp.task('build-html', () =>
 
 gulp.task('build-icon', () =>
   pump([
-    gulp.src('_site/assets/img/lodash.svg'),
-    responsive({
-      'lodash.svg': _(manifest.icons)
-        .reject(['sizes', 'any'])
-        .map(icon => {
-          const sizes = icon.sizes.split('x');
-          return {
-            'flatten': true,
-            'height': sizes[1],
-            'rename': path.basename(icon.src),
-            'width': sizes[0]
-          };
-        })
-        .value()
+    gulp.src('_site/**/*.{png,svg}'),
+    responsive(icons, {
+      'errorOnEnlargement': false,
+      'errorOnUnusedImage': false,
+      'silent': true,
+      'stats': false,
+      'withoutEnlargement': false
     }),
     imagemin(),
-    gulp.dest('_site/icon/')
+    gulp.dest('_site/icons/')
   ], cb)
 );
 

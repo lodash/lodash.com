@@ -13,16 +13,6 @@
       "type": "image/png"
     },
     {
-      "src": "/icons/mstile-150x150.png",
-      "sizes": "150x150",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/apple-touch-180x180.png",
-      "sizes": "180x180",
-      "type": "image/png"
-    },
-    {
       "src": "/icons/android-home-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
