@@ -5,12 +5,15 @@
 <html lang="en" class="{{ page.id }}">
 <head>
   <meta charset="utf-8">
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <meta name="theme-color" content="#3492ff">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title }}</title>
-  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-180x180.png">
   <link rel="feed" type="application/atom+xml" href="https://github.com/lodash/lodash/commits/master.atom">
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEVMaXExk//ImxjuAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYCAO1P8DIQYGABGNAvvo3s3iAAAAAElFTkSuQmCC">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEVMaXExk//ImxjuAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYCAO1P8DIQYGABGNAvvo3s3iAAAAAElFTkSuQmCC" sizes="16x16">
   <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/icon/safari-pinned-tab-16x16.svg" color="#3492ff">
   {% if page.url contains "/docs/" %}
   <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
   {% endif %}
