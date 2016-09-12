@@ -5,7 +5,9 @@
 <html lang="en" class="{{ page.id }}">
 <head>
   <meta charset="utf-8">
-  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  {% if page.description or page.id == "home" %}
+  <meta name="description" content="{{ page.description | default:site.description | escape_once }}">
+  {% endif %}
   <meta name="theme-color" content="{{ site.brand_color }}">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title }}</title>

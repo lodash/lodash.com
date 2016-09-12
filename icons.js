@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const path = require('path');
-const manifest = require('./manifest.json');
+const manifest = require('./_site/manifest.json');
 
 /*----------------------------------------------------------------------------*/
 

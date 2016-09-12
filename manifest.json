@@ -1,7 +1,10 @@
+---
+---
 {
   "name": "Lodash",
   "short_name": "Lodash",
   "background_color": "#fff",
+  "description": "{{ site.description }}",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

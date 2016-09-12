@@ -6,6 +6,14 @@ releases:
   - 3.10.1
   - 2.4.2
 
+brand_color: "#3492ff"
+description: "A JavaScript utility library delivering consistency, modularity, performance, & extras."
+incremental: true
+
+sass:
+  sass_dir:
+    assets/css
+
 vendor: {
   "css": [
     "https://unpkg.com/font-awesome@4.6.3/css/font-awesome.min.css"
@@ -21,10 +29,6 @@ vendor: {
   ]
 }
 
-sass:
-  sass_dir:
-    assets/css
-
 exclude:
   - node_modules
   - Gemfile
@@ -39,6 +43,3 @@ exclude:
 include:
   - _headers
   - _redirects
-
-brand_color: "#3492ff"
-incremental: true
