@@ -39,4 +39,5 @@ include:
   - _headers
   - _redirects
 
+brand_color: "#3492ff"
 incremental: true

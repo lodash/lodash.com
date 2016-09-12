@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
-  <meta name="theme-color" content="#3492ff">
+  <meta name="theme-color" content="{{ site.brand_color }}">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title }}</title>
   <link rel="apple-touch-icon" href="/icons/apple-touch-180x180.png" sizes="180x180">
@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
   <link rel="manifest" href="/manifest.json">
-  <link rel="mask-icon" href="/icons/safari-pinned-tab-16x16.svg" color="#3492ff">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab-16x16.svg" color="{{ site.brand_color }}">
   {% if page.url contains "/docs/" %}
   <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
   {% endif %}

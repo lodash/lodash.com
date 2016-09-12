@@ -1,11 +1,12 @@
 ---
 ---
 
+{% include_relative  _variables.scss %}
+
 {% for href in site.vendor.css %}
 @import url("{{ href }}");
 {% endfor %}
 
-@import "variables";
 @import "default";
 @import "home";
 @import "custom-builds";
