@@ -15,6 +15,7 @@ module.exports = {
         'rename': path.basename(icon.src),
         'width': sizes[0],
         'height': sizes[1],
+        'embed': true,
         'flatten': true
       };
     })
@@ -23,12 +24,28 @@ module.exports = {
         'rename': 'mstile-150x150.png',
         'width': '150',
         'height': '150',
+        'embed': true,
         'flatten': true
       },
       {
         'rename': 'apple-touch-180x180.png',
         'width': '180',
         'height': '180',
+        'embed': true,
+        'flatten': true
+      },
+      {
+        'rename': 'mstile-310x150.png',
+        'width': '310',
+        'height': '150',
+        'embed': true,
+        'flatten': true
+      },
+      {
+        'rename': 'mstile-310x310.png',
+        'width': '310',
+        'height': '310',
+        'embed': true,
         'flatten': true
       }
     )
