@@ -8,7 +8,7 @@
   "theme_color": "#3492ff",
   "icons": [
     {
-      "src": "/icon/icon-144.png",
+      "src": "/icon/chrome-banner-144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
