@@ -5,7 +5,7 @@
   <msapplication>
     <tile>
       <square150x150logo src="/icons/mstile-150x150.png"/>
-      <TileColor{{ site.brand_color }}</TileColor>
+      <TileColor>{{ site.brand_color }}</TileColor>
     </tile>
   </msapplication>
 </browserconfig>
