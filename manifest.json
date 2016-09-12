@@ -4,6 +4,7 @@
   "background_color": "#fff",
   "display": "standalone",
   "orientation": "portrait",
+  "scope": "/",
   "start_url": "/",
   "theme_color": "#3492ff",
   "icons": [
