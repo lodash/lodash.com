@@ -1,30 +1,65 @@
 ---
+prefetch: [
+  '/manifest.json',
+  'https://embed.tonicdev.com/'
+]
 ---
 'use strict';
 
-const BUILD_ID = '{% include BUILD_ID %}';
+{% capture BUILD_ID %}{% include BUILD_ID %}{% endcapture %}
+{% assign prefetch = page.prefetch %}
 
-const prefetch = [...new Set([
+{% comment %}
+Add site css to prefetch.
+{% endcomment %}
+{% assign href = '/assets/css/main.css?v=' | append:BUILD_ID %}
+{% assign prefetch = prefetch | push:href %}
+
+{% comment %}
+Add docs script to prefetch.
+{% endcomment %}
+{% assign href = '/assets/js/docs.js?v=' | append:BUILD_ID %}
+{% assign prefetch = prefetch | push:href %}
+
+{% comment %}
+Add static files to prefetch.
+{% endcomment %}
 {% for file in site.static_files %}
-  '{{ file.path }}',
+  {% assign prefetch = prefetch | push:file.path %}
 {% endfor %}
+
+{% comment %}
+Add html pages to prefetch.
+{% endcomment %}
 {% for page in site.html_pages %}
-  '{{ page.url | replace:".html","" }}',
-  '/{{ page.path }}',
+  {% assign href = page.url | replace:'.html','' %}
+  {% assign prefetch = prefetch | push:href %}
+  {% assign href = '/' | append:page.path %}
+  {% assign prefetch = prefetch | push:href %}
 {% endfor %}
+
+{% comment %}
+Add Lodash scripts to prefetch.
+{% endcomment %}
 {% for release in site.releases %}
-  'https://cdn.jsdelivr.net/lodash/{{ release }}/lodash.min.js',
+  {% assign href = 'https://cdn.jsdelivr.net/lodash/' | append:release | append:'/lodash.min.js' %}
+  {% assign prefetch = prefetch | push:href %}
 {% endfor %}
+
+{% comment %}
+Add vendor files to prefetch.
+{% endcomment %}
 {% for vendor in site.vendor %}
   {% for href in vendor[1] %}
-  '{{ href }}',
+    {% assign prefetch = prefetch | push:href %}
   {% endfor %}
 {% endfor %}
-  '/manifest.json',
-  `/assets/js/docs.js?v=${ BUILD_ID }`,
-  `/assets/css/main.css?v=${ BUILD_ID }`,
-  'https://embed.tonicdev.com/'
-])];
+
+const BUILD_ID = '{{ BUILD_ID }}';
+
+const prefetch = [
+  '{{ prefetch | uniq | join:"','" }}'
+];
 
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
