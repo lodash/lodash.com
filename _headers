@@ -2,16 +2,15 @@
 hints:
   all: [
     '<https://unpkg.com/>; rel=preconnect; pr=1.0; crossorigin',
-    '<https://tonicdev.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<https://static.tonicdev.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<https://runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<https://static.runkit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
     '<https://p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
   ]
   docs: [
-    '</assets/js/docs.js>; rel=preload; as=script; pr=1.0',
-    '<https://embed.tonicdev.com>; rel=preload; as=script; pr=1.0; crossorigin'
+    '</assets/js/docs.js>; rel=preload; as=script; pr=1.0'
   ]
   home: [
     '<https://ghbtns.com/>; rel=dns-prefetch; pr=1.0; crossorigin',

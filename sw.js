@@ -1,7 +1,6 @@
 ---
 prefetch: [
-  '/manifest.json',
-  'https://embed.tonicdev.com/'
+  '/manifest.json'
 ]
 ---
 'use strict';
