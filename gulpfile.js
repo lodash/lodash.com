@@ -1,8 +1,11 @@
 'use strict';
 
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const pump = require('pump');
+const toIco = require('to-ico');
 
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
@@ -17,7 +20,33 @@ const cb = e => e && console.log(e.message);
 const icons = require('./icons');
 const opts = { base };
 
+const optipng = imagemin.optipng({
+  'optimizationLevel': 7
+});
+
+const svgo = imagemin.svgo({
+  'floatPrecision': 1,
+  'plugins': [
+    { 'removeDimensions': true },
+    { 'removeTitle': true }
+  ]
+});
+
 /*----------------------------------------------------------------------------*/
+
+gulp.task('build-app-icons', () =>
+  pump([
+    gulp.src('_site/**/*.{png,svg}'),
+    responsive(icons, {
+      'errorOnEnlargement': false,
+      'errorOnUnusedImage': false,
+      'silent': true,
+      'stats': false,
+      'withoutEnlargement': false
+    }),
+    gulp.dest('_site/icons/')
+  ], cb)
+);
 
 gulp.task('build-css', () =>
   pump([
@@ -26,6 +55,16 @@ gulp.task('build-css', () =>
     cssnano(),
     gulp.dest(base)
   ])
+);
+
+gulp.task('build-favicon', () =>
+  Promise.all([
+    fs.readFileAsync('./_site/icons/favicon-16x16.png'),
+    fs.readFileAsync('./_site/icons/favicon-32x32.png'),
+    fs.readFileAsync('./_site/icons/favicon-48x48.png')
+  ])
+  .then(toIco)
+  .then(buffer => fs.writeFileAsync('./_site/favicon.ico', buffer))
 );
 
 gulp.task('build-html', () =>
@@ -44,21 +83,6 @@ gulp.task('build-html', () =>
   ], cb)
 );
 
-gulp.task('build-icon', () =>
-  pump([
-    gulp.src('_site/**/*.{png,svg}'),
-    responsive(icons, {
-      'errorOnEnlargement': false,
-      'errorOnUnusedImage': false,
-      'silent': true,
-      'stats': false,
-      'withoutEnlargement': false
-    }),
-    imagemin(),
-    gulp.dest('_site/icons/')
-  ], cb)
-);
-
 gulp.task('build-js', () =>
   pump([
     gulp.src('_site/**/*.js', opts),
@@ -68,15 +92,16 @@ gulp.task('build-js', () =>
   ], cb)
 );
 
-gulp.task('build-svg', () =>
+gulp.task('minify-images', () =>
   pump([
-    gulp.src('_site/**/*.svg', opts),
-    imagemin(),
+    gulp.src('_site/**/*.{png,svg}', opts),
+    imagemin([optipng, svgo]),
     gulp.dest(base)
   ], cb)
 );
 
 gulp.task('build', sequence(
-  ['build-css', 'build-html', 'build-js', 'build-svg'],
-  'build-icon'
+  ['build-app-icons', 'build-css', 'build-html', 'build-js'],
+  'build-favicon',
+  'minify-images'
 ));
