@@ -36,7 +36,7 @@ const svgo = imagemin.svgo({
 
 gulp.task('build-app-icons', () =>
   pump([
-    gulp.src('_site/**/*.{png,svg}'),
+    gulp.src(['**/*.{png,svg}', '!node_modules/**/*', '!_site/**/*'], opts),
     responsive(icons, {
       'errorOnEnlargement': false,
       'errorOnUnusedImage': false,
@@ -59,7 +59,7 @@ gulp.task('build-css', () =>
 
 gulp.task('build-favicon', () =>
   Promise.all([
-    fs.readFileAsync('./_site/icons/favicon-16x16.png'),
+    fs.readFileAsync('./icons/favicon-16x16.png'),
     fs.readFileAsync('./_site/icons/favicon-32x32.png'),
     fs.readFileAsync('./_site/icons/favicon-48x48.png')
   ])

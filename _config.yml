@@ -31,6 +31,7 @@ vendor: {
 }
 
 exclude:
+  - icons/favicon-16x16.png
   - node_modules
   - Gemfile
   - gulpfile.js
