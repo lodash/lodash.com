@@ -297,7 +297,7 @@
         parent.removeChild(div);
         parent.removeChild(button);
 
-        Tonic.createNotebook({
+        RunKit.createNotebook({
           'element': parent,
           'nodeVersion': '*',
           'preamble': [
