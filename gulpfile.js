@@ -87,7 +87,15 @@ gulp.task('build-js', () =>
   pump([
     gulp.src('_site/**/*.js', opts),
     babel({ 'presets': ['es2015'] }),
-    uglify(),
+    uglify({
+      'compress': {
+        'collapse_vars': true,
+        'negate_iife': false,
+        'pure_getters': true,
+        'unsafe': true,
+        'warnings': false
+      }
+    }),
     gulp.dest(base)
   ], cb)
 );
