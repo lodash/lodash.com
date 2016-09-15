@@ -52,6 +52,12 @@ module.exports = {
     .value(),
   'icons/favicon-16x16.png': [
     {
+      'rename': 'favicon-16x16.png',
+      'width': 16,
+      'height': 16,
+      'interpolation': 'nearest'
+    },
+    {
       'rename': 'favicon-32x32.png',
       'width': 32,
       'height': 32,

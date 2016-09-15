@@ -60,12 +60,12 @@ gulp.task('build-css', () =>
 
 gulp.task('build-favicon', () =>
   Promise.all([
-    fs.readFile('./icons/favicon-16x16.png'),
-    fs.readFile('./_site/icons/favicon-32x32.png'),
-    fs.readFile('./_site/icons/favicon-48x48.png')
+    fs.readFile('_site/icons/favicon-16x16.png'),
+    fs.readFile('_site/icons/favicon-32x32.png'),
+    fs.readFile('_site/icons/favicon-48x48.png')
   ])
   .then(toIco)
-  .then(buffer => fs.writeFile('./_site/favicon.ico', buffer))
+  .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
 );
 
 gulp.task('build-html', () =>
