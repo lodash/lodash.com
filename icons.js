@@ -14,41 +14,35 @@ module.exports = {
       return {
         'rename': path.basename(icon.src),
         'width': +sizes[0],
-        'height': +sizes[1],
-        'embed': true,
-        'flatten': true
+        'height': +sizes[1]
       };
     })
     .push(
       {
         'rename': 'mstile-150x150.png',
         'width': 150,
-        'height': 150,
-        'embed': true,
-        'flatten': true
+        'height': 150
       },
       {
         'rename': 'apple-touch-180x180.png',
         'width': 180,
-        'height': 180,
-        'embed': true,
-        'flatten': true
+        'height': 180
       },
       {
         'rename': 'mstile-310x150.png',
         'width': 310,
-        'height': 150,
-        'embed': true,
-        'flatten': true
+        'height': 150
       },
       {
         'rename': 'mstile-310x310.png',
         'width': 310,
-        'height': 310,
-        'embed': true,
-        'flatten': true
+        'height': 310
       }
     )
+    .map(icon => _.assign(icon, {
+      'background': 'rgba(0,0,0,0)',
+      'embed': true
+    }))
     .value(),
   'icons/favicon-16x16.png': [
     {
