@@ -26,7 +26,9 @@ Add docs script to prefetch.
 Add static files to prefetch.
 {% endcomment %}
 {% for file in site.static_files %}
-  {% assign prefetch = prefetch | push:file.path %}
+  {% unless site.safe == false and file contains "favicon-16x16" %}
+    {% assign prefetch = prefetch | push:file.path %}
+  {% endunless %}
 {% endfor %}
 
 {% comment %}
