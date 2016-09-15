@@ -8,7 +8,7 @@ The Lodash website.
 
 2. Install [required gems](http://bundler.io/) in the repository directory.
     ```shell
-    $ bundle install
+    $ bundle
     ```
 
 3. Build & run.
