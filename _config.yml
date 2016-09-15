@@ -9,6 +9,7 @@ releases:
 brand_color: "#3492ff"
 description: "A JavaScript utility library delivering consistency, modularity, performance, & extras."
 incremental: true
+safe: false
 
 sass:
   sass_dir:
