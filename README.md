@@ -1,4 +1,4 @@
-# lodash.github.io
+# lodash.com
 
 The Lodash website.
 
@@ -19,5 +19,5 @@ The Lodash website.
 ## Incrementing the Lodash Version
 
 1. Generate new documentation by running `npm run doc:sitehtml` from the [Lodash repository](https://github.com/lodash/lodash).
-2. Copy the generated documentation from `lodash/doc/` to `lodash.github.io/docs/`.
+2. Copy the generated documentation from `lodash/doc/` to `lodash.com/docs/`.
 3. Update the `release` field in `_config.yml`.
