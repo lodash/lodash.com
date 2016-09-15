@@ -49,14 +49,7 @@ gulp.task('build-app-icons', () =>
   ], cb)
 );
 
-gulp.task('build-css', () =>
-  pump([
-    gulp.src('_site/**/*.css', opts),
-    purify(['_site/**/*.html', '_site/assets/**/*.js'], { 'rejected': true }),
-    cssnano(),
-    gulp.dest(base)
-  ])
-);
+gulp.task('build-css', ['minify-css']);
 
 gulp.task('build-favicon', () =>
   Promise.all([
@@ -68,7 +61,24 @@ gulp.task('build-favicon', () =>
   .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
 );
 
-gulp.task('build-html', () =>
+gulp.task('build-html', ['minify-html']);
+
+gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'));
+
+gulp.task('build-js', ['minify-js', 'minify-sw']);
+
+/*----------------------------------------------------------------------------*/
+
+gulp.task('minify-css', () =>
+  pump([
+    gulp.src('_site/**/*.css', opts),
+    purify(['_site/**/*.html', '_site/assets/**/*.js'], { 'rejected': true }),
+    cssnano(),
+    gulp.dest(base)
+  ])
+);
+
+gulp.task('minify-html', () =>
   pump([
     gulp.src('_site/**/*.html', opts),
     htmlmin({
@@ -84,10 +94,17 @@ gulp.task('build-html', () =>
   ], cb)
 );
 
-gulp.task('build-js', () =>
+gulp.task('minify-images', () =>
   pump([
-    gulp.src('_site/**/*.js', opts),
-    babel({ 'presets': ['es2015'] }),
+    gulp.src('_site/**/*.{png,svg}', opts),
+    imagemin([optipng, svgo]),
+    gulp.dest(base)
+  ], cb)
+);
+
+gulp.task('minify-js', () =>
+  pump([
+    gulp.src(['_site/**/*.js', '!_site/sw.js'], opts),
     uglify({
       'compress': {
         'collapse_vars': true,
@@ -101,16 +118,14 @@ gulp.task('build-js', () =>
   ], cb)
 );
 
-gulp.task('minify-images', () =>
+gulp.task('minify-sw', () =>
   pump([
-    gulp.src('_site/**/*.{png,svg}', opts),
-    imagemin([optipng, svgo]),
+    gulp.src('_site/sw.js', opts),
+    babel({ 'comments': false, 'presets': ['babili'] }),
     gulp.dest(base)
   ], cb)
 );
 
-gulp.task('build', sequence(
-  ['build-app-icons', 'build-css', 'build-html', 'build-js'],
-  'build-favicon',
-  'minify-images'
-));
+/*----------------------------------------------------------------------------*/
+
+gulp.task('build', ['build-css', 'build-html', 'build-images', 'build-js']);
