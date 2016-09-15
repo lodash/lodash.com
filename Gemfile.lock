@@ -21,7 +21,7 @@ GEM
     ffi (1.9.14)
     forwardable-extended (2.6.0)
     gemoji (2.1.0)
-    github-pages (94)
+    github-pages (96)
       activesupport (= 4.2.7)
       github-pages-health-check (= 1.2.0)
       jekyll (= 3.2.1)
@@ -40,7 +40,7 @@ GEM
       liquid (= 3.0.6)
       listen (= 3.0.6)
       mercenary (~> 0.3)
-      minima (= 1.0.1)
+      minima (= 1.2.0)
       rouge (= 1.11.1)
       terminal-table (~> 1.4)
     github-pages-health-check (1.2.0)
@@ -85,6 +85,8 @@ GEM
     jekyll-sitemap (0.10.0)
     jekyll-watch (1.5.0)
       listen (~> 3.0, < 3.1)
+    jekyll_image_encode (0.0.4)
+      mimemagic (>= 0.2.0)
     jemoji (0.7.0)
       activesupport (~> 4.0)
       gemoji (~> 2.0)
@@ -97,8 +99,9 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
     mercenary (0.3.6)
+    mimemagic (0.3.2)
     mini_portile2 (2.1.0)
-    minima (1.0.1)
+    minima (1.2.0)
     minitest (5.9.0)
     multipart-post (2.0.0)
     net-dns (0.8.0)
@@ -120,20 +123,21 @@ GEM
     sawyer (0.7.0)
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
-    terminal-table (1.7.0)
-      unicode-display_width (~> 1.1)
+    terminal-table (1.7.2)
+      unicode-display_width (~> 1.1.1)
     thread_safe (0.3.5)
     typhoeus (0.8.0)
       ethon (>= 0.8.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    unicode-display_width (1.1.0)
+    unicode-display_width (1.1.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   github-pages
+  jekyll_image_encode
 
 BUNDLED WITH
    1.12.5
