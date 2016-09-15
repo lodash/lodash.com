@@ -1,11 +1,12 @@
 'use strict';
 
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const pump = require('pump');
 const toIco = require('to-ico');
+
+const pify = require('pify');
+const fs = pify(require('fs'));
 
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
@@ -59,12 +60,12 @@ gulp.task('build-css', () =>
 
 gulp.task('build-favicon', () =>
   Promise.all([
-    fs.readFileAsync('./icons/favicon-16x16.png'),
-    fs.readFileAsync('./_site/icons/favicon-32x32.png'),
-    fs.readFileAsync('./_site/icons/favicon-48x48.png')
+    fs.readFile('./icons/favicon-16x16.png'),
+    fs.readFile('./_site/icons/favicon-32x32.png'),
+    fs.readFile('./_site/icons/favicon-48x48.png')
   ])
   .then(toIco)
-  .then(buffer => fs.writeFileAsync('./_site/favicon.ico', buffer))
+  .then(buffer => fs.writeFile('./_site/favicon.ico', buffer))
 );
 
 gulp.task('build-html', () =>
