@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "npm run build:jekyll && npm run build:gulp",
-    "build:gulp": "gulp build",
+    "build:gulp": "gulp --silent build",
     "build:jekyll": "cross-env JEKYLL_ENV=production bundle exec jekyll build"
   },
   "devDependencies": {
