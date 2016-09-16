@@ -1,3 +1,5 @@
+repository: lodash/lodash.com
+
 release:
   &release 4.15.0
 

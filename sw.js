@@ -7,26 +7,26 @@ prefetch: [
 ---
 'use strict';
 
-{% capture BUILD_ID %}{% include BUILD_ID %}{% endcapture %}
+{% assign BUILD_REV = site.github.build_revision %}
 {% assign prefetch = page.prefetch %}
 
 {% comment %}
 Add site css to prefetch.
 {% endcomment %}
-{% assign href = '/assets/css/main.css?v=' | append:BUILD_ID %}
+{% assign href = '/assets/css/main.css?v=' | append:BUILD_REV %}
 {% assign prefetch = prefetch | push:href %}
 
 {% comment %}
 Add docs script to prefetch.
 {% endcomment %}
-{% assign href = '/assets/js/docs.js?v=' | append:BUILD_ID %}
+{% assign href = '/assets/js/docs.js?v=' | append:BUILD_REV %}
 {% assign prefetch = prefetch | push:href %}
 
 {% comment %}
 Add static files to prefetch.
 {% endcomment %}
 {% for file in site.static_files %}
-  {% unless site.safe == false and file contains "favicon-16x16" %}
+  {% unless site.github.hostname != 'github.com' and file.path contains 'favicon-16x16' %}
     {% assign prefetch = prefetch | push:file.path %}
   {% endunless %}
 {% endfor %}
@@ -58,7 +58,7 @@ Add vendor files to prefetch.
   {% endfor %}
 {% endfor %}
 
-const BUILD_ID = '{{ BUILD_ID }}';
+const BUILD_REV = '{{ BUILD_REV }}';
 
 const prefetch = [
   '{{ prefetch | uniq | join:"','" }}'
@@ -81,7 +81,7 @@ function cacheBust(resource) {
   // See https://github.com/mjackson/npm-http-server/issues/44.
   if (url.origin == location.origin) {
     if (!url.searchParams.has('v')) {
-      url.searchParams.set('v', BUILD_ID);
+      url.searchParams.set('v', BUILD_REV);
     }
     if (isReq) {
       return  new Request(url, resource);
@@ -96,7 +96,7 @@ function cacheBust(resource) {
 addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
-    caches.open(BUILD_ID).then(cache =>
+    caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri => {
         const input = cacheBust(uri);
         // Attempt to prefetch and cache with 'cors'.
@@ -125,7 +125,7 @@ addEventListener('activate', event =>
     // Delete old caches.
     caches.keys().then(keys =>
       Promise.all(keys.map(key =>
-        key == BUILD_ID || caches.delete(key)
+        key == BUILD_REV || caches.delete(key)
       ))
     )
   ]))
@@ -133,7 +133,7 @@ addEventListener('activate', event =>
 
 addEventListener('fetch', event =>
   event.respondWith(
-    caches.open(BUILD_ID).then(cache =>
+    caches.open(BUILD_REV).then(cache =>
       // Respond with cached request if available.
       cache.match(event.request).then(response => {
         if (response || !prefetch.includes(event.request.url)) {

@@ -15,7 +15,6 @@ hints:
     '<https://platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
 ---
-{% capture BUILD_ID %}{% include BUILD_ID %}{% endcapture %}
 {% assign all = page.hints.all %}
 {% assign docs = page.hints.docs %}
 {% assign home = page.hints.home %}
@@ -47,7 +46,7 @@ Add site-wide hints to docs and homepage hints.
 {% comment %}
 Add resource hints for docs.
 {% endcomment %}
-{% assign hint = '</assets/js/docs.js?v=' | append:BUILD_ID | append:'>; rel=preload; as=script; pr=1.0' %}
+{% assign hint = '</assets/js/docs.js?v=' | append:site.github.build_revision | append:'>; rel=preload; as=script; pr=1.0' %}
 {% assign docs = docs | push:hint %}
 
 {% for href in site.vendor.js %}

@@ -35,4 +35,4 @@ layout: base
 {% for href in site.vendor.js %}
 <script src="{{ href }}"></script>
 {% endfor %}
-<script src="/assets/js/docs.js?v={% include BUILD_ID %}"></script>
+<script src="/assets/js/docs.js?v={{ site.github.build_revision }}"></script>

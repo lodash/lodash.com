@@ -5,7 +5,7 @@
 <html lang="en" class="{{ page.id }}">
 <head>
   <meta charset="utf-8">
-  {% if page.description or page.id == "home" %}
+  {% if page.description or page.id == 'home' %}
   <meta name="description" content="{{ page.description | default:site.description | escape_once }}">
   {% endif %}
   <meta name="theme-color" content="{{ site.brand_color }}">
@@ -15,28 +15,28 @@
   <link rel="feed" type="application/atom+xml" href="https://github.com/lodash/lodash/commits/master.atom">
   <link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
   {% assign href = 'icons/favicon-16x16.png' %}
-  {% unless site.safe %}
-    {% assign href = base64 href %}
+  {% unless site.github.hostname == 'github.com' %}
+    {% capture href %}{% base64 icons/favicon-16x16.png %}{% endcapture %}
   {% endunless %}
   <link rel="icon" type="image/png" href="{{ href }}" sizes="16x16">
   <link rel="manifest" href="/manifest.json">
   <link rel="mask-icon" href="/icons/safari-pinned-tab-16x16.svg" color="{{ site.brand_color }}">
-  {% if page.url contains "/docs/" %}
+  {% if page.url contains '/docs/' %}
   <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
   {% endif %}
-  {% assign pageURL = page.url | replace:".html","" %}
-  {% assign docsURL = "/docs/" | append:site.release %}
+  {% assign pageURL = page.url | replace:'.html','' %}
+  {% assign docsURL = '/docs/' | append:site.release %}
   {% if pageURL != docsURL %}
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
-  <link rel="stylesheet" href="/assets/css/main.css?v={% include BUILD_ID %}">
-  {% if jekyll.environment == "production" %}
+  <link rel="stylesheet" href="/assets/css/main.css?v={{ site.github.build_revision }}">
+  {% if jekyll.environment == 'production' %}
   <script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js")</script>
   {% endif %}
 </head>
 <body class="layout-{{ page.layout }}">
   {{ content }}
-  {% if jekyll.environment == "production" %}
+  {% if jekyll.environment == 'production' %}
   <script>navigator.onLine&&function(e,a){this[GoogleAnalyticsObject=a]={l:Date.now(),q:[["create","UA-6065217-64","auto"],["send","pageview"]]};var t=e.createElement("script");t.src="https://www.google-analytics.com/analytics.js",e.head.appendChild(t)}(document,"_ga")</script>
   {% endif %}
 </body>

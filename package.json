@@ -1,5 +1,5 @@
 {
-  "name": "lodash.github.io",
+  "name": "lodash.com",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm run build:jekyll && npm run build:gulp",
     "build:gulp": "gulp --silent build",
-    "build:jekyll": "cross-env JEKYLL_ENV=production bundle exec jekyll build"
+    "build:jekyll": "cross-env JEKYLL_ENV=production PAGES_GITHUB_HOSTNAME=lodash.com bundle exec jekyll build"
   },
   "devDependencies": {
     "babel-preset-babili": "0.0.2",
