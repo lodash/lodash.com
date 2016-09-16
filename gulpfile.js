@@ -12,6 +12,8 @@ const babel = require('gulp-babel');
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
 const imagemin = require('gulp-imagemin');
+const jsonmin = require('gulp-jsonmin');
+const muxml = require('gulp-muxml');
 const purify = require('gulp-purifycss');
 const responsive = require('gulp-responsive');
 const sequence = require('gulp-sequence');
@@ -65,6 +67,8 @@ gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-i
 
 gulp.task('build-js', ['minify-js', 'minify-sw']);
 
+gulp.task('build-metadata', ['minify-json', 'minify-xml'])
+
 /*----------------------------------------------------------------------------*/
 
 gulp.task('minify-css', () =>
@@ -116,6 +120,14 @@ gulp.task('minify-js', () =>
   ], cb)
 );
 
+gulp.task('minify-json', () =>
+  pump([
+    gulp.src('_site/**/*.json', opts),
+    jsonmin(),
+    gulp.dest(base)
+  ], cb)
+);
+
 gulp.task('minify-sw', () =>
   pump([
     gulp.src('_site/sw.js', opts),
@@ -124,6 +136,20 @@ gulp.task('minify-sw', () =>
   ], cb)
 );
 
+gulp.task('minify-xml', () =>
+  pump([
+    gulp.src('_site/**/*.xml', opts),
+    muxml({ 'pretty': false }),
+    gulp.dest(base)
+  ], cb)
+);
+
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build', ['build-css', 'build-html', 'build-images', 'build-js']);
+gulp.task('build', [
+  'build-css',
+  'build-html',
+  'build-images',
+  'build-js',
+  'build-metadata'
+]);
