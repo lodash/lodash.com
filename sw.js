@@ -13,13 +13,13 @@ prefetch: [
 {% comment %}
 Add site css to prefetch.
 {% endcomment %}
-{% assign href = '/assets/css/main.css?v=' | append:BUILD_REV %}
+{% assign href = '/assets/css/main.css?v=${ BUILD_REV }' %}
 {% assign prefetch = prefetch | push:href %}
 
 {% comment %}
 Add docs script to prefetch.
 {% endcomment %}
-{% assign href = '/assets/js/docs.js?v=' | append:BUILD_REV %}
+{% assign href = '/assets/js/docs.js?v=${ BUILD_REV }' %}
 {% assign prefetch = prefetch | push:href %}
 
 {% comment %}
@@ -61,7 +61,7 @@ Add vendor files to prefetch.
 const BUILD_REV = '{{ BUILD_REV }}';
 
 const prefetch = [
-  '{{ prefetch | uniq | join:"','" }}'
+  `{{ prefetch | uniq | join:'`,`' }}`
 ];
 
 /**
