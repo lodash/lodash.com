@@ -45,8 +45,8 @@
 
 @media (max-width: $screen-lg-max) {
   html {
-    // Make font-size 8.75px to scale body, which is 1.6rem,
-    // to 14px (8.75px * 1.6 = 14px).
-    font-size: 54.6875%; // 0.625 * (14 / 16)
+    // Set font-size to 8.75px so body, which is 1.6rem,
+    // will scale to 14px (8.75px * 1.6 = 14px).
+    font-size: 8.75px;
   }
 }
