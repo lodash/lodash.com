@@ -1,13 +1,14 @@
 'use strict';
 
+const globby = require('globby');
 const gulp = require('gulp');
-const babel = require('gulp-babel');
 const pump = require('pump');
 const toIco = require('to-ico');
 
 const pify = require('pify');
 const fs = pify(require('fs'));
 
+const babel = require('gulp-babel');
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
 const imagemin = require('gulp-imagemin');
@@ -52,13 +53,10 @@ gulp.task('build-app-icons', () =>
 gulp.task('build-css', ['minify-css']);
 
 gulp.task('build-favicon', () =>
-  Promise.all([
-    fs.readFile('_site/icons/favicon-16x16.png'),
-    fs.readFile('_site/icons/favicon-32x32.png'),
-    fs.readFile('_site/icons/favicon-48x48.png')
-  ])
-  .then(toIco)
-  .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
+  globby('_site/icons/favicon-*.png')
+    .then(files => Promise.all(files.map(file => fs.readFile(file))))
+    .then(toIco)
+    .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
 );
 
 gulp.task('build-html', ['minify-html']);
