@@ -49,4 +49,10 @@
     // will scale to 14px (8.75px * 1.6 = 14px).
     font-size: 8.75px;
   }
+
+  html.docs {
+    .search input {
+      font-size: 16px;
+    }
+  }
 }
