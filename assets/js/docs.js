@@ -48,6 +48,12 @@
     return map.get(property) ? '' : 'hidden';
   }
 
+  function toggleMobileMenu(state) {
+    state = state === undefined ? !menuEl.classList.contains('open') : state;
+    mobileMenu.title = (state ? 'Collapse' : 'Expand') + ' Menu';
+    menuEl.classList[state ? 'add' : 'remove']('open');
+  }
+
   var Menu = React.createClass({
     'displayName': 'Menu',
 
@@ -145,7 +151,7 @@
       var _this = this;
 
       // Close mobile menu.
-      menuEl.classList.remove('open');
+      toggleMobileMenu(false);
 
       // Empty search box.
       _.defer(function() {
@@ -321,12 +327,12 @@
   // Open the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
     event.preventDefault();
-    menuEl.classList.toggle('open');
+    toggleMobileMenu();
   });
 
   // Close the mobile menu.
   docs.addEventListener('click', function() {
-    menuEl.classList.remove('open');
+    toggleMobileMenu(false);
   });
 
   // Change the documentation URL.
