@@ -3,15 +3,19 @@
 ;(function() {
   'use strict';
 
-  var searchNode,
+  var focusLast,
+      searchNode,
       BitapSearcher = new Fuse().options.searchFn,
       docs = document.querySelector('.doc-container'),
+      focusFirst = document.querySelector('a'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       replBtns = [],
       slice = Array.prototype.slice,
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
+
+  /*--------------------------------------------------------------------------*/
 
   function Searcher(pattern) {
     this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
@@ -20,6 +24,8 @@
   Searcher.prototype.isMatch = function(text) {
     return this.__engine__.search(text).isMatch;
   };
+
+  /*--------------------------------------------------------------------------*/
 
   function className() {
     return slice.call(arguments).join(' ');
@@ -45,6 +51,18 @@
     return collapseSpaces(string.toLowerCase());
   }
 
+  /*--------------------------------------------------------------------------*/
+
+  function focusLastRefCallback(node) {
+    focusLast = node;
+  }
+
+  function searchRefCallback(node) {
+    searchNode = node;
+  }
+
+  /*--------------------------------------------------------------------------*/
+
   function toggleHiddenClass(map, property) {
     return map.get(property) ? '' : 'hidden';
   }
@@ -57,6 +75,8 @@
       searchNode.focus();
     }
   }
+
+  /*--------------------------------------------------------------------------*/
 
   var Menu = React.createClass({
     'displayName': 'Menu',
@@ -92,20 +112,11 @@
     },
 
     'componentDidMount': function() {
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      document.addEventListener('keydown', this.onDocumentKeyDown, true);
     },
 
     'componentWillUnmount': function() {
-      document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    },
-
-    'handleDocumentKeyDown': function(event) {
-      var key = event.key || event.keyIdentifier;
-      if (key == '/' || key == 'U+002F') {
-        // Don't actually type a `/` in the input.
-        event.preventDefault();
-        searchNode.focus();
-      }
+      document.removeEventListener('keydown', this.onDocumentKeyDown, true);
     },
 
     'handleSearchChange': function(searchValue) {
@@ -163,6 +174,21 @@
       });
     },
 
+    'onDocumentKeyDown': function(event) {
+      var key = event.key || event.keyIdentifier;
+      if ((key == 'Tab' || key == 'U+0009') &&
+          menuEl.classList.contains('open') && event.target === focusLast) {
+        // Restart tab cycle.
+        event.preventDefault();
+        focusFirst.focus();
+      }
+      if (key == '/' || key == 'U+002F') {
+        // Don't actually type a `/` in the input.
+        event.preventDefault();
+        searchNode.focus();
+      }
+    },
+
     'shouldComponentUpdate': function(nextProps, nextState) {
       return (this.state.searchFound || nextState.searchFound) &&
         (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
@@ -172,12 +198,9 @@
     'render': function() {
       var _this = this;
 
-      var searchRefCallback = function(node) {
-        searchNode = node;
-      };
-
-      var elements = this.state.content.map(function(collection, index) {
+      var elements = this.state.content.map(function(collection, index, content) {
         var expanded = collection.get('expanded');
+        var isLast = (index + 1) == content.size;
 
         var expanderClick = function(event) {
           if (isClick(event)) {
@@ -211,7 +234,8 @@
             {
               'className': toggleHiddenClass(collection, 'expanded')
             },
-            collection.get('functions').map(function(entry) {
+            collection.get('functions').map(function(entry, subIndex, entries) {
+              var isLastEntry = isLast && (subIndex + 1) === entries.size;
               return React.createElement(
                 'li',
                 {
@@ -222,7 +246,8 @@
                   'a',
                   {
                     'href': entry.get('href'),
-                    'onClick': _this.onClickFuncName
+                    'onClick': _this.onClickFuncName,
+                    'ref': isLastEntry ? focusLastRefCallback : undefined
                   },
                   React.createElement(
                     'code',
@@ -276,6 +301,8 @@
       );
     }
   });
+
+  /*--------------------------------------------------------------------------*/
 
   ReactDOM.render(
     React.createElement(Menu),
