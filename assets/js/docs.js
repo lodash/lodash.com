@@ -44,7 +44,7 @@
     return collapseSpaces(string.toLowerCase());
   }
 
-  function toggleHidden(map, property) {
+  function toggleHiddenClass(map, property) {
     return map.get(property) ? '' : 'hidden';
   }
 
@@ -185,7 +185,7 @@
           'div',
           {
             'key': collection.get('key'),
-            'className': toggleHidden(collection, 'visible')
+            'className': toggleHiddenClass(collection, 'visible')
           },
           React.createElement(
             'h2',
@@ -205,14 +205,14 @@
           React.createElement(
             'ul',
             {
-              'className': toggleHidden(collection, 'expanded')
+              'className': toggleHiddenClass(collection, 'expanded')
             },
             collection.get('functions').map(function(entry) {
               return React.createElement(
                 'li',
                 {
                   'key': entry.get('key'),
-                  'className': toggleHidden(entry, 'visible')
+                  'className': toggleHiddenClass(entry, 'visible')
                 },
                 React.createElement(
                   'a',
