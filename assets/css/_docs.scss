@@ -18,7 +18,6 @@ html.docs {
   }
 
   header {
-    min-height: 56px;
     padding: 0;
   }
 
@@ -149,7 +148,7 @@ html.docs {
       color: $defaultColor;
 
       i {
-        margin-right: 10px;
+        margin-right: 1rem;
       }
     }
   }
@@ -223,10 +222,6 @@ html.docs {
     ul {
       border-left: 1px dashed #dcdcdc;
       margin-top: 0.8rem;
-
-      li {
-        max-height: 40px;
-      }
 
       li a {
         border: none;

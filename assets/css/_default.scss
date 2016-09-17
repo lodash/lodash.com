@@ -45,11 +45,11 @@ a.btn {
   color: $linkColor;
   font-size: 1.3rem;
   line-height: 1;
-  padding: 17px 25px;
+  padding: 1.7rem 2.5rem;
   white-space: nowrap;
 
   & + & {
-    margin-left: 10px;
+    margin-left: 1rem;
   }
 
   &:hover,
