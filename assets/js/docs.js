@@ -84,8 +84,8 @@
     'getInitialState': function() {
       return {
         'content': new Immutable.List,
-        'searchValue': '',
-        'searchFound': true
+        'searchFound': true,
+        'searchValue': ''
       };
     },
 
