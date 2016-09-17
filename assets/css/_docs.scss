@@ -199,6 +199,13 @@ html.docs {
       display: block;
     }
 
+    &.open + .doc-container {
+      overflow-y: hidden;
+
+      &:after {
+        display: block;
+      }
+    }
     // Offset top to avoid page jank when the search bar loads.
     > div:first-child:not(.search):not(.react-menu-container) {
       margin-top: calc(2.4rem + 37px);
@@ -243,9 +250,5 @@ html.docs {
       font-size: 1.4rem;
       margin-right: 1.1rem;
     }
-  }
-
-  .toc-container.open + .doc-container:after {
-    display: block;
   }
 }

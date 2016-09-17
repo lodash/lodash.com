@@ -12,8 +12,12 @@
       min-width: 300px;
       position: relative;
 
-      &.open + .doc-container:after {
-        display: none;
+      &.open + .doc-container {
+        overflow-y: auto;
+
+        &:after {
+          display: none;
+        }
       }
     }
   }
