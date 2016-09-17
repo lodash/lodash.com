@@ -11,6 +11,10 @@
       height: auto;
       min-width: 300px;
       position: relative;
+
+      &.open + .doc-container:after {
+        display: none;
+      }
     }
   }
 }
