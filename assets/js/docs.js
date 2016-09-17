@@ -15,8 +15,6 @@
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
-  /*--------------------------------------------------------------------------*/
-
   function Searcher(pattern) {
     this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
   }
@@ -24,8 +22,6 @@
   Searcher.prototype.isMatch = function(text) {
     return this.__engine__.search(text).isMatch;
   };
-
-  /*--------------------------------------------------------------------------*/
 
   function className() {
     return slice.call(arguments).join(' ');
@@ -51,8 +47,6 @@
     return collapseSpaces(string.toLowerCase());
   }
 
-  /*--------------------------------------------------------------------------*/
-
   function focusLastRefCallback(node) {
     focusLast = node;
   }
@@ -60,8 +54,6 @@
   function searchRefCallback(node) {
     searchNode = node;
   }
-
-  /*--------------------------------------------------------------------------*/
 
   function toggleHiddenClass(map, property) {
     return map.get(property) ? '' : 'hidden';
