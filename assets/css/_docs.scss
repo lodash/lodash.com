@@ -182,6 +182,7 @@ html.docs {
 
   .toc-container {
     background-color: $foreground;
+    display: none;
     flex: none;
     height: 100%;
     overflow-y: auto;
@@ -189,14 +190,12 @@ html.docs {
     position: absolute;
     right: 0;
     top: 0;
-    transform: translateX(100%);
-    transition: all 0.5s ease;
     white-space: nowrap;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
 
     &.open {
-      transform: none;
+      display: block;
     }
 
     // Offset top to avoid page jank when the search bar loads.

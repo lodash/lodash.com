@@ -6,12 +6,11 @@
 
     .toc-container {
       box-shadow: 0 0 0.5rem $shadow;
+      display: block;
       flex: 3 3 0;
       height: auto;
       min-width: 300px;
       position: relative;
-      transform: none;
-      transition: none;
     }
   }
 }
