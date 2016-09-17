@@ -23,16 +23,19 @@
 }
 
 @media (max-width: $screen-sm-max) {
-  header {
-    .logo {
-      height: 60px;
-      width: 60px;
-    }
+  .logo {
+    height: 60px;
+    width: 60px;
   }
 
   html.docs {
     .btn-repl {
       display: none;
+    }
+
+    .logo {
+      height: 30px;
+      width: 30px;
     }
   }
 }
