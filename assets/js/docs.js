@@ -3,7 +3,8 @@
 ;(function() {
   'use strict';
 
-  var BitapSearcher = new Fuse().options.searchFn,
+  var searchNode,
+      BitapSearcher = new Fuse().options.searchFn,
       docs = document.querySelector('.doc-container'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
@@ -52,6 +53,9 @@
     state = state === undefined ? !menuEl.classList.contains('open') : state;
     mobileMenu.title = (state ? 'Collapse' : 'Expand') + ' Menu';
     menuEl.classList[state ? 'add' : 'remove']('open');
+    if (state) {
+      searchNode.focus();
+    }
   }
 
   var Menu = React.createClass({
@@ -100,7 +104,7 @@
       if (key == '/' || key == 'U+002F') {
         // Don't actually type a `/` in the input.
         event.preventDefault();
-        this.searchNode.focus();
+        searchNode.focus();
       }
     },
 
@@ -169,7 +173,7 @@
       var _this = this;
 
       var searchRefCallback = function(node) {
-        _this.searchNode = node;
+        searchNode = node;
       };
 
       var elements = this.state.content.map(function(collection, index) {
