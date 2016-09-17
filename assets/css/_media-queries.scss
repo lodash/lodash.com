@@ -24,6 +24,10 @@
 
 @media (max-width: $screen-xs) {
   html.docs {
+    h3 a {
+      display: none;
+    }
+
     .logo {
       padding: 0 0.6rem 0 0;
     }
