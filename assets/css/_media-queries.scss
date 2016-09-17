@@ -22,6 +22,14 @@
   }
 }
 
+@media (max-width: $screen-xs) {
+  html.docs {
+    .logo {
+      padding: 0 0.6rem 0 0;
+    }
+  }
+}
+
 @media (max-width: $screen-sm-max) {
   .logo {
     height: 60px;
@@ -31,11 +39,6 @@
   html.docs {
     .btn-repl {
       display: none;
-    }
-
-    .logo {
-      height: 30px;
-      width: 30px;
     }
   }
 }
