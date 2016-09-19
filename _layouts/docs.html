@@ -1,5 +1,7 @@
 ---
 layout: base
+majors: []
+releases: []
 ---
 
 <header>
@@ -12,11 +14,20 @@ layout: base
         <h1>Lodash
           <select id="version">
             <option value="" {% if page.version == null %}selected{% endif %} disabled>Version</option>
-            {% unless site.releases contains page.version %}
-              <option value="{{ page.version }}" selected>v{{ page.version }}</option>
-            {% endunless %}
+            {% assign majors = layout.majors %}
+            {% assign releases = layout.releases %}
             {% for release in site.releases %}
-              <option value="{{ release }}" {% if page.version == release %}selected{% endif %}>v{{ release }}</option>
+              {% assign major = release | split:'.' | first %}
+              {% unless majors contains major %}
+                {% assign majors = majors | push:major %}
+                {% assign releases = releases | push:release %}
+              {% endunless %}
+            {% endfor %}
+            {% unless releases contains page.version %}
+              {% assign releases = releases | push:page.version | sort | reverse %}
+            {% endunless %}
+            {% for release in releases %}
+            <option value="{{ release }}" {% if page.version == release %}selected{% endif %}>v{{ release }}</option>
             {% endfor %}
             <option value="1.3.1">v1.3.1</option>
           </select>

@@ -5,6 +5,7 @@ release:
 
 releases:
   - *release
+  - 4.15.0
   - 3.10.1
   - 2.4.2
 
