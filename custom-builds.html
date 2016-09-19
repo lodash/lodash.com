@@ -30,10 +30,10 @@ layout: default
 <section>
   <h2>Build Commands:</h2>
   <ul class="chevron">
-    <li>Use the <code>category</code> command to pass comma separated categories of functions to include in the build.<br>Valid categories are <em>“array”</em>, <em>“collection”</em>, <em>“date”</em>, <em>“function”</em>, <em>“lang”</em>, <em>“object”</em>, <em>“number”</em>, <em>“seq”</em>, <em>“string”</em>, &amp; <em>“util”</em>.
+    <li>Use the <code>category</code> command to pass comma separated categories of functions to include in the build. <span class="rwd-line">Valid categories are <em>“array”</em>, <em>“collection”</em>, <em>“date”</em>, <em>“function”</em>, <em>“lang”</em>, <em>“object”</em>, <em>“number”</em>, <em>“seq”</em>, <em>“string”</em>, &amp; <em>“util”</em>.</span>
       <div class="highlight shell"><pre>lodash&#xA0;category=collection,function</pre></div>
     </li>
-    <li>Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function.<br>Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“es”</em>, <em>“global”</em>, <em>“node”</em>, <em>“npm”</em>, <em>“none”</em>, &amp; <em>“umd”</em>.
+    <li>Use the <code>exports</code> command to pass comma separated names of ways to export the <code>lodash</code> function. <span class="rwd-line">Valid exports are <em>“amd”</em>, <em>“commonjs”</em>, <em>“es”</em>, <em>“global”</em>, <em>“node”</em>, <em>“npm”</em>, <em>“none”</em>, &amp; <em>“umd”</em>.</span>
       <div class="highlight shell"><pre>lodash&#xA0;exports=amd,node</pre></div>
     </li>
     <li>Use the <code>iife</code> command to specify code to replace the <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> that wraps Lodash.
@@ -48,13 +48,13 @@ layout: default
     <li>Use the <code>plus</code> command to pass comma separated function/category names to add to the build.
       <div class="highlight shell"><pre>lodash&#xA0;category=array&#xA0;plus=random,template</pre></div>
     </li>
-    <li>Use the <code>template</code> command to pass the file path pattern used to match template files to precompile.<br><strong>Note:</strong> Precompiled templates are assigned to the <code>_.<span class="me1">templates</span></code> object.
+    <li>Use the <code>template</code> command to pass the file path pattern used to match template files to precompile. <span class="rwd-line"><strong>Note:</strong> Precompiled templates are assigned to the <code>_.<span class="me1">templates</span></code> object.</span>
       <div class="highlight shell"><pre>lodash&#xA0;template=&quot;./*.jst&quot;</pre></div>
     </li>
     <li>Use the <code>settings</code> command to pass template settings used when precompiling templates.
       <div class="highlight shell"><pre>lodash&#xA0;settings=&quot;{interpolate:/\{\{([sS]+?)\}\}/g}&quot;</pre></div>
     </li>
-    <li>Use the <code>moduleId</code> command to specify the AMD module ID for Lodash or the module ID used to include Lodash in compiled templates.<br>Use “none” as the module ID to create compiled templates without a dependency on Lodash.
+    <li>Use the <code>moduleId</code> command to specify the AMD module ID for Lodash or the module ID used to include Lodash in compiled templates. <span class="rwd-line">Use “none” as the module ID to create compiled templates without a dependency on Lodash.</span>
       <div class="highlight shell"><pre>lodash&#xA0;moduleId=underscore</pre></div>
     </li>
   </ul>
