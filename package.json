@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "npm run build:jekyll && npm run build:gulp",
-    "build:gulp": "gulp --silent build",
+    "build:gulp": "gulp build",
     "build:jekyll": "cross-env JEKYLL_ENV=production PAGES_GITHUB_HOSTNAME=lodash.com bundle exec jekyll build"
   },
   "devDependencies": {
@@ -22,6 +22,7 @@
     "gulp-htmlmin": "^2.0.0",
     "gulp-imagemin": "^3.0.3",
     "gulp-jsonmin": "^1.1.0",
+    "gulp-muxml": "^0.1.2",
     "gulp-purifycss": "^0.2.0",
     "gulp-responsive": "^2.6.0",
     "gulp-sequence": "^0.4.6",
