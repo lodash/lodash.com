@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
 const globby = require('globby');
 const gulp = require('gulp');
 const pump = require('pump');
