@@ -2,3 +2,9 @@
 ---
 
 /docs /docs/{{ site.release }}
+
+{% for release in site.releases %}
+  {% assign major = release | split:'.' | first %}
+/docs/{{ major }} /docs/{{ release }}
+/docs/{{ major }}.* /docs/{{ release }}
+{% endfor %}
