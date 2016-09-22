@@ -35,8 +35,6 @@ Add static files to prefetch.
 Add html pages to prefetch.
 {% endcomment %}
 {% for page in site.html_pages %}
-  {% assign href = page.url | replace:'.html','' %}
-  {% assign prefetch = prefetch | push:href %}
   {% assign href = '/' | append:page.path %}
   {% assign prefetch = prefetch | push:href %}
 {% endfor %}
@@ -71,7 +69,7 @@ const prefetch = [
  * @param {*} resource The resource to cache bust.
  * @returns {*} Returns the cache busted resource.
  */
-function cacheBust(resource) {
+function bust(resource) {
   const isReq = resource instanceof Request;
   const isStr = typeof resource == 'string';
   const url = new URL(isReq ? resource.url : resource, location.href);
@@ -84,11 +82,32 @@ function cacheBust(resource) {
       url.searchParams.set('v', BUILD_REV);
     }
     if (isReq) {
-      return  new Request(url, resource);
+      return new Request(url, resource);
     }
     return isStr ? url.href : url;
   }
   return resource;
+}
+
+/**
+ * A specialized version of `Cache#put` which caches an additional extensionless
+ * resource for HTML requests.
+ *
+ * @private
+ * @param {Object} cache The cache object
+ * @param {*} resource The resource key.
+ * @param {Object} response The response value.
+ * @returns {Promise} Returns a promise that resolves to `undefined`.
+ */
+function put(cache, resource, response) {
+  const isReq = resource instanceof Request;
+  const url = new URL(isReq ? resource.url : resource, location.href);
+  if (url.pathname.endsWith('.html')) {
+    const extless = new URL(url);
+    extless.pathname = extless.pathname.replace(/(?:index)?\.html$/, '');
+    cache.put(new Request(extless, isReq ? resource : undefined), response.clone());
+  }
+  return cache.put(resource, response);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -98,10 +117,10 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri => {
-        const input = cacheBust(uri);
+        const input = bust(uri);
         // Attempt to prefetch and cache with 'cors'.
         return fetch(input)
-          .then(response => response.ok && cache.put(uri, response))
+          .then(response => response.ok && put(cache, uri, response))
           .catch(() =>
             // Fallback to prefetch and cache with 'no-cors'.
             fetch(input, { 'mode': 'no-cors' })
@@ -109,7 +128,7 @@ addEventListener('install', event =>
                 if (response.status && !response.ok) {
                   throw new TypeError('Response status is !ok');
                 }
-                cache.put(uri, response);
+                put(cache, uri, response);
               })
               // Prefetch failed.
               .catch(error => console.log(`prefetch failed: ${ uri }`, error))
@@ -139,11 +158,11 @@ addEventListener('fetch', event =>
         if (response || !prefetch.includes(event.request.url)) {
           return response || fetch(event.request);
         }
-        const input = cacheBust(event.request);
+        const input = bust(event.request);
         // Retry caching if missed during prefetch.
         return fetch(input).then(response => {
           if (response.ok || !response.status) {
-            cache.put(event.request, response.clone());
+            put(cache, event.request, response.clone());
           }
           return response;
         })
