@@ -8,3 +8,6 @@
 /docs/{{ major }} /docs/{{ release }}
 /docs/{{ major }}.* /docs/{{ release }}
 {% endfor %}
+
+/docs/1 {{ site.links.docs_v1 }}
+/docs/1.* {{ site.links.docs_v1 }}
