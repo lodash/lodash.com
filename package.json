@@ -11,9 +11,9 @@
     "build:jekyll": "cross-env JEKYLL_ENV=production PAGES_GITHUB_HOSTNAME=lodash.com bundle exec jekyll build"
   },
   "devDependencies": {
-    "babel-preset-babili": "0.0.2",
-    "babel-preset-es2015": "^6.14.0",
-    "cross-env": "^2.0.1",
+    "babel-preset-babili": "0.0.4",
+    "babel-preset-es2015": "^6.16.0",
+    "cross-env": "^3.0.0",
     "globby": "^6.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
