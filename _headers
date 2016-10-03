@@ -5,6 +5,7 @@ hints:
     '<https://maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://static.runkit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<wss://runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
     '<https://p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
