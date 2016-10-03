@@ -1,7 +1,7 @@
 repository: lodash/lodash.com
 
 release:
-  &release 4.16.2
+  &release 4.16.3
 
 releases:
   - *release
