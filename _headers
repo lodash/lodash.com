@@ -2,18 +2,17 @@
 hints:
   all: [
     '<https://unpkg.com/>; rel=preconnect; pr=1.0; crossorigin',
-    '<https://maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<https://runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<https://static.runkit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<wss://runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
-    '<https://p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<https://use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
+    '<//maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//static.runkit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
   ]
   docs: []
   home: [
-    '<https://ghbtns.com/>; rel=dns-prefetch; pr=1.0; crossorigin',
-    '<https://platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
+    '<//ghbtns.com/>; rel=dns-prefetch; pr=1.0; crossorigin',
+    '<//platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
 ---
 {% assign all = page.hints.all %}
