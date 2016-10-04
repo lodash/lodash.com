@@ -181,6 +181,8 @@ html.docs {
   }
 
   .toc-container {
+    @include minimal-scrollbar();
+
     background-color: $foreground;
     display: none;
     flex: none;
