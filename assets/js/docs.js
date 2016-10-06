@@ -10,10 +10,16 @@
       focusFirst = document.querySelector('a'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
+      referQuery = (/[?&]q=([^&]+)/.exec(document.referrer) || ['']).pop().toLowerCase(),
+      referSearch = (/\blodash(?:[+.]|%20)(\w+)/.exec(referQuery) || ['']).pop(),
       replBtns = [],
       slice = Array.prototype.slice,
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
+
+  var referValue = _.findKey(referSearch && _.prototype, function(value, key) {
+    return key.toLowerCase() == referSearch;
+  }) || '';
 
   function Searcher(pattern) {
     this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
@@ -45,14 +51,6 @@
 
   function normalize(string) {
     return collapseSpaces(string.toLowerCase());
-  }
-
-  function focusLastRefCallback(node) {
-    focusLast = node;
-  }
-
-  function searchRefCallback(node) {
-    searchNode = node;
   }
 
   function toggleHiddenClass(map, property) {
@@ -181,6 +179,17 @@
       }
     },
 
+    'onRefFuncName': function(node) {
+      focusLast = node;
+    },
+
+    'onRefSearch': function(node) {
+      searchNode = node;
+
+      // Prefill the search field based on the referrer.
+      this.handleSearchChange(referValue);
+    },
+
     'shouldComponentUpdate': function(nextProps, nextState) {
       return (this.state.searchFound || nextState.searchFound) &&
         (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
@@ -191,8 +200,8 @@
       var _this = this;
 
       var elements = this.state.content.map(function(collection, index, content) {
-        var expanded = collection.get('expanded');
-        var isLast = (index + 1) == content.size;
+        var expanded = collection.get('expanded'),
+            isLast = (index + 1) == content.size;
 
         var expanderClick = function(event) {
           if (isClick(event)) {
@@ -239,7 +248,7 @@
                   {
                     'href': entry.get('href'),
                     'onClick': _this.onClickFuncName,
-                    'ref': isLastEntry ? focusLastRefCallback : undefined
+                    'ref': isLastEntry ? _this.onRefFuncName : undefined
                   },
                   React.createElement(
                     'code',
@@ -278,7 +287,7 @@
               'type': 'search',
               'value': this.state.searchValue,
               'onChange': this.onChangeSearch,
-              'ref': searchRefCallback
+              'ref': this.onRefSearch
             }
           )
         ),
