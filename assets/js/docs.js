@@ -236,7 +236,7 @@
               'className': toggleHiddenClass(collection, 'expanded')
             },
             collection.get('functions').map(function(entry, subIndex, entries) {
-              var isLastEntry = isLast && (subIndex + 1) === entries.size;
+              var isLastEntry = isLast && (subIndex + 1) == entries.size;
               return React.createElement(
                 'li',
                 {
