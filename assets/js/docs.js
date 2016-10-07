@@ -10,15 +10,15 @@
       focusFirst = document.querySelector('a'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
-      referQuery = (/[?&]q=([^&]+)/.exec(document.referrer) || ['']).pop().toLowerCase(),
-      referSearch = (/\blodash(?:[+.]|%20)(\w+)/.exec(referQuery) || ['']).pop(),
+      referQuery = (/[?&]q=([^&]+)/.exec(document.referrer) || ['']).pop(),
+      referSearch = normalize((/\blodash(?:[+.]|%20)(\w+)/i.exec(referQuery) || ['']).pop()),
       replBtns = [],
       slice = Array.prototype.slice,
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
 
   var referValue = _.findKey(referSearch && _.prototype, function(value, key) {
-    return key.toLowerCase() == referSearch;
+    return normalize(key) == referSearch;
   }) || '';
 
   function Searcher(pattern) {
