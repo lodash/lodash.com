@@ -10,16 +10,14 @@
       focusFirst = document.querySelector('a'),
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
-      referQuery = (/[?&]q=([^&]+)/.exec(document.referrer) || ['']).pop(),
-      referSearch = normalize((/\blodash(?:[+.]|%20)(\w+)/i.exec(referQuery) || ['']).pop()),
+      reQuery = /[?&]q=([^&]+)/,
+      reReferSearch = /\blodash(?:[+.]|%20)(\w+)/i,
+      referSearchValue = getReferSearchValue(document.referrer),
       replBtns = [],
       slice = Array.prototype.slice,
+      urlSearchValue = getSearchQuery(location.search),
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
-
-  var referValue = _.findKey(referSearch && _.prototype, function(value, key) {
-    return normalize(key) == referSearch;
-  }) || '';
 
   function Searcher(pattern) {
     this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
@@ -35,6 +33,23 @@
 
   function collapseSpaces(string) {
     return string.replace(/\s+/g, '');
+  }
+
+  function getReferSearch(url) {
+    var match = reReferSearch.exec(getSearchQuery(url));
+    return match ? normalize(match[1]) : '';
+  }
+
+  function getReferSearchValue(url) {
+    var pattern = getReferSearch(url);
+    return _.findKey(pattern && _.prototype, function(value, key) {
+      return normalize(key) == pattern;
+    }) || '';
+  }
+
+  function getSearchQuery(url) {
+    var match = reQuery.exec(url);
+    return match ? match[1] : '';
   }
 
   function isClick(event){
@@ -186,8 +201,8 @@
     'onRefSearch': function(node) {
       searchNode = node;
 
-      // Prefill the search field based on the referrer.
-      this.handleSearchChange(referValue);
+      // Prefill the search field based on the query string or referrer.
+      this.handleSearchChange(urlSearchValue || referSearchValue);
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
