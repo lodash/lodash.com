@@ -11,7 +11,7 @@
       menuEl = document.querySelector('.toc-container'),
       mobileMenu = document.querySelector('.mobile-menu a'),
       reQuery = /[?&]q=([^&]+)/,
-      reReferSearch = /\blodash(?:[+.]|%20)(\w+)/i,
+      reReferSearch = /\blodash[. ](\w+)/i,
       referSearchValue = getReferSearchValue(document.referrer),
       replBtns = [],
       slice = Array.prototype.slice,
@@ -35,6 +35,10 @@
     return string.replace(/\s+/g, '');
   }
 
+  function decode(string) {
+    return decodeURIComponent(string).replace(/\+/g, ' ');
+  }
+
   function getReferSearch(url) {
     var match = reReferSearch.exec(getSearchQuery(url));
     return match ? normalize(match[1]) : '';
@@ -49,7 +53,7 @@
 
   function getSearchQuery(url) {
     var match = reQuery.exec(url);
-    return match ? match[1] : '';
+    return match ? decode(match[1]) : '';
   }
 
   function isClick(event){
