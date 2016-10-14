@@ -1,4 +1,7 @@
 ---
+ignored: [
+  'robots.txt'
+]
 prefetch: [
   '/manifest.json',
   '/icons/apple-touch-180x180.png',
@@ -8,7 +11,15 @@ prefetch: [
 'use strict';
 
 {% assign BUILD_REV = site.github.build_revision %}
+{% assign ignored = page.ignored %}
 {% assign prefetch = page.prefetch %}
+
+{% comment %}
+Add conditionally ignored files.
+{% endcomment %}
+{% unless site.github.hostname == 'github.com' %}
+  {% assign ignored = ignored | push:'favicon-16x16.png' %}
+{% endunless %}
 
 {% comment %}
 Add site css to prefetch.
@@ -26,7 +37,8 @@ Add docs script to prefetch.
 Add static files to prefetch.
 {% endcomment %}
 {% for file in site.static_files %}
-  {% unless site.github.hostname != 'github.com' and file.path contains 'favicon-16x16' %}
+  {% assign basename = file.path | split:'/' | last %}
+  {% unless ignored contains basename %}
     {% assign prefetch = prefetch | push:file.path %}
   {% endunless %}
 {% endfor %}
