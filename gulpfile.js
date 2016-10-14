@@ -114,10 +114,10 @@ gulp.task('build-favicon', () =>
 
 gulp.task('build-header', () =>
   exec('node_modules/seespee/bin/seespee --root _site _site/index.html')
-    .then(csp => fs.readFile('_site/_headers')
+    .then(csp => fs.readFile('_site/_headers', 'utf8')
       .then(headers => {
         // Add CSP header.
-        headers += '\n/*\n  ' + csp;
+        // headers += '\n/*\n  ' + csp;
         // Consolidate multiple newlines.
         headers = headers.replace(/^(?:\s*\n){2,}/gm, '\n');
         return fs.writeFile('_site/_headers', headers);
