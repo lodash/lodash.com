@@ -7,7 +7,6 @@ const pump = require('pump');
 const toIco = require('to-ico');
 
 const pify = require('pify');
-const exec = pify(require('child_process').exec);
 const fs = pify(require('fs'));
 
 const babel = require('gulp-babel');
@@ -113,16 +112,16 @@ gulp.task('build-favicon', () =>
 );
 
 gulp.task('build-header', () =>
-  exec('node_modules/seespee/bin/seespee --root _site _site/index.html')
-    .then(csp => fs.readFile('_site/_headers', 'utf8')
-      .then(headers => {
-        // Add CSP header.
-        // headers += '\n/*\n  ' + csp;
+  fs.readFile('_site/_headers', 'utf8')
+    .then(headers => {
+      headers = headers
         // Consolidate multiple newlines.
-        headers = headers.replace(/^(?:\s*\n){2,}/gm, '\n');
-        return fs.writeFile('_site/_headers', headers);
-      })
-    )
+        .replace(/^(?:\s*\n){2,}/gm, '\n')
+        // Consolidate spaces.
+        .replace(/ {2,}/g, ' ');
+
+      return fs.writeFile('_site/_headers', headers);
+    })
 );
 
 gulp.task('build-html', ['minify-html']);
