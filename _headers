@@ -79,3 +79,8 @@ Add link header for doc pages.
 {% endcomment %}
 /docs/*
   Link: {{ docs | join:', ' }}
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
