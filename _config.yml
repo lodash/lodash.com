@@ -9,27 +9,27 @@ releases:
   - 2.4.2
 
 brand_color: "#3492ff"
-description: "A JavaScript utility library delivering consistency, modularity, performance, & extras."
+description: A JavaScript utility library delivering consistency, modularity, performance, & extras.
 incremental: true
 
 css:
   all:
-    - "/assets/css/main.css"
+    - /assets/css/main.css
 
 js:
   all:
-    - "/assets/js/boot.ga.js"
-    - "/assets/js/boot.sw.js"
+    - /assets/js/boot.ga.js
+    - /assets/js/boot.sw.js
 
   docs:
-    - "/assets/js/docs.js"
+    - /assets/js/docs.js
 
   home:
-    - "/assets/js/home.js"
+    - /assets/js/home.js
 
 links:
   docs_v1:
-    "https://github.com/lodash/lodash/blob/1.3.1/doc/README.md"
+    https://github.com/lodash/lodash/blob/1.3.1/doc/README.md
 
 sass:
   sass_dir:
@@ -37,17 +37,17 @@ sass:
 
 vendor:
   css:
-    - "https://unpkg.com/font-awesome@4.6.3/css/font-awesome.min.css"
+    - https://unpkg.com/font-awesome@4.6.3/css/font-awesome.min.css
 
   font:
-    - "https://unpkg.com/font-awesome@4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3"
+    - https://unpkg.com/font-awesome@4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3
 
   js:
-    - "https://embed.runkit.com/"
-    - "https://unpkg.com/fuse.js@2.5.0/src/fuse.min.js"
-    - "https://unpkg.com/immutable@3.8.1/dist/immutable.min.js"
-    - "https://unpkg.com/react@15.3.1/dist/react.min.js"
-    - "https://unpkg.com/react-dom@15.3.1/dist/react-dom.min.js"
+    - https://embed.runkit.com/
+    - https://unpkg.com/fuse.js@2.5.0/src/fuse.min.js
+    - https://unpkg.com/immutable@3.8.1/dist/immutable.min.js
+    - https://unpkg.com/react@15.3.1/dist/react.min.js
+    - https://unpkg.com/react-dom@15.3.1/dist/react-dom.min.js
 
 exclude:
   - node_modules
@@ -55,7 +55,7 @@ exclude:
   - gulpfile.js
   - icons.js
   - LICENSE
-  - "package.json"
+  - package.json
   - "*.log"
   - "*.md"
   - "*.toml"
