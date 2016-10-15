@@ -113,15 +113,16 @@ gulp.task('build-favicon', () =>
 
 gulp.task('build-header', () =>
   fs.readFile('_site/_headers', 'utf8')
-    .then(headers => {
-      headers = headers
-        // Consolidate multiple newlines.
-        .replace(/^(?:\s*\n){2,}/gm, '\n')
-        // Consolidate spaces.
-        .replace(/ {2,}/g, ' ');
-
-      return fs.writeFile('_site/_headers', headers);
-    })
+    .then(headers => fs.writeFile('_site/_headers', headers
+      // Trim leading whitespace.
+      .trimLeft()
+      // Consolidate multiple newlines.
+      .replace(/^(?:\s*\n){2,}/gm, '\n')
+      // Consolidate spaces.
+      .replace(/ {2,}/g, ' ')
+      // Repair header indentation.
+      .replace(/^ *(?=[-\w]+:)/gm, '  ')
+    ))
 );
 
 gulp.task('build-html', ['minify-html']);
