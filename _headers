@@ -93,7 +93,8 @@ Add link header for doc pages.
     font-src https://unpkg.com;
     frame-src 'self' data: https://ghbtns.com https://platform.twitter.com https://runkit.com;
     img-src 'self' data: https://www.google-analytics.com;
-    manifest-src 'self'; style-src 'self' https://unpkg.com;
+    manifest-src 'self';
     connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
-    script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com
+    script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
+    style-src 'self' https://unpkg.com
   " | replace:EOL,' ' }}
