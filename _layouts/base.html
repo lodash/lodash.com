@@ -31,13 +31,13 @@
   {% endif %}
   <link rel="stylesheet" href="/assets/css/main.css?v={{ site.github.build_revision }}">
   {% if jekyll.environment == 'production' %}
-  <script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/sw.js")</script>
+  <script src="/assets/js/boot.sw.js"></script>
   {% endif %}
 </head>
 <body class="layout-{{ page.layout }}">
   {{ content }}
   {% if jekyll.environment == 'production' %}
-  <script>navigator.onLine&&function(e,a){this[GoogleAnalyticsObject=a]={l:Date.now(),q:[["create","UA-6065217-64","auto"],["send","pageview"]]};var t=e.createElement("script");t.src="https://www.google-analytics.com/analytics.js",e.head.appendChild(t)}(document,"_ga")</script>
+  <script src="/assets/js/boot.ga.js"></script>
   {% endif %}
 </body>
 </html>

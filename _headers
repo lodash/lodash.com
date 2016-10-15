@@ -95,5 +95,5 @@ Add link header for doc pages.
     img-src 'self' data: https://www.google-analytics.com;
     manifest-src 'self'; style-src 'self' https://unpkg.com;
     connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
-    script-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com 'unsafe-inline'
+    script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com
   " | replace:EOL,' ' }}
