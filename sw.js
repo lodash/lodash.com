@@ -24,14 +24,22 @@ Add conditionally ignored files.
 {% comment %}
 Add site css to prefetch.
 {% endcomment %}
-{% assign href = '/assets/css/main.css?v=${ BUILD_REV }' %}
-{% assign prefetch = prefetch | push:href %}
+{% for hrefs in site.css %}
+  {% for href in hrefs[1] %}
+    {% assign href = href | append:'?v=' | append:BUILD_REV %}
+    {% assign prefetch = prefetch | push:href %}
+  {% endfor %}
+{% endfor %}
 
 {% comment %}
-Add docs script to prefetch.
+Add site js prefetch.
 {% endcomment %}
-{% assign href = '/assets/js/docs.js?v=${ BUILD_REV }' %}
-{% assign prefetch = prefetch | push:href %}
+{% for hrefs in site.js %}
+  {% for href in hrefs[1] %}
+    {% assign href = href | append:'?v=' | append:BUILD_REV %}
+    {% assign prefetch = prefetch | push:href %}
+  {% endfor %}
+{% endfor %}
 
 {% comment %}
 Add static files to prefetch.
@@ -62,8 +70,8 @@ Add Lodash scripts to prefetch.
 {% comment %}
 Add vendor files to prefetch.
 {% endcomment %}
-{% for vendor in site.vendor %}
-  {% for href in vendor[1] %}
+{% for  hrefs in site.vendor %}
+  {% for href in  hrefs[1] %}
     {% assign prefetch = prefetch | push:href %}
   {% endfor %}
 {% endfor %}

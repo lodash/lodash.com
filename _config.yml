@@ -12,6 +12,21 @@ brand_color: "#3492ff"
 description: "A JavaScript utility library delivering consistency, modularity, performance, & extras."
 incremental: true
 
+css:
+  all:
+    - "/assets/css/main.css"
+
+js:
+  all:
+    - "/assets/js/boot.ga.js"
+    - "/assets/js/boot.sw.js"
+
+  docs:
+    - "/assets/js/docs.js"
+
+  home:
+    - "/assets/js/home.js"
+
 links:
   docs_v1:
     "https://github.com/lodash/lodash/blob/1.3.1/doc/README.md"

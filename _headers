@@ -15,6 +15,7 @@ hints:
     '<//platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
 ---
+{% assign BUILD_REV = site.github.build_revision %}
 {% capture EOL %}
 {% endcapture %}
 
@@ -25,13 +26,29 @@ hints:
 {% comment %}
 Add resource hints for site-wide css.
 {% endcomment %}
+{% for href in site.css.all %}
+  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=style; pr=1.0' %}
+  {% assign all = all | push:hint %}
+{% endfor %}
+
+{% comment %}
+Add resource hints for site-wide js.
+{% endcomment %}
+{% for href in site.js.all %}
+  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=script; pr=1.0' %}
+  {% assign all = all | push:hint %}
+{% endfor %}
+
+{% comment %}
+Add resource hints for site-wide vendor css.
+{% endcomment %}
 {% for href in site.vendor.css %}
   {% assign hint = '<' | append:href | append:'>; rel=preload; as=style; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
 {% comment %}
-Add resource hints for site-wide fonts.
+Add resource hints for site-wide vendor fonts.
 {% endcomment %}
 {% for href in site.vendor.font %}
   {% assign hint = '<' | append:href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
@@ -47,11 +64,24 @@ Add site-wide hints to docs and homepage hints.
 {% endfor %}
 
 {% comment %}
-Add resource hints for docs.
+Add resource hints for home js.
 {% endcomment %}
-{% assign hint = '</assets/js/docs.js?v=' | append:site.github.build_revision | append:'>; rel=preload; as=script; pr=1.0' %}
-{% assign docs = docs | push:hint %}
+{% for href in site.js.home %}
+  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=script; pr=1.0' %}
+  {% assign home = home | push:hint %}
+{% endfor %}
 
+{% comment %}
+Add resource hints for docs js.
+{% endcomment %}
+{% for href in site.js.docs %}
+  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=script; pr=1.0' %}
+  {% assign docs = docs | push:hint %}
+{% endfor %}
+
+{% comment %}
+Add resource hints for docs vendor js.
+{% endcomment %}
 {% for href in site.vendor.js %}
   {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0; crossorigin' %}
   {% assign docs = docs | push:hint %}
