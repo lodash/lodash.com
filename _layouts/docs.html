@@ -26,10 +26,12 @@ layout: base
   </div>
 </header>
 <div class="doc-main">
-  {{ content }}
+  {% capture scripts %}class="doc-container">
+    <script src="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js"></script>
+    {% for href in site.vendor.js %}
+    <script src="{{ href }}"></script>
+    {% endfor %}
+    <script src="/assets/js/docs.js?v={{ site.github.build_revision }}"></script>
+  {% endcapture %}
+  {{ content | replace_first:'class="doc-container">',scripts }}
 </div>
-<script src="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js"></script>
-{% for href in site.vendor.js %}
-<script src="{{ href }}"></script>
-{% endfor %}
-<script src="/assets/js/docs.js?v={{ site.github.build_revision }}"></script>

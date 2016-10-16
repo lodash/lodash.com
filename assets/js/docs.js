@@ -337,44 +337,16 @@
     }
   });
 
-  // Add REPL buttons.
-  if ('innerText' in docs) {
-    _.each(docs.querySelectorAll('.highlight.js'), function(div) {
-      var button = document.createElement('a'),
-          parent = div.parentNode;
+  // Change the documentation URL.
+  versionSelect.addEventListener('change', function(event) {
+    var value = event.target.value;
+    if (value) {
+      location.href = value == '1.3.1'
+        ? '{{ site.links.docs_v1 }}'
+        : '/docs/' + value;
+    }
+  });
 
-      button.classList.add('btn-repl');
-      button.textContent = 'Try in REPL';
-      button.style.display = navigator.onLine ? '' : 'none';
-
-      parent.appendChild(button);
-
-      button.addEventListener('click', function() {
-        var source = div.innerText;
-        parent.removeChild(div);
-        parent.removeChild(button);
-
-        RunKit.createNotebook({
-          'element': parent,
-          'nodeVersion': '*',
-          'preamble': [
-            'var _ = require("lodash@' + versionSelect.value + '");',
-            '_.assign(global, require("lodash-doc-globals"));',
-            'Object.observe = _.noop;'
-          ].join('\n'),
-          'source': source,
-          'onLoad': function(notebook) {
-            var iframe = parent.lastElementChild;
-            iframe.style.cssText = 'height:' + iframe.style.height;
-            iframe.classList.add('repl');
-            notebook.evaluate();
-          }
-        });
-      });
-
-      replBtns.push(button);
-    });
-  }
   // Open the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
     event.preventDefault();
@@ -384,16 +356,6 @@
   // Close the mobile menu.
   docs.addEventListener('click', function() {
     toggleMobileMenu(false);
-  });
-
-  // Change the documentation URL.
-  versionSelect.addEventListener('change', function(event) {
-    var value = event.target.value;
-    if (value) {
-      location.href = value == '1.3.1'
-        ? '{{ site.links.docs_v1 }}'
-        : '/docs/' + value;
-    }
   });
 
   // Toggle REPL buttons for online status.
@@ -407,5 +369,42 @@
     _.each(replBtns, function(button) {
       button.style.display = '';
     });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add REPL buttons.
+    if ('innerText' in docs) {
+      _.each(docs.querySelectorAll('.highlight.js'), function(div) {
+        var button = document.createElement('a'),
+            parent = div.parentNode;
+
+        button.classList.add('btn-repl');
+        button.textContent = 'Try in REPL';
+        button.style.display = navigator.onLine ? '' : 'none';
+        button.addEventListener('click', function() {
+          var source = div.innerText;
+          parent.removeChild(div);
+          parent.removeChild(button);
+          RunKit.createNotebook({
+            'element': parent,
+            'nodeVersion': '*',
+            'preamble': [
+              'var _ = require("lodash@' + versionSelect.value + '");',
+              '_.assign(global, require("lodash-doc-globals"));',
+              'Object.observe = _.noop;'
+            ].join('\n'),
+            'source': source,
+            'onLoad': function(notebook) {
+              var iframe = parent.lastElementChild;
+              iframe.style.cssText = 'height:' + iframe.style.height;
+              iframe.classList.add('repl');
+              notebook.evaluate();
+            }
+          });
+        });
+        replBtns.push(button);
+        parent.appendChild(button);
+      });
+    }
   });
 }());
