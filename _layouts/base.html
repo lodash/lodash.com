@@ -24,7 +24,7 @@
   {% if page.url contains '/docs/' %}
   <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
   {% endif %}
-  {% assign pageURL = page.url | replace:'.html','' %}
+  {% assign pageURL = page.url | remove_first:'.html' %}
   {% assign docsURL = '/docs/' | append:site.release %}
   {% if pageURL != docsURL %}
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">

@@ -93,7 +93,7 @@ Add link headers for non-doc pages.
 {% for page in site.html_pages %}
   {% assign parts = page.url | split:'/' %}
   {% if parts.size == 2 %}
-{{ page.url | replace:'.html','*' }}
+{{ page.url | replace_first:'.html','*' }}
   Link: {{ all | join:', ' }}
   {% endif %}
 {% endfor %}
