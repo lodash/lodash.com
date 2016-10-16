@@ -37,7 +37,7 @@
 <body class="layout-{{ page.layout }}">
   {{ content }}
   {% if jekyll.environment == 'production' %}
-  <script src="/assets/js/boot.ga.js?v={{ site.github.build_revision }}"></script>
+  <script src="/assets/js/boot.ga.js?v={{ site.github.build_revision }}" async></script>
   {% endif %}
 </body>
 </html>
