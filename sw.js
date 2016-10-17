@@ -123,9 +123,17 @@ function put(cache, resource, response) {
   const isReq = resource instanceof Request;
   const url = new URL(isReq ? resource.url : resource, location.href);
   if (url.pathname.endsWith('.html')) {
+    // Add cache entry for the extensionless variant.
     const extless = new URL(url);
     extless.pathname = extless.pathname.replace(/(?:index)?\.html$/, '');
     cache.put(new Request(extless, isReq ? resource : undefined), response.clone());
+
+    // Add cache entry for the docs/ path.
+    if (extless.pathname.endsWith('/docs/{{ site.release }}')) {
+      const docs = new URL(extless);
+      docs.pathname = docs.pathname.replace(/[^\/]+$/, '');
+      cache.put(new Request(docs, isReq ? resource : undefined), response.clone());
+    }
   }
   return cache.put(resource, response);
 }
