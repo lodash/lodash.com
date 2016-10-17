@@ -71,7 +71,7 @@ Add Lodash scripts to prefetch.
 Add vendor files to prefetch.
 {% endcomment %}
 {% for  hrefs in site.vendor %}
-  {% for href in  hrefs[1] %}
+  {% for href in hrefs[1] %}
     {% assign prefetch = prefetch | push:href %}
   {% endfor %}
 {% endfor %}
