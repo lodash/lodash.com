@@ -113,6 +113,11 @@ Add link header for doc pages.
 /docs/*
   Link: {{ docs | join:', ' }}
 
+{% for release in site.releases %}
+/docs/{{ release }}*
+  Link: <https://cdn.jsdelivr.net/lodash/{{ release }}/lodash.min.js>; rel=preload; as=script; pr=1.0 crossorigin
+{% endfor %}
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN

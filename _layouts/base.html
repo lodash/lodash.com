@@ -21,9 +21,6 @@
   <link rel="icon" type="image/png" href="{{ href }}" sizes="16x16">
   <link rel="manifest" href="/manifest.json">
   <link rel="mask-icon" href="/icons/safari-pinned-tab-16x16.svg" color="{{ site.brand_color }}">
-  {% if page.url contains '/docs/' %}
-  <link rel="preload" href="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js" as="script" pr="1.0" crossorigin>
-  {% endif %}
   {% assign pageURL = page.url | remove_first:'.html' %}
   {% assign docsURL = '/docs/' | append:site.release %}
   {% if pageURL != docsURL %}
