@@ -82,6 +82,10 @@ const prefetch = [
   `{{ prefetch | uniq | join:'`,`' }}`
 ];
 
+const redirect = [
+  ['/docs/', '/docs/{{ site.release }}']
+];
+
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
  *
@@ -127,13 +131,6 @@ function put(cache, resource, response) {
     const extless = new URL(url);
     extless.pathname = extless.pathname.replace(/(?:index)?\.html$/, '');
     cache.put(new Request(extless, isReq ? resource : undefined), response.clone());
-
-    // Add cache entry for the docs/ path.
-    if (extless.pathname.endsWith('/docs/{{ site.release }}')) {
-      const docs = new URL(extless);
-      docs.pathname = docs.pathname.replace(/[^\/]+$/, '');
-      cache.put(new Request(docs, isReq ? resource : undefined), Response.redirect(extless, 301));
-    }
   }
   return cache.put(resource, response);
 }
@@ -144,6 +141,7 @@ addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
+      // Cache resources.
       Promise.all(prefetch.map(uri => {
         const input = bust(uri);
         // Attempt to prefetch and cache with 'cors'.
@@ -162,6 +160,8 @@ addEventListener('install', event =>
               .catch(error => console.log(`prefetch failed: ${ uri }`, error))
           );
       }))
+      // Cache redirects.
+      .then(() => Promise.all(redirect.map(pair => put(cache, pair[0], Response.redirect(pair[1], 301)))))
     )
   ]))
 );
