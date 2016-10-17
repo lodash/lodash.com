@@ -16,7 +16,7 @@
       replBtns = [],
       slice = Array.prototype.slice,
       urlSearchValue = getSearchQuery(location.search),
-      version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
+      version = (location.pathname.match(/[\d.]+(?=(?:\.html)?$)/) || ['{{ site.release }}'])[0],
       versionSelect = document.getElementById('version');
 
   function Searcher(pattern) {
