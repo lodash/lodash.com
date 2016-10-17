@@ -3,6 +3,7 @@ ignored: [
   'robots.txt'
 ]
 prefetch: [
+  '/docs/',
   '/manifest.json',
   '/icons/apple-touch-180x180.png',
   '/icons/favicon-32x32.png'
@@ -82,10 +83,6 @@ const prefetch = [
   `{{ prefetch | uniq | join:'`,`' }}`
 ];
 
-const redirect = [
-  ['/docs/', '/docs/{{ site.release }}']
-];
-
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
  *
@@ -141,15 +138,18 @@ addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
-      // Cache resources.
       Promise.all(prefetch.map(uri => {
         const input = bust(uri);
         // Attempt to prefetch and cache with 'cors'.
-        return fetch(input)
-          .then(response => response.ok && put(cache, uri, response))
+        return fetch(input, { 'redirect': 'manual' })
+          .then(response => {
+            if (response.ok || response.type == 'opaqueredirect') {
+              return put(cache, uri, response);
+            }
+          })
           .catch(() =>
             // Fallback to prefetch and cache with 'no-cors'.
-            fetch(input, { 'mode': 'no-cors' })
+            fetch(input, { 'mode': 'no-cors', 'redirect': 'manual' })
               .then(response => {
                 if (response.status && !response.ok) {
                   throw new TypeError('Response status is !ok');
@@ -160,8 +160,6 @@ addEventListener('install', event =>
               .catch(error => console.log(`prefetch failed: ${ uri }`, error))
           );
       }))
-      // Cache redirects.
-      .then(() => Promise.all(redirect.map(pair => put(cache, pair[0], Response.redirect(pair[1])))))
     )
   ]))
 );
