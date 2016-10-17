@@ -132,7 +132,7 @@ function put(cache, resource, response) {
     if (extless.pathname.endsWith('/docs/{{ site.release }}')) {
       const docs = new URL(extless);
       docs.pathname = docs.pathname.replace(/[^\/]+$/, '');
-      cache.put(new Request(docs, isReq ? resource : undefined), response.clone());
+      cache.put(new Request(docs, isReq ? resource : undefined), Response.redirect(extless, 301));
     }
   }
   return cache.put(resource, response);
