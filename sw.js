@@ -161,7 +161,7 @@ addEventListener('install', event =>
           );
       }))
       // Cache redirects.
-      .then(() => Promise.all(redirect.map(pair => put(cache, pair[0], Response.redirect(pair[1], 301)))))
+      .then(() => Promise.all(redirect.map(pair => put(cache, pair[0], Response.redirect(pair[1])))))
     )
   ]))
 );
