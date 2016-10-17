@@ -26,8 +26,8 @@ Add site css to prefetch.
 {% endcomment %}
 {% for hrefs in site.css %}
   {% for href in hrefs[1] %}
-    {% assign href = href | append:'?v=' | append:BUILD_REV %}
-    {% assign prefetch = prefetch | push:href %}
+    {% assign busted = href | append:'?v=' | append:BUILD_REV %}
+    {% assign prefetch = prefetch | push:busted %}
   {% endfor %}
 {% endfor %}
 
@@ -36,8 +36,8 @@ Add site js prefetch.
 {% endcomment %}
 {% for hrefs in site.js %}
   {% for href in hrefs[1] %}
-    {% assign href = href | append:'?v=' | append:BUILD_REV %}
-    {% assign prefetch = prefetch | push:href %}
+    {% assign busted = href | append:'?v=' | append:BUILD_REV %}
+    {% assign prefetch = prefetch | push:busted %}
   {% endfor %}
 {% endfor %}
 
