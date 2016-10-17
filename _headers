@@ -1,6 +1,7 @@
 ---
 hints:
   all: [
+    '</sw.js>; rel=preload; as=script; pr=1.0',
     '<https://unpkg.com/>; rel=preconnect; pr=1.0; crossorigin',
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
     '<//maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
