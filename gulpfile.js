@@ -150,11 +150,26 @@ gulp.task('build-html', ['minify-html']);
 
 gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'));
 
-gulp.task('build-js', ['minify-js', 'minify-sw']);
+gulp.task('build-js', sequence('build-sw', ['minify-js', 'minify-sw']));
 
 gulp.task('build-metadata', ['minify-json', 'minify-xml']);
 
 gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
+
+gulp.task('build-sw', () =>
+  Promise.all([
+    fs.readFile('_site/_redirects', 'utf8'),
+    fs.readFile('_site/sw.js', 'utf8')
+  ])
+  .then(({ 0:_redirects, 1:sw }) => {
+    const entries = [];
+    _redirects.replace(/^ *(\S+) +(\S+)(?: +(\S+))?/gm, (match, from, to, status) => {
+      from = _.escapeRegExp(from).replace(/\\\*/g, '*').replace(/\//g, '\\/');
+      entries.push(`[/${ from }/,'${ to }',${ status }]`);
+    });
+    return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
+  })
+);
 
 /*----------------------------------------------------------------------------*/
 
@@ -218,11 +233,11 @@ gulp.task('minify-xml', () =>
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build', [
-  'build-css',
   'build-headers',
+  'build-redirects',
+  'build-metadata',
+  'build-css',
   'build-html',
   'build-images',
-  'build-js',
-  'build-metadata',
-  'build-redirects'
+  'build-js'
 ]);
