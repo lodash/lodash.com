@@ -82,10 +82,10 @@ Add vendor files to prefetch.
 const BUILD_REV = '{{ BUILD_REV }}';
 
 const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`]
-  .map(href => new URL(href, location.href));
+  .map(href => new URL(href, location));
 
 const redirect = [/*insert_redirect*/]
-  .map(entry => (entry[1] = new URL(entry[1], location.href), entry));
+  .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
@@ -97,7 +97,7 @@ const redirect = [/*insert_redirect*/]
 function bust(resource) {
   const isReq = resource instanceof Request;
   const isStr = typeof resource == 'string';
-  const url = new URL(isReq ? resource.url : resource, location.href);
+  const url = new URL(isReq ? resource.url : resource, location);
 
   // Use cache-bust query until cache modes are supported in Chrome.
   // Only add to same-origin requests to avoid potential 403 responses.
@@ -126,7 +126,7 @@ function bust(resource) {
  */
 function put(cache, resource, response) {
   const isReq = resource instanceof Request;
-  const url = new URL(isReq ? resource.url : resource, location.href);
+  const url = new URL(isReq ? resource.url : resource, location);
   if (url.pathname.endsWith('.html')) {
     // Add cache entry for the extensionless variant.
     const extless = new URL(url);
