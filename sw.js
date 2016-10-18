@@ -178,7 +178,7 @@ addEventListener('activate', event =>
 
 addEventListener('fetch', event => {
   const { request } = event;
-  const { url } = request;
+  const url = new URL(request.url);
   event.respondWith(
     caches.open(BUILD_REV).then(cache =>
       cache.match(request).then(response => {
@@ -187,15 +187,18 @@ addEventListener('fetch', event => {
           return response;
         }
         // Detect URL redirects.
-        for (let { 0:pattern, 1:to, 2:status } of redirect) {
-          if (url != to && pattern.test(url)) {
-            response = Response.redirect(to, status);
-            put(cache, url, response.clone());
-            return response;
+        if (url.origin == location.origin) {
+          for (let { 0:pattern, 1:to, 2:status } of redirect) {
+            to = new URL(to, location.href);
+            if (url.href != to.href && pattern.test(url)) {
+              response = Response.redirect(to, status);
+              put(cache, url, response.clone());
+              return response;
+            }
           }
         }
         // Fetch requests that weren't prefetched.
-        if (!prefetch.includes(url)) {
+        if (!prefetch.includes(url.href)) {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
