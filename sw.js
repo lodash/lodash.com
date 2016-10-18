@@ -96,8 +96,7 @@ const redirect = [/*insert_redirect*/]
  */
 function bust(resource) {
   const isReq = resource instanceof Request;
-  const isStr = typeof resource == 'string';
-  const url = new URL(isReq ? resource.url : resource, location);
+  const url = new URL(isReq ? resource.url : resource);
 
   // Use cache-bust query until cache modes are supported in Chrome.
   // Only add to same-origin requests to avoid potential 403 responses.
@@ -106,10 +105,7 @@ function bust(resource) {
     if (!url.searchParams.has('v')) {
       url.searchParams.set('v', BUILD_REV);
     }
-    if (isReq) {
-      return new Request(url, resource);
-    }
-    return isStr ? url.href : url;
+    return isReq ? new Request(url, resource) : url;
   }
   return resource;
 }
