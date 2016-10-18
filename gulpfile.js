@@ -92,6 +92,39 @@ const plugins = {
   }
 };
 
+/**
+ * Cleanup whitespace of file at `filePath`.
+ *
+ * @private
+ * @param {string} filePath The path of the file to clean.
+ * @returns {Promise} Returns the cleanup promise.
+ */
+function cleanFile(filePath) {
+  return fs.readFile(filePath, 'utf8')
+    .then(source => fs.writeFile(filePath, cleanSource(source)));
+}
+
+/**
+ * Cleanup whitespace of `source`.
+ *
+ * @private
+ * @param {string} source The source to clean.
+ * @returns {string} Returns the cleaned source.
+ */
+function cleanSource(source) {
+  return source
+    // Trim whitespace.
+    .trim()
+    // Consolidate multiple newlines.
+    .replace(/^(?:\s*\n){2,}/gm, '\n')
+    // Consolidate spaces.
+    .replace(/ {2,}/g, ' ')
+    // Repair indentation.
+    .replace(/^ (?=[-\w]+:)/gm, '  ') +
+    // Add trailing newline.
+    '\n';
+}
+
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build-app-icons', () =>
@@ -111,19 +144,7 @@ gulp.task('build-favicon', () =>
     .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
 );
 
-gulp.task('build-header', () =>
-  fs.readFile('_site/_headers', 'utf8')
-    .then(headers => fs.writeFile('_site/_headers', headers
-      // Trim leading whitespace.
-      .trimLeft()
-      // Consolidate multiple newlines.
-      .replace(/^(?:\s*\n){2,}/gm, '\n')
-      // Consolidate spaces.
-      .replace(/ {2,}/g, ' ')
-      // Repair header indentation.
-      .replace(/^ *(?=[-\w]+:)/gm, '  ')
-    ))
-);
+gulp.task('build-headers', () => cleanFile('_site/_headers'));
 
 gulp.task('build-html', ['minify-html']);
 
@@ -131,7 +152,9 @@ gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-i
 
 gulp.task('build-js', ['minify-js', 'minify-sw']);
 
-gulp.task('build-metadata', ['minify-json', 'minify-xml'])
+gulp.task('build-metadata', ['minify-json', 'minify-xml']);
+
+gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
 
 /*----------------------------------------------------------------------------*/
 
@@ -196,9 +219,10 @@ gulp.task('minify-xml', () =>
 
 gulp.task('build', [
   'build-css',
-  'build-header',
+  'build-headers',
   'build-html',
   'build-images',
   'build-js',
-  'build-metadata'
+  'build-metadata',
+  'build-redirects'
 ]);
