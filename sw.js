@@ -179,11 +179,6 @@ addEventListener('activate', event =>
 addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
-  const onError = error => {
-    // Respond with a 400 "Bad Request" status.
-    console.log(`fetch failed: ${ url }`, error);
-    return new Response(new Blob, { 'status': 400, 'statusText': 'Bad Request' });
-  };
   event.respondWith(
     caches.open(BUILD_REV).then(cache =>
       cache.match(request).then(response => {
@@ -203,7 +198,7 @@ addEventListener('fetch', event => {
         }
         // Fetch requests that weren't prefetched.
         if (!prefetch.find(({ href }) => href == url.href)) {
-          return fetch(request).catch(onError);
+          return fetch(request);
         }
         // Retry requests that failed during prefetch.
         return fetch(bust(request)).then(response => {
@@ -211,8 +206,12 @@ addEventListener('fetch', event => {
             put(cache, request, response.clone());
           }
           return response;
-        })
-        .catch(onError)
+        });
+      })
+      .catch(error => {
+        // Respond with a 400 "Bad Request" status.
+        console.log(`fetch failed: ${ url }`, error);
+        return new Response(new Blob, { 'status': 400, 'statusText': 'Bad Request' });
       })
     )
   )
