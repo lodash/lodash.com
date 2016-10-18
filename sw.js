@@ -37,7 +37,9 @@ Add site js prefetch.
 {% endcomment %}
 {% for hrefs in site.js %}
   {% for href in hrefs[1] %}
+    {% assign basename = href | split:'/' | last %}
     {% assign busted = href | append:'?v=' | append:BUILD_REV %}
+    {% assign ignored = ignored | push:basename %}
     {% assign prefetch = prefetch | push:busted %}
   {% endfor %}
 {% endfor %}
