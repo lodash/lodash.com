@@ -81,7 +81,8 @@ Add vendor files to prefetch.
 
 const BUILD_REV = '{{ BUILD_REV }}';
 const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`];
-const redirect = [/*insert_redirect*/];
+const redirect = [/*insert_redirect*/]
+  .map(entry => (entry[1] = new URL(entry[1], location.href), entry));
 
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
@@ -189,7 +190,6 @@ addEventListener('fetch', event => {
         // Detect URL redirects.
         if (url.origin == location.origin) {
           for (let { 0:pattern, 1:to, 2:status } of redirect) {
-            to = new URL(to, location.href);
             if (url.href != to.href && pattern.test(url)) {
               response = Response.redirect(to, status);
               put(cache, url, response.clone());
