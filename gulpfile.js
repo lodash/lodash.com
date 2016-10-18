@@ -164,7 +164,7 @@ gulp.task('build-sw', () =>
   .then(({ 0:_redirects, 1:sw }) => {
     const entries = [];
     _redirects.replace(/^ *(\S+) +(\S+)(?: +(\S+))?/gm, (match, from, to, status) => {
-      from = _.escapeRegExp(from).replace(/\\\*/g, '*').replace(/\//g, '\\/');
+      from = _.escapeRegExp(from).replace(/\\\*/g, '*').replace(/\//g, '\\/').replace(/\/$/, '/?');
       entries.push(`[/${ from }/,'${ to }',${ status }]`);
     });
     return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
