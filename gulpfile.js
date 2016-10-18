@@ -233,6 +233,6 @@ gulp.task('minify-xml', () =>
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build', sequence(
-  ['build-headers', 'build-redirects', 'build-metadata'],
+  ['build-headers', 'build-metadata', 'build-redirects'],
   ['build-css', 'build-html', 'build-images', 'build-js']
 ));
