@@ -12,6 +12,7 @@ prefetch: [
 'use strict';
 
 {% assign BUILD_REV = site.github.build_revision %}
+
 {% assign ignored = page.ignored %}
 {% assign prefetch = page.prefetch %}
 
@@ -78,10 +79,8 @@ Add vendor files to prefetch.
 {% endfor %}
 
 const BUILD_REV = '{{ BUILD_REV }}';
-
-const prefetch = [
-  `{{ prefetch | uniq | join:'`,`' }}`
-];
+const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`];
+const redirect = [/*insert_redirect*/];
 
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
@@ -176,17 +175,29 @@ addEventListener('activate', event =>
   ]))
 );
 
-addEventListener('fetch', event =>
+addEventListener('fetch', event => {
+  const { url } = event.request;
   event.respondWith(
     caches.open(BUILD_REV).then(cache =>
-      // Respond with cached request if available.
       cache.match(event.request).then(response => {
-        if (response || !prefetch.includes(event.request.url)) {
-          return response || fetch(event.request);
+        // Return the cached response if available.
+        if (response) {
+          return response;
         }
-        const input = bust(event.request);
-        // Retry caching if missed during prefetch.
-        return fetch(input).then(response => {
+        // Detect URL redirects.
+        for (let { 0:pattern, 1:to, 2:status } of redirect) {
+          if (pattern.test(url)) {
+            response = Response.redirect(to, status);
+            put(cache, url, response.clone());
+            return response;
+          }
+        }
+        // Fetch requests that weren't prefetched.
+        if (!prefetch.includes(url)) {
+          return fetch(event.request);
+        }
+        // Retry requests that failed during prefetch.
+        return fetch(bust(event.request)).then(response => {
           if (response.ok || !response.status) {
             put(cache, event.request, response.clone());
           }
@@ -194,10 +205,10 @@ addEventListener('fetch', event =>
         })
         .catch(error => {
           // Respond with a 400 "Bad Request" status.
-          console.log(`fetch failed: ${ event.request.url }`, error);
+          console.log(`fetch failed: ${ url }`, error);
           return new Response(new Blob, { 'status': 400, 'statusText': 'Bad Request' });
         })
       })
     )
   )
-);
+});
