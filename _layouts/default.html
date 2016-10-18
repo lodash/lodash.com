@@ -14,7 +14,11 @@ layout: base
       </div>
     </div>
     <div class="header-section">
-      <a href="/docs/" class="btn primary">Documentation</a>
+      {% assign href = '/docs/' %}
+      {% unless jekyll.environment == 'production' and site.github.hostname != 'github.com' %}
+        {% assign href = href | append:site.release %}
+      {% endunless %}
+      <a href="{{ href }}" class="btn primary">Documentation</a>
       <a href="https://github.com/lodash/lodash/wiki/FP-Guide" class="btn">FP Guide</a>
     </div>
   </div>
