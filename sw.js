@@ -175,10 +175,11 @@ addEventListener('activate', event =>
 );
 
 addEventListener('fetch', event => {
-  const { url } = event.request;
+  const { request } = event;
+  const { url } = request;
   event.respondWith(
     caches.open(BUILD_REV).then(cache =>
-      cache.match(event.request).then(response => {
+      cache.match(request).then(response => {
         // Return the cached response if available.
         if (response) {
           return response;
@@ -193,12 +194,12 @@ addEventListener('fetch', event => {
         }
         // Fetch requests that weren't prefetched.
         if (!prefetch.includes(url)) {
-          return fetch(event.request);
+          return fetch(request);
         }
         // Retry requests that failed during prefetch.
-        return fetch(bust(event.request)).then(response => {
+        return fetch(bust(request)).then(response => {
           if (response.ok || !response.status) {
-            put(cache, event.request, response.clone());
+            put(cache, request, response.clone());
           }
           return response;
         })
