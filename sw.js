@@ -186,7 +186,7 @@ addEventListener('fetch', event => {
         }
         // Detect URL redirects.
         for (let { 0:pattern, 1:to, 2:status } of redirect) {
-          if (pattern.test(url)) {
+          if (url != to && pattern.test(url)) {
             response = Response.redirect(to, status);
             put(cache, url, response.clone());
             return response;
