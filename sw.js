@@ -80,7 +80,10 @@ Add vendor files to prefetch.
 {% endfor %}
 
 const BUILD_REV = '{{ BUILD_REV }}';
-const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`];
+
+const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`]
+  .map(href => new URL(href, location.href));
+
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location.href), entry));
 
@@ -198,7 +201,7 @@ addEventListener('fetch', event => {
           }
         }
         // Fetch requests that weren't prefetched.
-        if (!prefetch.includes(url.href)) {
+        if (!prefetch.find(({ href }) => href == url.href)) {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
