@@ -9,4 +9,4 @@
 /docs/1 {{ site.links.docs_v1 }} 301
 /docs/ /docs/{{ site.release }} 302
 
-/license https://raw.githubusercontent.com/lodash/lodash/{{ site.release }}/LICENSE 301
+/license {{ site.links.raw }}/{{ site.release }}/LICENSE 301

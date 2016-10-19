@@ -28,8 +28,17 @@ js:
     - /assets/js/home.js
 
 links:
+  build_differences:
+    https://github.com/lodash/lodash/wiki/Build-Differences
+
   docs_v1:
     https://github.com/lodash/lodash/blob/1.3.1/doc/README.md
+
+  raw:
+    https://raw.githubusercontent.com/lodash/lodash
+
+  repo:
+    https://github.com/lodash/lodash
 
 sass:
   sass_dir:
