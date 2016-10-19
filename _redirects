@@ -6,5 +6,7 @@
 /docs/{{ major }} /docs/{{ release }} 302
 {% endfor %}
 
-/docs/1 {{ site.links.docs_v1 }} 302
+/docs/1 {{ site.links.docs_v1 }} 301
 /docs/ /docs/{{ site.release }} 302
+
+/license https://raw.githubusercontent.com/lodash/lodash/{{ site.release }}/LICENSE 301
