@@ -130,7 +130,8 @@ Add link header for doc pages.
     frame-src 'self' data: https://ghbtns.com https://platform.twitter.com https://runkit.com;
     img-src 'self' data: https://www.google-analytics.com;
     manifest-src 'self';
-    connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
+    connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com https://lodash.report-uri.io;
     script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
-    style-src 'self' https://unpkg.com
+    style-src 'self' https://unpkg.com;
+    report-uri https://lodash.report-uri.io/r/default/csp/enforce
   " | replace:EOL,' ' }}
