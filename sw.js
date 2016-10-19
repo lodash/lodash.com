@@ -87,6 +87,8 @@ const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`]
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
+const reSplat = /:splat\b/;
+
 /**
  * Appends a cache-bust query to same-origin URIs and requests.
  *
@@ -190,6 +192,10 @@ addEventListener('fetch', event => {
         if (url.origin == location.origin) {
           for (let { 0:pattern, 1:to, 2:status } of redirect) {
             if (url.href != to.href && pattern.test(url.pathname)) {
+              // Replace :splat references in `to`.
+              if (reSplat.test(to)) {
+                to = to.replace(reSplat, pattern.exec(url)[1] || '');
+              }
               response = Response.redirect(to, status);
               put(cache, url, response.clone());
               return response;

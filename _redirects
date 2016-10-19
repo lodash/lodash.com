@@ -3,8 +3,10 @@
 
 {% for release in site.releases %}
   {% assign major = release | split:'.' | first %}
+/docs/{{ major }}?* /docs/{{ release }}?:splat 302
 /docs/{{ major }} /docs/{{ release }} 302
 {% endfor %}
 
 /docs/1 {{ site.links.docs_v1 }} 302
+/docs/?* /docs/{{ site.release }}?:splat 302
 /docs/ /docs/{{ site.release }} 302
