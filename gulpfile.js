@@ -169,10 +169,10 @@ gulp.task('build-sw', () =>
         .replace(/\\\*/g, '(.*)')
         // Make trailing slashes optional.
         .replace(/\/$/, '(?:/.|/?$)')
-        // Escape forward slashes in the regexp literal.
+        // Escape forward slashes.
         .replace(/\//g, '\\/');
 
-      entries.push(`[/${ from }/,'${ to }',${ status }]`);
+      entries.push(`[/^${ from }/,'${ to }',${ status }]`);
     });
     return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
   })
