@@ -99,11 +99,13 @@ const reSplat = /:splat\b/;
  */
 function bust(resource) {
   const isReq = resource instanceof Request;
-  const url = new URL(isReq ? resource.url : resource);
-
+  if (isReq && resource.mode == 'navigate') {
+    return resource;
+  }
   // Use cache-bust query until cache modes are supported in Chrome.
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
+  const url = new URL(isReq ? resource.url : resource);
   if (url.origin == location.origin) {
     if (!url.searchParams.has('v')) {
       url.searchParams.set('v', BUILD_REV);
