@@ -167,10 +167,10 @@ gulp.task('build-sw', () =>
       from = _.escapeRegExp(from)
         // Replace escaped asterisks with greedy dot capture groups.
         .replace(/\\\*/g, '(.*)')
-        // Escape forward slashes in the regexp literal.
-        .replace(/\//g, '\\/')
         // Make trailing slashes optional.
-        .replace(/\/$/, '/?');
+        .replace(/\/$/, '(?:/.|/?$)')
+        // Escape forward slashes in the regexp literal.
+        .replace(/\//g, '\\/');
 
       entries.push(`[/${ from }/,'${ to }',${ status }]`);
     });
