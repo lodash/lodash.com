@@ -9,13 +9,13 @@ layout: base
         <a href="/" title="Lodash">Lodash</a>
       </div>
       <div class="header-group">
-        <h1>Lodash
+        <h1>
           <select id="version">
             <option value="" {% if page.version == null %}selected{% endif %} disabled>Version</option>
             {% for release in site.releases %}
-            <option value="{{ release }}" {% if page.version == release %}selected{% endif %}>v{{ release }}</option>
+            <option value="{{ release }}" {% if page.version == release %}selected{% endif %}>{{ release }}</option>
             {% endfor %}
-            <option value="1.3.1">v1.3.1</option>
+            <option value="1.3.1">1.3.1</option>
           </select>
         </h1>
       </div>
