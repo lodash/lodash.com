@@ -163,8 +163,15 @@ gulp.task('build-sw', () =>
   ])
   .then(({ 0:_redirects, 1:sw }) => {
     const entries = [];
-    _redirects.replace(/^ *(\S+) +(\S+)(?: +(\S+))?/gm, (match, from, to, status) => {
-      from = _.escapeRegExp(from).replace(/\\\*/g, '*').replace(/\//g, '\\/').replace(/\/$/, '/?');
+    _redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) => {
+      from = _.escapeRegExp(from)
+        // Replace escaped asterisks with greedy dot capture groups.
+        .replace(/\\\*/g, '(.*)')
+        // Escape forward slashes in the regexp literal.
+        .replace(/\//g, '\\/')
+        // Make trailing slashes optional.
+        .replace(/\/$/, '/?');
+
       entries.push(`[/${ from }/,'${ to }',${ status }]`);
     });
     return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
