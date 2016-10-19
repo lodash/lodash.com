@@ -189,7 +189,7 @@ addEventListener('fetch', event => {
         // Detect URL redirects.
         if (url.origin == location.origin) {
           for (let { 0:pattern, 1:to, 2:status } of redirect) {
-            if (url.href != to.href && pattern.test(url)) {
+            if (url.href != to.href && pattern.test(url.pathname)) {
               response = Response.redirect(to, status);
               put(cache, url, response.clone());
               return response;
