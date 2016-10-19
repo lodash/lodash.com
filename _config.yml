@@ -20,7 +20,6 @@ js:
   all:
     - /assets/js/boot.ga.js
     - /assets/js/boot.sw.js
-    - /sw.js
 
   docs:
     - /assets/js/docs.js

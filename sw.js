@@ -3,6 +3,7 @@ ignored: [
   'robots.txt'
 ]
 prefetch: [
+  '/sw.js',
   '/manifest.json',
   '/icons/apple-touch-180x180.png',
   '/icons/favicon-32x32.png'
@@ -191,19 +192,26 @@ addEventListener('fetch', event => {
         // Detect URL redirects.
         if (url.origin == location.origin) {
           for (let { 0:pattern, 1:to, 2:status } of redirect) {
-            if (url.href != to.href && pattern.test(url.pathname)) {
-              // Replace :splat references in `to`.
-              if (reSplat.test(to)) {
-                to = to.replace(reSplat, pattern.exec(url)[1] || '');
+            const match = pattern.exec(url.pathname);
+            const search = to.search || url.search;
+            const splat = match ? match[1] : undefined;
+            if (splat !== undefined) {
+              to = new URL(to.pathname.replace(reSplat, splat) + search, location);
+            } else if (!to.search && search) {
+              to = new URL(to.pathname + search, location);
+            }
+            if (match) {
+              if (url.href != to.href) {
+                response = Response.redirect(to, status);
+                put(cache, url, response.clone());
+                return response;
               }
-              response = Response.redirect(to, status);
-              put(cache, url, response.clone());
-              return response;
+              break;
             }
           }
         }
         // Fetch requests that weren't prefetched.
-        if (!prefetch.find(({ href }) => href == url.href)) {
+        else if (!prefetch.find(({ href }) => href == url.href)) {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
