@@ -152,18 +152,7 @@ addEventListener('install', event =>
               return put(cache, uri, response);
             }
           })
-          .catch(() =>
-            // Fallback to prefetch and cache with 'no-cors'.
-            fetch(input, { 'mode': 'no-cors', 'redirect': 'manual' })
-              .then(response => {
-                if (response.status && !response.ok) {
-                  throw new TypeError('Response status is !ok');
-                }
-                put(cache, uri, response);
-              })
-              // Prefetch failed.
-              .catch(error => console.log(`prefetch failed: ${ uri }`, error))
-          );
+          .catch(error => console.log(`prefetch failed: ${ uri }`, error))
       }))
     )
   ]))
