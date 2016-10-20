@@ -120,6 +120,7 @@ Add link header for doc pages.
 {% endfor %}
 
 /*
+  Access-Control-Allow-Origin: https://lodash.com
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
