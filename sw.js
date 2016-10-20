@@ -127,7 +127,7 @@ function bust(resource) {
  */
 function put(cache, resource, response) {
   const isReq = resource instanceof Request;
-  const url = new URL(isReq ? resource.url : resource, location);
+  const url = new URL(isReq ? resource.url : resource);
   // Add cache entry for the extensionless variant.
   if (url.pathname.endsWith('.html')) {
     const extless = new URL(url);
