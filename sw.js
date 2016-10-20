@@ -143,17 +143,12 @@ addEventListener('install', event =>
   event.waitUntil(Promise.all([
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
-      Promise.all(prefetch.map(uri => {
-        const input = bust(uri);
-        // Attempt to prefetch and cache with 'cors'.
-        return fetch(input, { 'redirect': 'manual' })
-          .then(response => {
-            if (response.ok || response.type == 'opaqueredirect') {
-              return put(cache, uri, response);
-            }
-          })
+      Promise.all(prefetch.map(uri =>
+        // Attempt to prefetch and cache.
+        fetch(bust(uri))
+          .then(response => response.ok && put(cache, uri, response))
           .catch(error => console.log(`prefetch failed: ${ uri }`, error))
-      }))
+      ))
     )
   ]))
 );
