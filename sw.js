@@ -106,13 +106,13 @@ function bust(resource) {
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
   const url = new URL(isReq ? resource.url : resource);
-  if (url.origin == location.origin) {
-    if (!url.searchParams.has('v')) {
-      url.searchParams.set('v', BUILD_REV);
-    }
-    return isReq ? new Request(url, resource) : url;
+  if (url.origin != location.origin) {
+    return resource;
   }
-  return resource;
+  if (!url.searchParams.has('v')) {
+    url.searchParams.set('v', BUILD_REV);
+  }
+  return isReq ? new Request(url, resource) : url;
 }
 
 /**
