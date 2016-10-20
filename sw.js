@@ -131,7 +131,7 @@ function put(cache, resource, response) {
   // Add cache entry for the extensionless variant.
   if (url.pathname.endsWith('.html')) {
     const extless = new URL(url);
-    extless.pathname = extless.pathname.replace(/(?:index)?\.html$/, '');
+    extless.pathname = extless.pathname.replace(/(?:(^|\/)index)?\.html$/, '$1');
     cache.put(new Request(extless, isReq ? resource : undefined), response.clone());
   }
   return cache.put(resource, response);
