@@ -202,7 +202,7 @@ addEventListener('fetch', event => {
         }
         // Retry requests that failed during prefetch.
         return fetch(bust(request)).then(response => {
-          if (response.ok || !response.status) {
+          if (response.ok) {
             put(cache, request, response.clone());
           }
           return response;
