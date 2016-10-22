@@ -134,6 +134,8 @@ Add link header for doc pages.
     connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com https://lodash.report-uri.io;
     script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
     style-src 'self' https://unpkg.com;
+    referrer strict-origin-when-cross-origin;
+    block-all-mixed-content;
     report-uri https://lodash.report-uri.io/r/default/csp/enforce
   " | replace:EOL,' ' }}
   Public-Key-Pins-Report-Only: {{ '
