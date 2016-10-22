@@ -15,7 +15,7 @@ addEventListener('load', function() {
     FRM_OPEN + GHB_CLS + GHB_SRC + 'star' + FRM_CLOSE +
     FRM_OPEN + GHB_CLS + GHB_SRC + 'fork' + FRM_CLOSE +
     FRM_OPEN + TWT_CLS + TWT_FLW + ' ' + TWT_SRC + TWT_FLW + TWT_QRY + 'false&amp;screen_name=bestiejs' + FRM_CLOSE +
-    FRM_OPEN + TWT_CLS + 'share ' + TWT_SRC + 'tweet' + TWT_QRY + 'true&amp;url=https://lodash.com/&amp;text=' + DSC + FRM_CLOSE;
+    FRM_OPEN + TWT_CLS + 'share '      + TWT_SRC + 'tweet' + TWT_QRY + 'true&amp;url=https://lodash.com/&amp;text=' + DSC + FRM_CLOSE;
 
   var container = document.getElementById('social');
   if (navigator.onLine) {
