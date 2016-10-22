@@ -138,7 +138,7 @@ Add link header for doc pages.
     block-all-mixed-content;
     report-uri https://lodash.report-uri.io/r/default/csp/enforce
   " | replace:EOL,' ' }}
-  Public-Key-Pins-Report-Only: {{ '
+  Public-Key-Pins: {{ '
     pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=";
     pin-sha256="sRHdihwgkaib1P1gxX8HFszlD+7/gTfNvuAybgLPNis=";
     pin-sha256="Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys=";
@@ -147,5 +147,5 @@ Add link header for doc pages.
     pin-sha256="5C8kvU039KouVrl52D0eZSGf4Onjo4Khs8tmyTlV3nU=";
     max-age=5184000;
     includeSubdomains;
-    report-uri="https://lodash.report-uri.io/r/default/hpkp/reportOnly"
+    report-uri="https://lodash.report-uri.io/r/default/hpkp/enforce"
   ' | replace:EOL,' ' }}
