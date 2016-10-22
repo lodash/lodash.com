@@ -27,14 +27,14 @@
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
   <link rel="stylesheet" href="/assets/css/main.css?v={{ site.github.build_revision }}">
-  {% if jekyll.environment == 'production' %}
-  <script src="/assets/js/boot.sw.js?v={{ site.github.build_revision }}" async></script>
-  {% endif %}
+  <noscript>
+  {% for href in site.vendor.css %}
+    <link rel="stylesheet" href="{{ href }}">
+  {% endfor %}
+  </noscript>
+  <script src="/assets/js/boot.js?v={{ site.github.build_revision }}" async></script>
 </head>
 <body class="layout-{{ page.layout }}">
   {{ content }}
-  {% if jekyll.environment == 'production' %}
-  <script src="/assets/js/boot.ga.js?v={{ site.github.build_revision }}" async></script>
-  {% endif %}
 </body>
 </html>
