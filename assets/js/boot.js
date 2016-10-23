@@ -14,7 +14,7 @@ resources: []
   [{{ resources | join:',' }}]
     .forEach(function(res) {
       var link = document.createElement('link');
-      link.crossorigin = 'anonymous';
+      link.crossOrigin = 'anonymous';
       link.href = res.href;
       link.integrity = res.sri;
       link.rel = 'stylesheet';
