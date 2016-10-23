@@ -6,7 +6,7 @@ hints:
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
     '<//maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<//static.runkit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//static.tonicdev.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
   ]
