@@ -3,7 +3,7 @@
 addEventListener('load', function() {
   'use strict';
 
-  var DSC = encodeURI('Check out lodash – {{ site.description | replace:"&":"%26" | remove_first:"." }}').replace('%25', '%'),
+  var DSC = encodeURI('Check out lodash – {{ site.description | replace:"&","%26" | remove_first:"." }}').replace('%25', '%'),
       FRM_OPEN = '<iframe frameborder=0 scrolling=0 allowtransparency ',
       FRM_CLOSE = '></iframe>',
       GHB_CLS = 'class=btn-gh ',
