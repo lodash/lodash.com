@@ -23,7 +23,7 @@ hrefs: []
     navigator.serviceWorker.register('/sw.js');
   }
   if (navigator.onLine) {
-    root[GoogleAnalyticsObject = '_ga'] = {
+    root[root.GoogleAnalyticsObject = '_ga'] = {
       'l': Date.now(),
       'q': [
         ['create', 'UA-6065217-64', 'auto'],
