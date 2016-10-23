@@ -128,13 +128,13 @@ Add link header for doc pages.
   Content-Security-Policy: {{ "
     default-src 'none';
     child-src 'self';
-    font-src https://unpkg.com;
+    font-src https://cdn.jsdelivr.net;
     frame-src 'self' data: https://ghbtns.com https://platform.twitter.com https://runkit.com;
     img-src 'self' data: https://www.google-analytics.com;
     manifest-src 'self';
-    connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com https://lodash.report-uri.io;
-    script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://unpkg.com https://www.google-analytics.com;
-    style-src 'self' https://unpkg.com;
+    connect-src 'self' https://cdn.jsdelivr.net https://embed.runkit.com https://www.google-analytics.com https://lodash.report-uri.io;
+    script-src 'self'  https://cdn.jsdelivr.net https://embed.runkit.com https://www.google-analytics.com;
+    style-src 'self' https://cdn.jsdelivr.net/;
     referrer origin-when-cross-origin;
     block-all-mixed-content;
     report-uri https://lodash.report-uri.io/r/default/csp/enforce
