@@ -67,7 +67,7 @@ Add html pages to prefetch.
 Add Lodash scripts to prefetch.
 {% endcomment %}
 {% for res in site.builds %}
-  {% assign prefetch = prefetch | push:res.href %}
+  {% assign prefetch = prefetch | push:res[1].href %}
 {% endfor %}
 
 {% comment %}
