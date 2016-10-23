@@ -157,25 +157,22 @@ gulp.task('build-metadata', ['minify-json', 'minify-xml']);
 gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
 
 gulp.task('build-sw', () =>
-  Promise.all([
-    fs.readFile('_site/_redirects', 'utf8'),
-    fs.readFile('_site/sw.js', 'utf8')
-  ])
-  .then(({ 0:_redirects, 1:sw }) => {
-    const entries = [];
-    _redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) => {
-      from = _.escapeRegExp(from)
-        // Replace escaped asterisks with greedy dot capture groups.
-        .replace(/\\\*/g, '(.*)')
-        // Make trailing slashes optional.
-        .replace(/\/$/, '(?:/.|/?$)')
-        // Escape forward slashes.
-        .replace(/\//g, '\\/');
+  Promise.all(['_site/_redirects', '_site/sw.js'].map(file => fs.readFile(file, 'utf8')))
+    .then(({ 0:_redirects, 1:sw }) => {
+      const entries = [];
+      _redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) => {
+        from = _.escapeRegExp(from)
+          // Replace escaped asterisks with greedy dot capture groups.
+          .replace(/\\\*/g, '(.*)')
+          // Make trailing slashes optional.
+          .replace(/\/$/, '(?:/.|/?$)')
+          // Escape forward slashes.
+          .replace(/\//g, '\\/');
 
-      entries.push(`[/^${ from }/,'${ to }',${ status }]`);
-    });
-    return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
-  })
+        entries.push(`[/^${ from }/,'${ to }',${ status }]`);
+      });
+      return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
+    })
 );
 
 /*----------------------------------------------------------------------------*/
