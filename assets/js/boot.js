@@ -6,7 +6,7 @@ resources: []
 
 {% assign resources = page.resources %}
 {% for res in site.vendor.css %}
-  {% assign resources = "{ 'href': '" | append:res.href | append:"', 'sri': '" | append:res.sri | append:"' }" %}
+  {% assign resources = "{ 'href': '" | append:res.href | append:"', 'integrity': '" | append:res.integrity | append:"' }" %}
 {% endfor %}
 
   var head = document.head;
@@ -15,7 +15,7 @@ resources: []
     .forEach(function(res) {
       var link = document.createElement('link');
       link.crossOrigin = 'anonymous';
-      link.integrity = res.sri;
+      link.integrity = res.integrity;
       link.rel = 'stylesheet';
       link.href = res.href;
       head.appendChild(link);

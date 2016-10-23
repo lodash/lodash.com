@@ -46,30 +46,30 @@ sass:
 builds:
   *release:
     href: https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js
-    sri: sha384-hCcdMrpDWSOIdJ+il0ghio5LeZ9JPWqqEnQ/gOSyZJnyzmk2v6pOKhNjviLRwD7Q
+    integrity: sha384-hCcdMrpDWSOIdJ+il0ghio5LeZ9JPWqqEnQ/gOSyZJnyzmk2v6pOKhNjviLRwD7Q
 
   3.10.1:
     href: https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js
-    sri: sha384-0BrUT26SU4JPtbvE/hI6oj4mbEXE32qhRoD51rUTB+QFrg6ViIceJR8op6FmEIA1
+    integrity: sha384-0BrUT26SU4JPtbvE/hI6oj4mbEXE32qhRoD51rUTB+QFrg6ViIceJR8op6FmEIA1
 
   2.4.2:
     href: https://cdn.jsdelivr.net/lodash/2.4.2/lodash.min.js
-    sri: sha384-i14qZ6FYmJXQABb+YG5tH4NXjKOLznxsr5jFsNiJNRcQ77978BoUif762EQyydgt
+    integrity: sha384-i14qZ6FYmJXQABb+YG5tH4NXjKOLznxsr5jFsNiJNRcQ77978BoUif762EQyydgt
 
 vendor:
   css:
     - href: https://cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css
-      sri: sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1
+      integrity: sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1
 
   font:
     - href: https://cdn.jsdelivr.net/fontawesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3
 
   js:
     - href: https://embed.runkit.com/
-      sri: sha384-AopOp5MNNAdV2kRPQgGlnI6noZ0Ii6sceGEQruBidfqu+QCMssJqKC0lej1ePFU9
+      integrity: sha384-AopOp5MNNAdV2kRPQgGlnI6noZ0Ii6sceGEQruBidfqu+QCMssJqKC0lej1ePFU9
 
     - href: https://cdn.jsdelivr.net/g/fuse@2.5.0,immutable.js@3.8.1,react@15.3.2(react.min.js+react-dom.min.js)
-      sri: sha384-NFvWg391HUzxoyYtBHIFpwz8GQwmfhqOTtkoDntpx1pGfKmWfxwcNFPrjQbEXk9L
+      integrity: sha384-NFvWg391HUzxoyYtBHIFpwz8GQwmfhqOTtkoDntpx1pGfKmWfxwcNFPrjQbEXk9L
 
 exclude:
   - node_modules

@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="/assets/css/main.css?v={{ site.github.build_revision }}">
   <noscript>
   {% for res in site.vendor.css %}
-    <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.sri }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin="anonymous">
   {% endfor %}
   </noscript>
   <script src="/assets/js/boot.js?v={{ site.github.build_revision }}" async></script>

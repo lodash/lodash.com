@@ -28,7 +28,7 @@ layout: base
     {% assign resources = site.vendor.js %}
     {% assign resources = resources | unshift:site.builds[page.version] %}
     {% for res in resources %}
-    <script src="{{ res.href }}" integrity="{{ res.sri }}" crossorigin="anonymous"></script>
+    <script src="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin="anonymous"></script>
     {% endfor %}
     <script src="/assets/js/docs.js?v={{ site.github.build_revision }}"></script>
   {% endcapture %}
