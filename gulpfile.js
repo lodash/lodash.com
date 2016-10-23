@@ -4,6 +4,8 @@ const _ = require('lodash');
 const globby = require('globby');
 const gulp = require('gulp');
 const pump = require('pump');
+const request = require('request-promise-native');
+const sri = require('sri-toolbox');
 const toIco = require('to-ico');
 
 const pify = require('pify');
@@ -124,6 +126,21 @@ function cleanSource(source) {
     // Add trailing newline.
     '\n';
 }
+
+/*----------------------------------------------------------------------------*/
+
+gulp.task('build-config', () =>
+  fs.readFile('_config.yml', 'utf8')
+    .then(config => {
+      const entries = [];
+      config.replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) => {
+        entries.push({ href, integrity });
+      });
+      return Promise.all(entries.map(({ href }) => request(href)))
+        .then(sources => fs.writeFile('_config.yml', sources.reduce((config, source, index) =>
+          config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, source)), config)));
+    })
+);
 
 /*----------------------------------------------------------------------------*/
 
