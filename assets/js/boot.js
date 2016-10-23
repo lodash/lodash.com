@@ -1,22 +1,25 @@
 ---
-hrefs: []
+resources: []
 ---
 ;(function(root) {
   'use strict';
 
+{% assign resources = page.resources %}
+{% for res in site.vendor.css %}
+  {% assign resources = "{href:'" | append:res.href | append:"',sri:'" | append:res.sri | append:"'}" %}
+{% endfor %}
+
   var head = document.head;
 
-  {% assign hrefs = page.hrefs %}
-  {% for res in site.vendor.css %}
-    {% assign hrefs = hrefs | push:res.href %}
-  {% endfor %}
-
-  ['{{ hrefs | join:"','" }}'].forEach(function(href) {
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    head.appendChild(link);
-  });
+  [{{ resources | join:',' }}]
+    .forEach(function(res) {
+      var link = document.createElement('link');
+      link.crossorigin = 'anonymous';
+      link.href = res.href;
+      link.integrity = res.sri;
+      link.rel = 'stylesheet';
+      head.appendChild(link);
+    });
 
   {% if jekyll.environment == 'production' %}
   if ('serviceWorker' in navigator) {
