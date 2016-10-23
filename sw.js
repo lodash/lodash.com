@@ -66,17 +66,16 @@ Add html pages to prefetch.
 {% comment %}
 Add Lodash scripts to prefetch.
 {% endcomment %}
-{% for release in site.releases %}
-  {% assign href = 'https://cdn.jsdelivr.net/lodash/' | append:release | append:'/lodash.min.js' %}
-  {% assign prefetch = prefetch | push:href %}
+{% for res in site.builds %}
+  {% assign prefetch = prefetch | push:res.href %}
 {% endfor %}
 
 {% comment %}
 Add vendor files to prefetch.
 {% endcomment %}
-{% for  hrefs in site.vendor %}
-  {% for href in hrefs[1] %}
-    {% assign prefetch = prefetch | push:href %}
+{% for resources in site.vendor %}
+  {% for res in resources[1] %}
+    {% assign prefetch = prefetch | push:res.href %}
   {% endfor %}
 {% endfor %}
 

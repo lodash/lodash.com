@@ -25,9 +25,10 @@ layout: base
 </header>
 <div class="doc-main">
   {% capture scripts %}class="doc-container">
-    <script src="https://cdn.jsdelivr.net/lodash/{{ page.version }}/lodash.min.js"></script>
-    {% for href in site.vendor.js %}
-    <script src="{{ href }}"></script>
+    {% assign resources = site.vendor.js %}
+    {% assign resources = resources | unshift:site.builds[page.version] %}
+    {% for res in resources %}
+    <script src="{{ res.href }}" integrity="{{ res.sri }}" crossorigin="anonymous"></script>
     {% endfor %}
     <script src="/assets/js/docs.js?v={{ site.github.build_revision }}"></script>
   {% endcapture %}

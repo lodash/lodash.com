@@ -43,16 +43,16 @@ Add resource hints for site-wide js.
 {% comment %}
 Add resource hints for site-wide vendor css.
 {% endcomment %}
-{% for href in site.vendor.css %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=style; pr=1.0; crossorigin' %}
+{% for res in site.vendor.css %}
+  {% assign hint = '<' | append:res.href | append:'>; rel=preload; as=style; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for site-wide vendor fonts.
 {% endcomment %}
-{% for href in site.vendor.font %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
+{% for res in site.vendor.font %}
+  {% assign hint = '<' | append:res.href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
@@ -83,8 +83,8 @@ Add resource hints for docs js.
 {% comment %}
 Add resource hints for docs vendor js.
 {% endcomment %}
-{% for href in site.vendor.js %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0; crossorigin' %}
+{% for res in site.vendor.js %}
+  {% assign hint = '<' | append:res.href | append:'>; rel=preload; as=script; pr=1.0; crossorigin' %}
   {% assign docs = docs | push:hint %}
 {% endfor %}
 

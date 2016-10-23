@@ -31,4 +31,5 @@ layout: base
     made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://twitter.com/veksenn">@veksenn</a> &amp; <a href="https://twitter.com/ZTHall">@zthall</a>
   </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/lodash/{{ site.release }}/lodash.min.js" async></script>
+{% assign res = site.builds[site.release] %}
+<script src="{{ res.href }}" integrity="{{ res.sri }}" crossorigin="anonymous" async></script>
