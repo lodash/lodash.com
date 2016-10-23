@@ -15,9 +15,9 @@ resources: []
     .forEach(function(res) {
       var link = document.createElement('link');
       link.crossOrigin = 'anonymous';
-      link.href = res.href;
       link.integrity = res.sri;
       link.rel = 'stylesheet';
+      link.href = res.href;
       head.appendChild(link);
     });
 
