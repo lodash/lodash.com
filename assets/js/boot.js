@@ -6,7 +6,7 @@ resources: []
 
 {% assign resources = page.resources %}
 {% for res in site.vendor.css %}
-  {% assign resources = "{href:'" | append:res.href | append:"',sri:'" | append:res.sri | append:"'}" %}
+  {% assign resources = "{ 'href': '" | append:res.href | append:"', 'sri': '" | append:res.sri | append:"' }" %}
 {% endfor %}
 
   var head = document.head;
