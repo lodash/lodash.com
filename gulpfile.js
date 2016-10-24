@@ -1,10 +1,10 @@
 'use strict';
 
 const _ = require('lodash');
+const fetch = require('node-fetch');
 const globby = require('globby');
 const gulp = require('gulp');
 const pump = require('pump');
-const request = require('request-promise-native');
 const sri = require('sri-toolbox');
 const toIco = require('to-ico');
 
@@ -136,9 +136,11 @@ gulp.task('build-config', () =>
       config.replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) =>
         entries.push({ href, integrity })
       );
-      return Promise.all(entries.map(({ href }) => request(href)))
-        .then(sources => fs.writeFile('_config.yml', sources.reduce((config, source, index) =>
-          config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, source)), config)));
+      return Promise.all(entries.map(({ href }) => fetch(href)))
+        .then(respes => Promise.all(respes.map(resp => resp.text())))
+        .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
+          config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, body))
+        , config)));
     })
 );
 
