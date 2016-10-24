@@ -135,20 +135,20 @@ gulp.task('build-config', () =>
   readSource('_config.yml').then(config => {
     const args = process.argv;
     const entries = [];
-    const oldVersion = /&release[\t ]+([\d.]+)/.exec(config)[1];
+    const oldVersion = /&release +([\d.]+)/.exec(config)[1];
     const newVersion = args[args.findIndex(arg => arg == '--version') + 1] || oldVersion;
 
     config = config
       // Update `release` variable value.
-      .replace(/(&release[\t ]+)[\d.]+/, (match, prelude) =>
+      .replace(/(&release +)[\d.]+/, (match, prelude) =>
         prelude + newVersion
       )
       // Update `release` build href.
-      .replace(/(\*release:[\s\S]+?\bhref:[\t ]*)(\S+)/,  (match, prelude, href) =>
+      .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
         prelude + href.replace(RegExp(_.escapeRegExp(oldVersion), 'g'), newVersion)
       )
       // Collect entries with integrity fields.
-      .replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) =>
+      .replace(/^ *(?:- *)?href: *(\S+)\n *integrity: *(\S+)/gm, (match, href, integrity) =>
         (entries.push({ href, integrity }), match)
       );
     return Promise.all(entries.map(({ href }) => fetch(href)))
