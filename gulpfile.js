@@ -22,9 +22,11 @@ const sequence = require('gulp-sequence');
 const uglify = require('gulp-uglify');
 
 const base = './';
-const cb = e => e && console.log(e.message);
 const icons = require('./icons');
 const opts = { base };
+
+const cb = e => e && console.log(e.message);
+const readSource = file => fs.readFile(file, 'utf8');
 
 const plugins = {
   'babel': {
@@ -102,7 +104,7 @@ const plugins = {
  * @returns {Promise} Returns the cleanup promise.
  */
 function cleanFile(filePath) {
-  return fs.readFile(filePath, 'utf8')
+  return readSource(filePath)
     .then(source => fs.writeFile(filePath, cleanSource(source)));
 }
 
@@ -130,18 +132,17 @@ function cleanSource(source) {
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build-config', () =>
-  fs.readFile('_config.yml', 'utf8')
-    .then(config => {
-      const entries = [];
-      config.replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) =>
-        entries.push({ href, integrity })
-      );
-      return Promise.all(entries.map(({ href }) => fetch(href)))
-        .then(respes => Promise.all(respes.map(resp => resp.text())))
-        .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
-          config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, body))
-        , config)));
-    })
+  readSource('_config.yml').then(config => {
+    const entries = [];
+    config.replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) =>
+      entries.push({ href, integrity })
+    );
+    return Promise.all(entries.map(({ href }) => fetch(href)))
+      .then(respes => Promise.all(respes.map(resp => resp.text())))
+      .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
+        config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, body))
+      , config)));
+  })
 );
 
 /*----------------------------------------------------------------------------*/
@@ -176,7 +177,7 @@ gulp.task('build-metadata', ['minify-json', 'minify-xml']);
 gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
 
 gulp.task('build-sw', () =>
-  Promise.all(['_site/_redirects', '_site/sw.js'].map(file => fs.readFile(file, 'utf8')))
+  Promise.all(['_site/_redirects', '_site/sw.js'].map(readSource))
     .then(({ 0:_redirects, 1:sw }) => {
       const entries = [];
       _redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) => {
