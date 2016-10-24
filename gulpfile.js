@@ -133,10 +133,24 @@ function cleanSource(source) {
 
 gulp.task('build-config', () =>
   readSource('_config.yml').then(config => {
+    const args = process.argv;
     const entries = [];
-    config.replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) =>
-      entries.push({ href, integrity })
-    );
+    const oldVersion = /&release[\t ]+([\d.]+)/.exec(config)[1];
+    const newVersion = args[args.findIndex(arg => arg == '--version') + 1] || oldVersion;
+
+    config = config
+      // Update `release` variable value.
+      .replace(/(&release[\t ]+)[\d.]+/, (match, prelude) =>
+        prelude + newVersion
+      )
+      // Update `release` build href.
+      .replace(/(\*release:[\s\S]+?\bhref:[\t ]*)(\S+)/,  (match, prelude, href) =>
+        prelude + href.replace(RegExp(_.escapeRegExp(oldVersion), 'g'), newVersion)
+      )
+      // Collect entries with integrity fields.
+      .replace(/^[\t ]*(?:-[\t ]*)?href:[\t ]*(\S+)\n[\t ]*integrity:[\t ]*(\S+)/gm, (match, href, integrity) =>
+        (entries.push({ href, integrity }), match)
+      );
     return Promise.all(entries.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.text())))
       .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
@@ -191,7 +205,8 @@ gulp.task('build-sw', () =>
 
         entries.push(`[/^${ from }/,'${ to }',${ status }]`);
       });
-      return fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', entries.join(',')));
+      sw = sw.replace('/*insert_redirect*/', entries.join(','));
+      return fs.writeFile('_site/sw.js', sw);
     })
 );
 

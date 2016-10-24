@@ -6,9 +6,10 @@ The Lodash website.
 
 1. Clone the repository locally.
 
-2. Install [required gems](http://bundler.io/) in the repository directory.
+2. Install required [gems](http://bundler.io/) & [packages](https://www.npmjs.com/) in the repository directory.
     ```shell
     $ bundle
+    $ npm i
     ```
 
 3. Build & run.
@@ -19,5 +20,10 @@ The Lodash website.
 ## Incrementing the Lodash Version
 
 1. Generate new documentation by running `npm run doc:sitehtml` from the [Lodash repository](https://github.com/lodash/lodash).
+
 2. Copy the generated documentation from `lodash/doc/` to `lodash.com/docs/`.
-3. Update the `release` field in `_config.yml`.
+
+3. Update `_config.yml` for the release.
+    ```shell
+    $ npm run build:config <version>
+    ```
