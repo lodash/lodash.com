@@ -210,11 +210,25 @@ gulp.task('build-sw', () => {
 
 /*----------------------------------------------------------------------------*/
 
+const autoprefixedBrowsers = [
+  'last 2 versions',
+  'safari >= 8',
+  'ie >= 10',
+  'ff >= 20',
+  'ios 6',
+  'android 4'
+];
+
 gulp.task('minify-css', () =>
   pump([
     gulp.src('_site/**/*.css', opts),
     purify(['_site/**/*.html', '_site/assets/**/*.js'], plugins.purify),
-    cssnano(),
+    cssnano({
+      autoprefixer: {
+        browsers: autoprefixedBrowsers,
+        add: true
+      }
+    }),
     gulp.dest(base)
   ])
 );
