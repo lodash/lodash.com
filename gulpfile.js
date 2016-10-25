@@ -34,6 +34,19 @@ const plugins = {
     'presets': ['babili']
   },
 
+  'cssnano': {
+    'autoprefixer': {
+      'add': true,
+      'browsers': [
+        'last 2 versions',
+        'android 4',
+        'ie >= 10',
+        'ios 6',
+        'safari >= 8'
+      ]
+    }
+  },
+
   'htmlmin': (() => {
     const html = {
       'collapseBooleanAttributes': true,
@@ -214,7 +227,7 @@ gulp.task('minify-css', () =>
   pump([
     gulp.src('_site/**/*.css', opts),
     purify(['_site/**/*.html', '_site/assets/**/*.js'], plugins.purify),
-    cssnano(),
+    cssnano(plugins.cssnano),
     gulp.dest(base)
   ])
 );
