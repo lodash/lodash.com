@@ -30,6 +30,7 @@ resources: []
       'l': Date.now(),
       'q': [
         ['create', 'UA-6065217-64', 'auto'],
+        ['require', 'linkid'],
         ['send', 'pageview']
       ]
     };
