@@ -131,33 +131,32 @@ function cleanSource(source) {
 
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build-config', () =>
-  readSource('_config.yml').then(config => {
+gulp.task('build-config', () => {
+  const update = (config, oldVer, newVer) => config
+    // Update `release` variable value.
+    .replace(/(&release +)[\d.]+/, (match, prelude) => prelude + newVer)
+    // Update `release` build href.
+    .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
+      prelude + href.replace(RegExp(`\\b${ _.escapeRegExp(oldVer) }\\b`, 'g'), newVer)
+    );
+
+  return readSource('_config.yml').then(config => {
     const args = process.argv;
     const entries = [];
-    const oldVersion = /&release +([\d.]+)/.exec(config)[1];
-    const newVersion = args[args.findIndex(arg => arg == '--version') + 1] || oldVersion;
+    const oldVer = /&release +([\d.]+)/.exec(config)[1];
+    const newVer = args[args.findIndex(arg => arg == '--version') + 1] || oldVer;
 
-    config = config
-      // Update `release` variable value.
-      .replace(/(&release +)[\d.]+/, (match, prelude) =>
-        prelude + newVersion
-      )
-      // Update `release` build href.
-      .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
-        prelude + href.replace(RegExp(_.escapeRegExp(oldVersion), 'g'), newVersion)
-      )
-      // Collect entries with integrity fields.
-      .replace(/^ *(?:- *)?href: *(\S+)\n *integrity: *(\S+)/gm, (match, href, integrity) =>
-        (entries.push({ href, integrity }), match)
-      );
+    config = update(config, oldVer, newVer);
+    config.replace(/^ *(?:- *)?href: *(\S+)\n *integrity: *(\S+)/gm, (match, href, integrity) =>
+      entries.push({ href, integrity })
+    );
     return Promise.all(entries.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.text())))
       .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
         config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, body))
       , config)));
   })
-);
+});
 
 /*----------------------------------------------------------------------------*/
 
