@@ -208,7 +208,7 @@ html.docs {
         display: block;
       }
     }
-    // Offset top to avoid page jank when the search bar loads.
+    // Offset to avoid page jank when the search bar loads.
     > div:first-child:not(.search):not(.react-menu-container) {
       margin-top: calc(2.4rem + 39px);
 
