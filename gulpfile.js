@@ -87,7 +87,8 @@ const plugins = {
   ],
 
   'purify': {
-    'rejected': true
+    'rejected': true,
+    'whitelist': ['*carbon*']
   },
 
   'responsive': {

@@ -372,6 +372,12 @@
   });
 
   document.addEventListener('DOMContentLoaded', function() {
+    // Inject Carbon Ads bootstrap.
+    var script = document.createElement('script');
+    script.id = '{{ site.carbon_ads.id }}';
+    script.src = '{{ site.carbon_ads.href }}';
+    menuEl.insertBefore(script, menuEl.firstChild);
+
     // Add REPL buttons.
     if ('innerText' in docs) {
       _.each(docs.querySelectorAll('.highlight.js'), function(div) {

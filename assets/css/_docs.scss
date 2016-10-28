@@ -253,4 +253,63 @@ html.docs {
       margin-right: 1.1rem;
     }
   }
+
+  .toc-container > div:nth-of-type(2) {
+    padding-bottom: 14rem;
+  }
+
+  #carbonads {
+    background-color: #fff;
+    bottom: 0;
+    display: block;
+    font-size: 11px;
+    font-family: Verdana, "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 1.5;
+    margin-left: -1rem;
+    max-width: calc(300px - 2rem);
+    overflow: hidden;
+    padding: 2rem 0;
+    position: fixed;
+  }
+
+  #carbonads a {
+    border-bottom: 0;
+    color: #3492ff;
+  }
+
+  #carbonads a:hover {
+    color: #0077ff;
+  }
+
+  #carbonads span {
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carbon-img {
+    float: left;
+    margin-right: 1em;
+  }
+
+  .carbon-img img {
+    border: 0;
+    display: block;
+  }
+
+  .carbon-text {
+    display: block;
+    float: left;
+    max-width: calc(100% - 130px - 1em);
+    text-align: left;
+    white-space: normal;
+  }
+
+  .carbon-poweredby {
+    bottom: 0;
+    display: block;
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+  }
 }
