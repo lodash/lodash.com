@@ -28,14 +28,10 @@ resources: []
   if (navigator.onLine) {
     root[root.GoogleAnalyticsObject = '_ga'] = {
       'l': Date.now(),
-      'q': [
-        ['create', 'UA-6065217-64', 'auto'],
-        ['require', 'linkid'],
-        ['send', 'pageview']
-      ]
+      'q': {{ site.google_analytics.commands | jsonify }}
     };
     var script = document.createElement('script');
-    script.src = 'https://www.google-analytics.com/analytics.js';
+    script.src = '{{ site.google_analytics.href }}';
     head.appendChild(script);
   }
   {% endif %}

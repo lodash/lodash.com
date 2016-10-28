@@ -71,6 +71,10 @@ vendor:
     - href: https://cdn.jsdelivr.net/g/fuse@2.5.0,immutable.js@3.8.1,react@15.3.2(react.min.js+react-dom.min.js)
       integrity: sha384-NFvWg391HUzxoyYtBHIFpwz8GQwmfhqOTtkoDntpx1pGfKmWfxwcNFPrjQbEXk9L
 
+google_analytics:
+  href: https://www.google-analytics.com/analytics.js
+  commands: [['create', 'UA-6065217-64', 'auto'], ['require', 'linkid'], ['send', 'pageview']]
+
 exclude:
   - node_modules
   - Gemfile
