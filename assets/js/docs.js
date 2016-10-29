@@ -6,15 +6,16 @@
   var focusLast,
       searchNode,
       BitapSearcher = new Fuse().options.searchFn,
+      carbonInited = false,
       docs = document.querySelector('.doc-container'),
       focusFirst = document.querySelector('a'),
-      menuEl = document.querySelector('.toc-container'),
-      mobileMenu = document.querySelector('.mobile-menu a'),
+      mobileMenu = document.querySelector('.mobile-menu'),
       reQuery = /[?&]q=([^&]+)/,
       reReferSearch = /\blodash[. ](\w+)/i,
       referSearchValue = getReferSearchValue(document.referrer),
       rootEl = document.documentElement,
       slice = Array.prototype.slice,
+      toc = document.querySelector('.toc-container'),
       urlSearchValue = getSearchQuery(location.search),
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
       versionSelect = document.getElementById('version');
@@ -56,6 +57,17 @@
     return match ? decode(match[1]) : '';
   }
 
+  function initCarbon() {
+    if (!carbonInited && !document.hidden && navigator.onLine &&
+        getComputedStyle(mobileMenu).display == 'none') {
+      var script = document.createElement('script');
+      script.id = '{{ site.carbon_ads.id }}';
+      script.src = '{{ site.carbon_ads.href }}';
+      toc.insertBefore(script, toc.firstChild);
+      carbonInited = true;
+    }
+  }
+
   function isClick(event){
     if (event.type == 'click') {
       return true;
@@ -77,9 +89,9 @@
   }
 
   function toggleMobileMenu(state) {
-    state = state === undefined ? !menuEl.classList.contains('open') : state;
-    mobileMenu.title = (state ? 'Collapse' : 'Expand') + ' Menu';
-    menuEl.classList[state ? 'add' : 'remove']('open');
+    state = state === undefined ? !toc.classList.contains('open') : state;
+    mobileMenu.firstChild.title = (state ? 'Collapse' : 'Expand') + ' Menu';
+    toc.classList[state ? 'add' : 'remove']('open');
     if (state) {
       searchNode.focus();
     }
@@ -105,7 +117,7 @@
     'componentWillMount': function() {
       // Before component mounts, use the initial HTML for its state.
       this.setState({
-        'content': Immutable.fromJS(_.map(menuEl.children, function(node, key) {
+        'content': Immutable.fromJS(_.map(toc.children, function(node, key) {
           return {
             'key': key,
             'title': node.querySelector('h2 code').textContent,
@@ -190,7 +202,7 @@
     'onDocumentKeyDown': function(event) {
       var key = event.key || event.keyIdentifier;
       if ((key == 'Tab' || key == 'U+0009') &&
-          menuEl.classList.contains('open') && event.target === focusLast) {
+          toc.classList.contains('open') && event.target === focusLast) {
         // Restart tab cycle.
         event.preventDefault();
         focusFirst.focus();
@@ -305,7 +317,7 @@
           React.createElement(
             'input',
             {
-              'autoFocus': getComputedStyle(mobileMenu.parentNode).display == 'none',
+              'autoFocus': getComputedStyle(mobileMenu).display == 'none',
               'placeholder': 'Search',
               'type': 'search',
               'value': this.state.searchValue,
@@ -330,7 +342,7 @@
 
   ReactDOM.render(
     React.createElement(Menu),
-    menuEl
+    toc
   );
 
   // Select current doc version.
@@ -366,13 +378,12 @@
   addEventListener('offline', toggleOffline);
   addEventListener('online', toggleOffline);
 
+  document.addEventListener('visibilitychange', initCarbon);
+
   document.addEventListener('DOMContentLoaded', function() {
-    // Inject Carbon Ads bootstrap.
-    if (navigator.onLine) {
-      var script = document.createElement('script');
-      script.id = '{{ site.carbon_ads.id }}';
-      script.src = '{{ site.carbon_ads.href }}';
-      menuEl.insertBefore(script, menuEl.firstChild);
+    // Inject Carbon Ads.
+    if (!document.hidden) {
+      initCarbon();
     }
     // Add REPL buttons.
     if ('innerText' in docs) {
