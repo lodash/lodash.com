@@ -36,7 +36,7 @@ csp:
   ]
   script-src: [
     "'self'",
-    'https://cdn.carbonads.com',
+    'https://*.carbonads.com',
     'https://srv.carbonads.net',
     'https://adn.fusionads.net',
     'https://www.google-analytics.com',
