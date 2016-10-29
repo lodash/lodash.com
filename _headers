@@ -9,6 +9,7 @@ hints:
     '<//static.tonicdev.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//ad.atdmt.com/>; rel=dns-prefetch; pr=0.25',
     '<//cdn.carbonads.com/>; rel=dns-prefetch; pr=0.25',
     '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25',
     '<//launchbit.com/>; rel=dns-prefetch; pr=0.25',
@@ -134,11 +135,11 @@ Add link header for doc pages.
     child-src 'self';
     font-src https://cdn.jsdelivr.net;
     frame-src 'self' data: https://ghbtns.com https://platform.twitter.com https://runkit.com;
-    img-src 'self' data: https://assets.servedby-buysellads.com https://launchbit.com https://www.google-analytics.com ;
+    img-src 'self' data: https://www.google-analytics.com https://*.adsafeprotected.com https://ad.atdmt.com https://*.convertro.com https://ad.doubleclick.net https://assets.servedby-buysellads.com https://launchbit.com https://www.launchbit.com;
     manifest-src 'self';
-    connect-src 'self' https://assets.servedby-buysellads.com https://cdn.carbonads.com https://cdn.jsdelivr.net https://embed.runkit.com https://srv.carbonads.net https://launchbit.com https://www.google-analytics.com https://lodash.report-uri.io;
-    script-src 'self'  https://assets.servedby-buysellads.com https://cdn.carbonads.com https://cdn.jsdelivr.net https://embed.runkit.com https://srv.carbonads.net https://launchbit.com https://www.google-analytics.com;
-    style-src 'self' https://cdn.jsdelivr.net/;
+    connect-src 'self' https://adn.fusionads.net https://cdn.carbonads.com https://cdn.jsdelivr.net https://embed.runkit.com https://srv.carbonads.net https://www.google-analytics.com https://*.adsafeprotected.com https://ad.atdmt.com https://*.convertro.com https://ad.doubleclick.net https://assets.servedby-buysellads.com https://launchbit.com https://www.launchbit.com https://lodash.report-uri.io;
+    script-src 'self'  https://adn.fusionads.net https://cdn.carbonads.com https://cdn.jsdelivr.net https://embed.runkit.com https://srv.carbonads.net https://www.google-analytics.com;
+    style-src 'self' https://cdn.jsdelivr.net;
     referrer origin-when-cross-origin;
     block-all-mixed-content;
     report-uri https://lodash.report-uri.io/r/default/csp/enforce
