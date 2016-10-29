@@ -8,7 +8,11 @@ hints:
     '<//runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//static.tonicdev.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<//use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin'
+    '<//use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
+    '<//cdn.carbonads.com/>; rel=dns-prefetch; pr=0.25',
+    '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25',
+    '<//launchbit.com/>; rel=dns-prefetch; pr=0.25',
+    '<//assets.servedby-buysellads.com/>; rel=dns-prefetch; pr=0.25'
   ]
   docs: []
   home: [
