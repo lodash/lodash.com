@@ -45,6 +45,8 @@ csp:
   ]
   style-src: [
     "'self'",
+    "'unsafe-hashed-attributes'",
+    "'sha256-q0XIaf1UDkAfvV3BYBAyZKE7lUTTr4wXP7aj4hR2D8g='",
     'https://cdn.jsdelivr.net'
   ]
 hints:
