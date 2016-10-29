@@ -13,7 +13,7 @@
       reQuery = /[?&]q=([^&]+)/,
       reReferSearch = /\blodash[. ](\w+)/i,
       referSearchValue = getReferSearchValue(document.referrer),
-      replBtns = [],
+      rootEl = document.documentElement,
       slice = Array.prototype.slice,
       urlSearchValue = getSearchQuery(location.search),
       version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
@@ -83,6 +83,10 @@
     if (state) {
       searchNode.focus();
     }
+  }
+
+  function toggleOffline() {
+    rootEl.classList.toggle('offline');
   }
 
   /*--------------------------------------------------------------------------*/
@@ -358,26 +362,18 @@
     toggleMobileMenu(false);
   });
 
-  // Toggle REPL buttons for online status.
-  addEventListener('offline', function() {
-    _.each(replBtns, function(button) {
-      button.style.display = 'none';
-    });
-  });
-
-  addEventListener('online', function() {
-    _.each(replBtns, function(button) {
-      button.style.display = '';
-    });
-  });
+  // Toggle offline status.
+  addEventListener('offline', toggleOffline);
+  addEventListener('online', toggleOffline);
 
   document.addEventListener('DOMContentLoaded', function() {
     // Inject Carbon Ads bootstrap.
-    var script = document.createElement('script');
-    script.id = '{{ site.carbon_ads.id }}';
-    script.src = '{{ site.carbon_ads.href }}';
-    menuEl.insertBefore(script, menuEl.firstChild);
-
+    if (navigator.onLine) {
+      var script = document.createElement('script');
+      script.id = '{{ site.carbon_ads.id }}';
+      script.src = '{{ site.carbon_ads.href }}';
+      menuEl.insertBefore(script, menuEl.firstChild);
+    }
     // Add REPL buttons.
     if ('innerText' in docs) {
       _.each(docs.querySelectorAll('.highlight.js'), function(div) {
@@ -408,7 +404,6 @@
             }
           });
         });
-        replBtns.push(button);
         parent.appendChild(button);
       });
     }

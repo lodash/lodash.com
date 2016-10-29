@@ -26,6 +26,13 @@ html.docs {
     }
   }
 
+  &.offline {
+    #carbonads,
+    .btn-repl {
+      display: none;
+    }
+  }
+
   .btn-repl {
     bottom: 2.4rem;
     color: $foreground;
@@ -208,7 +215,13 @@ html.docs {
         display: block;
       }
     }
-    // Offset to avoid page jank when the search bar loads.
+
+    // Make room for the Carbon ad.
+    > div:nth-of-type(2) {
+      padding-bottom: 14rem;
+    }
+
+    // Avoid page jank when the search bar initializes.
     > div:first-child:not(.search):not(.react-menu-container) {
       margin-top: calc(2.4rem + 39px);
 
@@ -252,10 +265,6 @@ html.docs {
       font-size: 1.4rem;
       margin-right: 1.1rem;
     }
-  }
-
-  .toc-container > div:nth-of-type(2) {
-    padding-bottom: 14rem;
   }
 
   #carbonads {
