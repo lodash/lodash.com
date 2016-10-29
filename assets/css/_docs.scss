@@ -124,13 +124,6 @@ html.docs {
         padding-left: 1.6rem;
       }
     }
-
-    .repl {
-      background-color: transparent;
-      margin: 0 0 0 -75px;
-      padding: 0;
-      width: calc(100% + 175px);
-    }
   }
 
   .doc-main {
@@ -160,6 +153,13 @@ html.docs {
         margin-right: 1rem;
       }
     }
+  }
+
+  .repl {
+    background-color: transparent;
+    margin: 0 0 0 -75px;
+    padding: 0;
+    width: calc(100% + 175px);
   }
 
   .search {
