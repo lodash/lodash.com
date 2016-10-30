@@ -166,45 +166,30 @@ html.docs {
   }
 
   .search {
-    display: flex;
-    align-items: center;
     position: relative;
     width: 100%;
-    padding: 10px 0 10px 7px;
 
     input {
-      border: none;
-      font-size: 1.4rem;
-      width: 100%;
-      margin-left: 10px;
       appearance: none;
-      -webkit-appearance: none;
-      flex: 1;
-
-      &::-webkit-search-decoration {
-        -webkit-appearance: none;
-      }
+      border: none;
+      border-bottom: 2px solid $defaultLiteColor;
+      font-size: 1.4rem;
+      padding: 0 0 10px 0;
+      text-indent: 30px;
+      width: 100%;
 
       &:focus {
+        border-bottom-color: $defaultNearColor;
         outline: none;
-
-        + .search-focus-marker {
-          border-color: $defaultNearColor;
-        }
       }
     }
 
     .fa-search {
       color: #979797;
       font-size: 1.5rem;
-    }
-
-    .search-focus-marker {
+      left: 7px;
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 1px solid $defaultLiteColor;
+      top: 5px;
     }
   }
 
@@ -244,7 +229,7 @@ html.docs {
 
     // Avoid page jank when the search bar initializes.
     > div:first-child:not(.search):not(.react-menu-container) {
-      margin-top: calc(2.4rem + 39px);
+      margin-top: calc(2.4rem + 33px);
 
       h2 {
         margin-left: calc(1.1rem + 11.5px);

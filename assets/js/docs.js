@@ -320,12 +320,6 @@
               'onChange': this.onChangeSearch,
               'ref': this.onRefSearch
             }
-          ),
-          React.createElement(
-            'div',
-            {
-              'className': 'search-focus-marker'
-            }
           )
         ),
         elements,
