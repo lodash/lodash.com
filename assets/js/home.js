@@ -20,7 +20,7 @@ addEventListener('load', function() {
     FRM_OPEN + TWT_CLS + 'share '      + TWT_SRC + 'tweet' + TWT_QRY + 'true&amp;url=https://lodash.com/&amp;text=' + DSC + FRM_CLOSE;
 
   var container = document.getElementById('social');
-  if (navigator.onLine) {
+  if (navigator.onLine && typeof phantom == 'undefined') {
     container.innerHTML = html;
   } else {
     container.parentNode.style.display = 'none';
