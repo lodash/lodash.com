@@ -58,7 +58,7 @@
 
   function carbonate() {
     if (!carbonated && typeof phantom == 'undefined' &&
-        document.hidden && navigator.onLine &&
+        !document.hidden && navigator.onLine &&
           getComputedStyle(mobileMenu).display == 'none') {
       var script = document.createElement('script');
       script.id = '{{ site.carbon_ads.id }}';
