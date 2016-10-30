@@ -27,6 +27,18 @@
     return this.__engine__.search(text).isMatch;
   };
 
+  function carbonate() {
+    if (!carbonated && typeof phantom == 'undefined' &&
+        !document.hidden && navigator.onLine &&
+          getComputedStyle(mobileMenu).display == 'none') {
+      var script = document.createElement('script');
+      script.id = '{{ site.carbon_ads.id }}';
+      script.src = '{{ site.carbon_ads.href }}';
+      toc.insertBefore(script, toc.firstChild);
+      carbonated = true;
+    }
+  }
+
   function className() {
     return slice.call(arguments).join(' ');
   }
@@ -54,18 +66,6 @@
   function getSearchQuery(url) {
     var match = reQuery.exec(url);
     return match ? decode(match[1]) : '';
-  }
-
-  function carbonate() {
-    if (!carbonated && typeof phantom == 'undefined' &&
-        !document.hidden && navigator.onLine &&
-          getComputedStyle(mobileMenu).display == 'none') {
-      var script = document.createElement('script');
-      script.id = '{{ site.carbon_ads.id }}';
-      script.src = '{{ site.carbon_ads.href }}';
-      toc.insertBefore(script, toc.firstChild);
-      carbonated = true;
-    }
   }
 
   function isClick(event){
