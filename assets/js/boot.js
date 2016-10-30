@@ -26,7 +26,7 @@
     {% assign resources = "{ 'href': '" | append:res.href | append:"', 'integrity': '" | append:res.integrity | append:"' }" %}
   {% endfor %}
 
-  // Add asynchronous stylesheets.
+  // Add asynchronous style sheets.
   [{{ resources | join:',' }}].forEach(addStyleSheet);
 
   {% if jekyll.environment == 'production' %}
