@@ -1,6 +1,6 @@
 ---
 ---
-;(function(root) {
+;(function() {
   'use strict';
 
   var focusLast,
@@ -10,7 +10,6 @@
       docs = document.querySelector('.doc-container'),
       focusFirst = document.querySelector('a'),
       mobileMenu = document.querySelector('.mobile-menu'),
-      phantom = root.phantom,
       reQuery = /[?&]q=([^&]+)/,
       reReferSearch = /\blodash[. ](\w+)/i,
       referSearchValue = getReferSearchValue(document.referrer),
@@ -58,7 +57,7 @@
   }
 
   function carbonate() {
-    if (!carbonated && !phantom &&
+    if (!carbonated && typeof phantom == 'undefined' &&
         document.hidden && navigator.onLine &&
           getComputedStyle(mobileMenu).display == 'none') {
       var script = document.createElement('script');
@@ -412,4 +411,4 @@
       });
     }
   });
-}(this));
+}());
