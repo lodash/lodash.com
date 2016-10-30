@@ -4,27 +4,38 @@ resources: []
 ;(function(root) {
   'use strict';
 
-{% assign resources = page.resources %}
-{% for res in site.vendor.css %}
-  {% assign resources = "{ 'href': '" | append:res.href | append:"', 'integrity': '" | append:res.integrity | append:"' }" %}
-{% endfor %}
+  var head = document.head,
+      rootEl = document.documentElement;
 
-  var head = document.head;
+  function addStyleSheet(res) {
+    var link = document.createElement('link');
+    link.crossOrigin = 'anonymous';
+    link.integrity = res.integrity;
+    link.rel = 'stylesheet';
+    link.href = res.href;
+    head.appendChild(link);
+  }
 
-  [{{ resources | join:',' }}]
-    .forEach(function(res) {
-      var link = document.createElement('link');
-      link.crossOrigin = 'anonymous';
-      link.integrity = res.integrity;
-      link.rel = 'stylesheet';
-      link.href = res.href;
-      head.appendChild(link);
-    });
+  function toggleOffline() {
+    rootEl.classList.toggle('offline');
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  {% assign resources = page.resources %}
+  {% for res in site.vendor.css %}
+    {% assign resources = "{ 'href': '" | append:res.href | append:"', 'integrity': '" | append:res.integrity | append:"' }" %}
+  {% endfor %}
+
+  // Add asynchronous stylesheets.
+  [{{ resources | join:',' }}].forEach(addStyleSheet);
 
   {% if jekyll.environment == 'production' %}
+  // Register service worker.
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   }
+  // Initialize Google Analytics.
   if (navigator.onLine) {
     root[root.GoogleAnalyticsObject = '_ga'] = {
       'l': Date.now(),
@@ -35,4 +46,8 @@ resources: []
     head.appendChild(script);
   }
   {% endif %}
+
+  // Toggle offline status.
+  addEventListener('offline', toggleOffline);
+  addEventListener('online', toggleOffline);
 }(this));

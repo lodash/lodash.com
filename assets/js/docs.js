@@ -1,19 +1,19 @@
 ---
 ---
-;(function() {
+;(function(root) {
   'use strict';
 
   var focusLast,
       searchNode,
       BitapSearcher = new Fuse().options.searchFn,
-      carbonInited = false,
+      carbonated = false,
       docs = document.querySelector('.doc-container'),
       focusFirst = document.querySelector('a'),
       mobileMenu = document.querySelector('.mobile-menu'),
+      phantom = root.phantom,
       reQuery = /[?&]q=([^&]+)/,
       reReferSearch = /\blodash[. ](\w+)/i,
       referSearchValue = getReferSearchValue(document.referrer),
-      rootEl = document.documentElement,
       slice = Array.prototype.slice,
       toc = document.querySelector('.toc-container'),
       urlSearchValue = getSearchQuery(location.search),
@@ -57,14 +57,15 @@
     return match ? decode(match[1]) : '';
   }
 
-  function initCarbon() {
-    if (!carbonInited && !document.hidden && navigator.onLine &&
-        getComputedStyle(mobileMenu).display == 'none') {
+  function carbonate() {
+    if (!carbonated && !phantom &&
+        document.hidden && navigator.onLine &&
+          getComputedStyle(mobileMenu).display == 'none') {
       var script = document.createElement('script');
       script.id = '{{ site.carbon_ads.id }}';
       script.src = '{{ site.carbon_ads.href }}';
       toc.insertBefore(script, toc.firstChild);
-      carbonInited = true;
+      carbonated = true;
     }
   }
 
@@ -95,10 +96,6 @@
     if (state) {
       searchNode.focus();
     }
-  }
-
-  function toggleOffline() {
-    rootEl.classList.toggle('offline');
   }
 
   /*--------------------------------------------------------------------------*/
@@ -374,16 +371,12 @@
     toggleMobileMenu(false);
   });
 
-  // Toggle offline status.
-  addEventListener('offline', toggleOffline);
-  addEventListener('online', toggleOffline);
-
-  document.addEventListener('visibilitychange', initCarbon);
+  document.addEventListener('visibilitychange', carbonate);
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Inject Carbon Ads.
+    // Initialize Carbon Ads.
     if (!document.hidden) {
-      initCarbon();
+      carbonate();
     }
     // Add REPL buttons.
     if ('innerText' in docs) {
@@ -419,4 +412,4 @@
       });
     }
   });
-}());
+}(this));
