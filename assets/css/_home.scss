@@ -1,4 +1,10 @@
 html.home {
+  &.offline {
+    section:nth-of-type(2) {
+      display: none;
+    }
+  }
+
   div.intro {
     font-size: 1.9rem;
   }
