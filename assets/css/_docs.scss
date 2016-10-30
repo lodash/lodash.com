@@ -166,29 +166,45 @@ html.docs {
   }
 
   .search {
+    display: flex;
+    align-items: center;
     position: relative;
     width: 100%;
+    padding: 10px 0 10px 7px;
 
     input {
       border: none;
-      border-bottom: 2px solid $defaultLiteColor;
       font-size: 1.4rem;
-      padding: 10px 0;
-      text-indent: 30px;
       width: 100%;
+      margin-left: 10px;
+      appearance: none;
+      -webkit-appearance: none;
+      flex: 1;
+
+      &::-webkit-search-decoration {
+        -webkit-appearance: none;
+      }
 
       &:focus {
-        border-bottom-color: $defaultNearColor;
         outline: none;
+
+        + .search-focus-marker {
+          border-color: $defaultNearColor;
+        }
       }
     }
 
     .fa-search {
       color: #979797;
       font-size: 1.5rem;
-      left: 7px;
+    }
+
+    .search-focus-marker {
       position: absolute;
-      top: 9px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid $defaultLiteColor;
     }
   }
 
