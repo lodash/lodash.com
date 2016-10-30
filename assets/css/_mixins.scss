@@ -13,7 +13,7 @@
 
   &::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    border: 2px solid white; // should match background, can't be transparent
+    border: 2px solid white; // Should match background, but can't be transparent.
     background-color: rgba(0, 0, 0, .33);
   }
 }
