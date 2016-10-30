@@ -1,5 +1,4 @@
 ---
-resources: []
 ---
 ;(function(root) {
   'use strict';
@@ -22,7 +21,7 @@ resources: []
 
   /*--------------------------------------------------------------------------*/
 
-  {% assign resources = page.resources %}
+  {% assign resources = site.data.init.array %}
   {% for res in site.vendor.css %}
     {% assign resources = "{ 'href': '" | append:res.href | append:"', 'integrity': '" | append:res.integrity | append:"' }" %}
   {% endfor %}
