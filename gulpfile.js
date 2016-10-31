@@ -158,7 +158,7 @@ gulp.task('build-config', () => {
     const args = process.argv;
     const entries = [];
     const oldVer = /&release +([\d.]+)/.exec(config)[1];
-    const newVer = args[args.findIndex(arg => arg == '--version') + 1] || oldVer;
+    const newVer = args[args.findIndex(arg => arg == '--release') + 1] || oldVer;
 
     config = update(config, oldVer, newVer);
     config.replace(/^ *(?:- *)?href: *(\S+)\n *integrity: *(\S+)/gm, (match, href, integrity) =>
