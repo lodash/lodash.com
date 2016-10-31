@@ -23,7 +23,8 @@
 
   {% assign resources = site.data.init.array %}
   {% for res in site.vendor.css %}
-    {% assign resources = "{ 'href': '" | append:res.href | append:"', 'integrity': '" | append:res.integrity | append:"' }" %}
+    {% assign object = res | jsonify %}
+    {% assign resources = resources | push:object %}
   {% endfor %}
 
   // Add asynchronous style sheets.
