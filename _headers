@@ -45,7 +45,6 @@ csp:
   ]
   style-src: [
     "'self'",
-    "'unsafe-inline'",
     'https://cdn.jsdelivr.net'
   ]
 hints:
