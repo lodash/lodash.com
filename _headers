@@ -27,6 +27,7 @@ csp:
   frame-src: [
     "'self'",
     'data:',
+    'ms-appx-web:',
     'https://ghbtns.com',
     'https://runkit.com',
     'https://platform.twitter.com'
