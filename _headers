@@ -12,6 +12,7 @@ csp:
   img-src: [
     "'self'",
     'data:',
+    'https://*.2mdn.net',
     'https://*.adsafeprotected.com',
     'https://ad.atdmt.com',
     'https://*.convertro.com',
@@ -19,7 +20,8 @@ csp:
     'https://www.google-analytics.com',
     'https://www.launchbit.com',
     'https://launchbit.com',
-    'https://assets.servedby-buysellads.com'
+    'https://assets.servedby-buysellads.com',
+    'https://bs.serving-sys.com'
   ]
   font-src: [
     'https://cdn.jsdelivr.net'
