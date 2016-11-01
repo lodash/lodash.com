@@ -233,7 +233,7 @@ html.docs {
 
     // Make room for the Carbon ad.
     > div:nth-of-type(2) {
-      padding-bottom: 12rem;
+      padding-bottom: 13rem; // Add 1rem extra for Edge.
     }
 
     div > h2 {
