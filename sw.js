@@ -195,6 +195,7 @@ addEventListener('fetch', event => {
         }
         // Fetch requests that weren't prefetched.
         else if (!prefetch.find(({ href }) => href == url.href)) {
+          console.log('sw request', request.url);
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
