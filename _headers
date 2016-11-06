@@ -71,7 +71,6 @@ hints:
     '<//platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
 ---
-{% assign BUILD_REV = site.github.build_revision %}
 {% capture EOL %}
 {% endcapture %}
 
@@ -83,7 +82,7 @@ hints:
 Add resource hints for site-wide css.
 {% endcomment %}
 {% for href in site.css.all %}
-  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=style; pr=1.0' %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=style; pr=1.0' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
@@ -91,7 +90,7 @@ Add resource hints for site-wide css.
 Add resource hints for site-wide js.
 {% endcomment %}
 {% for href in site.js.all %}
-  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=script; pr=1.0' %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 
@@ -123,7 +122,7 @@ Add site-wide hints to docs and homepage hints.
 Add resource hints for home js.
 {% endcomment %}
 {% for href in site.js.home %}
-  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=script; pr=1.0' %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
   {% assign home = home | push:hint %}
 {% endfor %}
 
@@ -131,7 +130,7 @@ Add resource hints for home js.
 Add resource hints for docs js.
 {% endcomment %}
 {% for href in site.js.docs %}
-  {% assign hint = '<' | append:href | | append:'?v=' | append:BUILD_REV | append:'>; rel=preload; as=script; pr=1.0' %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
   {% assign docs = docs | push:hint %}
 {% endfor %}
 

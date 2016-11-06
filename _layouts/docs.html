@@ -30,7 +30,7 @@ layout: base
     {% for res in resources %}
     <script src="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin="anonymous"></script>
     {% endfor %}
-    <script src="/assets/js/docs.js?v={{ site.github.build_revision }}"></script>
+    <script src="/assets/js/docs.js"></script>
   {% endcapture %}
   {{ content | replace_first:'class="doc-container">',scripts }}
 </div>

@@ -26,13 +26,13 @@
   {% if pageURL != docsURL %}
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
-  <link rel="stylesheet" href="/assets/css/main.css?v={{ site.github.build_revision }}">
+  <link rel="stylesheet" href="/assets/css/main.css">
   <noscript>
   {% for res in site.vendor.css %}
     <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin="anonymous">
   {% endfor %}
   </noscript>
-  <script src="/assets/js/boot.js?v={{ site.github.build_revision }}" async></script>
+  <script src="/assets/js/boot.js" async></script>
 </head>
 <body class="layout-{{ page.layout }}">
   {{ content }}

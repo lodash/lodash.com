@@ -11,8 +11,6 @@ prefetch: [
 ---
 'use strict';
 
-{% assign BUILD_REV = site.github.build_revision %}
-
 {% assign ignored = page.ignored %}
 {% assign prefetch = page.prefetch %}
 
@@ -28,8 +26,7 @@ Add site css to prefetch.
 {% endcomment %}
 {% for hrefs in site.css %}
   {% for href in hrefs[1] %}
-    {% assign busted = href | append:'?v=${ BUILD_REV }' %}
-    {% assign prefetch = prefetch | push:busted %}
+    {% assign prefetch = prefetch | push:href %}
   {% endfor %}
 {% endfor %}
 
@@ -39,9 +36,8 @@ Add site js prefetch.
 {% for hrefs in site.js %}
   {% for href in hrefs[1] %}
     {% assign basename = href | split:'/' | last %}
-    {% assign busted = href | append:'?v=${ BUILD_REV }' %}
     {% assign ignored = ignored | push:basename %}
-    {% assign prefetch = prefetch | push:busted %}
+    {% assign prefetch = prefetch | push:href %}
   {% endfor %}
 {% endfor %}
 
@@ -79,56 +75,13 @@ Add vendor files to prefetch.
   {% endfor %}
 {% endfor %}
 
-const BUILD_REV = '{{ BUILD_REV }}';
+const BUILD_REV = '{{ site.github.build_revision }}';
 
-const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`]
+const prefetch = ['{{ prefetch | uniq | join:"','" }}']
   .map(href => new URL(href, location));
 
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
-
-const supports = {
-  'cacheMode': 'cache' in new Request(location)
-};
-
-/**
- * Appends a cache busting query to same-origin URIs and requests.
- *
- * @private
- * @param {*} resource The resource to cache bust.
- * @returns {*} Returns the cache busted resource.
- */
-function bust(resource) {
-  const isReq = resource instanceof Request;
-  if (isReq && resource.mode == 'navigate') {
-    return resource;
-  }
-  // Only add to same-origin requests to avoid potential 403 responses.
-  // See https://github.com/mjackson/npm-http-server/issues/44.
-  const url = new URL(isReq ? resource.url : resource);
-  if (url.origin != location.origin) {
-    return resource;
-  }
-  if (!url.searchParams.has('v')) {
-    url.searchParams.set('v', BUILD_REV);
-  }
-  return isReq ? new Request(url, resource) : url;
-}
-
-/**
- * A specialized version of `fetch` which uses a cache mode of `no-cache` if
- * supported, else cache busts.
- *
- * @private
- * @param {*} resource The resource to fetch.
- * @returns {Promise} Returns a promise that resolves to the fetch response.
- */
-function get(resource) {
-  // Cache bust until cache modes are supported in Chrome.
-  return supports.cacheMode
-    ? fetch(resource, { 'cache': 'no-cache' })
-    : fetch(bust(resource))
-}
 
 /**
  * A specialized version of `Cache#put` which caches an additional extensionless
@@ -159,7 +112,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri =>
-        get(uri)
+        fetch(uri)
           .then(response => response.ok && put(cache, uri, response))
           .catch(error => console.log(`prefetch failed: ${ uri }`, error))
       ))
@@ -214,7 +167,7 @@ addEventListener('fetch', event => {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
-        return get(request).then(response => {
+        return fetch(request).then(response => {
           if (response.ok) {
             put(cache, request, response.clone());
           }
