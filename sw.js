@@ -159,7 +159,6 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri =>
-        // Attempt to prefetch and cache.
         get(uri)
           .then(response => response.ok && put(cache, uri, response))
           .catch(error => console.log(`prefetch failed: ${ uri }`, error))
@@ -186,7 +185,6 @@ addEventListener('fetch', event => {
   event.respondWith(
     caches.open(BUILD_REV).then(cache =>
       cache.match(request).then(response => {
-        // Return the cached response if available.
         if (response) {
           return response;
         }
