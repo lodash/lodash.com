@@ -87,8 +87,12 @@ const prefetch = [`{{ prefetch | uniq | join:'`,`' }}`]
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
+const supports = {
+  'cacheMode': 'cache' in new Request(location)
+};
+
 /**
- * Appends a cache-bust query to same-origin URIs and requests.
+ * Appends a cache busting query to same-origin URIs and requests.
  *
  * @private
  * @param {*} resource The resource to cache bust.
@@ -99,7 +103,6 @@ function bust(resource) {
   if (isReq && resource.mode == 'navigate') {
     return resource;
   }
-  // Use cache-bust query until cache modes are supported in Chrome.
   // Only add to same-origin requests to avoid potential 403 responses.
   // See https://github.com/mjackson/npm-http-server/issues/44.
   const url = new URL(isReq ? resource.url : resource);
@@ -110,6 +113,21 @@ function bust(resource) {
     url.searchParams.set('v', BUILD_REV);
   }
   return isReq ? new Request(url, resource) : url;
+}
+
+/**
+ * A specialized version of `fetch` which uses a cache mode of `no-cache` if
+ * supported, else cache busts.
+ *
+ * @private
+ * @param {*} resource The resource to fetch.
+ * @returns {Promise} Returns a promise that resolves to the fetch response.
+ */
+function get(resource) {
+  // Cache bust until cache modes are supported in Chrome.
+  return supports.cacheMode
+    ? fetch(resource, { 'cache': 'no-cache' })
+    : fetch(bust(resource))
 }
 
 /**
@@ -142,7 +160,7 @@ addEventListener('install', event =>
     caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri =>
         // Attempt to prefetch and cache.
-        fetch(bust(uri))
+        get(uri)
           .then(response => response.ok && put(cache, uri, response))
           .catch(error => console.log(`prefetch failed: ${ uri }`, error))
       ))
@@ -198,7 +216,7 @@ addEventListener('fetch', event => {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
-        return fetch(bust(request)).then(response => {
+        return get(request).then(response => {
           if (response.ok) {
             put(cache, request, response.clone());
           }
