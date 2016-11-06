@@ -21,7 +21,7 @@ csp:
     'https://www.launchbit.com',
     'https://launchbit.com',
     'https://assets.servedby-buysellads.com',
-    'https://bs.serving-sys.com'
+    'https://*.serving-sys.com'
   ]
   font-src: [
     'https://cdn.jsdelivr.net'
