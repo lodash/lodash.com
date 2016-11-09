@@ -19,7 +19,7 @@ layout: base
         {% assign href = href | append:site.release %}
       {% endunless %}
       <a href="{{ href }}" class="btn primary">Documentation</a>
-      <a href="https://github.com/lodash/lodash/wiki/FP-Guide" class="btn">FP Guide</a>
+      <a href="{{ site.links.repo }}/wiki/FP-Guide" class="btn">FP Guide</a>
     </div>
   </div>
 </header>
@@ -28,7 +28,8 @@ layout: base
 </div>
 <footer>
   <div class="container">
-    made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://twitter.com/veksenn">@veksenn</a> &amp; <a href="https://twitter.com/ZTHall">@zthall</a>
+    <p>Site made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://twitter.com/veksenn">@veksenn</a> &amp; <a href="https://twitter.com/ZTHall">@zthall</a>.</p>
+    <p>Maintained by the <a href="{{ site.links.org }}/people">core team</a> with help from <a href="{{ site.links.repo }}/graphs/contributors">our contributors</a>.
   </div>
 </footer>
 {% assign res = site.builds[site.release] %}
