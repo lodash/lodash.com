@@ -184,7 +184,6 @@
     },
 
     'onClickFuncName': function() {
-      // Close mobile menu.
       toggleMobileMenu(false);
     },
 
@@ -352,13 +351,12 @@
     }
   });
 
-  // Open the mobile menu.
+  // Toggle the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
     event.preventDefault();
     toggleMobileMenu();
   });
 
-  // Close the mobile menu.
   docs.addEventListener('click', function() {
     toggleMobileMenu(false);
   });
