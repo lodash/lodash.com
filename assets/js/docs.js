@@ -184,15 +184,8 @@
     },
 
     'onClickFuncName': function() {
-      var _this = this;
-
       // Close mobile menu.
       toggleMobileMenu(false);
-
-      // Empty search box.
-      _.defer(function() {
-        _this.handleSearchChange('');
-      });
     },
 
     'onDocumentKeyDown': function(event) {
