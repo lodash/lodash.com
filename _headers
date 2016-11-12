@@ -217,4 +217,5 @@ Add CSP header directives.
   ' | replace:EOL,' ' }}
 
 /*.appcache
+  Cache-Control: no-cache
   Content-Type: text/cache-manifest
