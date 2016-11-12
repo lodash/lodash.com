@@ -174,6 +174,15 @@ gulp.task('build-config', () => {
 
 /*----------------------------------------------------------------------------*/
 
+gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'));
+gulp.task('build-css', ['minify-css']);
+gulp.task('build-headers', () => cleanFile('_site/_headers'));
+gulp.task('build-html', ['minify-html']);
+gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'));
+gulp.task('build-js', sequence('build-sw', ['minify-js', 'minify-sw']));
+gulp.task('build-metadata', ['build-appcache', 'minify-json', 'minify-xml']);
+gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
+
 gulp.task('build-app-icons', () =>
   pump([
     gulp.src(['**/*.{png,svg}', '!node_modules/**/*', '!_site/**/*'], opts),
@@ -182,26 +191,12 @@ gulp.task('build-app-icons', () =>
   ], cb)
 );
 
-gulp.task('build-css', ['minify-css']);
-
 gulp.task('build-favicon', () =>
   globby('_site/icons/favicon-*.png')
     .then(files => Promise.all(files.map(file => fs.readFile(file))))
     .then(toIco)
     .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
 );
-
-gulp.task('build-headers', () => cleanFile('_site/_headers'));
-
-gulp.task('build-html', ['minify-html']);
-
-gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'));
-
-gulp.task('build-js', sequence('build-sw', ['minify-js', 'minify-sw']));
-
-gulp.task('build-metadata', ['minify-json', 'minify-xml']);
-
-gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
 
 gulp.task('build-sw', () => {
   const escape = from => _.escapeRegExp(from)

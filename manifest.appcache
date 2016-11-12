@@ -1,0 +1,96 @@
+---
+ignored: [
+  'appcache.html',
+  'manifest.appcache',
+  'manifest.json',
+  'robots.txt',
+  'sw.js'
+]
+cache: [
+  '/favicon.ico',
+  '/icons/apple-touch-180x180.png',
+  '/icons/favicon-32x32.png'
+]
+---
+CACHE MANIFEST
+
+# Revision {{ site.github.build_revision }}
+
+{% capture EOL %}
+{% endcapture %}
+
+{% assign ignored = page.ignored %}
+{% assign cache = page.cache %}
+
+{% comment %}
+Add conditionally ignored files.
+{% endcomment %}
+{% unless site.github.hostname == 'github.com' %}
+  {% assign ignored = ignored | push:'favicon-16x16.png' %}
+{% endunless %}
+
+{% comment %}
+Add site css to cache.
+{% endcomment %}
+{% for hrefs in site.css %}
+  {% for href in hrefs[1] %}
+    {% assign cache = cache | push:href %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
+Add site js cache.
+{% endcomment %}
+{% for hrefs in site.js %}
+  {% for href in hrefs[1] %}
+    {% assign basename = href | split:'/' | last %}
+    {% assign ignored = ignored | push:basename %}
+    {% assign cache = cache | push:href %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
+Add static files to cache.
+{% endcomment %}
+{% for file in site.static_files %}
+  {% assign basename = file.path | split:'/' | last %}
+  {% unless ignored contains basename %}
+    {% assign cache = cache | push:file.path %}
+  {% endunless %}
+{% endfor %}
+
+{% comment %}
+Add html pages to cache.
+{% endcomment %}
+{% for page in site.html_pages %}
+  {% assign href = page.url | replace:'.html','' %}
+  {% assign cache = cache | push:href %}
+  {% assign href = '/' | append:page.path %}
+  {% assign cache = cache | push:href %}
+{% endfor %}
+
+{% comment %}
+Add Lodash scripts to cache.
+{% endcomment %}
+{% for res in site.builds %}
+  {% assign cache = cache | push:res[1].href %}
+{% endfor %}
+
+{% comment %}
+Add vendor files to cache.
+{% endcomment %}
+{% for resources in site.vendor %}
+  {% for res in resources[1] %}
+    {% assign cache = cache | push:res.href %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
+Cleanup cache.
+{% endcomment %}
+{% assign cache = cache | uniq | sort %}
+
+{{ cache | join:EOL }}
+
+NETWORK:
+*

@@ -1,5 +1,7 @@
 ---
 ignored: [
+  'appcache.html',
+  'manifest.appcache',
   'robots.txt'
 ]
 prefetch: [
