@@ -3,7 +3,7 @@
 {
   "name": "Lodash",
   "short_name": "Lodash",
-  "background_color": "#fff",
+  "background_color": "transparent",
   "description": "{{ site.description }}",
   "display": "standalone",
   "scope": "/",
