@@ -41,12 +41,6 @@
     iframe.style.display = 'none';
     iframe.src = '/appcache.html';
     document.body.appendChild(iframe);
-
-    // Avoid redirect.
-    var anchor = document.querySelector('a[href="/docs/"]');
-    if (anchor) {
-      anchor.href += '{{ site.release }}';
-    }
   }
   // Initialize Google Analytics.
   if (navigator.onLine) {
