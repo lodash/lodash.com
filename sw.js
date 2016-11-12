@@ -77,9 +77,14 @@ Add vendor files to prefetch.
   {% endfor %}
 {% endfor %}
 
+{% comment %}
+Cleanup prefetch.
+{% endcomment %}
+{% assign prefetch = prefetch | uniq | sort %}
+
 const BUILD_REV = '{{ site.github.build_revision }}';
 
-const prefetch = ['{{ prefetch | uniq | join:"','" }}']
+const prefetch = ['{{ prefetch | join:"','" }}']
   .map(href => new URL(href, location));
 
 const redirect = [/*insert_redirect*/]
