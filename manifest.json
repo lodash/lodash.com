@@ -6,6 +6,7 @@
   "background_color": "transparent",
   "description": "{{ site.description }}",
   "display": "standalone",
+  "lang": "en",
   "scope": "/",
   "start_url": "/",
   "theme_color": "#3492ff",
