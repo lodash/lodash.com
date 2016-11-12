@@ -84,7 +84,7 @@ Cleanup prefetch.
 
 const BUILD_REV = '{{ site.github.build_revision }}';
 
-const prefetch = ['{{ prefetch | join:"','" }}']
+const prefetch = {{ prefetch | jsonify }}
   .map(href => new URL(href, location));
 
 const redirect = [/*insert_redirect*/]
