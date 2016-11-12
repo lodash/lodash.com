@@ -91,6 +91,19 @@ const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
 /**
+ * Checks if `status` is a redirect code.
+ *
+ * @param {number} status The status to check.
+ * @returns {boolean} Returns `true` if `status` is a redirect, else `false`.
+ */
+function isRedirect(status) {
+  return (
+    status === 301 || status === 302 || status === 303 ||
+    status === 307 || status === 308
+  );
+}
+
+/**
  * A specialized version of `Cache#put` which caches an additional extensionless
  * resource for HTML requests.
  *
@@ -161,6 +174,7 @@ addEventListener('fetch', event => {
             }
             if (match) {
               if (url.href != to.href) {
+                status = isRedirect(status) ? status : 302;
                 response = Response.redirect(to, status);
                 put(cache, url, response.clone());
                 return response;
