@@ -16,8 +16,9 @@
       slice = Array.prototype.slice,
       toc = document.querySelector('.toc-container'),
       urlSearchValue = getSearchQuery(location.search),
-      version = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/)[0],
-      versionSelect = document.getElementById('version');
+      versionMatch = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/),
+      versionSelect = document.getElementById('version'),
+      version = versionMatch ? versionMatch[0] : '{{ site.release }}';
 
   function Searcher(pattern) {
     this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
