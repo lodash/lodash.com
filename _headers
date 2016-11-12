@@ -215,3 +215,6 @@ Add CSP header directives.
     includeSubdomains;
     report-uri="https://lodash.report-uri.io/r/default/hpkp/enforce"
   ' | replace:EOL,' ' }}
+
+/*.appcache
+  Content-Type: text/cache-manifest
