@@ -91,15 +91,23 @@ const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
 /**
- * Checks if `status` is a redirect code.
+ * Checks if `status` is a [redirect code](https://fetch.spec.whatwg.org/#redirect-status).
  *
- * @param {number} status The status to check.
- * @returns {boolean} Returns `true` if `status` is a redirect, else `false`.
+ * @param {number} status The status code to check.
+ * @returns {boolean} Returns `true` if `status` is a redirect code, else `false`.
  */
 function isRedirect(status) {
   return (
-    status === 301 || status === 302 || status === 303 ||
-    status === 307 || status === 308
+    // Moved permanently.
+    status === 301 ||
+    // Moved temporarily.
+    status === 302 ||
+    // See other.
+    status === 303 ||
+    // Temporary redirect.
+    status === 307 ||
+    // Permanent redirect.
+    status === 308
   );
 }
 
@@ -167,6 +175,7 @@ addEventListener('fetch', event => {
             const match = pattern.exec(url.pathname);
             const search = to.search || url.search;
             const splat = match ? match[1] : undefined;
+            status = isRedirect(status) ? status : 302;
             if (splat !== undefined) {
               to = new URL(to.pathname.replace(/:splat\b/, splat) + search, location);
             } else if (!to.search && search) {
@@ -174,7 +183,6 @@ addEventListener('fetch', event => {
             }
             if (match) {
               if (url.href != to.href) {
-                status = isRedirect(status) ? status : 302;
                 response = Response.redirect(to, status);
                 put(cache, url, response.clone());
                 return response;
