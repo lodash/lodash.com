@@ -235,20 +235,25 @@ gulp.task('build-sw', () => {
 
 gulp.task('build-vendor', () =>
   readSource('_config.yml').then(config => {
+    let resources = [];
     const parsed = parseYAML(config);
     const push = ({ href }) => resources.push(URL.parse(href));
-    const resources = [];
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed.vendor, items => items.forEach(push));
+    resources = _.filter(resources, ({ href }) => href.includes('jsdelivr.net'));
 
     return Promise.all(resources.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
-        const { hostname, pathname } = resources[index];
+        const { href, hostname, pathname } = resources[index];
         const dest = path.join('_site/assets/vendor', hostname, pathname.slice(1));
+        const newHref = '/' + dest.split(path.sep).slice(1).join('/');
+
+        config = config.replace(toRegExp(href), () => newHref);
         return fs.outputFile(dest, buffer);
-      })));
+      })))
+      .then(() => fs.writeFile('_config.yml', config));
   })
 );
 
