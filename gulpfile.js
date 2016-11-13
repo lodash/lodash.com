@@ -1,5 +1,8 @@
 'use strict';
 
+const path = require('path');
+const URL = require('url');
+
 const _ = require('lodash');
 const fetch = require('node-fetch');
 const globby = require('globby');
@@ -7,9 +10,10 @@ const gulp = require('gulp');
 const pump = require('pump');
 const sri = require('sri-toolbox');
 const toIco = require('to-ico');
+const yamljs = require('js-yaml');
 
 const pify = require('pify');
-const fs = pify(require('fs'));
+const fs = pify(require('fs-extra'));
 
 const babel = require('gulp-babel');
 const cssnano = require('gulp-cssnano');
@@ -143,34 +147,96 @@ function cleanSource(source) {
     '\n';
 }
 
+/**
+ * Converts a `yaml` string into an object.
+ *
+ * @private
+ * @param {string} yaml The yaml to convert.
+ * @returns {Object} Returns the parsed yaml object.
+ */
+function parseYAML(yaml) {
+  // Replace aliases with anchor values to enable parsing.
+  yaml.replace(/^ *&(\S+) +(\S+)/gm, (match, name, value) => {
+    const reName = RegExp(`\\*${ _.escapeRegExp(name) }\\b`, 'g');
+    yaml = yaml.replace(reName, () => value);
+  });
+  return yamljs.load(yaml);
+}
+
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build-config', () => {
   const update = (config, oldVer, newVer) => config
-    // Update `release` variable value.
-    .replace(/(&release +)[\d.]+/, (match, prelude) => prelude + newVer)
-    // Update `release` build href.
+    // Update `release` anchor value.
+    .replace(/(&release +)\S+/, (match, prelude) => prelude + newVer)
+    // Update `release` alias build href.
     .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
       prelude + href.replace(RegExp(`\\b${ _.escapeRegExp(oldVer) }\\b`, 'g'), newVer)
     );
 
   return readSource('_config.yml').then(config => {
-    const args = process.argv;
-    const entries = [];
+    const args = process.argv.slice(3);
     const oldVer = /&release +([\d.]+)/.exec(config)[1];
     const newVer = args[args.findIndex(arg => arg == '--release') + 1] || oldVer;
 
     config = update(config, oldVer, newVer);
-    config.replace(/^ *(?:- *)?href: *(\S+)\n *integrity: *(\S+)/gm, (match, href, integrity) =>
-      entries.push({ href, integrity })
-    );
+
+    const entries = [];
+    const parsed = parseYAML(config);
+    const push = ({ href, integrity }) => integrity && entries.push({ href, integrity });
+
+    _.forOwn(parsed.builds, push);
+    _.forOwn(parsed.vendor, items => items.forEach(push));
+
     return Promise.all(entries.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.text())))
       .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
         config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, body))
       , config)));
-  })
+  });
 });
+
+/*----------------------------------------------------------------------------*/
+
+gulp.task('build-sw', () => {
+  const escape = from => _.escapeRegExp(from)
+    // Replace escaped asterisks with greedy dot capture groups.
+    .replace(/\\\*/g, '(.*)')
+    // Make trailing slashes optional.
+    .replace(/\/$/, '(?:/.|/?$)')
+    // Escape forward slashes.
+    .replace(/\//g, '\\/');
+
+  return Promise.all(['_site/_redirects', '_site/sw.js'].map(readSource))
+    .then(({ 0:redirects, 1:sw }) => fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', () => {
+      const entries = [];
+      redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) =>
+        entries.push(`[/^${ escape(from) }/,'${ to }',${ status }]`)
+      );
+      return entries.join(', ');
+    })));
+});
+
+/*----------------------------------------------------------------------------*/
+
+gulp.task('build-vendor', () =>
+  readSource('_config.yml').then(config => {
+    const parsed = parseYAML(config);
+    const push = ({ href }) => resources.push(URL.parse(href));
+    const resources = [];
+
+    _.forOwn(parsed.builds, push);
+    _.forOwn(parsed.vendor, items => items.forEach(push));
+
+    return Promise.all(resources.map(({ href }) => fetch(href)))
+      .then(respes => Promise.all(respes.map(resp => resp.buffer())))
+      .then(buffers => Promise.all(buffers.map((buffer, index) => {
+        const { hostname, pathname } = resources[index];
+        const dest = path.join('_site/assets/vendor', hostname, pathname.slice(1));
+        return fs.outputFile(dest, buffer);
+      })));
+  })
+);
 
 /*----------------------------------------------------------------------------*/
 
@@ -197,25 +263,6 @@ gulp.task('build-favicon', () =>
     .then(toIco)
     .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
 );
-
-gulp.task('build-sw', () => {
-  const escape = from => _.escapeRegExp(from)
-    // Replace escaped asterisks with greedy dot capture groups.
-    .replace(/\\\*/g, '(.*)')
-    // Make trailing slashes optional.
-    .replace(/\/$/, '(?:/.|/?$)')
-    // Escape forward slashes.
-    .replace(/\//g, '\\/');
-
-  return Promise.all(['_site/_redirects', '_site/sw.js'].map(readSource))
-    .then(({ 0:redirects, 1:sw }) => fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', () => {
-      const entries = [];
-      redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) =>
-        entries.push(`[/^${ escape(from) }/,'${ to }',${ status }]`)
-      );
-      return entries.join(', ');
-    })));
-});
 
 /*----------------------------------------------------------------------------*/
 
