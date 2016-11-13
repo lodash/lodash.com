@@ -114,6 +114,8 @@ const plugins = {
   }
 };
 
+/*----------------------------------------------------------------------------*/
+
 /**
  * Cleanup whitespace of file at `filePath`.
  *
@@ -156,11 +158,22 @@ function cleanSource(source) {
  */
 function parseYAML(yaml) {
   // Replace aliases with anchor values to enable parsing.
-  yaml.replace(/^ *&(\S+) +(\S+)/gm, (match, name, value) => {
-    const reName = RegExp(`\\*${ _.escapeRegExp(name) }\\b`, 'g');
-    yaml = yaml.replace(reName, () => value);
+  yaml.replace(/^ *&(\S+) +(\S+)/gm, (match, anchor, value) => {
+    const reAlias = RegExp(`\\*${ _.escapeRegExp(anchor) }\\b`, 'g');
+    yaml = yaml.replace(reAlias, () => value);
   });
   return yamljs.load(yaml);
+}
+
+/**
+ * Converts `string` to a regexp.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {RegExp} Returns the converted regexp.
+ */
+function toRegExp(string) {
+  return RegExp(`\\b${ _.escapeRegExp(string) }\\b`, 'g');
 }
 
 /*----------------------------------------------------------------------------*/
@@ -171,7 +184,7 @@ gulp.task('build-config', () => {
     .replace(/(&release +)\S+/, (match, prelude) => prelude + newVer)
     // Update `release` alias build href.
     .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
-      prelude + href.replace(RegExp(`\\b${ _.escapeRegExp(oldVer) }\\b`, 'g'), newVer)
+      prelude + href.replace(toRegExp(oldVer), newVer)
     );
 
   return readSource('_config.yml').then(config => {
@@ -181,12 +194,13 @@ gulp.task('build-config', () => {
 
     config = update(config, oldVer, newVer);
 
-    const entries = [];
+    let entries = [];
     const parsed = parseYAML(config);
-    const push = ({ href, integrity }) => integrity && entries.push({ href, integrity });
+    const push = ({ href, integrity }) => entries.push({ href, integrity });
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed.vendor, items => items.forEach(push));
+    entries = _.filter(entries, 'integrity');
 
     return Promise.all(entries.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.text())))
