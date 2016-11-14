@@ -86,6 +86,18 @@ Add vendor files to cache.
 {% endfor %}
 
 {% comment %}
+Remove external entries.
+{% endcomment %}
+{% assign filtered = site.data.init.array %}
+{% for href in cache %}
+  {% assign chr = href | slice:0,1 %}
+  {% if chr == '/' %}
+    {% assign filtered = filtered | push:href %}
+  {% endif %}
+{% endfor %}
+{% assign cache = filtered %}
+
+{% comment %}
 Cleanup cache.
 {% endcomment %}
 {% assign cache = cache | uniq | sort %}
