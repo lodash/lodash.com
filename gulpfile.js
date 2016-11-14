@@ -185,7 +185,7 @@ function parseYAML(yaml) {
  * @returns {RegExp} Returns the converted regexp.
  */
 function toRegExp(string) {
-  return RegExp(`\\b${ _.escapeRegExp(string) }(?:\\b|$)`, 'gm');
+  return RegExp(`(?:^|\\b)${ _.escapeRegExp(string) }(?:\\b|$)`, 'gm');
 }
 
 /*----------------------------------------------------------------------------*/
