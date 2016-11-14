@@ -24,6 +24,7 @@ csp:
     'https://*.serving-sys.com'
   ]
   font-src: [
+    "'self'",
     'https://cdn.jsdelivr.net'
   ]
   frame-src: [
