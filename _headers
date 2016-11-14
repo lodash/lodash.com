@@ -196,7 +196,6 @@ Add CSP header directives.
 
 /*
   Access-Control-Allow-Origin: https://lodash.com
-  Cache-Control: public, max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
