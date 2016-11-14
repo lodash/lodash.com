@@ -26,7 +26,6 @@ const sequence = require('gulp-sequence');
 const uglify = require('gulp-uglify');
 
 const base = './';
-const icons = require('./icons');
 const opts = { base };
 
 const cb = e => e && console.log(e.message);
@@ -271,7 +270,7 @@ gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
 gulp.task('build-app-icons', () =>
   pump([
     gulp.src(['**/*.{png,svg}', '!node_modules/**/*', '!_site/**/*'], opts),
-    responsive(icons, plugins.responsive),
+    responsive(require('./icons'), plugins.responsive),
     gulp.dest('_site/icons/')
   ], cb)
 );
