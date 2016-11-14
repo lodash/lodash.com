@@ -258,11 +258,11 @@ gulp.task('build-vendor', () =>
     return Promise.all(resources.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
-        const { href, hostname, pathname } = resources[index];
-        const dest = path.join('vendor', hostname, pathname.slice(1));
+        const url = resources[index];
+        const dest = path.join('vendor', url.hostname, url.path.slice(1));
         const newHref = '/' + dest.split(path.sep).join('/');
 
-        config = config.replace(toRegExp(href), () => newHref);
+        config = config.replace(toRegExp(url.href), () => newHref);
         return fs.outputFile(dest, buffer);
       })))
       .then(() => fs.writeFile('_config.yml', config));
