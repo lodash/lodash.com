@@ -155,11 +155,11 @@ function cleanSource(source) {
 }
 
 /**
- * A thin wrapper around `gulp.src` to enforce task-wide negated glob patterns.
+ * A thin wrapper around `gulp.src` to enforce task-wide negated globs.
  *
  * @private
  * @param {Array|string} glob The glob to read.
- * @returns {Stream} Returns the Vinyl file stream of globbed matches.
+ * @returns {Stream} Returns the Vinyl stream of globbed files.
  */
 function gulpSrc(glob, opts) {
   glob = _.castArray(glob);
