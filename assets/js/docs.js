@@ -362,6 +362,14 @@
     toggleMobileMenu(false);
   });
 
+  addEventListener('hashchange', function() {
+    // Scroll to the chosen method entry.
+    var node = document.getElementById(location.hash.slice(1));
+    if (node) {
+      node.scrollIntoView();
+    }
+  });
+
   document.addEventListener('visibilitychange', carbonate);
 
   document.addEventListener('DOMContentLoaded', function() {
