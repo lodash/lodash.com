@@ -286,7 +286,7 @@ gulp.task('build-favicon', () =>
 
 gulp.task('minify-css', () =>
   pump([
-    gulp.src('_site/**/*.css', opts),
+    gulp.src(['_site/**/*.css', '!_site/vendor/**/*'], opts),
     purify(['_site/**/*.html', '_site/assets/**/*.js'], plugins.purify),
     cssnano(plugins.cssnano),
     gulp.dest(base)
@@ -295,7 +295,7 @@ gulp.task('minify-css', () =>
 
 gulp.task('minify-html', () =>
   pump([
-    gulp.src('_site/**/*.html', opts),
+    gulp.src(['_site/**/*.html', '!_site/vendor/**/*'], opts),
     htmlmin(plugins.htmlmin.html),
     gulp.dest(base)
   ], cb)
@@ -303,7 +303,7 @@ gulp.task('minify-html', () =>
 
 gulp.task('minify-images', () =>
   pump([
-    gulp.src('_site/**/*.{png,svg}', opts),
+    gulp.src(['_site/**/*.{png,svg}', '!_site/vendor/**/*'], opts),
     imagemin(plugins.imagemin),
     gulp.dest(base)
   ], cb)
@@ -311,7 +311,7 @@ gulp.task('minify-images', () =>
 
 gulp.task('minify-js', () =>
   pump([
-    gulp.src(['_site/**/*.js', '!_site/sw.js'], opts),
+    gulp.src(['_site/**/*.js', '!_site/vendor/**/*', '!_site/sw.js'], opts),
     uglify(plugins.uglify),
     gulp.dest(base)
   ], cb)
@@ -319,7 +319,7 @@ gulp.task('minify-js', () =>
 
 gulp.task('minify-json', () =>
   pump([
-    gulp.src('_site/**/*.json', opts),
+    gulp.src(['_site/**/*.json', '!_site/vendor/**/*'], opts),
     jsonmin(),
     gulp.dest(base)
   ], cb)
@@ -335,7 +335,7 @@ gulp.task('minify-sw', () =>
 
 gulp.task('minify-xml', () =>
   pump([
-    gulp.src('_site/**/*.xml', opts),
+    gulp.src(['_site/**/*.xml', '!_site/vendor/**/*'], opts),
     htmlmin(plugins.htmlmin.xml),
     gulp.dest(base)
   ], cb)
