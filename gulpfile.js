@@ -31,6 +31,12 @@ const opts = { base };
 const cb = e => e && console.log(e.message);
 const readSource = file => fs.readFile(file, 'utf8');
 
+const negatedGlobs = [
+  '!_site/vendor/**/*',
+  '!node_modules/**/*',
+  '!vendor/**/*'
+];
+
 const plugins = {
   'babel': {
     'comments': false,
@@ -157,7 +163,7 @@ function cleanSource(source) {
  */
 function gulpSrc(glob, opts) {
   glob = _.castArray(glob);
-  glob.push('!node_modules/**/*', '!_site/vendor/**/*', '!vendor/**/*');
+  glob.push(...negatedGlobs);
   return gulp.src(glob, opts);
 }
 
