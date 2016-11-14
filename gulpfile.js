@@ -247,8 +247,8 @@ gulp.task('build-vendor', () =>
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
         const { href, hostname, pathname } = resources[index];
-        const dest = path.join('_site/assets/vendor', hostname, pathname.slice(1));
-        const newHref = '/' + dest.split(path.sep).slice(1).join('/');
+        const dest = path.join('vendor', hostname, pathname.slice(1));
+        const newHref = '/' + dest.split(path.sep).join('/');
 
         config = config.replace(toRegExp(href), () => newHref);
         return fs.outputFile(dest, buffer);
