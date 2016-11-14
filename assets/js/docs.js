@@ -184,7 +184,7 @@
       this.handleSearchChange(event.target.value);
     },
 
-    'onClickFuncName': function() {
+    'onClickMenuItem': function() {
       toggleMobileMenu(false);
     },
 
@@ -203,7 +203,7 @@
       }
     },
 
-    'onRefFuncName': function(node) {
+    'onRefMenuItem': function(node) {
       focusLast = node;
     },
 
@@ -271,8 +271,8 @@
                   'a',
                   {
                     'href': entry.get('href'),
-                    'onClick': _this.onClickFuncName,
-                    'ref': isLastEntry ? _this.onRefFuncName : undefined
+                    'onClick': _this.onClickMenuItem,
+                    'ref': isLastEntry ? _this.onRefMenuItem : undefined
                   },
                   React.createElement(
                     'code',
