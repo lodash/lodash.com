@@ -253,7 +253,7 @@ gulp.task('build-vendor', () =>
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed.vendor, items => items.forEach(push));
-    resources = _.filter(resources, ({ href }) => href.includes('jsdelivr.net'));
+    resources = _.filter(resources, ({ href }) => !href.endsWith('/'));
 
     return Promise.all(resources.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
