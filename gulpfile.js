@@ -247,18 +247,18 @@ gulp.task('build-sw', () => {
 
 gulp.task('build-vendor', () =>
   readSource('_config.yml').then(config => {
-    let resources = [];
+    let urls = [];
     const parsed = parseYAML(config);
-    const push = ({ href }) => resources.push(URL.parse(href));
+    const push = ({ href }) => urls.push(URL.parse(href));
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed.vendor, items => items.forEach(push));
-    resources = _.filter(resources, ({ href }) => !href.endsWith('/'));
+    urls = _.filter(urls, ({ href }) => !href.endsWith('/'));
 
-    return Promise.all(resources.map(({ href }) => fetch(href)))
+    return Promise.all(urls.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
-        const url = resources[index];
+        const url = urls[index];
         const dest = path.join('vendor', url.hostname, url.path.slice(1));
         const newHref = '/' + dest.split(path.sep).join('/');
 
