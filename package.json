@@ -6,9 +6,10 @@
     "node": ">=7.0.0"
   },
   "scripts": {
-    "build": "npm run build:jekyll && npm run build:gulp",
+    "build": "npm run build:vendor && npm run build:jekyll && npm run build:gulp",
     "build:config": "gulp build-config --release",
     "build:gulp": "gulp build",
+    "build:vendor": "gulp build-vendor",
     "build:jekyll": "cross-env JEKYLL_ENV=production PAGES_GITHUB_HOSTNAME=lodash.com bundle exec jekyll build"
   },
   "devDependencies": {
