@@ -220,3 +220,6 @@ Add CSP header directives.
 /*.appcache
   Cache-Control: no-cache
   Content-Type: text/cache-manifest
+
+/vendor/cdn.jsdelivr.net/g/*
+  Content-Type: application/javascript
