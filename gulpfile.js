@@ -149,6 +149,19 @@ function cleanSource(source) {
 }
 
 /**
+ * A thin wrapper around `gulp.src` to enforce task-wide negated glob patterns.
+ *
+ * @private
+ * @param {Array|string} glob The glob to read.
+ * @returns {Stream} Returns the Vinyl file stream of globbed matches.
+ */
+function gulpSrc(glob, opts) {
+  glob = _.castArray(glob);
+  glob.push('!node_modules/**/*', '!_site/vendor/**/*', '!vendor/**/*');
+  return gulp.src(glob, opts);
+}
+
+/**
  * Converts a `yaml` string into an object.
  *
  * @private
@@ -269,7 +282,7 @@ gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
 
 gulp.task('build-app-icons', () =>
   pump([
-    gulp.src(['**/*.{png,svg}', '!node_modules/**/*', '!_site/**/*'], opts),
+    gulpSrc(['**/*.{png,svg}', '!_site/**/*'], opts),
     responsive(require('./icons'), plugins.responsive),
     gulp.dest('_site/icons/')
   ], cb)
@@ -286,7 +299,7 @@ gulp.task('build-favicon', () =>
 
 gulp.task('minify-css', () =>
   pump([
-    gulp.src(['_site/**/*.css', '!_site/vendor/**/*'], opts),
+    gulpSrc('_site/**/*.css', opts),
     purify(['_site/**/*.html', '_site/assets/**/*.js'], plugins.purify),
     cssnano(plugins.cssnano),
     gulp.dest(base)
@@ -295,7 +308,7 @@ gulp.task('minify-css', () =>
 
 gulp.task('minify-html', () =>
   pump([
-    gulp.src(['_site/**/*.html', '!_site/vendor/**/*'], opts),
+    gulpSrc('_site/**/*.html', opts),
     htmlmin(plugins.htmlmin.html),
     gulp.dest(base)
   ], cb)
@@ -303,7 +316,7 @@ gulp.task('minify-html', () =>
 
 gulp.task('minify-images', () =>
   pump([
-    gulp.src(['_site/**/*.{png,svg}', '!_site/vendor/**/*'], opts),
+    gulpSrc('_site/**/*.{png,svg}', opts),
     imagemin(plugins.imagemin),
     gulp.dest(base)
   ], cb)
@@ -311,7 +324,7 @@ gulp.task('minify-images', () =>
 
 gulp.task('minify-js', () =>
   pump([
-    gulp.src(['_site/**/*.js', '!_site/vendor/**/*', '!_site/sw.js'], opts),
+    gulpSrc(['_site/**/*.js', '!_site/sw.js'], opts),
     uglify(plugins.uglify),
     gulp.dest(base)
   ], cb)
@@ -319,7 +332,7 @@ gulp.task('minify-js', () =>
 
 gulp.task('minify-json', () =>
   pump([
-    gulp.src(['_site/**/*.json', '!_site/vendor/**/*'], opts),
+    gulpSrc('_site/**/*.json', opts),
     jsonmin(),
     gulp.dest(base)
   ], cb)
@@ -327,7 +340,7 @@ gulp.task('minify-json', () =>
 
 gulp.task('minify-sw', () =>
   pump([
-    gulp.src('_site/sw.js', opts),
+    gulpSrc('_site/sw.js', opts),
     babel(plugins.babel),
     gulp.dest(base)
   ], cb)
@@ -335,7 +348,7 @@ gulp.task('minify-sw', () =>
 
 gulp.task('minify-xml', () =>
   pump([
-    gulp.src(['_site/**/*.xml', '!_site/vendor/**/*'], opts),
+    gulpSrc('_site/**/*.xml', opts),
     htmlmin(plugins.htmlmin.xml),
     gulp.dest(base)
   ], cb)
