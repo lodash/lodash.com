@@ -65,8 +65,6 @@ Add html pages to cache.
 {% for page in site.html_pages %}
   {% assign href = page.url | replace:'.html','' %}
   {% assign cache = cache | push:href %}
-  {% assign href = '/' | append:page.path %}
-  {% assign cache = cache | push:href %}
 {% endfor %}
 
 {% comment %}
