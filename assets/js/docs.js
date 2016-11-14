@@ -362,8 +362,8 @@
     toggleMobileMenu(false);
   });
 
+  // Scroll to the chosen method entry.
   addEventListener('hashchange', function() {
-    // Scroll to the chosen method entry.
     var node = document.getElementById(location.hash.slice(1));
     if (node) {
       node.scrollIntoView();
