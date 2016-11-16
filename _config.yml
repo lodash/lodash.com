@@ -71,7 +71,7 @@ vendor:
     - href: https://embed.runkit.com/
       integrity: sha384-AopOp5MNNAdV2kRPQgGlnI6noZ0Ii6sceGEQruBidfqu+QCMssJqKC0lej1ePFU9
 
-    - href: https://cdn.jsdelivr.net/g/fuse@2.5.0,immutable.js@3.8.1,react@15.3.2(react.min.js+react-dom.min.js)
+    - href: https://cdn.jsdelivr.net/g/fuse@2.5.0,immutable.js@3.8.1,react@15.3.2(react.min.js+react-dom.min.js
       integrity: sha384-NFvWg391HUzxoyYtBHIFpwz8GQwmfhqOTtkoDntpx1pGfKmWfxwcNFPrjQbEXk9L
 
 carbon_ads:
