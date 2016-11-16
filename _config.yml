@@ -60,19 +60,19 @@ builds:
 
 vendor:
   css:
-    - href: https://cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css
-      integrity: sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1
+    - href: https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css
+      integrity: sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN
 
   font:
-    - href: https://cdn.jsdelivr.net/fontawesome/4.6.3/fonts/fontawesome-webfont.woff?v=4.6.3
-    - href: https://cdn.jsdelivr.net/fontawesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3
+    - href: https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0
+    - href: https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0
 
   js:
     - href: https://embed.runkit.com/
       integrity: sha384-AopOp5MNNAdV2kRPQgGlnI6noZ0Ii6sceGEQruBidfqu+QCMssJqKC0lej1ePFU9
 
-    - href: https://cdn.jsdelivr.net/g/fuse@2.5.0,immutable.js@3.8.1,react@15.3.2(react.min.js+react-dom.min.js
-      integrity: sha384-NFvWg391HUzxoyYtBHIFpwz8GQwmfhqOTtkoDntpx1pGfKmWfxwcNFPrjQbEXk9L
+    - href: https://cdn.jsdelivr.net/g/fuse@2.5.0,immutable.js@3.8.1,react@15.4.0(react.min.js+react-dom.min.js
+      integrity: sha384-KNgnkjOIdYCvVr4IpTf80X73SDXCJPEWUS3ZwMV7V/KKVI64DZjD9NThruJTuXZW
 
 carbon_ads:
   href: https://cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=lodashcom
