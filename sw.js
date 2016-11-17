@@ -90,6 +90,28 @@ const prefetch = {{ prefetch | jsonify }}
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
+const reHtml = RegExp('(?:(^|/)index)?\\.html$');
+const reVendor = RegExp('^/vendor/');
+
+/**
+ * A specialized version of `fetch` which replaces vendor paths with their
+ * external counterparts.
+ *
+ * @private
+ * @param {*} resource The resource to fetch.
+ * @returns {Promise} Returns a promise that resolves to the response.
+ */
+function get(resource) {
+  const isReq = resource instanceof Request;
+  const url = new URL(isReq ? resource.url : resource);
+
+  // Convert vendor paths to external paths.
+  if (reVendor.test(url.pathname)) {
+    resource = new URL(url.pathname.replace(reVendor, 'https://') + url.search + url.hash);
+  }
+  return fetch(resource);
+}
+
 /**
  * Checks if `status` is a [redirect code](https://fetch.spec.whatwg.org/#redirect-status).
  *
@@ -124,10 +146,11 @@ function isRedirect(status) {
 function put(cache, resource, response) {
   const isReq = resource instanceof Request;
   const url = new URL(isReq ? resource.url : resource);
+
   // Add cache entry for the extensionless variant.
-  if (url.pathname.endsWith('.html')) {
+  if (reHtml.test(url.pathname)) {
     const extless = new URL(url);
-    extless.pathname = extless.pathname.replace(/(?:(^|\/)index)?\.html$/, '$1');
+    extless.pathname = extless.pathname.replace(reHtml, '$1');
     cache.put(new Request(extless, isReq ? resource : undefined), response.clone());
   }
   return cache.put(resource, response);
@@ -140,7 +163,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri =>
-        fetch(uri)
+        get(uri)
           .then(response => response.ok && put(cache, uri, response))
           .catch(error => console.log(`prefetch failed: ${ uri }`, error))
       ))
@@ -196,7 +219,7 @@ addEventListener('fetch', event => {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
-        return fetch(request).then(response => {
+        return get(request).then(response => {
           if (response.ok) {
             put(cache, request, response.clone());
           }
