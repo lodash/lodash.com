@@ -90,7 +90,7 @@ const prefetch = {{ prefetch | jsonify }}
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
-const reHtml = /(?:(^|\/)index)?\.html$/;
+const reHtml = /(?:(\/)index)?\.html$/;
 const reSplat = /:splat\b/;
 const reVendor = /^\/vendor\//;
 
