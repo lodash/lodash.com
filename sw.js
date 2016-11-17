@@ -90,9 +90,9 @@ const prefetch = {{ prefetch | jsonify }}
 const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
-const reHtml = RegExp('(?:(^|/)index)?\\.html$');
-const reSplat = RegExp(':splat\\b');
-const reVendor = RegExp('^/vendor/');
+const reHtml = /(?:(^|\/)index)?\.html$/;
+const reSplat = /:splat\b/;
+const reVendor = /^\/vendor\//;
 
 /**
  * A specialized version of `fetch` which replaces vendor paths with their
