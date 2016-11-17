@@ -91,6 +91,7 @@ const redirect = [/*insert_redirect*/]
   .map(entry => (entry[1] = new URL(entry[1], location), entry));
 
 const reHtml = RegExp('(?:(^|/)index)?\\.html$');
+const reSplat = RegExp(':splat\\b');
 const reVendor = RegExp('^/vendor/');
 
 /**
@@ -200,7 +201,7 @@ addEventListener('fetch', event => {
             const splat = match ? match[1] : undefined;
             status = isRedirect(status) ? status : 302;
             if (splat !== undefined) {
-              to = new URL(to.pathname.replace(/:splat\b/, splat) + search, location);
+              to = new URL(to.pathname.replace(reSplat, splat) + search, location);
             } else if (!to.search && search) {
               to = new URL(to.pathname + search, location);
             }
