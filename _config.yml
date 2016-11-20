@@ -64,13 +64,6 @@ font-face:
       - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0
       - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0
 
-  inconsolata:
-    normal:
-      - https://fonts.gstatic.com/s/inconsolata/v14/BjAYBlHtW3CJxDcjzrnZCIgp9Q8gbYrhqGlRav_IXfk.woff2
-
-    bold:
-      - https://fonts.gstatic.com/s/inconsolata/v14/AIed271kqQlcIRSOnQH0yf79_ZuUxCigM2DespTnFaw.woff2
-
 vendor:
   css:
     - href: https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css
