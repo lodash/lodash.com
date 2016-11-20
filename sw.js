@@ -33,6 +33,17 @@ Add site css to prefetch.
 {% endfor %}
 
 {% comment %}
+Add site font faces to prefetch.
+{% endcomment %}
+{% for family in site.font-face %}
+  {% for style in family[1] %}
+    {% for href in style[1] %}
+      {% assign prefetch = prefetch | push:href %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
 Add site js prefetch.
 {% endcomment %}
 {% for hrefs in site.js %}

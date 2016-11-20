@@ -218,7 +218,6 @@ gulp.task('build-config', () => {
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed.vendor, items => items.forEach(push));
-    entries = _.filter(entries, 'integrity');
 
     return Promise.all(entries.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.text())))
@@ -255,10 +254,12 @@ gulp.task('build-vendor', () =>
   readSource('_config.yml').then(config => {
     let urls = [];
     const parsed = parseYAML(config);
-    const push = ({ href }) => urls.push(URL.parse(href));
+    const push = value => urls.push(URL.parse(value.href || value));
 
     _.forOwn(parsed.builds, push);
+    _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)));
     _.forOwn(parsed.vendor, items => items.forEach(push));
+
     urls = _.filter(urls, ({ href }) => !href.endsWith('/'));
 
     return Promise.all(urls.map(({ href }) => fetch(href)))

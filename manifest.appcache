@@ -39,7 +39,18 @@ Add site css to cache.
 {% endfor %}
 
 {% comment %}
-Add site js cache.
+Add site font faces to cache.
+{% endcomment %}
+{% for family in site.font-face %}
+  {% for style in family[1] %}
+    {% for href in style[1] %}
+      {% assign cache = cache | push:href %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
+Add site js to cache.
 {% endcomment %}
 {% for hrefs in site.js %}
   {% for href in hrefs[1] %}

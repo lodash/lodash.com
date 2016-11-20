@@ -25,6 +25,7 @@ csp:
   ]
   font-src: [
     "'self'",
+    'https://fonts.gstatic.com',
     'https://cdn.jsdelivr.net'
   ]
   frame-src: [
@@ -88,14 +89,6 @@ Add resource hints for site-wide css.
 {% endfor %}
 
 {% comment %}
-Add resource hints for site-wide js.
-{% endcomment %}
-{% for href in site.js.all %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
-  {% assign all = all | push:hint %}
-{% endfor %}
-
-{% comment %}
 Add resource hints for site-wide vendor css.
 {% endcomment %}
 {% for res in site.vendor.css %}
@@ -104,10 +97,22 @@ Add resource hints for site-wide vendor css.
 {% endfor %}
 
 {% comment %}
-Add resource hints for site-wide vendor fonts.
+Add resource hints for site-wide font faces.
 {% endcomment %}
-{% for res in site.vendor.font %}
-  {% assign hint = '<' | append:res.href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
+{% for family in site.font-face %}
+  {% for style in family[1] %}
+    {% for href in style[1] %}
+      {% assign hint = '<' | append:href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
+      {% assign all = all | push:hint %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+{% comment %}
+Add resource hints for site-wide js.
+{% endcomment %}
+{% for href in site.js.all %}
+  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
   {% assign all = all | push:hint %}
 {% endfor %}
 

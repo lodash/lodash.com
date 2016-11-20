@@ -2,11 +2,11 @@
 ---
 
 {% include_relative  _variables.scss %}
-
-@import "mixins";
-@import "default";
-@import "home";
-@import "custom-builds";
-@import "docs";
-@import "syntax-highlight";
-@import "media-queries";
+{% include_relative  _font-face.scss %}
+{% include_relative  _mixins.scss %}
+{% include_relative  _default.scss %}
+{% include_relative  _home.scss %}
+{% include_relative  _docs.scss %}
+{% include_relative  _custom-builds.scss %}
+{% include_relative  _syntax-highlight.scss %}
+{% include_relative  _media-queries.scss %}
