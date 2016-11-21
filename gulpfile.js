@@ -255,6 +255,7 @@ gulp.task('build-vendor', () =>
     let urls = [];
     const parsed = parseYAML(config);
     const push = value => urls.push(URL.parse(value.href || value));
+    const to = href => _.trimEnd(new Buffer(href, 'utf8').toString('base64'), '=') + path.extname(href);
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)));
@@ -266,6 +267,13 @@ gulp.task('build-vendor', () =>
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
         const url = urls[index];
+        const parts = url.pathname.split('/');
+        const lastPart = _.last(parts);
+
+        if (/[@,(+]/.test(lastPart)) {
+          parts[parts.length - 1] = to(lastPart);
+          url.path = parts.join('/') + (url.search || '');
+        }
         const dest = path.join('vendor', url.hostname, url.path.slice(1));
         const newHref = '/' + dest.split(path.sep).join('/');
 

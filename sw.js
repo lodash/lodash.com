@@ -103,26 +103,6 @@ const redirect = [/*insert_redirect*/]
 
 const reHtml = /(?:(\/)index)?\.html$/;
 const reSplat = /:splat\b/;
-const reVendor = /^\/vendor\//;
-
-/**
- * A specialized version of `fetch` which replaces vendor paths with their
- * external counterparts.
- *
- * @private
- * @param {*} resource The resource to fetch.
- * @returns {Promise} Returns a promise that resolves to the response.
- */
-function get(resource) {
-  const isReq = resource instanceof Request;
-  const url = new URL(isReq ? resource.url : resource);
-
-  // Convert vendor paths to external paths.
-  if (reVendor.test(url.pathname)) {
-    resource = new URL(url.pathname.replace(reVendor, 'https://') + url.search + url.hash);
-  }
-  return fetch(resource);
-}
 
 /**
  * Checks if `status` is a [redirect code](https://fetch.spec.whatwg.org/#redirect-status).
@@ -175,7 +155,7 @@ addEventListener('install', event =>
     skipWaiting(),
     caches.open(BUILD_REV).then(cache =>
       Promise.all(prefetch.map(uri =>
-        get(uri)
+        fetch(uri)
           .then(response => response.ok && put(cache, uri, response))
           .catch(error => console.log(`prefetch failed: ${ uri }`, error))
       ))
@@ -231,7 +211,7 @@ addEventListener('fetch', event => {
           return fetch(request);
         }
         // Retry requests that failed during prefetch.
-        return get(request).then(response => {
+        return fetch(request).then(response => {
           if (response.ok) {
             put(cache, request, response.clone());
           }
