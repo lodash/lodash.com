@@ -252,32 +252,21 @@ gulp.task('build-sw', () => {
 
 gulp.task('build-vendor', () =>
   readSource('_config.yml').then(config => {
-    let urls = [];
+    let hrefs = [];
     const parsed = parseYAML(config);
-    const push = value => urls.push(URL.parse(value.href || value));
-    const encode = string => {
-      const encoded = new Buffer(string, 'utf8').toString('base64');
-      return _.trimEnd(encoded, '=') + path.extname(string);
-    };
+    const push = value => hrefs.push(value.href || value);
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)));
     _.forOwn(parsed.vendor, items => items.forEach(push));
 
-    urls = _.filter(urls, ({ href }) => !href.endsWith('/'));
+    hrefs = _.filter(hrefs, href => !href.endsWith('/'));
 
-    return Promise.all(urls.map(({ href }) => fetch(href)))
+    return Promise.all(hrefs.map(href => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
-        const url = urls[index];
-        const dest = path.join('vendor', url.hostname, url.pathname
-          .split('/')
-          // Base64 encode path segments containing a `+`.
-          .map(part => part.includes('+') ? encode(part) : part)
-          .join(path.sep)
-          .concat(url.search || '')
-          .slice(1)
-        );
+        const url = URL.parse(hrefs[index]);
+        const dest = path.join('vendor', url.hostname + url.path);
         const newHref = '/' + dest.split(path.sep).join('/');
         config = config.replace(toRegExp(url.href), () => newHref);
         return fs.outputFile(dest, buffer);
