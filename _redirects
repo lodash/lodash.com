@@ -12,3 +12,5 @@
 /docs/ /docs/{{ site.release }} 200
 
 /license {{ site.links.raw }}/{{ site.release }}/LICENSE 301
+
+/fx_bug_1319846/ /docs/{{ site.release }} 200
