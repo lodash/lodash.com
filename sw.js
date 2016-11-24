@@ -198,9 +198,8 @@ addEventListener('fetch', event => {
             }
             if (match) {
               if (url.href != to.href) {
-                response = Response.redirect(to, status);
-                put(cache, url, response.clone());
-                return response;
+                // Don't cache the redirect response to avoid a Firefox bug.
+                return Response.redirect(to, status);
               }
               break;
             }
