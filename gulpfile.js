@@ -252,15 +252,14 @@ gulp.task('build-sw', () => {
 
 gulp.task('build-vendor', () =>
   readSource('_config.yml').then(config => {
-    let hrefs = [];
+    const hrefs = [];
     const parsed = parseYAML(config);
     const push = value => hrefs.push(value.href || value);
 
     _.forOwn(parsed.builds, push);
     _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)));
     _.forOwn(parsed.vendor, items => items.forEach(push));
-
-    hrefs = _.filter(hrefs, href => !href.endsWith('/'));
+    _.remove(hrefs, href => href.endsWith('/'));
 
     return Promise.all(hrefs.map(href => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
