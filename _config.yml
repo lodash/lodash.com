@@ -64,6 +64,13 @@ font-face:
       - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0
       - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0
 
+  sourcecodepro:
+    normal:
+      - https://fonts.gstatic.com/s/sourcecodepro/v6/mrl8jkM18OlOQN8JLgasD5bPFduIYtoLzwST68uhz_Y.woff
+
+    bold:
+      - https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqZkF8H8ye47wsfpWywda8og.woff2
+
 vendor:
   css:
     - href: https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css
