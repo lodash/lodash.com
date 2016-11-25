@@ -240,11 +240,15 @@ gulp.task('build-sw', () => {
 
   return Promise.all(['_site/_redirects', '_site/sw.js'].map(readSource))
     .then(({ 0:redirects, 1:sw }) => fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', () => {
-      const entries = [];
-      redirects.replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) =>
-        entries.push(`[/^${ escape(from) }/,'${ to }',${ status }]`)
-      );
-      return entries.join(', ');
+      const rules = [];
+      redirects
+        // Remove comments.
+        .replace(/#.*/g, '')
+        // Extract redirect rules.
+        .replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) =>
+          rules.push(`[/^${ escape(from) }/,'${ to }',${ status }]`)
+        );
+      return rules.join(', ');
     })));
 });
 
