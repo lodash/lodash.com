@@ -13,4 +13,5 @@
 
 /license {{ site.links.raw }}/{{ site.release }}/LICENSE 301
 
+# Repro for http://bugzil.la/1319846.
 /fx_bug_1319846/ /docs/{{ site.release }} 200
