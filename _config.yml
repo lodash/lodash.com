@@ -65,6 +65,8 @@ font-face:
       - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0
 
   sourcecodepro:
+    light:
+      - https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqSP2LEk6lMzYsRqr3dHFImA.woff2
     regular:
       - https://fonts.gstatic.com/s/sourcecodepro/v6/mrl8jkM18OlOQN8JLgasD5bPFduIYtoLzwST68uhz_Y.woff2
     bold:
