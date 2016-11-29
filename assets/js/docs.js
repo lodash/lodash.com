@@ -348,7 +348,7 @@
     if (value) {
       location.href = value == '1.3.1'
         ? '{{ site.links.docs_v1 }}'
-        : '/docs/' + value;
+        : '/docs/' + value + location.hash;
     }
   });
 
