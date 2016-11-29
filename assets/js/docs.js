@@ -345,10 +345,11 @@
   // Change the documentation URL.
   versionSelect.addEventListener('change', function(event) {
     var value = event.target.value;
+    var hash = location.hash;
     if (value) {
       location.href = value == '1.3.1'
         ? '{{ site.links.docs_v1 }}'
-        : '/docs/' + value;
+        : '/docs/' + value + hash;
     }
   });
 
