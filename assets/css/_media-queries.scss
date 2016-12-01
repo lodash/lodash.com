@@ -60,6 +60,10 @@
   .container.main {
     margin: 2rem;
   }
+
+  .doc-container, .toc-container {
+    transform: none;
+  }
 }
 
 @media (max-width: $screen-lg-max) {
