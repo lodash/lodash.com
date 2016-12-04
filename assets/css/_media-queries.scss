@@ -61,8 +61,10 @@
     margin: 2rem;
   }
 
-  .doc-container, .toc-container {
-    transform: none;
+  html.docs {
+    .doc-container, .toc-container {
+      transform: none;
+    }
   }
 }
 
