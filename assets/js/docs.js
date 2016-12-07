@@ -35,7 +35,7 @@
       var script = document.createElement('script');
       script.id = '{{ site.carbon_ads.id }}';
       script.src = '{{ site.carbon_ads.href }}';
-      toc.insertBefore(script, toc.firstChild);
+      toc.insertBefore(script);
       carbonated = true;
     }
   }
