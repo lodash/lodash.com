@@ -32,12 +32,12 @@
     if (!carbonated && typeof phantom == 'undefined' &&
         !document.hidden && navigator.onLine &&
           getComputedStyle(mobileMenu).display == 'none') {
+      carbonated = true;
       var script = document.createElement('script');
       script.id = '{{ site.carbon_ads.id }}';
       script.src = '{{ site.carbon_ads.href }}';
       toc.style.transform = 'none';
       toc.insertBefore(script, toc.firstChild);
-      carbonated = true;
     }
   }
 
