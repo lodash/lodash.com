@@ -49,6 +49,10 @@
     return string.replace(/\s+/g, '');
   }
 
+  function decarbonate() {
+    toc.style.transform = '';
+  }
+
   function decode(string) {
     return decodeURIComponent(string).replace(/\+/g, ' ');
   }
@@ -371,10 +375,17 @@
     }
   });
 
+  // Decarbonate if Carbon ad is blocked.
+  addEventListener('load', function() {
+    if (carbonated && !document.getElementById('carbonads')) {
+      decarbonate();
+    }
+  });
+
   document.addEventListener('visibilitychange', carbonate);
 
   document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Carbon Ads.
+    // Initialize Carbon ad.
     if (!document.hidden) {
       carbonate();
     }
