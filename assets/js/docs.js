@@ -34,6 +34,7 @@
           getComputedStyle(mobileMenu).display == 'none') {
       carbonated = true;
       var script = document.createElement('script');
+      script.onerror = decarbonate;
       script.id = '{{ site.carbon_ads.id }}';
       script.src = '{{ site.carbon_ads.href }}';
       toc.style.transform = 'none';
@@ -372,13 +373,6 @@
     var node = document.getElementById(location.hash.slice(1));
     if (node) {
       node.scrollIntoView();
-    }
-  });
-
-  // Decarbonate if Carbon ad is blocked.
-  addEventListener('load', function() {
-    if (carbonated && !document.getElementById('carbonads')) {
-      decarbonate();
     }
   });
 
