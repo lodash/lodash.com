@@ -34,7 +34,7 @@
           getComputedStyle(mobileMenu).display == 'none') {
       carbonated = true;
       var script = document.createElement('script');
-      script.onerror = decarbonate;
+      script.addEventListener('error', decarbonate);
       script.id = '{{ site.carbon_ads.id }}';
       script.src = '{{ site.carbon_ads.href }}';
       toc.style.transform = 'none';
