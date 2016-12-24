@@ -55,7 +55,6 @@ csp:
 hints:
   all: [
     '</sw.js>; rel=preload; as=script; pr=1.0',
-    '</sw.js>; rel=prefetch; as=script; pr=1.0',
     '<https://cdn.jsdelivr.net/>; rel=preconnect; pr=1.0; crossorigin',
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
     '<//maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
@@ -70,10 +69,6 @@ hints:
     '<//ghbtns.com/>; rel=dns-prefetch; pr=1.0; crossorigin',
     '<//platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
-link-types: [
-  'preload',
-  'prefetch'
-]
 ---
 {% capture EOL %}
 {% endcapture %}
@@ -86,20 +81,16 @@ link-types: [
 Add resource hints for site-wide css.
 {% endcomment %}
 {% for href in site.css.all %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ href }}>; rel={{ type }}; as=style; pr=1.0{% endcapture %}
-    {% assign all = all | push:hint %}
-  {% endfor %}
+  {% capture hint %}<{{ href }}>; rel=preload; as=style; pr=1.0{% endcapture %}
+  {% assign all = all | push:hint %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for site-wide vendor css.
 {% endcomment %}
 {% for res in site.vendor.css %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ res.href }}>; rel={{ type }}; as=style; pr=1.0; crossorigin{% endcapture %}
-    {% assign all = all | push:hint %}
-  {% endfor %}
+  {% capture hint %}<{{ res.href }}>; rel=preload; as=style; pr=1.0; crossorigin{% endcapture %}
+  {% assign all = all | push:hint %}
 {% endfor %}
 
 {% comment %}
@@ -108,10 +99,8 @@ Add resource hints for site-wide font faces.
 {% for family in site.font-face %}
   {% for style in family[1] %}
     {% for href in style[1] %}
-      {% for type in page.link-types %}
-        {% capture hint %}<{{ href }}>; rel={{ type }}; as=font; pr=1.0; crossorigin{% endcapture %}
-        {% assign all = all | push:hint %}
-      {% endfor %}
+      {% capture hint %}<{{ href }}>; rel=preload; as=font; pr=1.0; crossorigin{% endcapture %}
+      {% assign all = all | push:hint %}
     {% endfor %}
   {% endfor %}
 {% endfor %}
@@ -120,10 +109,8 @@ Add resource hints for site-wide font faces.
 Add resource hints for site-wide js.
 {% endcomment %}
 {% for href in site.js.all %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ href }}>; rel={{ type }}; as=script; pr=1.0{% endcapture %}
-    {% assign all = all | push:hint %}
-  {% endfor %}
+  {% capture hint %}<{{ href }}>; rel=preload; as=script; pr=1.0{% endcapture %}
+  {% assign all = all | push:hint %}
 {% endfor %}
 
 {% comment %}
@@ -138,30 +125,24 @@ Add site-wide hints to docs and homepage hints.
 Add resource hints for home js.
 {% endcomment %}
 {% for href in site.js.home %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ href }}>; rel={{ type }}; as=script; pr=1.0{% endcapture %}
-    {% assign home = home | push:hint %}
-  {% endfor %}
+  {% capture hint %}<{{ href }}>; rel=preload; as=script; pr=1.0{% endcapture %}
+  {% assign home = home | push:hint %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for docs js.
 {% endcomment %}
 {% for href in site.js.docs %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ href }}>; rel={{ type }}; as=script; pr=1.0{% endcapture %}
-    {% assign docs = docs | push:hint %}
-  {% endfor %}
+  {% capture hint %}<{{ href }}>; rel=preload; as=script; pr=1.0{% endcapture %}
+  {% assign docs = docs | push:hint %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for docs vendor js.
 {% endcomment %}
 {% for res in site.vendor.js %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ res.href }}>; rel={{ type }}; as=script; pr=1.0; crossorigin{% endcapture %}
-    {% assign docs = docs | push:hint %}
-  {% endfor %}
+  {% capture hint %}<{{ res.href }}>; rel=preload; as=script; pr=1.0; crossorigin{% endcapture %}
+  {% assign docs = docs | push:hint %}
 {% endfor %}
 
 {% comment %}
@@ -191,13 +172,8 @@ Add link header for doc pages.
   Link: {{ docs | join:', ' }}
 
 {% for res in site.builds %}
-  {% assign hints = site.data.init.array %}
-  {% for type in page.link-types %}
-    {% capture hint %}<{{ res[1].href }}>; rel={{ type }}; as=script; pr=1.0 crossorigin{% endcapture %}
-    {% assign hints = hints | push:hint %}
-  {% endfor %}
 /docs/{{ res[0] }}*
-  Link: {{ hints | join:', ' }}
+  Link: <{{ res[1].href }}>; rel=preload; as=script; pr=1.0; crossorigin
 {% endfor %}
 
 {% comment %}
