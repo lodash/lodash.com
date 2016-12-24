@@ -1,7 +1,7 @@
 repository: lodash/lodash.com
 
 release:
-  &release 4.17.2
+  &release 4.17.3
 
 releases:
   - *release
@@ -47,8 +47,8 @@ sass:
 
 builds:
   *release:
-    href: https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js
-    integrity: sha384-M/4X4ie0qEUsbFQjmkoTxVlnY9qRl7kx6E3qF1zd86oa3BAn1iPD8XGv0ijRwnbe
+    href: https://cdn.jsdelivr.net/lodash/4.17.3/lodash.min.js
+    integrity: sha384-GPN0G0VeQF5ujMZyicyHbGcT9ZJFqgY91MkH2NRSfCRO8o6cvjKbY06EBwOoGUda
 
   3.10.1:
     href: https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js
