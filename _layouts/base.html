@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="/assets/css/main.css">
   <noscript>
   {% for res in site.vendor.css %}
-    <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin>
   {% endfor %}
   </noscript>
   <script src="/assets/js/boot.js" async></script>
