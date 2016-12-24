@@ -55,6 +55,7 @@ csp:
 hints:
   all: [
     '</sw.js>; rel=preload; as=script; pr=1.0',
+    '</sw.js>; rel=prefetch; as=script; pr=1.0',
     '<https://cdn.jsdelivr.net/>; rel=preconnect; pr=1.0; crossorigin',
     '<https://fonts.typekit.net/>; rel=preconnect; pr=0.25; crossorigin',
     '<//maxcdn.bootstrapcdn.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
@@ -62,16 +63,17 @@ hints:
     '<//static.tonicdev.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//p.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//use.typekit.net/>; rel=dns-prefetch; pr=0.25; crossorigin',
-    '<//ad.atdmt.com/>; rel=dns-prefetch; pr=0.25',
     '<//cdn.carbonads.com/>; rel=dns-prefetch; pr=0.25',
-    '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25',
-    '<//launchbit.com/>; rel=dns-prefetch; pr=0.25',
-    '<//assets.servedby-buysellads.com/>; rel=dns-prefetch; pr=0.25'
+    '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25'
   ]
   home: [
     '<//ghbtns.com/>; rel=dns-prefetch; pr=1.0; crossorigin',
     '<//platform.twitter.com/>; rel=dns-prefetch; pr=1.0; crossorigin'
   ]
+link-types: [
+  'preload',
+  'prefetch'
+]
 ---
 {% capture EOL %}
 {% endcapture %}
@@ -84,16 +86,20 @@ hints:
 Add resource hints for site-wide css.
 {% endcomment %}
 {% for href in site.css.all %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=style; pr=1.0' %}
-  {% assign all = all | push:hint %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ href }}>; rel={{ type }}; as=style; pr=1.0{% endcapture %}
+    {% assign all = all | push:hint %}
+  {% endfor %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for site-wide vendor css.
 {% endcomment %}
 {% for res in site.vendor.css %}
-  {% assign hint = '<' | append:res.href | append:'>; rel=preload; as=style; pr=1.0; crossorigin' %}
-  {% assign all = all | push:hint %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ res.href }}>; rel={{ type }}; as=style; pr=1.0; crossorigin{% endcapture %}
+    {% assign all = all | push:hint %}
+  {% endfor %}
 {% endfor %}
 
 {% comment %}
@@ -102,8 +108,10 @@ Add resource hints for site-wide font faces.
 {% for family in site.font-face %}
   {% for style in family[1] %}
     {% for href in style[1] %}
-      {% assign hint = '<' | append:href | append:'>; rel=preload; as=font; pr=1.0; crossorigin' %}
-      {% assign all = all | push:hint %}
+      {% for type in page.link-types %}
+        {% capture hint %}<{{ href }}>; rel={{ type }}; as=font; pr=1.0; crossorigin{% endcapture %}
+        {% assign all = all | push:hint %}
+      {% endfor %}
     {% endfor %}
   {% endfor %}
 {% endfor %}
@@ -112,8 +120,10 @@ Add resource hints for site-wide font faces.
 Add resource hints for site-wide js.
 {% endcomment %}
 {% for href in site.js.all %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
-  {% assign all = all | push:hint %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ href }}>; rel={{ type }}; as=script; pr=1.0{% endcapture %}
+    {% assign all = all | push:hint %}
+  {% endfor %}
 {% endfor %}
 
 {% comment %}
@@ -128,24 +138,30 @@ Add site-wide hints to docs and homepage hints.
 Add resource hints for home js.
 {% endcomment %}
 {% for href in site.js.home %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
-  {% assign home = home | push:hint %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ href }}>; rel={{ type }}; as=script; pr=1.0{% endcapture %}
+    {% assign home = home | push:hint %}
+  {% endfor %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for docs js.
 {% endcomment %}
 {% for href in site.js.docs %}
-  {% assign hint = '<' | append:href | append:'>; rel=preload; as=script; pr=1.0' %}
-  {% assign docs = docs | push:hint %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ href }}>; rel={{ type }}; as=script; pr=1.0{% endcapture %}
+    {% assign docs = docs | push:hint %}
+  {% endfor %}
 {% endfor %}
 
 {% comment %}
 Add resource hints for docs vendor js.
 {% endcomment %}
 {% for res in site.vendor.js %}
-  {% assign hint = '<' | append:res.href | append:'>; rel=preload; as=script; pr=1.0; crossorigin' %}
-  {% assign docs = docs | push:hint %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ res.href }}>; rel={{ type }}; as=script; pr=1.0; crossorigin{% endcapture %}
+    {% assign docs = docs | push:hint %}
+  {% endfor %}
 {% endfor %}
 
 {% comment %}
@@ -175,8 +191,13 @@ Add link header for doc pages.
   Link: {{ docs | join:', ' }}
 
 {% for res in site.builds %}
+  {% assign hints = site.data.init.array %}
+  {% for type in page.link-types %}
+    {% capture hint %}<{{ res[1].href }}>; rel={{ type }}; as=script; pr=1.0 crossorigin{% endcapture %}
+    {% assign hints = hints | push:hint %}
+  {% endfor %}
 /docs/{{ res[0] }}*
-  Link: <{{ res[1].href }}>; rel=preload; as=script; pr=1.0 crossorigin
+  Link: {{ hints | join:', ' }}
 {% endfor %}
 
 {% comment %}
