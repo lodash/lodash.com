@@ -29,7 +29,12 @@
   <link rel="stylesheet" href="/assets/css/main.css">
   <noscript>
   {% for res in site.vendor.css %}
+    {% assign protocol = res.href | slice:0,6 %}
+    {% if protocol == 'https:' %}
     <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin>
+    {% else %}
+    <link rel="stylesheet" href="{{ res.href }}">
+    {% endif %}
   {% endfor %}
   </noscript>
   <script src="/assets/js/boot.js" async></script>

@@ -33,4 +33,9 @@ layout: base
   </div>
 </footer>
 {% assign res = site.builds[site.release] %}
+{% assign protocol = res.href | slice:0,6 %}
+{% if protocol == 'https:' %}
 <script src="{{ res.href }}" integrity="{{ res.integrity }}" async crossorigin></script>
+{% else %}
+<script src="{{ res.href }}" async></script>
+{% endif %}

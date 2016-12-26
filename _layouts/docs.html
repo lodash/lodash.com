@@ -28,7 +28,12 @@ layout: base
     {% assign resources = site.vendor.js %}
     {% assign resources = resources | unshift:site.builds[page.version] %}
     {% for res in resources %}
+      {% assign protocol = res.href | slice:0,6 %}
+      {% if protocol == 'https:' %}
     <script src="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin></script>
+      {% else %}
+    <script src="{{ res.href }}"></script>
+      {% endif %}
     {% endfor %}
     <script src="/assets/js/docs.js"></script>
   {% endcapture %}
