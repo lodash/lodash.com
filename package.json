@@ -28,7 +28,7 @@
     "gulp-purifycss": "~0.2.0",
     "gulp-responsive": "^2.7.0",
     "gulp-sequence": "^0.4.6",
-    "gulp-uglify": "^2.0.0",
+    "gulp-uglify": "^2.0.1",
     "js-yaml": "^3.7.0",
     "lodash": "^4.17.4",
     "node-fetch": "^1.6.3",
