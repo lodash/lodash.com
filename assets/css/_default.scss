@@ -103,6 +103,7 @@ header {
   padding: 0.8rem 0;
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
 
   .container {
     align-items: center;
