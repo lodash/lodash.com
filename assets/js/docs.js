@@ -91,8 +91,8 @@
     return collapseSpaces(string.toLowerCase());
   }
 
-  function toggleHiddenClass(map, property) {
-    return map.get(property) ? '' : 'hidden';
+  function toggleHiddenClass(object, property) {
+    return object[property] ? '' : 'hidden';
   }
 
   function toggleMobileMenu(state) {
@@ -106,12 +106,15 @@
 
   /*--------------------------------------------------------------------------*/
 
+  var React = Inferno;
+  var ReactDOM = Inferno;
+
   var Menu = React.createClass({
     'displayName': 'Menu',
 
     'getInitialState': function() {
       return {
-        'content': new Immutable.List,
+        'content': [],
         'searchFound': true,
         'searchValue': ''
       };
@@ -120,7 +123,7 @@
     'componentWillMount': function() {
       // Before component mounts, use the initial HTML for its state.
       this.setState({
-        'content': Immutable.fromJS(_.map(toc.children, function(node, key) {
+        'content': _.map(toc.children, function(node, key) {
           return {
             'key': key,
             'title': node.querySelector('h2 code').textContent,
@@ -135,7 +138,7 @@
               };
             })
           };
-        }))
+        })
       });
     },
 
@@ -155,23 +158,22 @@
         'content': this.state.content.map(function(collection) {
           // The collection is visible if `searchValue` matches its title or
           // any of its function entries.
-          var found = !searchValue || searcher.isMatch(collection.get('title')),
+          var found = !searchValue || searcher.isMatch(collection.title),
               visible = found;
 
-          return collection
-            .update('functions', function(functions) {
-              return functions.map(function(entry) {
-                var entryVis = (
-                  found ||
-                  searcher.isMatch(entry.get('name')) ||
-                  searcher.isMatch(entry.get('href').split('#')[1])
-                );
-                visible || (visible = entryVis);
-                searchFound || (searchFound = entryVis);
-                return entry.set('visible', entryVis);
-              });
-            })
-            .set('visible', visible);
+          collection.functions = collection.functions.map(function(entry) {
+            var entryVis = (
+              found ||
+              searcher.isMatch(entry.name) ||
+              searcher.isMatch(entry.href.split('#')[1])
+            );
+            visible || (visible = entryVis);
+            searchFound || (searchFound = entryVis);
+            entry.visible = entryVis;
+            return entry;
+          });
+          collection.visible = visible;
+          return collection;
         }),
         'searchFound': searchFound,
         'searchValue': searchValue
@@ -179,10 +181,10 @@
     },
 
     'onChangeExpanded': function(event, index) {
+      var content = this.state.content;
+      content[index].expanded = !collection[index].expanded;
       this.setState({
-        'content': this.state.content.update(index, function(collection) {
-          return collection.set('expanded', !collection.get('expanded'));
-        })
+        'content': content
       });
     },
 
@@ -223,14 +225,14 @@
     'shouldComponentUpdate': function(nextProps, nextState) {
       return (this.state.searchFound || nextState.searchFound) &&
         (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
-          !this.state.content.equals(nextState.content));
+          !_.isEqual(this.state.content, nextState.content));
     },
 
     'render': function() {
       var _this = this;
 
       var elements = this.state.content.map(function(collection, index, content) {
-        var expanded = collection.get('expanded'),
+        var expanded = collection.expanded,
             isLast = (index + 1) == content.size;
 
         var expanderClick = function(event) {
@@ -242,7 +244,7 @@
         return React.createElement(
           'div',
           {
-            'key': collection.get('key'),
+            'key': collection.key,
             'className': toggleHiddenClass(collection, 'visible')
           },
           React.createElement(
@@ -258,32 +260,32 @@
                 'onKeyPress': expanderClick
               }
             ),
-            collection.get('title')
+            collection.title
           ),
           React.createElement(
             'ul',
             {
               'className': toggleHiddenClass(collection, 'expanded')
             },
-            collection.get('functions').map(function(entry, subIndex, entries) {
+            collection.functions.map(function(entry, subIndex, entries) {
               var isLastEntry = isLast && (subIndex + 1) == entries.size;
               return React.createElement(
                 'li',
                 {
-                  'key': entry.get('key'),
+                  'key': entry.key,
                   'className': toggleHiddenClass(entry, 'visible')
                 },
                 React.createElement(
                   'a',
                   {
-                    'href': entry.get('href'),
+                    'href': entry.href,
                     'onClick': _this.onClickMenuItem,
                     'ref': isLastEntry ? _this.onRefMenuItem : undefined
                   },
                   React.createElement(
                     'code',
                     null,
-                    entry.get('name')
+                    entry.name
                   )
                 )
               );
