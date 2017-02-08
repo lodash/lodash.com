@@ -199,11 +199,11 @@ Add CSP header directives.
 
 /*
   Access-Control-Allow-Origin: https://lodash.com
+  Referrer-Policy: origin-when-cross-origin
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
   Content-Security-Policy: {{ "
-    referrer origin-when-cross-origin;
     block-all-mixed-content;
     report-uri https://lodash.report-uri.io/r/default/csp/enforce;
   " | replace:EOL,' ' | append:csp }}
