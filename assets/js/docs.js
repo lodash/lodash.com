@@ -21,11 +21,11 @@
       version = versionMatch ? versionMatch[0] : '{{ site.release }}'
 
   function Searcher(pattern) {
-    this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 })
+    this.__engine__ = new BitapSearcher(normalizeSearchValue(pattern), { 'threshold': 0.35 })
   }
 
   Searcher.prototype.isMatch = function(text) {
-    return this.__engine__.search(text).isMatch
+    return this.__engine__.search(normalizeSearchValue(text)).isMatch
   }
 
   function carbonate() {
@@ -88,7 +88,11 @@
   }
 
   function normalize(string) {
-    return trim(collapseSpaces(string.toLowerCase())).replace(/^_\./, '')
+    return trim(collapseSpaces(string.toLowerCase()))
+  }
+
+  function normalizeSearchValue(string) {
+    return normalize(string).replace(/^_\.?/, '')
   }
 
   function toggleHiddenClass(object, property) {
@@ -155,14 +159,15 @@
     },
 
     'handleSearchChange': function(searchValue) {
-      var searcher = new Searcher(searchValue),
+      var normed = normalizeSearchValue(searchValue),
+          searcher = new Searcher(searchValue),
           searchFound = false
 
       this.setState({
         'content': this.state.content.map(function(collection) {
           // The collection is visible if `searchValue` matches its title or
           // any of its function entries.
-          var found = !searchValue || searcher.isMatch(collection.title),
+          var found = !normed || searcher.isMatch(collection.title),
               visible = found
 
           collection.functions = collection.functions.map(function(entry) {
