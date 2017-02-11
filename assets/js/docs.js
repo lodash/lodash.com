@@ -88,7 +88,7 @@
   }
 
   function normalize(string) {
-    return collapseSpaces(string.toLowerCase());
+    return trim(collapseSpaces(string.toLowerCase())).replace(/^_\./, '');
   }
 
   function toggleHiddenClass(object, property) {
@@ -102,6 +102,10 @@
     if (state) {
       searchNode.focus();
     }
+  }
+
+  function trim(string) {
+    return string.replace(/^\s+|\s+$/g, '');
   }
 
   /*--------------------------------------------------------------------------*/
