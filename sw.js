@@ -11,7 +11,7 @@ prefetch: [
   '/icons/favicon-32x32.png'
 ]
 ---
-'use strict';
+'use strict'
 
 {% assign ignored = page.ignored %}
 {% assign prefetch = page.prefetch %}
@@ -93,16 +93,16 @@ Cleanup prefetch.
 {% endcomment %}
 {% assign prefetch = prefetch | uniq | sort %}
 
-const BUILD_REV = '{{ site.github.build_revision }}';
+const BUILD_REV = '{{ site.github.build_revision }}'
 
 const prefetch = {{ prefetch | jsonify }}
-  .map(href => new URL(href, location));
+  .map(href => new URL(href, location))
 
 const redirect = [/*insert_redirect*/]
-  .map(entry => (entry[1] = new URL(entry[1], location), entry));
+  .map(entry => (entry[1] = new URL(entry[1], location), entry))
 
-const reHtml = /(?:(\/)index)?\.html$/;
-const reSplat = /:splat\b/;
+const reHtml = /(?:(\/)index)?\.html$/
+const reSplat = /:splat\b/
 
 /**
  * Checks if `status` is a [redirect code](https://fetch.spec.whatwg.org/#redirect-status).
@@ -122,7 +122,7 @@ function isRedirect(status) {
     status === 307 ||
     // Permanent redirect.
     status === 308
-  );
+  )
 }
 
 /**
@@ -136,16 +136,16 @@ function isRedirect(status) {
  * @returns {Promise} Returns a promise that resolves to `undefined`.
  */
 function put(cache, resource, response) {
-  const isReq = resource instanceof Request;
-  const url = new URL(isReq ? resource.url : resource);
+  const isReq = resource instanceof Request
+  const url = new URL(isReq ? resource.url : resource)
 
   // Add cache entry for the extensionless variant.
   if (reHtml.test(url.pathname)) {
-    const extless = new URL(url);
-    extless.pathname = extless.pathname.replace(reHtml, '$1');
-    cache.put(new Request(extless, isReq ? resource : undefined), response.clone());
+    const extless = new URL(url)
+    extless.pathname = extless.pathname.replace(reHtml, '$1')
+    cache.put(new Request(extless, isReq ? resource : undefined), response.clone())
   }
-  return cache.put(resource, response);
+  return cache.put(resource, response)
 }
 
 /*----------------------------------------------------------------------------*/
@@ -161,7 +161,7 @@ addEventListener('install', event =>
       ))
     )
   ]))
-);
+)
 
 addEventListener('activate', event =>
   event.waitUntil(Promise.all([
@@ -173,59 +173,59 @@ addEventListener('activate', event =>
       ))
     )
   ]))
-);
+)
 
 addEventListener('fetch', event => {
-  const { request } = event;
-  const url = new URL(request.url);
+  const { request } = event
+  const url = new URL(request.url)
   event.respondWith(
     caches.open(BUILD_REV).then(cache =>
       cache.match(request).then(response => {
         if (response) {
-          return response;
+          return response
         }
         // Detect URL redirects.
         if (url.origin == location.origin) {
           for (let { 0:pattern, 1:to, 2:status } of redirect) {
-            const match = pattern.exec(url.pathname);
-            const search = to.search || url.search;
-            const splat = match ? match[1] : undefined;
-            status = isRedirect(status) ? status : 302;
+            const match = pattern.exec(url.pathname)
+            const search = to.search || url.search
+            const splat = match ? match[1] : undefined
+            status = isRedirect(status) ? status : 302
             if (splat !== undefined) {
-              to = new URL(to.pathname.replace(reSplat, splat) + search, location);
+              to = new URL(to.pathname.replace(reSplat, splat) + search, location)
             } else if (!to.search && search) {
-              to = new URL(to.pathname + search, location);
+              to = new URL(to.pathname + search, location)
             }
             if (match) {
               if (url.href != to.href) {
-                const response = Response.redirect(to, status);
+                const response = Response.redirect(to, status)
                 // Repro for http://bugzil.la/1319846.
                 if (/fx_bug_1319846/.test(url.href)) {
-                  put(cache, url, response.clone());
+                  put(cache, url, response.clone())
                 }
-                return response;
+                return response
               }
-              break;
+              break
             }
           }
         }
         // Fetch requests that weren't prefetched.
         else if (!prefetch.find(({ href }) => href == url.href)) {
-          return fetch(request);
+          return fetch(request)
         }
         // Retry requests that failed during prefetch.
         return fetch(request).then(response => {
           if (response.ok) {
-            put(cache, request, response.clone());
+            put(cache, request, response.clone())
           }
-          return response;
-        });
+          return response
+        })
       })
       .catch(error => {
         // Respond with a 400 "Bad Request" status.
-        console.log(`fetch failed: ${ url }`, error);
-        return new Response(new Blob, { 'status': 400, 'statusText': 'Bad Request' });
+        console.log(`fetch failed: ${ url }`, error)
+        return new Response(new Blob, { 'status': 400, 'statusText': 'Bad Request' })
       })
     )
   )
-});
+})

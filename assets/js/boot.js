@@ -1,22 +1,22 @@
 ---
 ---
-;(function(root) {
-  'use strict';
+(function(root) {
+  'use strict'
 
   var head = document.head,
-      rootEl = document.documentElement;
+      rootEl = document.documentElement
 
   function addStyleSheet(res) {
-    var link = document.createElement('link');
-    link.crossOrigin = 'anonymous';
-    link.integrity = res.integrity;
-    link.rel = 'stylesheet';
-    link.href = res.href;
-    head.appendChild(link);
+    var link = document.createElement('link')
+    link.crossOrigin = 'anonymous'
+    link.integrity = res.integrity
+    link.rel = 'stylesheet'
+    link.href = res.href
+    head.appendChild(link)
   }
 
   function toggleOffline() {
-    rootEl.classList.toggle('offline');
+    rootEl.classList.toggle('offline')
   }
 
   /*--------------------------------------------------------------------------*/
@@ -28,33 +28,33 @@
   {% endfor %}
 
   // Add asynchronous style sheets.
-  [{{ resources | join:',' }}].forEach(addStyleSheet);
+  [{{ resources | join:',' }}].forEach(addStyleSheet)
 
   {% if jekyll.environment == 'production' %}
   // Register service worker.
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
+    navigator.serviceWorker.register('/sw.js')
   }
   // Fallback to AppCache.
   else if ('applicationCache' in root) {
-    var iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = '/appcache.html';
-    document.body.appendChild(iframe);
+    var iframe = document.createElement('iframe')
+    iframe.style.display = 'none'
+    iframe.src = '/appcache.html'
+    document.body.appendChild(iframe)
   }
   // Initialize Google Analytics.
   if (navigator.onLine) {
     root[root.GoogleAnalyticsObject = '_ga'] = {
       'l': Date.now(),
       'q': {{ site.google_analytics.commands | jsonify }}
-    };
-    var script = document.createElement('script');
-    script.src = '{{ site.google_analytics.href }}';
-    head.appendChild(script);
+    }
+    var script = document.createElement('script')
+    script.src = '{{ site.google_analytics.href }}'
+    head.appendChild(script)
   }
   {% endif %}
 
   // Toggle offline status.
-  addEventListener('offline', toggleOffline);
-  addEventListener('online', toggleOffline);
-}(this));
+  addEventListener('offline', toggleOffline)
+  addEventListener('online', toggleOffline)
+}(this))

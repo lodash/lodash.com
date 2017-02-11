@@ -1,7 +1,7 @@
 ---
 ---
-;(function() {
-  'use strict';
+(function() {
+  'use strict'
 
   var focusLast,
       searchNode,
@@ -18,100 +18,100 @@
       urlSearchValue = getSearchQuery(location.search),
       versionMatch = location.pathname.match(/[\d.]+(?=(?:\.html)?$)/),
       versionSelect = document.getElementById('version'),
-      version = versionMatch ? versionMatch[0] : '{{ site.release }}';
+      version = versionMatch ? versionMatch[0] : '{{ site.release }}'
 
   function Searcher(pattern) {
-    this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 });
+    this.__engine__ = new BitapSearcher(pattern, { 'threshold': 0.35 })
   }
 
   Searcher.prototype.isMatch = function(text) {
-    return this.__engine__.search(text).isMatch;
-  };
+    return this.__engine__.search(text).isMatch
+  }
 
   function carbonate() {
     if (!carbonated && typeof phantom == 'undefined' &&
         !document.hidden && navigator.onLine &&
           getComputedStyle(mobileMenu).display == 'none') {
-      carbonated = true;
-      var script = document.createElement('script');
-      script.addEventListener('error', decarbonate);
-      script.id = '{{ site.carbon_ads.id }}';
-      script.src = '{{ site.carbon_ads.href }}';
-      toc.style.transform = 'none';
-      toc.insertBefore(script, toc.firstChild);
+      carbonated = true
+      var script = document.createElement('script')
+      script.addEventListener('error', decarbonate)
+      script.id = '{{ site.carbon_ads.id }}'
+      script.src = '{{ site.carbon_ads.href }}'
+      toc.style.transform = 'none'
+      toc.insertBefore(script, toc.firstChild)
     }
   }
 
   function className() {
-    return slice.call(arguments).join(' ');
+    return slice.call(arguments).join(' ')
   }
 
   function collapseSpaces(string) {
-    return string.replace(/\s+/g, '');
+    return string.replace(/\s+/g, '')
   }
 
   function decarbonate() {
-    toc.style.transform = '';
+    toc.style.transform = ''
   }
 
   function decode(string) {
-    return decodeURIComponent(string).replace(/\+/g, ' ');
+    return decodeURIComponent(string).replace(/\+/g, ' ')
   }
 
   function getReferSearch(url) {
-    var match = reReferSearch.exec(getSearchQuery(url));
-    return match ? normalize(match[1]) : '';
+    var match = reReferSearch.exec(getSearchQuery(url))
+    return match ? normalize(match[1]) : ''
   }
 
   function getReferSearchValue(url) {
-    var pattern = getReferSearch(url);
+    var pattern = getReferSearch(url)
     return _.findKey(pattern && _.prototype, function(value, key) {
-      return normalize(key) == pattern;
-    }) || '';
+      return normalize(key) == pattern
+    }) || ''
   }
 
   function getSearchQuery(url) {
-    var match = reQuery.exec(url);
-    return match ? decode(match[1]) : '';
+    var match = reQuery.exec(url)
+    return match ? decode(match[1]) : ''
   }
 
   function isClick(event){
     if (event.type == 'click') {
-      return true;
+      return true
     }
-    var key = event.key || event.keyIdentifier;
+    var key = event.key || event.keyIdentifier
     if (key == ' ' || key == 'U+0020') {
-      event.preventDefault();
-      return true;
+      event.preventDefault()
+      return true
     }
-    return key == 'Enter';
+    return key == 'Enter'
   }
 
   function normalize(string) {
-    return trim(collapseSpaces(string.toLowerCase())).replace(/^_\./, '');
+    return trim(collapseSpaces(string.toLowerCase())).replace(/^_\./, '')
   }
 
   function toggleHiddenClass(object, property) {
-    return object[property] ? '' : 'hidden';
+    return object[property] ? '' : 'hidden'
   }
 
   function toggleMobileMenu(state) {
-    state = state === undefined ? !toc.classList.contains('open') : state;
-    mobileMenu.firstChild.title = (state ? 'Collapse' : 'Expand') + ' Menu';
-    toc.classList[state ? 'add' : 'remove']('open');
+    state = state === undefined ? !toc.classList.contains('open') : state
+    mobileMenu.firstChild.title = (state ? 'Collapse' : 'Expand') + ' Menu'
+    toc.classList[state ? 'add' : 'remove']('open')
     if (state) {
-      searchNode.focus();
+      searchNode.focus()
     }
   }
 
   function trim(string) {
-    return string.replace(/^\s+|\s+$/g, '');
+    return string.replace(/^\s+|\s+$/g, '')
   }
 
   /*--------------------------------------------------------------------------*/
 
-  var React = Inferno;
-  var ReactDOM = Inferno;
+  var React = Inferno
+  var ReactDOM = Inferno
 
   var Menu = React.createClass({
     'displayName': 'Menu',
@@ -121,7 +121,7 @@
         'content': [],
         'searchFound': true,
         'searchValue': ''
-      };
+      }
     },
 
     'componentWillMount': function() {
@@ -139,111 +139,111 @@
                 'name': anchor.textContent,
                 'href': anchor.href,
                 'visible': true
-              };
+              }
             })
-          };
+          }
         })
-      });
+      })
     },
 
     'componentDidMount': function() {
-      document.addEventListener('keydown', this.onDocumentKeyDown, true);
+      document.addEventListener('keydown', this.onDocumentKeyDown, true)
     },
 
     'componentWillUnmount': function() {
-      document.removeEventListener('keydown', this.onDocumentKeyDown, true);
+      document.removeEventListener('keydown', this.onDocumentKeyDown, true)
     },
 
     'handleSearchChange': function(searchValue) {
       var searcher = new Searcher(searchValue),
-          searchFound = false;
+          searchFound = false
 
       this.setState({
         'content': this.state.content.map(function(collection) {
           // The collection is visible if `searchValue` matches its title or
           // any of its function entries.
           var found = !searchValue || searcher.isMatch(collection.title),
-              visible = found;
+              visible = found
 
           collection.functions = collection.functions.map(function(entry) {
             var entryVis = (
               found ||
               searcher.isMatch(entry.name) ||
               searcher.isMatch(entry.href.split('#')[1])
-            );
-            visible || (visible = entryVis);
-            searchFound || (searchFound = entryVis);
-            entry.visible = entryVis;
-            return entry;
-          });
-          collection.visible = visible;
-          return collection;
+            )
+            visible || (visible = entryVis)
+            searchFound || (searchFound = entryVis)
+            entry.visible = entryVis
+            return entry
+          })
+          collection.visible = visible
+          return collection
         }),
         'searchFound': searchFound,
         'searchValue': searchValue
-      });
+      })
     },
 
     'onChangeExpanded': function(event, index) {
-      var content = this.state.content;
-      content[index].expanded = !collection[index].expanded;
+      var content = this.state.content
+      content[index].expanded = !collection[index].expanded
       this.setState({
         'content': content
-      });
+      })
     },
 
     'onChangeSearch': function(event) {
-      this.handleSearchChange(event.target.value);
+      this.handleSearchChange(event.target.value)
     },
 
     'onClickMenuItem': function() {
-      toggleMobileMenu(false);
+      toggleMobileMenu(false)
     },
 
     'onDocumentKeyDown': function(event) {
-      var key = event.key || event.keyIdentifier;
+      var key = event.key || event.keyIdentifier
       if ((key == 'Tab' || key == 'U+0009') &&
           toc.classList.contains('open') && event.target === focusLast) {
         // Restart tab cycle.
-        event.preventDefault();
-        focusFirst.focus();
+        event.preventDefault()
+        focusFirst.focus()
       }
       if (key == '/' || key == 'U+002F') {
         // Don't actually type a `/` in the input.
-        event.preventDefault();
-        searchNode.focus();
+        event.preventDefault()
+        searchNode.focus()
       }
     },
 
     'onRefMenuItem': function(node) {
-      focusLast = node;
+      focusLast = node
     },
 
     'onRefSearch': function(node) {
-      searchNode = node;
+      searchNode = node
 
       // Prefill the search field based on the query string or referrer.
-      this.handleSearchChange(urlSearchValue || referSearchValue);
+      this.handleSearchChange(urlSearchValue || referSearchValue)
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
       return (this.state.searchFound || nextState.searchFound) &&
         (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
-          !_.isEqual(this.state.content, nextState.content));
+          !_.isEqual(this.state.content, nextState.content))
     },
 
     'render': function() {
-      var _this = this;
+      var _this = this
 
       var elements = this.state.content.map(function(collection, index, content) {
         var expanded = collection.expanded,
-            isLast = (index + 1) == content.size;
+            isLast = (index + 1) == content.size
 
         var expanderClick = function(event) {
           if (isClick(event)) {
-            _this.onChangeExpanded(event, index);
+            _this.onChangeExpanded(event, index)
           }
-        };
+        }
 
         return React.createElement(
           'div',
@@ -272,7 +272,7 @@
               'className': toggleHiddenClass(collection, 'expanded')
             },
             collection.functions.map(function(entry, subIndex, entries) {
-              var isLastEntry = isLast && (subIndex + 1) == entries.size;
+              var isLastEntry = isLast && (subIndex + 1) == entries.size
               return React.createElement(
                 'li',
                 {
@@ -292,11 +292,11 @@
                     entry.name
                   )
                 )
-              );
+              )
             })
           )
-        );
-      });
+        )
+      })
 
       return React.createElement(
         'div',
@@ -335,92 +335,92 @@
           },
           'Sorry, no matches.'
         )
-      );
+      )
     }
-  });
+  })
 
   /*--------------------------------------------------------------------------*/
 
   ReactDOM.render(
     React.createElement(Menu),
     toc
-  );
+  )
 
   // Select current doc version.
   _.each(versionSelect.options, function(option) {
     if (option.value == version) {
-      option.selected = true;
-      return false;
+      option.selected = true
+      return false
     }
-  });
+  })
 
   // Change the documentation URL.
   versionSelect.addEventListener('change', function(event) {
-    var value = event.target.value;
+    var value = event.target.value
     if (value) {
       location.href = value == '1.3.1'
         ? '{{ site.links.docs_v1 }}'
-        : '/docs/' + value + location.hash;
+        : '/docs/' + value + location.hash
     }
-  });
+  })
 
   // Toggle the mobile menu.
   mobileMenu.addEventListener('click', function(event) {
-    event.preventDefault();
-    toggleMobileMenu();
-  });
+    event.preventDefault()
+    toggleMobileMenu()
+  })
 
   docs.addEventListener('click', function() {
-    toggleMobileMenu(false);
-  });
+    toggleMobileMenu(false)
+  })
 
   // Scroll to the chosen method entry.
   addEventListener('hashchange', function() {
-    var node = document.getElementById(location.hash.slice(1));
+    var node = document.getElementById(location.hash.slice(1))
     if (node) {
-      node.scrollIntoView();
+      node.scrollIntoView()
     }
-  });
+  })
 
-  document.addEventListener('visibilitychange', carbonate);
+  document.addEventListener('visibilitychange', carbonate)
 
   document.addEventListener('DOMContentLoaded', function() {
     // Initialize Carbon ad.
     if (!document.hidden) {
-      carbonate();
+      carbonate()
     }
     // Add REPL buttons.
     if ('innerText' in docs) {
       _.each(docs.querySelectorAll('.highlight.js'), function(div) {
         var button = document.createElement('a'),
-            parent = div.parentNode;
+            parent = div.parentNode
 
-        button.classList.add('btn-repl');
-        button.textContent = 'Try in REPL';
-        button.style.display = navigator.onLine ? '' : 'none';
+        button.classList.add('btn-repl')
+        button.textContent = 'Try in REPL'
+        button.style.display = navigator.onLine ? '' : 'none'
         button.addEventListener('click', function() {
-          var source = div.innerText;
-          parent.removeChild(div);
-          parent.removeChild(button);
+          var source = div.innerText
+          parent.removeChild(div)
+          parent.removeChild(button)
           RunKit.createNotebook({
             'element': parent,
             'nodeVersion': '*',
             'preamble': [
-              'var _ = require("lodash@' + versionSelect.value + '");',
-              '_.assign(global, require("lodash-doc-globals"));',
-              'Object.observe = _.noop;'
+              'var _ = require("lodash@' + versionSelect.value + '")',
+              '_.assign(global, require("lodash-doc-globals"))',
+              'Object.observe = _.noop'
             ].join('\n'),
             'source': source,
             'onLoad': function(notebook) {
-              var iframe = parent.lastElementChild;
-              iframe.style.cssText = 'height:' + iframe.style.height;
-              iframe.classList.add('repl');
-              notebook.evaluate();
+              var iframe = parent.lastElementChild
+              iframe.style.cssText = 'height:' + iframe.style.height
+              iframe.classList.add('repl')
+              notebook.evaluate()
             }
-          });
-        });
-        parent.appendChild(button);
-      });
+          })
+        })
+        parent.appendChild(button)
+      })
     }
-  });
-}());
+  })
+}())
