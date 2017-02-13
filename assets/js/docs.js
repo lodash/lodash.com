@@ -170,6 +170,7 @@
           var found = !normed || searcher.isMatch(collection.title),
               visible = found
 
+          collection = _.clone(collection)
           collection.functions = collection.functions.map(function(entry) {
             var entryVis = (
               found ||
@@ -190,8 +191,10 @@
     },
 
     'onChangeExpanded': function(event, index) {
-      var content = this.state.content
-      content[index].expanded = !content[index].expanded
+      var content = this.state.content.slice(),
+          collection = content[index] = _.clone(content[index])
+
+      collection.expanded = !collection.expanded
       this.setState({
         'content': content
       })
