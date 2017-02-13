@@ -191,7 +191,7 @@
 
     'onChangeExpanded': function(event, index) {
       var content = this.state.content
-      content[index].expanded = !collection[index].expanded
+      content[index].expanded = !content[index].expanded
       this.setState({
         'content': content
       })
