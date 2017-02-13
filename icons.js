@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const _ = require('lodash');
-const path = require('path');
-const manifest = require('./_site/manifest.json');
+const _ = require('lodash')
+const path = require('path')
+const manifest = require('./_site/manifest.json')
 
 /*----------------------------------------------------------------------------*/
 
@@ -10,13 +10,13 @@ module.exports = {
   'assets/img/lodash.svg': _(manifest.icons)
     .reject(['sizes', 'any'])
     .map(icon => {
-      const sizes = icon.sizes.split('x');
+      const sizes = icon.sizes.split('x')
       return {
         'rename': path.basename(icon.src),
         'width': +sizes[0],
         'height': +sizes[1],
         'background': 'rgba(0,0,0,0)'
-      };
+      }
     })
     .push(
       {
@@ -66,4 +66,4 @@ module.exports = {
       'interpolator': 'nearest'
     }
   ]
-};
+}
