@@ -1,41 +1,41 @@
-'use strict';
+'use strict'
 
-const path = require('path');
-const URL = require('url');
+const path = require('path')
+const URL = require('url')
 
-const _ = require('lodash');
-const fetch = require('node-fetch');
-const globby = require('globby');
-const gulp = require('gulp');
-const pump = require('pump');
-const sri = require('sri-toolbox');
-const toIco = require('to-ico');
-const yamljs = require('js-yaml');
+const _ = require('lodash')
+const fetch = require('node-fetch')
+const globby = require('globby')
+const gulp = require('gulp')
+const pump = require('pump')
+const sri = require('sri-toolbox')
+const toIco = require('to-ico')
+const yamljs = require('js-yaml')
 
-const pify = require('pify');
-const fs = pify(require('fs-extra'));
+const pify = require('pify')
+const fs = pify(require('fs-extra'))
 
-const babel = require('gulp-babel');
-const cssnano = require('gulp-cssnano');
-const htmlmin = require('gulp-htmlmin');
-const imagemin = require('gulp-imagemin');
-const jsonmin = require('gulp-jsonmin');
-const purify = require('gulp-purifycss');
-const responsive = require('gulp-responsive');
-const sequence = require('gulp-sequence');
-const uglify = require('gulp-uglify');
+const babel = require('gulp-babel')
+const cssnano = require('gulp-cssnano')
+const htmlmin = require('gulp-htmlmin')
+const imagemin = require('gulp-imagemin')
+const jsonmin = require('gulp-jsonmin')
+const purify = require('gulp-purifycss')
+const responsive = require('gulp-responsive')
+const sequence = require('gulp-sequence')
+const uglify = require('gulp-uglify')
 
-const base = './';
-const opts = { base };
+const base = './'
+const opts = { base }
 
-const cb = e => e && console.log(e.message);
-const readSource = file => fs.readFile(file, 'utf8');
+const cb = e => e && console.log(e.message)
+const readSource = file => fs.readFile(file, 'utf8')
 
 const negatedGlobs = [
   '!_site/vendor/**/*',
   '!node_modules/**/*',
   '!vendor/**/*'
-];
+]
 
 const plugins = {
   'babel': {
@@ -72,14 +72,14 @@ const plugins = {
       'sortAttributes': true,
       'sortClassName': true,
       'useShortDoctype': true
-    };
+    }
 
     const xml = _.defaults({
       'html5': false,
       'removeAttributeQuotes': false
-    }, html);
+    }, html)
 
-    return { html, xml };
+    return { html, xml }
   })(),
 
   'imagemin': [
@@ -117,7 +117,7 @@ const plugins = {
       'warnings': false
     }
   }
-};
+}
 
 /*----------------------------------------------------------------------------*/
 
@@ -130,7 +130,7 @@ const plugins = {
  */
 function cleanFile(filePath) {
   return readSource(filePath)
-    .then(source => fs.writeFile(filePath, cleanSource(source)));
+    .then(source => fs.writeFile(filePath, cleanSource(source)))
 }
 
 /**
@@ -151,7 +151,7 @@ function cleanSource(source) {
     // Repair indentation.
     .replace(/^ (?=[-\w]+:)/gm, '  ') +
     // Add trailing newline.
-    '\n';
+    '\n'
 }
 
 /**
@@ -162,9 +162,9 @@ function cleanSource(source) {
  * @returns {Stream} Returns the Vinyl stream of globbed files.
  */
 function gulpSrc(glob, opts) {
-  glob = _.castArray(glob);
-  glob.push(...negatedGlobs);
-  return gulp.src(glob, opts);
+  glob = _.castArray(glob)
+  glob.push(...negatedGlobs)
+  return gulp.src(glob, opts)
 }
 
 /**
@@ -177,10 +177,10 @@ function gulpSrc(glob, opts) {
 function parseYAML(yaml) {
   // Replace aliases with anchor values to enable parsing.
   yaml.replace(/^ *&(\S+) +(\S+)/gm, (match, anchor, value) => {
-    const reAlias = RegExp(`\\*${ _.escapeRegExp(anchor) }\\b`, 'g');
-    yaml = yaml.replace(reAlias, () => value);
-  });
-  return yamljs.load(yaml);
+    const reAlias = RegExp(`\\*${ _.escapeRegExp(anchor) }\\b`, 'g')
+    yaml = yaml.replace(reAlias, () => value)
+  })
+  return yamljs.load(yaml)
 }
 
 /**
@@ -191,7 +191,7 @@ function parseYAML(yaml) {
  * @returns {RegExp} Returns the converted regexp.
  */
 function toRegExp(string) {
-  return RegExp(`(?:^|\\b)${ _.escapeRegExp(string) }(?:\\b|$)`, 'gm');
+  return RegExp(`(?:^|\\b)${ _.escapeRegExp(string) }(?:\\b|$)`, 'gm')
 }
 
 /*----------------------------------------------------------------------------*/
@@ -203,29 +203,29 @@ gulp.task('build-config', () => {
     // Update `release` alias build href.
     .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
       prelude + href.replace(toRegExp(oldVer), newVer)
-    );
+    )
 
   return readSource('_config.yml').then(config => {
-    const args = process.argv.slice(3);
-    const oldVer = /&release +([\d.]+)/.exec(config)[1];
-    const newVer = args[args.findIndex(arg => arg == '--release') + 1] || oldVer;
+    const args = process.argv.slice(3)
+    const oldVer = /&release +([\d.]+)/.exec(config)[1]
+    const newVer = args[args.findIndex(arg => arg == '--release') + 1] || oldVer
 
-    config = update(config, oldVer, newVer);
+    config = update(config, oldVer, newVer)
 
-    let entries = [];
-    const parsed = parseYAML(config);
-    const push = ({ href, integrity }) => entries.push({ href, integrity });
+    let entries = []
+    const parsed = parseYAML(config)
+    const push = ({ href, integrity }) => entries.push({ href, integrity })
 
-    _.forOwn(parsed.builds, push);
-    _.forOwn(parsed.vendor, items => items.forEach(push));
+    _.forOwn(parsed.builds, push)
+    _.forOwn(parsed.vendor, items => items.forEach(push))
 
     return Promise.all(entries.map(({ href }) => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.text())))
       .then(bodies => fs.writeFile('_config.yml', bodies.reduce((config, body, index) =>
         config.replace(entries[index].integrity, sri.generate({ 'algorithms': ['sha384'] }, body))
-      , config)));
-  });
-});
+      , config)))
+  })
+})
 
 /*----------------------------------------------------------------------------*/
 
@@ -236,58 +236,58 @@ gulp.task('build-sw', () => {
     // Make trailing slashes optional.
     .replace(/\/$/, '(?:/.|/?$)')
     // Escape forward slashes.
-    .replace(/\//g, '\\/');
+    .replace(/\//g, '\\/')
 
   return Promise.all(['_site/_redirects', '_site/sw.js'].map(readSource))
     .then(({ 0:redirects, 1:sw }) => fs.writeFile('_site/sw.js', sw.replace('/*insert_redirect*/', () => {
-      const rules = [];
+      const rules = []
       redirects
         // Remove comments.
         .replace(/#.*/g, '')
         // Extract redirect rules.
         .replace(/^[\t ]*(\S+)[\t ]+(\S+)(?:[\t ]+(\S+))?/gm, (match, from, to, status) =>
           rules.push(`[/^${ escape(from) }/,'${ to }',${ status }]`)
-        );
-      return rules.join(', ');
-    })));
-});
+        )
+      return rules.join(', ')
+    })))
+})
 
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build-vendor', () =>
   readSource('_config.yml').then(config => {
-    const hrefs = [];
-    const parsed = parseYAML(config);
-    const push = value => hrefs.push(value.href || value);
+    const hrefs = []
+    const parsed = parseYAML(config)
+    const push = value => hrefs.push(value.href || value)
 
-    _.forOwn(parsed.builds, push);
-    _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)));
-    _.forOwn(parsed.vendor, items => items.forEach(push));
-    _.remove(hrefs, href => href.endsWith('/'));
+    _.forOwn(parsed.builds, push)
+    _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)))
+    _.forOwn(parsed.vendor, items => items.forEach(push))
+    _.remove(hrefs, href => href.endsWith('/'))
 
     return Promise.all(hrefs.map(href => fetch(href)))
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
-        const url = URL.parse(hrefs[index]);
-        const dest = path.join('vendor', url.hostname + url.path);
-        const newHref = '/' + dest.split(path.sep).join('/');
-        config = config.replace(toRegExp(url.href), () => newHref);
-        return fs.outputFile(dest, buffer);
+        const url = URL.parse(hrefs[index])
+        const dest = path.join('vendor', url.hostname + url.path)
+        const newHref = '/' + dest.split(path.sep).join('/')
+        config = config.replace(toRegExp(url.href), () => newHref)
+        return fs.outputFile(dest, buffer)
       })))
-      .then(() => fs.writeFile('_config.yml', config));
+      .then(() => fs.writeFile('_config.yml', config))
   })
-);
+)
 
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'));
-gulp.task('build-css', ['minify-css']);
-gulp.task('build-headers', () => cleanFile('_site/_headers'));
-gulp.task('build-html', ['minify-html']);
-gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'));
-gulp.task('build-js', sequence('build-sw', ['minify-js', 'minify-sw']));
-gulp.task('build-metadata', ['build-appcache', 'minify-json', 'minify-xml']);
-gulp.task('build-redirects', () => cleanFile('_site/_redirects'));
+gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'))
+gulp.task('build-css', ['minify-css'])
+gulp.task('build-headers', () => cleanFile('_site/_headers'))
+gulp.task('build-html', ['minify-html'])
+gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'))
+gulp.task('build-js', sequence('build-sw', ['minify-js', 'minify-sw']))
+gulp.task('build-metadata', ['build-appcache', 'minify-json', 'minify-xml'])
+gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
 
 gulp.task('build-app-icons', () =>
   pump([
@@ -295,14 +295,14 @@ gulp.task('build-app-icons', () =>
     responsive(require('./icons'), plugins.responsive),
     gulp.dest('_site/icons/')
   ], cb)
-);
+)
 
 gulp.task('build-favicon', () =>
   globby('_site/icons/favicon-*.png')
     .then(files => Promise.all(files.map(file => fs.readFile(file))))
     .then(toIco)
     .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
-);
+)
 
 /*----------------------------------------------------------------------------*/
 
@@ -313,7 +313,7 @@ gulp.task('minify-css', () =>
     cssnano(plugins.cssnano),
     gulp.dest(base)
   ])
-);
+)
 
 gulp.task('minify-html', () =>
   pump([
@@ -321,7 +321,7 @@ gulp.task('minify-html', () =>
     htmlmin(plugins.htmlmin.html),
     gulp.dest(base)
   ], cb)
-);
+)
 
 gulp.task('minify-images', () =>
   pump([
@@ -329,7 +329,7 @@ gulp.task('minify-images', () =>
     imagemin(plugins.imagemin),
     gulp.dest(base)
   ], cb)
-);
+)
 
 gulp.task('minify-js', () =>
   pump([
@@ -337,7 +337,7 @@ gulp.task('minify-js', () =>
     uglify(plugins.uglify),
     gulp.dest(base)
   ], cb)
-);
+)
 
 gulp.task('minify-json', () =>
   pump([
@@ -345,7 +345,7 @@ gulp.task('minify-json', () =>
     jsonmin(),
     gulp.dest(base)
   ], cb)
-);
+)
 
 gulp.task('minify-sw', () =>
   pump([
@@ -353,7 +353,7 @@ gulp.task('minify-sw', () =>
     babel(plugins.babel),
     gulp.dest(base)
   ], cb)
-);
+)
 
 gulp.task('minify-xml', () =>
   pump([
@@ -361,11 +361,11 @@ gulp.task('minify-xml', () =>
     htmlmin(plugins.htmlmin.xml),
     gulp.dest(base)
   ], cb)
-);
+)
 
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build', sequence(
   ['build-headers', 'build-metadata', 'build-redirects'],
   ['build-css', 'build-html', 'build-images', 'build-js']
-));
+))
