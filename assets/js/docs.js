@@ -168,10 +168,10 @@
           // The collection is visible if `searchValue` matches its title or
           // any of its function entries.
           var found = !normed || searcher.isMatch(collection.title),
-              visible = found
+              visible = found,
+              changed = collection.visible !== visible
 
-          collection = _.clone(collection)
-          collection.functions = collection.functions.map(function(entry) {
+          var functions = collection.functions.map(function(entry) {
             var entryVis = (
               found ||
               searcher.isMatch(entry.name) ||
@@ -179,10 +179,19 @@
             )
             visible || (visible = entryVis)
             searchFound || (searchFound = entryVis)
-            entry.visible = entryVis
+            if (entry.visible !== entryVis) {
+              changed = true
+              entry = _.clone(entry)
+              entry.visible = entryVis
+            }
             return entry
           })
-          collection.visible = visible
+
+          if (changed) {
+            collection = _.clone(collection)
+            collection.functions = functions
+            collection.visible = visible
+          }
           return collection
         }),
         'searchFound': searchFound,
@@ -195,9 +204,7 @@
           collection = content[index] = _.clone(content[index])
 
       collection.expanded = !collection.expanded
-      this.setState({
-        'content': content
-      })
+      this.setState({ 'content': content })
     },
 
     'onChangeSearch': function(event) {
