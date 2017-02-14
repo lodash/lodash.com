@@ -181,18 +181,13 @@
             searchFound || (searchFound = entryVis)
             if (entry.visible !== entryVis) {
               changed = true
-              entry = _.clone(entry)
-              entry.visible = entryVis
+              return _.assign({}, entry, { 'visible': entryVis })
             }
             return entry
           })
-
-          if (changed) {
-            collection = _.clone(collection)
-            collection.functions = functions
-            collection.visible = visible
-          }
-          return collection
+          return changed
+            ? _.assign({}, collection, { 'functions': functions, 'visible': visible })
+            : collection
         }),
         'searchFound': searchFound,
         'searchValue': searchValue
@@ -201,9 +196,9 @@
 
     'onChangeExpanded': function(event, index) {
       var content = this.state.content.slice(),
-          collection = content[index] = _.clone(content[index])
+          collection = content[index]
 
-      collection.expanded = !collection.expanded
+      content[index] = _.assign({}, collection, { 'expanded': !collection.expanded })
       this.setState({ 'content': content })
     },
 
