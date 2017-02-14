@@ -114,9 +114,6 @@
 
   /*--------------------------------------------------------------------------*/
 
-  var React = Inferno
-  var ReactDOM = Inferno
-
   var Menu = React.createClass({
     'displayName': 'Menu',
 
