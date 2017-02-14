@@ -21,7 +21,7 @@
       version = versionMatch ? versionMatch[0] : '{{ site.release }}'
 
   function Searcher(pattern) {
-    this.__engine__ = new BitapSearcher(normalizeSearchValue(pattern), { 'threshold': 0.35 })
+    this.__engine__ = new BitapSearcher(normalizeSearchValue(pattern), { 'threshold': 0.25 })
   }
 
   Searcher.prototype.isMatch = function(text) {
