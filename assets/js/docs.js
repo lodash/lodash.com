@@ -296,7 +296,14 @@
                   React.createElement(
                     'code',
                     null,
-                    entry.name
+                    React.createElement(
+                      'span',
+                      {
+                        className: 'subtle-punctuation'
+                      },
+                      '_.'
+                    ),
+                    entry.name.slice(2)
                   )
                 )
               )
