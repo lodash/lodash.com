@@ -293,17 +293,26 @@
                     'onClick': _this.onClickMenuItem,
                     'ref': isLastEntry ? _this.onRefMenuItem : undefined
                   },
-                  React.createElement(
-                    'code',
-                    null,
-                    React.createElement(
-                      'span',
-                      {
-                        className: 'subtle-punctuation'
-                      },
-                      '_.'
-                    ),
-                    entry.name.slice(2)
+                  React.createElement.apply(
+                    this,
+                    [
+                      'code',
+                      null,
+                    ]
+                    .concat(
+                      entry.name.match(/^_\./)
+                      ? [
+                        React.createElement(
+                          'span',
+                          {
+                            className: 'subtle-punctuation'
+                          },
+                          '_.'
+                        ),
+                        entry.name.slice(2)
+                      ]
+                      : entry.name
+                    )
                   )
                 )
               )
