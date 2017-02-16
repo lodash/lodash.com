@@ -300,18 +300,18 @@
                       null,
                     ]
                     .concat(
-                      entry.name.match(/^_\./)
-                      ? [
-                        React.createElement(
-                          'span',
-                          {
-                            className: 'subtle-punctuation'
-                          },
-                          '_.'
-                        ),
-                        entry.name.slice(2)
-                      ]
-                      : entry.name
+                      /^_\./.test(entry.name)
+                        ? [
+                            React.createElement(
+                              'span',
+                              {
+                                'className': 'subtle-punctuation'
+                              },
+                              '_.'
+                            ),
+                            entry.name.slice(2)
+                          ]
+                        : entry.name
                     )
                   )
                 )
