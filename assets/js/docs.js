@@ -280,6 +280,14 @@
             },
             collection.functions.map(function(entry, subIndex, entries) {
               var isLastEntry = isLast && (subIndex + 1) == entries.size
+              var children = [entry.name]
+
+              if (/^_\./.test(name)) {
+                children = [
+                  React.createElement('span', { 'className': 'subtle-punctuation' }, '_.'),
+                  entry.name.slice(2)
+                ]
+              }
               return React.createElement(
                 'li',
                 {
@@ -293,27 +301,10 @@
                     'onClick': _this.onClickMenuItem,
                     'ref': isLastEntry ? _this.onRefMenuItem : undefined
                   },
-                  React.createElement.apply(
-                    this,
-                    [
-                      'code',
-                      null,
-                    ]
-                    .concat(
-                      /^_\./.test(entry.name)
-                        ? [
-                            React.createElement(
-                              'span',
-                              {
-                                'className': 'subtle-punctuation'
-                              },
-                              '_.'
-                            ),
-                            entry.name.slice(2)
-                          ]
-                        : entry.name
-                    )
-                  )
+                  React.createElement.apply(React, [
+                    'code',
+                    null
+                  ].concat(children))
                 )
               )
             })
