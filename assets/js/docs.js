@@ -282,7 +282,7 @@
               var isLastEntry = isLast && (subIndex + 1) == entries.size
               var children = [entry.name]
 
-              if (/^_\./.test(name)) {
+              if (/^_\./.test(entry.name)) {
                 children = [
                   React.createElement('span', { 'className': 'subtle-punctuation' }, '_.'),
                   entry.name.slice(2)
