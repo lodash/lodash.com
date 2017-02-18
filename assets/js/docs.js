@@ -279,8 +279,8 @@
               'className': toggleHiddenClass(collection, 'expanded')
             },
             collection.functions.map(function(entry, subIndex, entries) {
-              var isLastEntry = isLast && (subIndex + 1) == entries.size
-              var children = [entry.name]
+              var children = [entry.name],
+                  isLastEntry = isLast && (subIndex + 1) == entries.size
 
               if (/^_\./.test(entry.name)) {
                 children = [
