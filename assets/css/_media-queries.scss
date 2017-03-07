@@ -49,6 +49,10 @@
     .btn-repl {
       display: none;
     }
+
+    .toc-container {
+      padding-top: calc(56px + 2.4rem); // Offset the container by 56px to make sure the search is always below the header
+    }
   }
 }
 
