@@ -19,7 +19,7 @@
     {% capture href %}{% base64 icons/favicon-16x16.png %}{% endcapture %}
   {% endunless %}
   <link rel="icon" type="image/png" href="{{ href }}" sizes="16x16">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/manifest.webmanifest">
   <link rel="mask-icon" href="/icons/safari-pinned-tab-16x16.svg" color="{{ site.brand_color }}">
   {% assign pageURL = page.url | remove_first:'.html' %}
   {% assign docsURL = '/docs/' | append:site.release %}

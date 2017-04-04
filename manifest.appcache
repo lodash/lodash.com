@@ -2,7 +2,7 @@
 ignored: [
   'appcache.html',
   'manifest.appcache',
-  'manifest.json',
+  'manifest.webmanifest',
   'robots.txt',
   'sw.js'
 ]

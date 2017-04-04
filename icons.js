@@ -1,8 +1,9 @@
 'use strict'
 
 const _ = require('lodash')
+const fs = require('fs')
 const path = require('path')
-const manifest = require('./_site/manifest.json')
+const manifest = JSON.parse(fs.readFileSync('./_site/manifest.webmanifest', 'utf8'))
 
 /*----------------------------------------------------------------------------*/
 

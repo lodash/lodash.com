@@ -6,7 +6,7 @@ ignored: [
 ]
 prefetch: [
   '/sw.js',
-  '/manifest.json',
+  '/manifest.webmanifest',
   '/icons/apple-touch-180x180.png',
   '/icons/favicon-32x32.png'
 ]
