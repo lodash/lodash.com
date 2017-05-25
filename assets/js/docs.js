@@ -398,6 +398,16 @@
 
   document.addEventListener('visibilitychange', carbonate)
 
+  // Jump to correct section on history change (back/forward button)
+  window.addEventListener("hashchange", function(ev) {
+    var elem, target;
+    // target = ev.target.location.hash.substr(1);
+    elem = document.getElementById(location.hash.substr(1));
+    if (elem && elem.scrollIntoView) {
+      elem.scrollIntoView();
+    }
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
     // Initialize Carbon ad.
     if (!document.hidden) {
