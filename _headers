@@ -223,5 +223,9 @@ Add CSP header directives.
   Cache-Control: no-cache
   Content-Type: text/cache-manifest
 
+/*.js.gz
+  Content-Type: application/javascript
+  Content-Encoding: gzip
+
 /*.webmanifest
   Content-Type: application/manifest+json
