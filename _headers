@@ -4,7 +4,12 @@ csp:
     "'none'"
   ]
   child-src: [
-    "'self'"
+    "'self'",
+    'data:',
+    'ms-appx-web:',
+    'https://ghbtns.com',
+    'https://runkit.com',
+    'https://platform.twitter.com'
   ]
   connect-src: [
     'https://lodash.report-uri.io'
