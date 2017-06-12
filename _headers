@@ -31,6 +31,7 @@ csp:
   ]
   font-src: [
     "'self'",
+    'data:',
     'https://fonts.gstatic.com',
     'https://cdn.jsdelivr.net'
   ]
