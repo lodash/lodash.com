@@ -1,7 +1,7 @@
 ---
 csp:
   default-src: [
-    'none'
+    "'none'"
   ]
   child-src: [
     "'self'"
@@ -187,7 +187,7 @@ Add CSP header directives.
     {% capture directive %}{{ entry[0] }} {{ entry[1] | join:' ' }}; {% endcapture %}
     {% assign csp = csp | append:directive %}
     {% for src in entry[1] %}
-      {% unless src == 'data:' or src == 'none' %}
+      {% unless src == 'data:' or src == "'none'" %}
         {% assign connect-src = connect-src | push:src %}
       {% endunless %}
     {% endfor %}
