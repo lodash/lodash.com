@@ -12,8 +12,7 @@ const sri = require('sri-toolbox')
 const toIco = require('to-ico')
 const yamljs = require('js-yaml')
 
-const pify = require('pify')
-const fs = pify(require('fs-extra'))
+const fs = require('fs-extra')
 
 const babel = require('gulp-babel')
 const cssnano = require('gulp-cssnano')
