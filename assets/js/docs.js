@@ -425,6 +425,7 @@
               'Object.observe = _.noop'
             ].join('\n'),
             'source': source,
+            'syntaxTheme': 'atom-light-syntax',
             'onLoad': function(notebook) {
               var iframe = parent.lastElementChild
               iframe.style.cssText = 'height:' + iframe.style.height
