@@ -205,7 +205,9 @@
     },
 
     'onClickMenuItem': function() {
-      if (++clickCount % 4 === 0 && _.isObject(_carbonads)) {
+      if (++clickCount % 4 === 0 &&
+          typeof _carbonads != 'undefined' &&
+          typeof _carbonads.refresh == 'function') {
         try {
           _carbonads.refresh()
         } catch (e) {}
