@@ -7,6 +7,7 @@
       searchNode,
       BitapSearcher = new Fuse().options.searchFn,
       carbonated = false,
+      clickCount = 0,
       docs = document.querySelector('.doc-container'),
       focusFirst = document.querySelector('a'),
       mobileMenu = document.querySelector('.mobile-menu'),
@@ -204,6 +205,11 @@
     },
 
     'onClickMenuItem': function() {
+      if (++clickCount % 4 === 0 && _.isObject(_carbonads)) {
+        try {
+          _carbonads.refresh()
+        } catch (e) {}
+      }
       toggleMobileMenu(false)
     },
 
