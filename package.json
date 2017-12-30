@@ -27,7 +27,7 @@
     "gulp-jsonmin": "^1.1.0",
     "gulp-purifycss": "~0.2.0",
     "gulp-responsive": "^2.7.1",
-    "gulp-sequence": "^0.4.6",
+    "gulp-sequence": "^1.0.0",
     "gulp-uglify": "^3.0.0",
     "js-yaml": "^3.8.4",
     "lodash": "^4.17.4",
