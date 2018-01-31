@@ -268,10 +268,12 @@ gulp.task('build-vendor', () =>
       .then(respes => Promise.all(respes.map(resp => resp.buffer())))
       .then(buffers => Promise.all(buffers.map((buffer, index) => {
         const url = URL.parse(hrefs[index])
-        const dest = path.join('vendor', url.hostname + url.path)
-        const newHref = '/' + dest.split(path.sep).join('/')
+        const withQuery = path.join('vendor', url.hostname + url.path)
+        const withoutQuery = path.join('vendor', url.hostname + url.pathname)
+        const newHref = '/' + withQuery.split(path.sep).join('/')
+
         config = config.replace(toRegExp(url.href), () => newHref)
-        return fs.outputFile(dest, buffer)
+        return fs.outputFile(withoutQuery, buffer)
       })))
       .then(() => fs.writeFile('_config.yml', config))
   })
