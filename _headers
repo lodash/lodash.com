@@ -7,58 +7,58 @@ csp:
     "'self'",
     'data:',
     'ms-appx-web:',
-    'https://ghbtns.com',
-    'https://runkit.com',
-    'https://platform.twitter.com'
+    'ghbtns.com',
+    'runkit.com',
+    'platform.twitter.com'
   ]
   connect-src: [
-    'https://lodash.report-uri.io'
+    'lodash.report-uri.io'
   ]
   img-src: [
     "'self'",
     'data:',
-    'https://*.2mdn.net',
-    'https://*.adsafeprotected.com',
-    'https://ad.atdmt.com',
-    'https://*.buysellads.com',
-    'https://*.c3tag.com',
-    'https://*.convertro.com',
-    'https://ad.doubleclick.net',
-    'https://www.google-analytics.com',
-    'https://www.launchbit.com',
-    'https://launchbit.com',
-    'https://assets.servedby-buysellads.com',
-    'https://*.serving-sys.com'
+    '*.2mdn.net',
+    '*.adsafeprotected.com',
+    'ad.atdmt.com',
+    '*.buysellads.com',
+    '*.c3tag.com',
+    '*.convertro.com',
+    'ad.doubleclick.net',
+    'www.google-analytics.com',
+    'www.launchbit.com',
+    'launchbit.com',
+    'assets.servedby-buysellads.com',
+    '*.serving-sys.com'
   ]
   font-src: [
     "'self'",
     'data:',
-    'https://fonts.gstatic.com',
-    'https://cdn.jsdelivr.net'
+    'fonts.gstatic.com',
+    'cdn.jsdelivr.net'
   ]
   frame-src: [
     "'self'",
     'data:',
     'ms-appx-web:',
-    'https://ghbtns.com',
-    'https://runkit.com',
-    'https://platform.twitter.com'
+    'ghbtns.com',
+    'runkit.com',
+    'platform.twitter.com'
   ]
   manifest-src: [
     "'self'"
   ]
   script-src: [
     "'self'",
-    'https://*.carbonads.com',
-    'https://srv.carbonads.net',
-    'https://adn.fusionads.net',
-    'https://www.google-analytics.com',
-    'https://cdn.jsdelivr.net',
-    'https://embed.runkit.com'
+    '*.carbonads.com',
+    'srv.carbonads.net',
+    'adn.fusionads.net',
+    'www.google-analytics.com',
+    'cdn.jsdelivr.net',
+    'embed.runkit.com'
   ]
   style-src: [
     "'self'",
-    'https://cdn.jsdelivr.net'
+    'cdn.jsdelivr.net'
   ]
 hints:
   all: [
