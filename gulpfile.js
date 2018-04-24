@@ -286,7 +286,7 @@ gulp.task('build-css', ['minify-css'])
 gulp.task('build-headers', () => cleanFile('_site/_headers'))
 gulp.task('build-html', ['minify-html'])
 gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'))
-gulp.task('build-js', sequence('build-sw', ['minify-js', 'minify-sw']))
+gulp.task('build-js', sequence('build-sw'))
 gulp.task('build-metadata', ['build-appcache', 'minify-json', 'minify-xml'])
 gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
 
