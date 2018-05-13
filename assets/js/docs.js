@@ -268,7 +268,11 @@
           },
           React.createElement(
             'h2',
-            null,
+            {
+              'className': 'collapsible-title',
+              'onClick': expanderClick,
+              'onKeyPress': expanderClick
+            },
             React.createElement(
               'i',
               {
