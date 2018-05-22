@@ -82,7 +82,7 @@ vendor:
       integrity: sha384-txLSiuN1HJSO1or/mE1Y6bvgD0cV3WA6Ss7rs9WqvPQ3zthR8w/DzHpB+DVTDAMz
 
 carbon_ads:
-  href: https://cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=lodashcom
+  href: https://cdn.carbonads.com/carbon.js?serve=CKYIEK37&placement=lodashcom
   id: _carbonads_js
 
 google_analytics:
