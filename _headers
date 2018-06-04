@@ -12,6 +12,7 @@ csp:
     'platform.twitter.com'
   ]
   connect-src: [
+    'lodash.report-uri.com',
     'lodash.report-uri.io'
   ]
   img-src: [
@@ -21,6 +22,7 @@ csp:
     '*.adsafeprotected.com',
     'ad.atdmt.com',
     '*.buysellads.com',
+    '*.buysellads.net',
     '*.c3tag.com',
     '*.convertro.com',
     'ad.doubleclick.net',
