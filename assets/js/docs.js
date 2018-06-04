@@ -425,6 +425,10 @@
         button.textContent = 'Try in REPL'
         button.style.display = navigator.onLine ? '' : 'none'
         button.addEventListener('click', function() {
+          if (typeof RunKit === 'undefined') {
+            return
+          }
+
           var source = div.innerText
           parent.removeChild(div)
           parent.removeChild(button)

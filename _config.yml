@@ -77,6 +77,7 @@ vendor:
 
   js:
     - href: https://embed.runkit.com/
+      async: true
 
     - href: https://cdn.jsdelivr.net/g/fuse@2.6.1,react@15.4.0(react.min.js+react-dom.min.js
       integrity: sha384-txLSiuN1HJSO1or/mE1Y6bvgD0cV3WA6Ss7rs9WqvPQ3zthR8w/DzHpB+DVTDAMz

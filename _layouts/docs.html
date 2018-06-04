@@ -29,11 +29,7 @@ layout: base
     {% assign resources = resources | unshift:site.builds[page.version] %}
     {% for res in resources %}
       {% assign protocol = res.href | slice:0,6 %}
-      {% if res.integrity and protocol == 'https:' %}
-    <script src="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin></script>
-      {% else %}
-    <script src="{{ res.href }}"></script>
-      {% endif %}
+    <script src="{{ res.href }}"{% if res.integrity and protocol == 'https:' %} integrity="{{ res.integrity }}" crossorigin{% endif %}{% if res.async %} async{% endif %}></script>
     {% endfor %}
     <script src="/assets/js/docs.js"></script>
   {% endcapture %}
