@@ -31,7 +31,7 @@ layout: base
       {% assign protocol = res.href | slice:0,6 %}
     <script src="{{ res.href }}"{% if res.integrity and protocol == 'https:' %} integrity="{{ res.integrity }}" crossorigin{% endif %}{% if res.async %} async{% endif %}></script>
     {% endfor %}
-    <script src="/assets/js/docs.js"></script>
+    <script src="/assets/js/docs.js" async></script>
   {% endcapture %}
   {{ content | replace_first:'class="doc-container">',scripts }}
 </div>
