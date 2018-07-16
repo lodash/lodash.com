@@ -109,8 +109,10 @@ Add resource hints for site-wide font faces.
 {% for family in site.font-face %}
   {% for style in family[1] %}
     {% for href in style[1] %}
-      {% capture hint %}<{{ href }}>; rel=preload; as=font; pr=1.0; crossorigin{% endcapture %}
-      {% assign all = all | push:hint %}
+      {% if href contains '.woff2' %}
+        {% capture hint %}<{{ href }}>; rel=preload; as=font; pr=1.0; crossorigin{% endcapture %}
+        {% assign all = all | push:hint %}
+      {% endif %}
     {% endfor %}
   {% endfor %}
 {% endfor %}
