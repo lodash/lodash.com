@@ -8,8 +8,13 @@
 
   function addStyleSheet(res) {
     var link = document.createElement('link')
-    link.crossOrigin = 'anonymous'
-    link.integrity = res.integrity
+
+    if (res.integrity &&
+        res.href.slice(0, 6) === 'https:') {
+      link.crossOrigin = 'anonymous'
+      link.integrity = res.integrity
+    }
+
     link.rel = 'stylesheet'
     link.href = res.href
     head.appendChild(link)
