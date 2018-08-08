@@ -14,15 +14,13 @@ try {
   );
 }
 
-const pify = require('pify');
 const fs = require('fs-extra');
+const execa = require('execa');
 const getTemporaryFilePath = require('gettemporaryfilepath');
 
 require('promise.prototype.finally').shim();
 
 const allowedFormats = ['woff', 'woff2'];
-
-const execFile = pify(childProcess.execFile);
 
 function subsetLocalFont(inputFile, format, unicodes = '*') {
   if (!allowedFormats.includes(format)) {
@@ -50,7 +48,7 @@ function subsetLocalFont(inputFile, format, unicodes = '*') {
     args.push('--with-zopfli');
   }
 
-  return execFile('pyftsubset', args)
+  return execa('pyftsubset', args)
     .catch(err => {
       if (
         err.message.includes(
