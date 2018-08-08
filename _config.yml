@@ -16,9 +16,6 @@ css:
     - /assets/css/main.css
 
 js:
-  all:
-    - /assets/js/boot.js
-
   docs:
     - /assets/js/docs.js
 
