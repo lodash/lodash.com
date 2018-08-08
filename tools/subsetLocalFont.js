@@ -14,16 +14,15 @@ try {
   );
 }
 
-const util = require('util');
-const fs = require('fs');
+const pify = require('pify');
+const fs = require('fs-extra');
 const getTemporaryFilePath = require('gettemporaryfilepath');
 
 require('promise.prototype.finally').shim();
 
 const allowedFormats = ['woff', 'woff2'];
 
-const readFile = util.promisify(fs.readFile);
-const execFile = util.promisify(childProcess.execFile);
+const execFile = pify(childProcess.execFile);
 
 function subsetLocalFont(inputFile, format, unicodes = '*') {
   if (!allowedFormats.includes(format)) {
@@ -63,7 +62,7 @@ function subsetLocalFont(inputFile, format, unicodes = '*') {
 
       throw err;
     })
-    .then(() => readFile(tempOutputFileName))
+    .then(() => fs.readFile(tempOutputFileName))
     .finally(() => {
       fs.unlink(tempOutputFileName, () => {});
     });
