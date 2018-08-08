@@ -18,7 +18,7 @@ const formats = [
   'woff'
 ];
 
-const cssPath = path.resolve(__dirname, '../vendor/cdn.jsdelivr.net/fontawesome/4.7.0/css');
+const cssPath = path.resolve(__dirname, 'cdn.jsdelivr.net/fontawesome/4.7.0/css');
 
 function unquote(str) {
   return str.replace(/^["']|["']$/g, '').replace('\\', '');
@@ -82,8 +82,6 @@ const cssAst = fs.readFile(`${cssPath}/font-awesome.min.css`, 'utf8')
         .then(srcValue => {
           fontFace.walkDecls('src', decl => decl.remove());
           fontFace.append({ prop: 'src', value: srcValue });
-
-          console.error(fontFace.toString() + styles);
 
           console.log(fontFace.toString() + styles);
         });

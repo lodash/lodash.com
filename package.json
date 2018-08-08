@@ -6,7 +6,7 @@
     "node": ">=7.0.0"
   },
   "scripts": {
-    "build": "npm run build:jekyll && npm run build:site",
+    "build": "npm run build:jekyll && npm run build:fonts && npm run build:site",
     "build:config": "gulp build-config --release",
     "build:jekyll": "cross-env JEKYLL_ENV=production PAGES_GITHUB_HOSTNAME=lodash.com bundle exec jekyll build",
     "build:fonts": "node tools/subset-fontawesome.js >> _site/assets/css/main.css",
