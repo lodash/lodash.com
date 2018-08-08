@@ -89,6 +89,7 @@ exclude:
   - icons.js
   - LICENSE
   - package.json
+  - package-lock.json
   - "*.lock"
   - "*.log"
   - "*.md"
