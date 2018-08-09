@@ -66,7 +66,6 @@ hints:
   all: [
     '</sw.js>; rel=serviceworker',
     '<https://cdn.jsdelivr.net/>; rel=preconnect; pr=1.0; crossorigin',
-    '<//runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//cdn.carbonads.com/>; rel=dns-prefetch; pr=0.25',
     '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25'
   ]
