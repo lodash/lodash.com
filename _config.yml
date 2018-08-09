@@ -87,6 +87,7 @@ exclude:
   - LICENSE
   - package.json
   - package-lock.json
+  - requirements.txt
   - "*.lock"
   - "*.log"
   - "*.md"
