@@ -400,6 +400,8 @@
     toggleMobileMenu(false)
   })
 
+  document.addEventListener('visibilitychange', carbonate)
+
   // Scroll to the chosen method entry.
   addEventListener('hashchange', function() {
     var node = document.getElementById(location.hash.slice(1))
@@ -408,9 +410,7 @@
     }
   })
 
-  document.addEventListener('visibilitychange', carbonate)
-
-  document.addEventListener('DOMContentLoaded', function() {
+  function onLoad() {
     // Initialize Carbon ad.
     if (!document.hidden) {
       carbonate()
@@ -425,7 +425,7 @@
         button.textContent = 'Try in REPL'
         button.style.display = navigator.onLine ? '' : 'none'
         button.addEventListener('click', function() {
-          if (typeof RunKit === 'undefined') {
+          if (typeof RunKit == 'undefined') {
             return
           }
 
@@ -453,5 +453,11 @@
         parent.appendChild(button)
       })
     }
-  })
+  }
+
+  if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', onLoad)
+  } else {
+    addEventListener('load', onLoad)
+  }
 }())
