@@ -27,16 +27,6 @@
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
   <link rel="stylesheet" href="/assets/css/main.css">
-  <noscript>
-  {% for res in site.vendor.css %}
-    {% assign protocol = res.href | slice:0,6 %}
-    {% if res.integrity and protocol == 'https:' %}
-    <link rel="stylesheet" href="{{ res.href }}" integrity="{{ res.integrity }}" crossorigin>
-    {% else %}
-    <link rel="stylesheet" href="{{ res.href }}">
-    {% endif %}
-  {% endfor %}
-  </noscript>
   <script src="/assets/js/boot.js" async></script>
 </head>
 <body class="layout-{{ page.layout }}">

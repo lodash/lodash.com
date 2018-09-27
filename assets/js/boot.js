@@ -6,34 +6,11 @@
   var head = document.head,
       rootEl = document.documentElement
 
-  function addStyleSheet(res) {
-    var link = document.createElement('link')
-
-    if (res.integrity &&
-        res.href.slice(0, 6) === 'https:') {
-      link.crossOrigin = 'anonymous'
-      link.integrity = res.integrity
-    }
-
-    link.rel = 'stylesheet'
-    link.href = res.href
-    head.appendChild(link)
-  }
-
   function toggleOffline() {
     rootEl.classList.toggle('offline')
   }
 
   /*--------------------------------------------------------------------------*/
-
-  {% assign resources = site.data.init.array %}
-  {% for res in site.vendor.css %}
-    {% assign object = res | jsonify %}
-    {% assign resources = resources | push:object %}
-  {% endfor %}
-
-  // Add asynchronous style sheets.
-  [{{ resources | join:',' }}].forEach(addStyleSheet)
 
   {% if jekyll.environment == 'production' %}
   // Register service worker.

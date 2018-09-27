@@ -16,9 +16,6 @@ css:
     - /assets/css/main.css
 
 js:
-  all:
-    - /assets/js/boot.js
-
   docs:
     - /assets/js/docs.js
 
@@ -59,22 +56,13 @@ builds:
     integrity: sha384-i14qZ6FYmJXQABb+YG5tH4NXjKOLznxsr5jFsNiJNRcQ77978BoUif762EQyydgt
 
 font-face:
-  fontawesome:
-    regular:
-      - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0
-      - https://cdn.jsdelivr.net/fontawesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0
-
   sourcecodepro:
     light:
-      - https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqSP2LEk6lMzYsRqr3dHFImA.woff2
+      - /assets/fonts/source-code-pro-v7-latin-300.woff2
     semi-bold:
-      - https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqczFoXZ-Kj537nB_-9jJhlA.woff2
+      - /assets/fonts/source-code-pro-v7-latin-600.woff2
 
 vendor:
-  css:
-    - href: https://cdn.jsdelivr.net/fontawesome/4.7.0/css/font-awesome.min.css
-      integrity: sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN
-
   js:
     - href: https://embed.runkit.com/
       async: true
@@ -92,11 +80,14 @@ google_analytics:
 
 exclude:
   - node_modules
+  - tools
   - Gemfile
   - gulpfile.js
   - icons.js
   - LICENSE
   - package.json
+  - package-lock.json
+  - requirements.txt
   - "*.lock"
   - "*.log"
   - "*.md"

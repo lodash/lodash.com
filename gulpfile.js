@@ -260,7 +260,6 @@ gulp.task('build-vendor', () =>
     const push = value => hrefs.push(value.href || value)
 
     _.forOwn(parsed.builds, push)
-    _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)))
     _.forOwn(parsed.vendor, items => items.forEach(push))
     _.remove(hrefs, href => href.endsWith('/'))
 

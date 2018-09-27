@@ -66,7 +66,6 @@ hints:
   all: [
     '</sw.js>; rel=serviceworker',
     '<https://cdn.jsdelivr.net/>; rel=preconnect; pr=1.0; crossorigin',
-    '<//runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//cdn.carbonads.com/>; rel=dns-prefetch; pr=0.25',
     '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25'
   ]
@@ -180,7 +179,7 @@ Add link header for doc pages.
 
 {% for res in site.builds %}
 /docs/{{ res[0] }}*
-  Link: <{{ res[1].href }}>; rel=preload; as=script; pr=1.0; crossorigin
+  Link: {{ docs | join:', ' }}, <{{ res[1].href }}>; rel=preload; as=script; pr=1.0; crossorigin
 {% endfor %}
 
 {% comment %}
