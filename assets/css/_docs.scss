@@ -172,7 +172,7 @@ html.docs {
     width: 100%;
 
     input {
-      -webkit-appearance: none;
+      appearance: none;
       border: none;
       border-bottom: 2px solid $defaultLiteColor;
       border-radius: 0;
