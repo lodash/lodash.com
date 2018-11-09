@@ -5620,6 +5620,12 @@ properties may be accessed as free variables in the template. If a setting
 object is given, it takes precedence over <a href="#templateSettings"><code>_.templateSettings</code></a> values.
 <br>
 <br>
+<strong>Warning: </strong> Do not run user input through this method. Because of the evaluation functionallity,
+this could represent a huge security breach.
+If you do need to run user input through the <code>template</code> function, make sure you pass an options object setting
+the &quote;evaluate&quote; option to false, so the user is not able to run malicious code on your application.
+<br>
+<br>
 <strong>Note:</strong> In the development build <a href="#template"><code>_.template</code></a> utilizes
 <a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/#toc-sourceurl">sourceURLs</a>
 for easier debugging.
