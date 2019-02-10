@@ -213,17 +213,6 @@ Add CSP header directives.
     block-all-mixed-content;
     report-uri https://lodash.report-uri.io/r/default/csp/enforce;
   " | replace:EOL,' ' | append:csp }}
-  Public-Key-Pins: {{ '
-    pin-sha256="YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=";
-    pin-sha256="sRHdihwgkaib1P1gxX8HFszlD+7/gTfNvuAybgLPNis=";
-    pin-sha256="Vjs8r4z+80wjNcr1YKepWQboSIRi63WsWXhIMN+eWys=";
-    pin-sha256="ssn0bp3aJM2vUYUXtSHIs9ot8zpUBmg5WyHJAKcWZHI=";
-    pin-sha256="pfA53W55Amk+K08h4zEmDgN4p1HSgZU53DVPBp6qN6M=";
-    pin-sha256="5C8kvU039KouVrl52D0eZSGf4Onjo4Khs8tmyTlV3nU=";
-    max-age=5184000;
-    includeSubdomains;
-    report-uri="https://lodash.report-uri.io/r/default/hpkp/enforce"
-  ' | replace:EOL,' ' }}
 
 /*.appcache
   Cache-Control: no-cache
