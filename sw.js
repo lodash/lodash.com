@@ -59,7 +59,7 @@ Add static files to prefetch.
 {% endcomment %}
 {% for file in site.static_files %}
   {% assign basename = file.path | split:'/' | last %}
-  {% unless ignored contains basename %}
+  {% unless ignored contains basename or file.path contains 'anchor-js' %}
     {% assign prefetch = prefetch | push:file.path %}
   {% endunless %}
 {% endfor %}
