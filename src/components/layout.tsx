@@ -6,15 +6,8 @@
  */
 import { graphql, StaticQuery } from "gatsby"
 import React from "react"
-import styled from "styled-components"
-import Header from "./header"
+import Footer from "./footer"
 import "./layout.css"
-
-const Content = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 0 1.0875rem 1.45rem;
-`
 
 const Layout: React.SFC<{}> = ({ children }) => (
   <StaticQuery
@@ -27,18 +20,11 @@ const Layout: React.SFC<{}> = ({ children }) => (
         }
       }
     `}
-    render={data => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Content>
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </Content>
-      </>
+    render={() => (
+      <div>
+        <main>{children}</main>
+        <Footer />
+      </div>
     )}
   />
 )

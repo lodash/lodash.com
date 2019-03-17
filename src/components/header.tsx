@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
+import Container from "./container"
 
 interface HeaderProps {
   siteTitle?: string
@@ -9,12 +10,6 @@ interface HeaderProps {
 const HeaderWrapper = styled.header`
   background: rebeccapurple;
   margin-bottom: 1.45rem;
-`
-
-const HeaderInner = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 1.45rem 1.0875rem;
 `
 
 const Title = styled.h1`
@@ -28,11 +23,11 @@ const StyledLink = styled(Link)`
 
 const Header: React.SFC<HeaderProps> = ({ siteTitle }) => (
   <HeaderWrapper>
-    <HeaderInner>
+    <Container>
       <Title>
         <StyledLink to="/">{siteTitle}</StyledLink>
       </Title>
-    </HeaderInner>
+    </Container>
   </HeaderWrapper>
 )
 
