@@ -4,8 +4,8 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
+import { graphql, StaticQuery } from "gatsby"
 import React from "react"
-import { StaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import Header from "./header"
 import "./layout.css"

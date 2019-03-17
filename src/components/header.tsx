@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 
-type HeaderProps = {
+interface HeaderProps {
   siteTitle?: string
 }
 
