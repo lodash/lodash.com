@@ -1,0 +1,27 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-config-prettier", "tslint-eslint-rules"],
+  "linterOptions": {
+    "exclude": ["node_modules"]
+  },
+  "rules": {
+    "indent": [true, "spaces", 4],
+    "no-constant-condition": true,
+    "no-console": false,
+    "interface-name": [true, "never-prefix"],
+    "object-curly-spacing": true,
+    "object-literal-sort-keys": false,
+
+    "member-access": [true, "no-public"],
+    "no-var-keyword": true,
+    "typedef": [true, "call-signature"],
+    "readonly-keyword": true,
+    "no-eval": true,
+    "no-parameter-reassignment": true,
+    "no-loop-statement": true,
+    "no-object-mutation": true,
+    "no-delete": true,
+    "no-method-signature": true
+  },
+  "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"]
+}
