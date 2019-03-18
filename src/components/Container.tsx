@@ -10,8 +10,8 @@ const ContainerWrapper = styled.div`
   max-width: 100%;
 `
 
-const Container: React.SFC<{}> = ({ children }) => (
-  <ContainerWrapper>{children}</ContainerWrapper>
+const Container: React.SFC<{}> = ({ children, ...restProps }) => (
+  <ContainerWrapper {...restProps}>{children}</ContainerWrapper>
 )
 
 export default Container

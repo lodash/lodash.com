@@ -1,6 +1,8 @@
+import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import Logo from "../images/lodash.svg"
+import Button from "./Button"
 import Container from "./Container"
 
 const HeroWrapper = styled.header`
@@ -16,11 +18,25 @@ const HeroWrapper = styled.header`
   margin-bottom: 1.45rem;
 `
 
+const StyledContainer = styled(Container)`
+  justify-content: center;
+`
+
 const HeroInner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+`
+
+const Row = styled.div`
+  display: flex;
+  width: 100%;
+
+  & + & {
+    margin-top: 32px;
+  }
 `
 
 const Aside = styled.aside`
@@ -29,10 +45,26 @@ const Aside = styled.aside`
   padding-right: 32px;
   justify-content: flex-end;
   align-items: center;
+  font-weight: 700;
+`
+
+const AsideTitle = styled.h3`
+  font-size: 24px;
+  font-weight: 500;
+  align-self: flex-start;
 `
 
 const Content = styled.div`
-  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1 0 65%;
+  font-size: 17px;
+  margin-left: 35%;
+
+  ${Aside} + & {
+    margin-left: 0;
+  }
 `
 
 const Title = styled.h1`
@@ -53,24 +85,90 @@ const StyledLogo = styled(Logo)`
   width: 125px;
 `
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+`
+
+const UL = styled.ul`
+  list-style: none;
+  margin-left: 0;
+
+  li {
+    margin: 0;
+  }
+`
+
+const StyledLink = styled(Link)`
+  color: #fff;
+  border-bottom: 1px solid #75b5ff;
+  text-decoration: none;
+  white-space: nowrap;
+`
+
+const Info = styled.p`
+  color: #ceddf7;
+  font-size: 15px;
+`
+
 const Hero: React.SFC = () => (
   <HeroWrapper>
-    <Container>
+    <StyledContainer>
       <HeroInner>
-        <Aside>
-          <StyledLogo />
-        </Aside>
-        <Content>
-          <Title>
-            Lodash
-            <small>
-              A modern JavaScript utility library delivering modularity,
-              performance & extras.
-            </small>
-          </Title>
-        </Content>
+        <Row>
+          <Aside>
+            <StyledLogo />
+          </Aside>
+          <Content>
+            <Title>
+              Lodash
+              <small>
+                A modern JavaScript utility library delivering modularity,
+                performance & extras.
+              </small>
+            </Title>
+          </Content>
+        </Row>
+
+        <Row>
+          <Content>
+            <ButtonsWrapper>
+              <Button type="primary">Documentation</Button>
+              <Button type="secondary">FP Guide</Button>
+            </ButtonsWrapper>
+          </Content>
+        </Row>
+
+        <Row>
+          <Aside>
+            <AsideTitle>Download</AsideTitle>
+          </Aside>
+          <Content>
+            <UL>
+              <li>
+                <StyledLink to="/">Core build</StyledLink> (
+                <StyledLink to="/">~4kB gzipped</StyledLink>)
+              </li>
+              <li>
+                <StyledLink to="/">Full build</StyledLink> (
+                <StyledLink to="/">~24kB gzipped</StyledLink>)
+              </li>
+              <li>
+                <StyledLink to="/">CDN copies</StyledLink>
+              </li>
+            </UL>
+
+            <Info>
+              Lodash is released under the{" "}
+              <StyledLink to="/">MIT license</StyledLink> & supports modern
+              environments.
+              <br />
+              Review the <StyledLink to="/">build differences</StyledLink> &
+              pick one that’s right for you.
+            </Info>
+          </Content>
+        </Row>
       </HeroInner>
-    </Container>
+    </StyledContainer>
   </HeroWrapper>
 )
 
