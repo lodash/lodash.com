@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 interface ButtonProps {
   type?: "primary" | "secondary"
+  onClick?: () => void
 }
 
 const ButtonWrapper = styled.div<ButtonProps>`
@@ -19,8 +20,10 @@ const ButtonWrapper = styled.div<ButtonProps>`
   }
 `
 
-const Button: React.SFC<ButtonProps> = ({ type, children }) => (
-  <ButtonWrapper type={type}>{children}</ButtonWrapper>
+const Button: React.SFC<ButtonProps> = ({ type, children, ...restProps }) => (
+  <ButtonWrapper type={type} {...restProps}>
+    {children}
+  </ButtonWrapper>
 )
 
 Button.defaultProps = {

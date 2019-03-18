@@ -1,4 +1,4 @@
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import Logo from "../images/lodash.svg"
@@ -132,7 +132,9 @@ const Hero: React.SFC = () => (
         <Row>
           <Content>
             <ButtonsWrapper>
-              <Button type="primary">Documentation</Button>
+              <Button type="primary" onClick={() => navigate("/docs")}>
+                Documentation
+              </Button>
               <Button type="secondary">FP Guide</Button>
             </ButtonsWrapper>
           </Content>
