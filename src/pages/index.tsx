@@ -2,11 +2,11 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 
-import Container from "../components/container"
-import Hero from "../components/hero"
-import Image from "../components/image"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Container from "../components/Container"
+import Hero from "../components/Hero"
+import Image from "../components/Image"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 
 const ImageWrapper = styled.div`
   max-width: 300px;

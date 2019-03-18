@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
-import Container from "./container"
+import Container from "./Container"
 
 interface HeaderProps {
   siteTitle?: string

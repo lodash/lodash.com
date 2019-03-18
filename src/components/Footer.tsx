@@ -1,5 +1,5 @@
 import React from "react"
-import Container from "./container"
+import Container from "./Container"
 
 const Footer: React.SFC<{}> = () => (
   <footer>

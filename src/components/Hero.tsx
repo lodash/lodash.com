@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Logo from "../images/lodash.svg"
-import Container from "./container"
+import Container from "./Container"
 
 const HeroWrapper = styled.header`
   display: flex;
