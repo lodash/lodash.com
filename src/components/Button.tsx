@@ -1,3 +1,4 @@
+import { darken } from "polished"
 import React from "react"
 import styled from "styled-components"
 
@@ -14,6 +15,16 @@ const ButtonWrapper = styled.div<ButtonProps>`
   border-radius: 5px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15),
     0px 6px 10px rgba(255, 223, 52, 0.2);
+  cursor: pointer;
+  transition: 0.3s background;
+
+  &:hover,
+  &:focus {
+    background: ${props =>
+      props.type === "primary"
+        ? darken(0.2, `#ffeb80`)
+        : darken(0.2, `#fffbe5`)};
+  }
 
   & + & {
     margin-left: 8px;
