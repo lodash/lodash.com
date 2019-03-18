@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import Code from "../components/Code"
 import Container from "../components/Container"
+import Footer from "../components/Footer"
 import Hero from "../components/Hero"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -112,6 +113,8 @@ var curryN = require('lodash/fp/curryN');
         available.
       </p>
     </Container>
+
+    <Footer />
   </Layout>
 )
 

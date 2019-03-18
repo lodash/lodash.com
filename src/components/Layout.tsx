@@ -6,7 +6,6 @@
  */
 import { graphql, StaticQuery } from "gatsby"
 import React from "react"
-import Footer from "./Footer"
 import "./layout.css"
 
 const Layout: React.SFC<{}> = ({ children }) => (
@@ -23,7 +22,6 @@ const Layout: React.SFC<{}> = ({ children }) => (
     render={() => (
       <div>
         <main>{children}</main>
-        <Footer />
       </div>
     )}
   />
