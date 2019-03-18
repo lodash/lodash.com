@@ -8,6 +8,14 @@ const ContainerWrapper = styled.div`
   margin: 0 auto;
   width: 1300px;
   max-width: 100%;
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
 `
 
 const Container: React.SFC<{}> = ({ children, ...restProps }) => (
