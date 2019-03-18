@@ -1,14 +1,31 @@
+import { Link } from "gatsby"
 import React from "react"
+import styled from "styled-components"
 import Container from "./Container"
 
+const FooterWrapper = styled.footer`
+  margin-top: 32px;
+  padding: 32px 0;
+  background: #171f26;
+`
+
+const StyledLink = styled(Link)`
+  color: #9cb2ff;
+  text-decoration: none;
+`
+
 const Footer: React.SFC<{}> = () => (
-  <footer>
+  <FooterWrapper>
     <Container>
-      © {new Date().getFullYear()}, Built with
-      {` `}
-      <a href="https://www.gatsbyjs.org">Gatsby</a>
+      <p>
+        Site made with ❤️ by <StyledLink to="/">@veksenn</StyledLink> &{" "}
+        <StyledLink to="/">@zthall</StyledLink>.
+        <br />
+        Maintained by the <StyledLink to="/">core team</StyledLink> with help
+        from <StyledLink to="/">our contributors</StyledLink>.
+      </p>
     </Container>
-  </footer>
+  </FooterWrapper>
 )
 
 export default Footer
