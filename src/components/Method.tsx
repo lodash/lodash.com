@@ -73,6 +73,8 @@ const SubContent = styled.div`
 
 const StyledCode = styled(Code)`
   margin: 0 calc(-18px - 11px);
+  padding-left: calc(18px + 11px);
+  padding-right: calc(18px + 11px);
   background: #171f26;
 `
 

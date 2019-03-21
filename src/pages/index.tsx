@@ -36,18 +36,18 @@ const IndexPage = () => (
       <Title>Installation</Title>
       <p>In a browser:</p>
     </Container>
-    <Code>{`<script src="lodash.js"></script>`}</Code>
+    <Code withContainer>{`<script src="lodash.js"></script>`}</Code>
 
     <Container>
       <p>Using npm:</p>
     </Container>
-    <Code>{`$ npm i -g npm
+    <Code withContainer>{`$ npm i -g npm
 $ npm i --save lodash`}</Code>
 
     <Container>
       <p>In Node.js:</p>
     </Container>
-    <Code>{`// Load the full build.
+    <Code withContainer>{`// Load the full build.
 var _ = require('lodash');
 // Load the core build.
 var _ = require('lodash/core');

@@ -2,6 +2,11 @@ import React from "react"
 import styled from "styled-components"
 import Container from "./Container"
 
+interface CodeProps {
+  children: React.ReactNode
+  withContainer?: boolean
+}
+
 const CodeWrapper = styled.div`
   margin: 32px 0;
   padding: 32px 0;
@@ -34,12 +39,15 @@ const encodeString = (str: React.ReactNode) => {
     : ""
 }
 
-const Code: React.SFC<{}> = ({ children, ...restProps }) => (
+const Code: React.SFC<CodeProps> = ({ children, withContainer = false, ...restProps }) => {
+  const MaybeContainer = withContainer ? Container : React.Fragment;
+
+  return (
   <CodeWrapper {...restProps}>
-    <Container>
+    <MaybeContainer>
       <CodeInner dangerouslySetInnerHTML={{ __html: encodeString(children) }} />
-    </Container>
+    </MaybeContainer>
   </CodeWrapper>
-)
+)}
 
 export default Code
