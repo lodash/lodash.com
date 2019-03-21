@@ -110,7 +110,7 @@ const Info = styled.p`
   font-size: 15px;
 `
 
-const Hero: React.SFC = () => (
+const Hero = (): JSX.Element => (
   <HeroWrapper>
     <StyledContainer>
       <HeroInner>

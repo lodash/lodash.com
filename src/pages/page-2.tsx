@@ -5,7 +5,7 @@ import Container from "../components/Container"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 
-const SecondPage = () => (
+const SecondPage = (): JSX.Element => (
   <Layout>
     <SEO title="Page two" />
     <Container>

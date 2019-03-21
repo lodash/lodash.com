@@ -86,7 +86,7 @@ const InlineCode = styled.code`
   padding: 6px 10px;
 `
 
-const Method: React.SFC<MethodProps> = ({ name, ...restProps }) => (
+const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
   <MethodWrapper {...restProps}>
     <Name>_.{name}</Name>
 

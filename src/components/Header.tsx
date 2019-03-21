@@ -25,7 +25,7 @@ const StyledLogo = styled(Logo)`
   width: 58px;
 `
 
-const Header: React.SFC<HeaderProps> = ({ siteTitle }) => (
+const Header = ({ siteTitle }: HeaderProps): JSX.Element => (
   <HeaderWrapper>
     <LogoWrapper>
       <StyledLogo />

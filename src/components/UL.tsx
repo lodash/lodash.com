@@ -29,7 +29,7 @@ const StyledChevronRight = styled(ChevronRight)`
   }
 `
 
-const UL: React.SFC<ULProps> = ({ items = [], ...restProps }) => {
+const UL = ({ items = [], ...restProps }: ULProps): JSX.Element | null => {
   if (!items.length) {
     return null
   }

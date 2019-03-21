@@ -8,7 +8,7 @@ import { graphql, StaticQuery } from "gatsby"
 import React from "react"
 import "./layout.css"
 
-const Layout: React.SFC<{}> = ({ children }) => (
+const Layout = ({ children }): JSX.Element => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {

@@ -18,7 +18,7 @@ const ContainerWrapper = styled.div`
   }
 `
 
-const Container: React.SFC<{}> = ({ children, ...restProps }) => (
+const Container = ({ children, ...restProps }): JSX.Element => (
   <ContainerWrapper {...restProps}>{children}</ContainerWrapper>
 )
 

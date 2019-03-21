@@ -33,7 +33,7 @@ const ButtonWrapper = styled.div<ButtonProps>`
   }
 `
 
-const Button: React.SFC<ButtonProps> = ({ type, children, ...restProps }) => (
+const Button = ({ type, children, ...restProps }: ButtonProps): JSX.Element => (
   <ButtonWrapper type={type} {...restProps}>
     {children}
   </ButtonWrapper>

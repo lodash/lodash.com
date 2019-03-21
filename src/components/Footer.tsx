@@ -14,7 +14,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
-const Footer: React.SFC<{}> = () => (
+const Footer = (): JSX.Element => (
   <FooterWrapper>
     <Container>
       <p>

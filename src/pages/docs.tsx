@@ -201,7 +201,7 @@ const methodFromPath = (props: any) => {
   return method
 }
 
-const DocsPage = (props: any) => {
+const DocsPage = (props: any): JSX.Element => {
   const currentMethod = methodFromPath(props)
 
   return (

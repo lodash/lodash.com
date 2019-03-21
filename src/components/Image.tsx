@@ -12,7 +12,7 @@ import React from "react"
  * - `gatsby-image`: https://gatsby.dev/gatsby-image
  * - `StaticQuery`: https://gatsby.dev/staticquery
  */
-const Image = () => (
+const Image = (): JSX.Element => (
   <StaticQuery
     query={graphql`
       query {

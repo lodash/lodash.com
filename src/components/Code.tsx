@@ -39,15 +39,22 @@ const encodeString = (str: React.ReactNode) => {
     : ""
 }
 
-const Code: React.SFC<CodeProps> = ({ children, withContainer = false, ...restProps }) => {
-  const MaybeContainer = withContainer ? Container : React.Fragment;
+const Code = ({
+  children,
+  withContainer = false,
+  ...restProps
+}: CodeProps): JSX.Element => {
+  const MaybeContainer = withContainer ? Container : React.Fragment
 
   return (
-  <CodeWrapper {...restProps}>
-    <MaybeContainer>
-      <CodeInner dangerouslySetInnerHTML={{ __html: encodeString(children) }} />
-    </MaybeContainer>
-  </CodeWrapper>
-)}
+    <CodeWrapper {...restProps}>
+      <MaybeContainer>
+        <CodeInner
+          dangerouslySetInnerHTML={{ __html: encodeString(children) }}
+        />
+      </MaybeContainer>
+    </CodeWrapper>
+  )
+}
 
 export default Code

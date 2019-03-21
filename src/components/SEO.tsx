@@ -16,13 +16,13 @@ interface SEOProps {
   title: string
 }
 
-const SEO: React.SFC<SEOProps> = ({
+const SEO = ({
   description,
   lang,
   meta,
   keywords,
   title,
-}) => {
+}: SEOProps): JSX.Element => {
   const { site } = useStaticQuery(graphql`
     query {
       site {

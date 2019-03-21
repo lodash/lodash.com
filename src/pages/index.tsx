@@ -26,7 +26,7 @@ const StyledLink = styled(Link)`
   border-bottom: 1px solid;
 `
 
-const IndexPage = () => (
+const IndexPage = (): JSX.Element => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
 
