@@ -180,7 +180,8 @@ const Methods = styled.div`
 const StyledMethodLink = styled(Link)`
   color: #91a0ae;
   font-size: 16px;
-  line-height: 16px;
+  line-height: 18px;
+  padding: 4px 0;
   text-decoration: none;
   letter-spacing: 1px;
 
