@@ -1,3 +1,4 @@
+import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import Logo from "../images/lodash.svg"
@@ -24,7 +25,9 @@ const StyledLogo = styled(Logo)`
 const Header = (): JSX.Element => (
   <HeaderWrapper>
     <LogoWrapper>
-      <StyledLogo />
+      <Link to="/">
+        <StyledLogo />
+      </Link>
     </LogoWrapper>
   </HeaderWrapper>
 )
