@@ -5,6 +5,7 @@ import styled from "styled-components"
 
 import Header from "../components/Header"
 import Layout from "../components/Layout"
+import Method from "../components/Method"
 import SEO from "../components/SEO"
 
 const ArrayMethods = [
@@ -89,7 +90,7 @@ const Sidebar = styled.aside`
 const Main = styled.main`
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 `
 
 const Content = styled.div`
@@ -175,7 +176,11 @@ const DocsPage = () => (
       </Sidebar>
       <Main>
         <Header />
-        <Content>hello from docs</Content>
+        <Content>
+          {ArrayMethods.map(method => (
+            <Method name={method} />
+          ))}
+        </Content>
       </Main>
     </Wrapper>
   </Layout>

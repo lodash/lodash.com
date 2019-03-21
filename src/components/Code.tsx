@@ -34,8 +34,8 @@ const encodeString = (str: React.ReactNode) => {
     : ""
 }
 
-const Code: React.SFC<{}> = ({ children }) => (
-  <CodeWrapper>
+const Code: React.SFC<{}> = ({ children, ...restProps }) => (
+  <CodeWrapper {...restProps}>
     <Container>
       <CodeInner dangerouslySetInnerHTML={{ __html: encodeString(children) }} />
     </Container>

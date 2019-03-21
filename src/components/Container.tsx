@@ -6,8 +6,8 @@ const ContainerWrapper = styled.div`
   flex-direction: column;
   padding: 0 32px;
   margin: 0 auto;
-  width: 1300px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 1300px;
 
   & > :first-child {
     margin-top: 0;
