@@ -18,9 +18,9 @@ interface SEOProps {
 
 const SEO = ({
   description,
-  lang,
-  meta,
-  keywords,
+  lang = "en",
+  meta = [],
+  keywords = [],
   title,
 }: SEOProps): JSX.Element => {
   const { site } = useStaticQuery(graphql`
@@ -89,12 +89,6 @@ const SEO = ({
         .concat(meta)}
     />
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  keywords: [],
 }
 
 export default SEO

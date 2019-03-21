@@ -174,8 +174,4 @@ const Hero = (): JSX.Element => (
   </HeroWrapper>
 )
 
-Hero.defaultProps = {
-  siteTitle: ``,
-}
-
 export default Hero

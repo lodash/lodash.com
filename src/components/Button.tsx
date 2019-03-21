@@ -34,14 +34,14 @@ const ButtonWrapper = styled.div<ButtonProps>`
   }
 `
 
-const Button = ({ type, children, ...restProps }: ButtonProps): JSX.Element => (
+const Button = ({
+  type = "secondary",
+  children,
+  ...restProps
+}: ButtonProps): JSX.Element => (
   <ButtonWrapper type={type} {...restProps}>
     {children}
   </ButtonWrapper>
 )
-
-Button.defaultProps = {
-  type: "secondary",
-}
 
 export default Button

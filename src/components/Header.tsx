@@ -29,8 +29,4 @@ const Header = (): JSX.Element => (
   </HeaderWrapper>
 )
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
 export default Header
