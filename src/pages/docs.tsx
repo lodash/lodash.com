@@ -10,71 +10,71 @@ import Method from "../components/Method"
 import SEO from "../components/SEO"
 
 const ArrayMethods = [
-  "chunk",
-  "compact",
-  "concat",
-  "difference",
-  "differenceBy",
-  "differenceWith",
-  "drop",
-  "dropRight",
-  "dropRightWhile",
-  "dropWhile",
-  "fill",
-  "findIndex",
-  "findLastIndex",
-  "first -> head",
-  "flatten",
-  "flattenDeep",
-  "flattenDepth",
-  "fromPairs",
-  "head",
-  "indexOf",
-  "initial",
-  "intersection",
-  "intersectionBy",
-  "intersectionWith",
-  "join",
-  "last",
-  "lastIndexOf",
-  "nth",
-  "pull",
-  "pullAll",
-  "pullAllBy",
-  "pullAllWith",
-  "pullAt",
-  "remove",
-  "reverse",
-  "slice",
-  "sortedIndex",
-  "sortedIndexBy",
-  "sortedIndexOf",
-  "sortedLastIndex",
-  "sortedLastIndexBy",
-  "sortedLastIndexOf",
-  "sortedUniq",
-  "sortedUniqBy",
-  "tail",
-  "take",
-  "takeRight",
-  "takeRightWhile",
-  "takeWhile",
-  "union",
-  "unionBy",
-  "unionWith",
-  "uniq",
-  "uniqBy",
-  "uniqWith",
-  "unzip",
-  "unzipWith",
-  "without",
-  "xor",
-  "xorBy",
-  "xorWith",
-  "zip",
-  "zipObject",
-  "zipObjectDeep",
-  "zipWith",
+  { name: "chunk" },
+  { name: "compact" },
+  { name: "concat" },
+  { name: "difference" },
+  { name: "differenceBy" },
+  { name: "differenceWith" },
+  { name: "drop" },
+  { name: "dropRight" },
+  { name: "dropRightWhile" },
+  { name: "dropWhile" },
+  { name: "fill" },
+  { name: "findIndex" },
+  { name: "findLastIndex" },
+  { name: "first", aliasOf: "head" },
+  { name: "flatten" },
+  { name: "flattenDeep" },
+  { name: "flattenDepth" },
+  { name: "fromPairs" },
+  { name: "head" },
+  { name: "indexOf" },
+  { name: "initial" },
+  { name: "intersection" },
+  { name: "intersectionBy" },
+  { name: "intersectionWith" },
+  { name: "join" },
+  { name: "last" },
+  { name: "lastIndexOf" },
+  { name: "nth" },
+  { name: "pull" },
+  { name: "pullAll" },
+  { name: "pullAllBy" },
+  { name: "pullAllWith" },
+  { name: "pullAt" },
+  { name: "remove" },
+  { name: "reverse" },
+  { name: "slice" },
+  { name: "sortedIndex" },
+  { name: "sortedIndexBy" },
+  { name: "sortedIndexOf" },
+  { name: "sortedLastIndex" },
+  { name: "sortedLastIndexBy" },
+  { name: "sortedLastIndexOf" },
+  { name: "sortedUniq" },
+  { name: "sortedUniqBy" },
+  { name: "tail" },
+  { name: "take" },
+  { name: "takeRight" },
+  { name: "takeRightWhile" },
+  { name: "takeWhile" },
+  { name: "union" },
+  { name: "unionBy" },
+  { name: "unionWith" },
+  { name: "uniq" },
+  { name: "uniqBy" },
+  { name: "uniqWith" },
+  { name: "unzip" },
+  { name: "unzipWith" },
+  { name: "without" },
+  { name: "xor" },
+  { name: "xorBy" },
+  { name: "xorWith" },
+  { name: "zip" },
+  { name: "zipObject" },
+  { name: "zipObjectDeep" },
+  { name: "zipWith" },
 ]
 
 const Wrapper = styled.div`
@@ -187,10 +187,11 @@ const DocsPage = (props: any) => {
               {ArrayMethods.map(method => (
                 <div>
                   <StyledMethodLink
-                    to={`/docs/${method}`}
+                    to={`/docs/${method.aliasOf || method.name}`}
                     activeClassName="active"
                   >
-                    _.{method}
+                    _.{method.name}
+                    {method.aliasOf && ` -> ${method.aliasOf}`}
                   </StyledMethodLink>
                 </div>
               ))}
@@ -204,9 +205,9 @@ const DocsPage = (props: any) => {
               <SeeAll onClick={() => navigate("/docs")}>← See all</SeeAll>
             )}
             {ArrayMethods.filter(
-              m => !currentMethod || m === currentMethod
+              m => !currentMethod || m.name === currentMethod
             ).map(method => (
-              <Method name={method} />
+              <Method name={method.name} />
             ))}
           </Content>
         </Main>
