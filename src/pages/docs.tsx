@@ -106,14 +106,19 @@ const Sidebar = styled.aside`
     content: "";
     display: block;
     left: 0;
-    bottom: 32px;
+    bottom: 0;
     width: 320px;
-    height: 110px;
+    height: 142px;
     background: linear-gradient(
       0deg,
-      rgba(41, 56, 69, 1) 0%,
+      rgba(41, 56, 69, 1) 30%,
       rgba(41, 56, 69, 0) 100%
     );
+    transition: opacity 1s;
+  }
+
+  &:hover .scrollbar-container::before {
+    opacity: 0;
   }
 `
 
