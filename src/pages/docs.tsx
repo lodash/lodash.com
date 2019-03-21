@@ -1,6 +1,8 @@
 import { Link, navigate } from "gatsby"
 import { darken } from "polished"
 import React from "react"
+import PerfectScrollbar from "react-perfect-scrollbar"
+import "react-perfect-scrollbar/dist/css/styles.css"
 import styled from "styled-components"
 
 import Button from "../components/Button"
@@ -85,13 +87,41 @@ const Wrapper = styled.div`
 const Sidebar = styled.aside`
   background: #293845;
   flex: 0 0 320px;
+  width: 320px;
   padding: 32px 16px;
+  position: fixed;
+  height: 100vh;
+
+  .ps__rail-y {
+    background-color: transparent !important;
+  }
+
+  .ps__thumb-y {
+    background-color: #1f2a34 !important;
+  }
+
+  .scrollbar-container::before {
+    pointer-events: none;
+    position: fixed;
+    content: "";
+    display: block;
+    left: 0;
+    bottom: 32px;
+    width: 320px;
+    height: 110px;
+    background: linear-gradient(
+      0deg,
+      rgba(41, 56, 69, 1) 0%,
+      rgba(41, 56, 69, 0) 100%
+    );
+  }
 `
 
 const Main = styled.main`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  margin-left: 320px;
 `
 
 const Content = styled.div`
@@ -179,24 +209,26 @@ const DocsPage = (props: any) => {
       <SEO title="Docs" />
       <Wrapper>
         <Sidebar>
-          <MethodType>
-            <MethodTypeTitle>
-              {expanded ? <Min /> : <Max />} Array
-            </MethodTypeTitle>
-            <Methods>
-              {ArrayMethods.map(method => (
-                <div>
-                  <StyledMethodLink
-                    to={`/docs/${method.aliasOf || method.name}`}
-                    activeClassName="active"
-                  >
-                    _.{method.name}
-                    {method.aliasOf && ` -> ${method.aliasOf}`}
-                  </StyledMethodLink>
-                </div>
-              ))}
-            </Methods>
-          </MethodType>
+          <PerfectScrollbar>
+            <MethodType>
+              <MethodTypeTitle>
+                {expanded ? <Min /> : <Max />} Array
+              </MethodTypeTitle>
+              <Methods>
+                {ArrayMethods.map(method => (
+                  <div>
+                    <StyledMethodLink
+                      to={`/docs/${method.aliasOf || method.name}`}
+                      activeClassName="active"
+                    >
+                      _.{method.name}
+                      {method.aliasOf && ` -> ${method.aliasOf}`}
+                    </StyledMethodLink>
+                  </div>
+                ))}
+              </Methods>
+            </MethodType>
+          </PerfectScrollbar>
         </Sidebar>
         <Main>
           <Header />
