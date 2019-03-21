@@ -36,12 +36,12 @@ const IndexPage = (): JSX.Element => (
       <Title>Installation</Title>
       <p>In a browser:</p>
     </Container>
-    <Code withContainer>{`<script src="lodash.js"></script>`}</Code>
+    <Code withContainer lang="html">{`<script src="lodash.js"></script>`}</Code>
 
     <Container>
       <p>Using npm:</p>
     </Container>
-    <Code withContainer>{`$ npm i -g npm
+    <Code withContainer lang="bash">{`$ npm i -g npm
 $ npm i --save lodash`}</Code>
 
     <Container>

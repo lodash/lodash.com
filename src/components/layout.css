@@ -90,13 +90,6 @@ img {
 svg:not(:root) {
   overflow: hidden;
 }
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
 figure {
   margin: 1em 40px;
 }
@@ -401,11 +394,9 @@ figure {
 pre {
   margin-left: 0;
   margin-right: 0;
-  margin-top: 1.45rem;
+  margin-top: 0;
   margin-bottom: 0;
-  font-size: 0.85rem;
   line-height: 1.42;
-  background: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
   overflow: auto;
   word-wrap: normal;
