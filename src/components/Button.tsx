@@ -11,6 +11,7 @@ const primary = "#3492ff"
 const secondary = "#fff"
 
 const ButtonWrapper = styled.div<ButtonProps>`
+  display: inline-flex;
   background: ${props => (props.type === "primary" ? primary : secondary)};
   color: ${props => (props.type === "primary" ? "#fff" : "#4b71ca")};
   font-size: 17px;

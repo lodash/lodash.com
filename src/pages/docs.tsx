@@ -1,8 +1,9 @@
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { darken } from "polished"
 import React from "react"
 import styled from "styled-components"
 
+import Button from "../components/Button"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
 import Method from "../components/Method"
@@ -148,42 +149,70 @@ const StyledMethodLink = styled(Link)`
   text-decoration: none;
   letter-spacing: 1px;
 
+  &.active {
+    color: #fff !important;
+  }
+
   &:hover,
   &:focus {
     color: ${darken(0.1, "#91a0ae")};
   }
 `
 
+const SeeAll = styled(Button)`
+  margin-bottom: 24px;
+`
+
 const expanded = true
 
-const DocsPage = () => (
-  <Layout>
-    <SEO title="Docs" />
-    <Wrapper>
-      <Sidebar>
-        <MethodType>
-          <MethodTypeTitle>
-            {expanded ? <Min /> : <Max />} Array
-          </MethodTypeTitle>
-          <Methods>
-            {ArrayMethods.map(method => (
-              <div>
-                <StyledMethodLink to="/docs">_.{method}</StyledMethodLink>
-              </div>
+const methodFromPath = (props: any) => {
+  const [, method] = props["*"].split("/")
+
+  return method
+}
+
+const DocsPage = (props: any) => {
+  const currentMethod = methodFromPath(props)
+
+  return (
+    <Layout>
+      <SEO title="Docs" />
+      <Wrapper>
+        <Sidebar>
+          <MethodType>
+            <MethodTypeTitle>
+              {expanded ? <Min /> : <Max />} Array
+            </MethodTypeTitle>
+            <Methods>
+              {ArrayMethods.map(method => (
+                <div>
+                  <StyledMethodLink
+                    to={`/docs/${method}`}
+                    activeClassName="active"
+                  >
+                    _.{method}
+                  </StyledMethodLink>
+                </div>
+              ))}
+            </Methods>
+          </MethodType>
+        </Sidebar>
+        <Main>
+          <Header />
+          <Content>
+            {currentMethod && (
+              <SeeAll onClick={() => navigate("/docs")}>← See all</SeeAll>
+            )}
+            {ArrayMethods.filter(
+              m => !currentMethod || m === currentMethod
+            ).map(method => (
+              <Method name={method} />
             ))}
-          </Methods>
-        </MethodType>
-      </Sidebar>
-      <Main>
-        <Header />
-        <Content>
-          {ArrayMethods.map(method => (
-            <Method name={method} />
-          ))}
-        </Content>
-      </Main>
-    </Wrapper>
-  </Layout>
-)
+          </Content>
+        </Main>
+      </Wrapper>
+    </Layout>
+  )
+}
 
 export default DocsPage
