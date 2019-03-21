@@ -2,10 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import Logo from "../images/lodash.svg"
 
-interface HeaderProps {
-  siteTitle?: string
-}
-
 const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
@@ -25,7 +21,7 @@ const StyledLogo = styled(Logo)`
   width: 58px;
 `
 
-const Header = ({ siteTitle }: HeaderProps): JSX.Element => (
+const Header = (): JSX.Element => (
   <HeaderWrapper>
     <LogoWrapper>
       <StyledLogo />

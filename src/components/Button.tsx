@@ -5,6 +5,7 @@ import styled from "styled-components"
 interface ButtonProps {
   type?: "primary" | "secondary"
   onClick?: () => void
+  children: React.ReactNode
 }
 
 const primary = "#3492ff"

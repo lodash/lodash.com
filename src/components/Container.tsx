@@ -1,6 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 
+interface ContainerProps {
+  children: React.ReactNode
+}
+
 const ContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,7 +22,7 @@ const ContainerWrapper = styled.div`
   }
 `
 
-const Container = ({ children, ...restProps }): JSX.Element => (
+const Container = ({ children, ...restProps }: ContainerProps): JSX.Element => (
   <ContainerWrapper {...restProps}>{children}</ContainerWrapper>
 )
 
