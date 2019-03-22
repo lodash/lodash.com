@@ -240,7 +240,9 @@ const DocsPage = (props: any): JSX.Element => {
           <Header />
           <Content>
             {currentMethod && (
-              <SeeAll onClick={() => navigate("/docs")}>← See all</SeeAll>
+              <SeeAll onClick={() => navigate("/docs")} type="primary">
+                ← See all
+              </SeeAll>
             )}
             {ArrayMethods.filter(
               m => !currentMethod || m.name === currentMethod
