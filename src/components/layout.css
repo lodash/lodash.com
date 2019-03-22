@@ -1,10 +1,29 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  font: 112.5%/1.45em sans-serif;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
 body {
   margin: 0;
+  background: #293845;
+  color: #fff;
+  font-size: 17px;
+  font-family: sans-serif;
+  font-weight: normal;
+  word-wrap: break-word;
+  font-kerning: normal;
+  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+  font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,18 +55,22 @@ a:hover {
 }
 b,
 strong {
-  font-weight: inherit;
-  font-weight: bolder;
-}
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+  font-weight: bold;
 }
 small {
   font-size: 80%;
 }
 img {
   border-style: none;
+  max-width: 100%;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1.45rem;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
 }
 svg:not(:root) {
   overflow: hidden;
@@ -56,9 +79,6 @@ button,
 input {
   font: inherit;
   margin: 0;
-}
-button,
-input {
   overflow: visible;
 }
 button {
@@ -88,44 +108,6 @@ button:-moz-focusring {
 ::-webkit-input-placeholder {
   color: inherit;
   opacity: 0.54;
-}
-html {
-  font: 112.5%/1.45em sans-serif;
-  box-sizing: border-box;
-  overflow-y: scroll;
-}
-* {
-  box-sizing: inherit;
-}
-*:before {
-  box-sizing: inherit;
-}
-*:after {
-  box-sizing: inherit;
-}
-body {
-  background: #293845;
-  color: #fff;
-  font-size: 17px;
-  font-family: sans-serif;
-  font-weight: normal;
-  word-wrap: break-word;
-  font-kerning: normal;
-  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
-  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
-  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
-  font-feature-settings: "kern", "liga", "clig", "calt";
-}
-img {
-  max-width: 100%;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 1.45rem;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
 }
 h1,
 h2,
@@ -199,12 +181,6 @@ pre {
   word-wrap: normal;
   padding: 0;
 }
-b {
-  font-weight: bold;
-}
-strong {
-  font-weight: bold;
-}
 li {
   margin-bottom: calc(1.45rem / 2);
 }
@@ -227,27 +203,17 @@ li > p {
 }
 code {
   font-size: 0.85rem;
-  line-height: 1.45rem;
-}
-code {
-  background-color: hsla(0, 0%, 0%, 0.04);
+  line-height: 1.42;
+  background: none;
   border-radius: 3px;
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
   padding: 0;
 }
-pre code {
-  background: none;
-  line-height: 1.42;
-}
 code:before,
 code:after {
   letter-spacing: -0.2em;
   content: " ";
-}
-pre code:before,
-pre code:after {
-  content: "";
 }
 @media only screen and (max-width: 480px) {
   html {
