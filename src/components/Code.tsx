@@ -68,7 +68,6 @@ const CodeWrapper = styled.div`
     display: block;
     overflow-x: auto;
     color: #ddd;
-    padding: 0.5em;
   }
 
   .hljs-emphasis {

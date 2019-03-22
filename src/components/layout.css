@@ -400,7 +400,7 @@ pre {
   border-radius: 3px;
   overflow: auto;
   word-wrap: normal;
-  padding: 1.45rem;
+  padding: 0;
 }
 table {
   margin-bottom: 0;
@@ -588,8 +588,6 @@ code {
   font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
     "Liberation Mono", Menlo, Courier, monospace;
   padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
 }
 pre code {
   background: none;
