@@ -91,6 +91,7 @@ const Sidebar = styled.aside`
   padding: 32px 16px;
   position: fixed;
   height: 100vh;
+  z-index: 1;
 
   .ps__rail-y {
     background-color: transparent !important;
