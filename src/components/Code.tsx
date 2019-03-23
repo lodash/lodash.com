@@ -90,11 +90,14 @@ const Code = ({
   ...restProps
 }: CodeProps): JSX.Element => {
   const MaybeContainer = withContainer ? Container : React.Fragment
+  const trimmedCode = React.Children.map(children, child => {
+    return typeof child === "string" ? child.trim() : child
+  })
 
   return (
     <CodeWrapper {...restProps}>
       <MaybeContainer>
-        <Highlight children={children} className={lang} />
+        <Highlight children={trimmedCode} className={lang} />
       </MaybeContainer>
     </CodeWrapper>
   )
