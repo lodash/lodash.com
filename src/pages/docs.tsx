@@ -123,6 +123,7 @@ const Sidebar = styled.aside`
 `
 
 const Main = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -132,7 +133,7 @@ const Main = styled.main`
 const Content = styled.div`
   background: #1e2933;
   flex: 1 0 auto;
-  padding: 24px;
+  padding: 124px 24px 24px;
 `
 
 const MethodType = styled.div``

@@ -9,6 +9,11 @@ const HeaderWrapper = styled.header`
   align-items: center;
   background: #171f26;
   padding: 24px;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 320px;
+  right: 0;
 `
 
 const LogoWrapper = styled.div`
