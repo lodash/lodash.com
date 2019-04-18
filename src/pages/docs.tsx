@@ -1,4 +1,4 @@
-import { Link, navigate } from "gatsby"
+import { graphql, Link, navigate, StaticQuery } from "gatsby"
 import { darken } from "polished"
 import React from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
@@ -10,74 +10,6 @@ import Header from "../components/Header"
 import Layout from "../components/Layout"
 import Method from "../components/Method"
 import SEO from "../components/SEO"
-
-const ArrayMethods = [
-  { name: "chunk" },
-  { name: "compact" },
-  { name: "concat" },
-  { name: "difference" },
-  { name: "differenceBy" },
-  { name: "differenceWith" },
-  { name: "drop" },
-  { name: "dropRight" },
-  { name: "dropRightWhile" },
-  { name: "dropWhile" },
-  { name: "fill" },
-  { name: "findIndex" },
-  { name: "findLastIndex" },
-  { name: "first", aliasOf: "head" },
-  { name: "flatten" },
-  { name: "flattenDeep" },
-  { name: "flattenDepth" },
-  { name: "fromPairs" },
-  { name: "head" },
-  { name: "indexOf" },
-  { name: "initial" },
-  { name: "intersection" },
-  { name: "intersectionBy" },
-  { name: "intersectionWith" },
-  { name: "join" },
-  { name: "last" },
-  { name: "lastIndexOf" },
-  { name: "nth" },
-  { name: "pull" },
-  { name: "pullAll" },
-  { name: "pullAllBy" },
-  { name: "pullAllWith" },
-  { name: "pullAt" },
-  { name: "remove" },
-  { name: "reverse" },
-  { name: "slice" },
-  { name: "sortedIndex" },
-  { name: "sortedIndexBy" },
-  { name: "sortedIndexOf" },
-  { name: "sortedLastIndex" },
-  { name: "sortedLastIndexBy" },
-  { name: "sortedLastIndexOf" },
-  { name: "sortedUniq" },
-  { name: "sortedUniqBy" },
-  { name: "tail" },
-  { name: "take" },
-  { name: "takeRight" },
-  { name: "takeRightWhile" },
-  { name: "takeWhile" },
-  { name: "union" },
-  { name: "unionBy" },
-  { name: "unionWith" },
-  { name: "uniq" },
-  { name: "uniqBy" },
-  { name: "uniqWith" },
-  { name: "unzip" },
-  { name: "unzipWith" },
-  { name: "without" },
-  { name: "xor" },
-  { name: "xorBy" },
-  { name: "xorWith" },
-  { name: "zip" },
-  { name: "zipObject" },
-  { name: "zipObjectDeep" },
-  { name: "zipWith" },
-]
 
 const Wrapper = styled.div`
   display: flex;
@@ -213,48 +145,97 @@ const DocsPage = (props: any): JSX.Element => {
   const currentMethod = methodFromPath(props)
 
   return (
-    <Layout>
-      <SEO title="Docs" />
-      <Wrapper>
-        <Sidebar>
-          <PerfectScrollbar>
-            <MethodType>
-              <MethodTypeTitle>
-                {expanded ? <Min /> : <Max />} Array
-              </MethodTypeTitle>
-              <Methods>
-                {ArrayMethods.map(method => (
-                  <div>
-                    <StyledMethodLink
-                      to={`/docs/${method.aliasOf || method.name}`}
-                      activeClassName="active"
-                    >
-                      _.{method.name}
-                      {method.aliasOf && ` -> ${method.aliasOf}`}
-                    </StyledMethodLink>
-                  </div>
-                ))}
-              </Methods>
-            </MethodType>
-          </PerfectScrollbar>
-        </Sidebar>
-        <Main>
-          <Header />
-          <Content>
-            {currentMethod && (
-              <SeeAll onClick={() => navigate("/docs")} type="primary">
-                ← See all
-              </SeeAll>
-            )}
-            {ArrayMethods.filter(
-              m => !currentMethod || m.name === currentMethod
-            ).map(method => (
-              <Method name={method.name} />
-            ))}
-          </Content>
-        </Main>
-      </Wrapper>
-    </Layout>
+    <StaticQuery
+      query={graphql`
+        query {
+          allLodashMethod {
+            group(field: category) {
+              field
+              fieldValue
+              totalCount
+              edges {
+                node {
+                  id
+                  name
+                  category
+                  aliases
+                  desc
+                  example
+                  since
+                  params {
+                    type
+                    name
+                    desc
+                  }
+                  call
+                }
+              }
+            }
+          }
+        }
+      `}
+      render={data => {
+        const groups = data.allLodashMethod.group
+        // TODO: optimize performance
+        const methods = groups.map(group => group.edges).flat()
+
+        return (
+          <Layout>
+            <SEO title="Docs" />
+            <Wrapper>
+              <Sidebar>
+                <PerfectScrollbar>
+                  {groups.map(group => {
+                    const { edges: groupMethods } = group
+
+                    return (
+                      <MethodType>
+                        <MethodTypeTitle>
+                          {expanded ? <Min /> : <Max />} {group.fieldValue}
+                        </MethodTypeTitle>
+                        <Methods>
+                          {groupMethods.map(({ node: method }) => (
+                            <div>
+                              <StyledMethodLink
+                                // to={`/docs/${method.aliasOf || method.name}`}
+                                to={`/docs/${method.name}`}
+                                activeClassName="active"
+                              >
+                                _.{method.name}
+                                {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
+                              </StyledMethodLink>
+                            </div>
+                          ))}
+                        </Methods>
+                      </MethodType>
+                    )
+                  })}
+                </PerfectScrollbar>
+              </Sidebar>
+              <Main>
+                <Header />
+                <Content>
+                  {currentMethod && (
+                    <SeeAll onClick={() => navigate("/docs")} type="primary">
+                      ← See all
+                    </SeeAll>
+                  )}
+                  {/* TODO: optimize performance */}
+                  {methods
+                    .filter(
+                      ({ node: method }) =>
+                        !currentMethod || method.name === currentMethod
+                    )
+                    .map(({ node: method }) => (
+                      <Method method={method} />
+                    ))}
+                </Content>
+              </Main>
+            </Wrapper>
+          </Layout>
+        )
+      }}
+    />
   )
 }
 

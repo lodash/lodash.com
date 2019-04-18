@@ -5,7 +5,12 @@ import styled from "styled-components"
 import Code from "./Code"
 
 interface MethodProps {
-  name: string
+  method: {
+    name: string
+    desc: string
+    since: string
+    example: string
+  }
 }
 
 const MethodWrapper = styled.div`
@@ -86,9 +91,9 @@ const InlineCode = styled.code`
   padding: 6px 10px;
 `
 
-const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
+const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
   <MethodWrapper {...restProps}>
-    <Name>_.{name}</Name>
+    <Name>_.{method.name}</Name>
 
     <Content>
       <MetaLinks>
@@ -96,18 +101,11 @@ const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
         <MetaLink to="/">npm package</MetaLink>
       </MetaLinks>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim autem
-        ullam obcaecati sit sequi, eaque sint id, nostrum at neque deleniti a
-        sed quas fugit repellat corrupti ut dolore omnis?
-      </p>
-
-      <p>
-        <b>Note:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </p>
+      {/* TODO: extract to sensible HTML */}
+      {method.desc}
 
       <Subtitle>Since</Subtitle>
-      <SubContent>1.0</SubContent>
+      <SubContent>{method.since}</SubContent>
 
       <Subtitle>Arguments</Subtitle>
       <SubContent>...</SubContent>
@@ -119,25 +117,10 @@ const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
 
       <Subtitle>Example</Subtitle>
       <StyledCode>
-        {`var users = [
-  { 'user': 'barney', 'age': 36, 'active': true },
-  { 'user': 'fred',   'age': 40, 'active': false }
-];
- 
-_.filter(users, function(o) { return !o.active; });
-// => objects for ['fred']
- 
-// The \`_.matches\` iteratee shorthand.
-_.filter(users, { 'age': 36, 'active': true });
-// => objects for ['barney']
- 
-// The \`_.matchesProperty\` iteratee shorthand.
-_.filter(users, ['active', false]);
-// => objects for ['fred']
- 
-// The \`_.property\` iteratee shorthand.
-_.filter(users, 'active');
-// => objects for ['barney']`}
+        {method.example
+          .replace(/```js/, "")
+          .replace(/```/, "")
+          .trim()}
       </StyledCode>
     </Content>
   </MethodWrapper>
