@@ -4,8 +4,21 @@ import React from "react"
 import styled from "styled-components"
 import Code from "./Code"
 
-interface MethodProps {
+interface Param {
   name: string
+  type: string
+  desc: string
+}
+
+interface MethodProps {
+  method: {
+    name: string
+    call: string
+    desc: string
+    since: string
+    params: Param[]
+    example: string
+  }
 }
 
 const MethodWrapper = styled.div`
@@ -86,9 +99,34 @@ const InlineCode = styled.code`
   padding: 6px 10px;
 `
 
-const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
+const Arguments = styled.div`
+  display: flex;
+`
+
+const ArgumentCol = styled.div`
+  flex: 0 0 auto;
+
+  &:last-child {
+    flex-grow: 1;
+  }
+`
+
+const ArgumentHeader = styled.div`
+  color: #a0afbd;
+  border-bottom: 1px solid #364959;
+  padding-bottom: 4px;
+  padding-right: 16px;
+`
+
+const ArgumentValue = styled.div`
+  color: #fff;
+  margin-top: 8px;
+  padding-right: 16px;
+`
+
+const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
   <MethodWrapper {...restProps}>
-    <Name>_.{name}</Name>
+    <Name>_.{method.call}</Name>
 
     <Content>
       <MetaLinks>
@@ -96,22 +134,41 @@ const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
         <MetaLink to="/">npm package</MetaLink>
       </MetaLinks>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim autem
-        ullam obcaecati sit sequi, eaque sint id, nostrum at neque deleniti a
-        sed quas fugit repellat corrupti ut dolore omnis?
-      </p>
-
-      <p>
-        <b>Note:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </p>
+      {/* TODO: extract to sensible HTML */}
+      {method.desc}
 
       <Subtitle>Since</Subtitle>
-      <SubContent>1.0</SubContent>
+      <SubContent>{method.since}</SubContent>
 
       <Subtitle>Arguments</Subtitle>
-      <SubContent>...</SubContent>
+      <SubContent>
+        <Arguments>
+          <ArgumentCol>
+            <ArgumentHeader>argument</ArgumentHeader>
+            {method.params.map((param, i) => (
+              <ArgumentValue key={i}>
+                <InlineCode>{param.name}</InlineCode>
+              </ArgumentValue>
+            ))}
+          </ArgumentCol>
 
+          <ArgumentCol>
+            <ArgumentHeader>type</ArgumentHeader>
+            {method.params.map((param, i) => (
+              <ArgumentValue key={i}>{param.type}</ArgumentValue>
+            ))}
+          </ArgumentCol>
+
+          <ArgumentCol>
+            <ArgumentHeader>description</ArgumentHeader>
+            {method.params.map((param, i) => (
+              <ArgumentValue key={i}>{param.desc}</ArgumentValue>
+            ))}
+          </ArgumentCol>
+        </Arguments>
+      </SubContent>
+
+      {/* TODO: reimplement? */}
       <Subtitle>Returns</Subtitle>
       <SubContent>
         <InlineCode>(array)</InlineCode>
@@ -119,25 +176,10 @@ const Method = ({ name, ...restProps }: MethodProps): JSX.Element => (
 
       <Subtitle>Example</Subtitle>
       <StyledCode>
-        {`var users = [
-  { 'user': 'barney', 'age': 36, 'active': true },
-  { 'user': 'fred',   'age': 40, 'active': false }
-];
- 
-_.filter(users, function(o) { return !o.active; });
-// => objects for ['fred']
- 
-// The \`_.matches\` iteratee shorthand.
-_.filter(users, { 'age': 36, 'active': true });
-// => objects for ['barney']
- 
-// The \`_.matchesProperty\` iteratee shorthand.
-_.filter(users, ['active', false]);
-// => objects for ['fred']
- 
-// The \`_.property\` iteratee shorthand.
-_.filter(users, 'active');
-// => objects for ['barney']`}
+        {method.example
+          .replace(/```js/, "")
+          .replace(/```/, "")
+          .trim()}
       </StyledCode>
     </Content>
   </MethodWrapper>
