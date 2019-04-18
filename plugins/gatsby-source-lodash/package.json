@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-source-lodash",
+  "version": "0.1.0",
+  "description": "Gatsby Source Plugin to grab method metadata from Lodash.",
+  "main": "gatsby-node.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Zack Hall <zack@zthall.com>",
+  "contributors": [
+    "John-David Dalton <john.david.dalton@gmail.com>",
+    "Mathias Bynens <mathias@qiwi.be>",
+    "Zack Hall <zack@zthall.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "doctrine": "^3.0.0",
+    "lodash": "^4.17.11",
+    "node-fetch": "^2.3.0"
+  }
+}
