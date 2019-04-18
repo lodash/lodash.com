@@ -1,6 +1,6 @@
-'use strict';
+"use strict"
 
-var _ = require('lodash');
+const _ = require("lodash")
 
 /*----------------------------------------------------------------------------*/
 
@@ -12,8 +12,8 @@ var _ = require('lodash');
  * @param {Object} owner The alias owner.
  */
 function Alias(name, owner) {
-  this._owner = owner;
-  this._name = name;
+  this._owner = owner
+  this._name = name
 }
 
 /**
@@ -24,7 +24,7 @@ function Alias(name, owner) {
  * @returns {Array|string} Returns the entry's `alias` objects.
  */
 function getAliases(index) {
-  return index == null ? [] : undefined;
+  return index == null ? [] : undefined
 }
 
 /**
@@ -34,7 +34,7 @@ function getAliases(index) {
  * @returns {string} Returns the function call.
  */
 function getCall() {
-  return this._owner.getCall();
+  return this._owner.getCall()
 }
 
 /**
@@ -44,7 +44,7 @@ function getCall() {
  * @returns {string} Returns the owner entry's `category` data.
  */
 function getCategory() {
-  return this._owner.getCategory();
+  return this._owner.getCategory()
 }
 
 /**
@@ -54,7 +54,7 @@ function getCategory() {
  * @returns {string} Returns the owner entry's description.
  */
 function getDesc() {
-  return this._owner.getDesc();
+  return this._owner.getDesc()
 }
 
 /**
@@ -64,7 +64,7 @@ function getDesc() {
  * @returns {string} Returns the owner entry's `example` data.
  */
 function getExample() {
-  return this._owner.getExample();
+  return this._owner.getExample()
 }
 
 /**
@@ -75,7 +75,7 @@ function getExample() {
  * @returns {string} Returns the entry's hash value (without a hash itself).
  */
 function getHash(style) {
-  return this._owner.getHash(style);
+  return this._owner.getHash(style)
 }
 
 /**
@@ -85,7 +85,7 @@ function getHash(style) {
  * @returns {number} Returns the owner entry's line number.
  */
 function getLineNumber() {
-  return this._owner.getLineNumber();
+  return this._owner.getLineNumber()
 }
 
 /**
@@ -96,7 +96,7 @@ function getLineNumber() {
  * @returns {Array|string} Returns the owner entry's `member` data.
  */
 function getMembers(index) {
-  return this._owner.getMembers(index);
+  return this._owner.getMembers(index)
 }
 
 /**
@@ -106,7 +106,7 @@ function getMembers(index) {
  * @returns {string} Returns the owner entry's `name` data.
  */
 function getName() {
-  return this._name;
+  return this._name
 }
 
 /**
@@ -116,7 +116,7 @@ function getName() {
  * @returns {Object} Returns the owner entry.
  */
 function getOwner() {
-  return this._owner;
+  return this._owner
 }
 
 /**
@@ -127,7 +127,7 @@ function getOwner() {
  * @returns {Array} Returns the owner entry's `param` data.
  */
 function getParams(index) {
-  return this._owner.getParams(index);
+  return this._owner.getParams(index)
 }
 
 /**
@@ -137,7 +137,7 @@ function getParams(index) {
  * @returns {string} Returns the owner entry's `returns` data.
  */
 function getReturns() {
-  return this._owner.getReturns();
+  return this._owner.getReturns()
 }
 
 /**
@@ -147,7 +147,7 @@ function getReturns() {
  * @returns {string} Returns the owner entry's `since` data.
  */
 function getSince() {
-  return this._owner.getSince();
+  return this._owner.getSince()
 }
 
 /**
@@ -157,7 +157,7 @@ function getSince() {
  * @returns {string} Returns the owner entry's `type` data.
  */
 function getType() {
-  return this._owner.getType();
+  return this._owner.getType()
 }
 
 /**
@@ -167,7 +167,7 @@ function getType() {
  * @returns {boolean} Returns `true`.
  */
 function isAlias() {
-  return true;
+  return true
 }
 
 /**
@@ -177,7 +177,7 @@ function isAlias() {
  * @returns {boolean} Returns `true` if a constructor, else `false`.
  */
 function isCtor() {
-  return this._owner.isCtor();
+  return this._owner.isCtor()
 }
 
 /**
@@ -187,7 +187,7 @@ function isCtor() {
  * @returns {boolean} Returns `true` if the entry is a function reference, else `false`.
  */
 function isFunction() {
-  return this._owner.isFunction();
+  return this._owner.isFunction()
 }
 
 /**
@@ -197,7 +197,7 @@ function isFunction() {
  * @returns {boolean} Returns `true` if a license, else `false`.
  */
 function isLicense() {
-  return this._owner.isLicense();
+  return this._owner.isLicense()
 }
 
 /**
@@ -207,7 +207,7 @@ function isLicense() {
  * @returns {boolean} Returns `true` if assigned to a prototype, else `false`.
  */
 function isPlugin() {
-  return this._owner.isPlugin();
+  return this._owner.isPlugin()
 }
 
 /**
@@ -217,7 +217,7 @@ function isPlugin() {
  * @returns {boolean} Returns `true` if private, else `false`.
  */
 function isPrivate() {
-  return this._owner.isPrivate();
+  return this._owner.isPrivate()
 }
 
 /**
@@ -227,33 +227,33 @@ function isPrivate() {
  * @returns {boolean} Returns `true` if not assigned to a prototype, else `false`.
  */
 function isStatic() {
-  return this._owner.isStatic();
+  return this._owner.isStatic()
 }
 
 /*----------------------------------------------------------------------------*/
 
 _.assign(Alias.prototype, {
-  'getAliases': getAliases,
-  'getCall': getCall,
-  'getCategory': getCategory,
-  'getDesc': getDesc,
-  'getExample': getExample,
-  'getHash': getHash,
-  'getLineNumber': getLineNumber,
-  'getMembers': getMembers,
-  'getName': getName,
-  'getOwner': getOwner,
-  'getParams': getParams,
-  'getReturns': getReturns,
-  'getSince': getSince,
-  'getType': getType,
-  'isAlias': isAlias,
-  'isCtor': isCtor,
-  'isFunction': isFunction,
-  'isLicense': isLicense,
-  'isPlugin': isPlugin,
-  'isPrivate': isPrivate,
-  'isStatic': isStatic,
-});
+  getAliases,
+  getCall,
+  getCategory,
+  getDesc,
+  getExample,
+  getHash,
+  getLineNumber,
+  getMembers,
+  getName,
+  getOwner,
+  getParams,
+  getReturns,
+  getSince,
+  getType,
+  isAlias,
+  isCtor,
+  isFunction,
+  isLicense,
+  isPlugin,
+  isPrivate,
+  isStatic,
+})
 
-module.exports = Alias;
+module.exports = Alias

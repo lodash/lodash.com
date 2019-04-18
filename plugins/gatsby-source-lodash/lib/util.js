@@ -1,12 +1,12 @@
-'use strict';
+"use strict"
 
-var _ = require('lodash'),
-    doctrine = require('doctrine');
+const _ = require("lodash")
+const doctrine = require("doctrine")
 
-var reCode = /`.*?`/g,
-    reToken = /@@token@@/g,
-    split = String.prototype.split,
-    token = '@@token@@';
+const reCode = /`.*?`/g
+const reToken = /@@token@@/g
+const split = String.prototype.split
+const token = "@@token@@"
 
 /*----------------------------------------------------------------------------*/
 
@@ -20,59 +20,61 @@ var reCode = /`.*?`/g,
  * @returns {number} Returns the sort order indicator for `value`.
  */
 function compareNatural(value, other) {
-  var index = -1,
-      valParts = split.call(value, '.'),
-      valLength = valParts.length,
-      othParts = split.call(other, '.'),
-      othLength = othParts.length,
-      length = Math.min(valLength, othLength);
+  let index = -1
+  const valParts = split.call(value, ".")
+  const valLength = valParts.length
+  const othParts = split.call(other, ".")
+  const othLength = othParts.length
+  const length = Math.min(valLength, othLength)
 
   while (++index < length) {
-    var valPart = valParts[index],
-        othPart = othParts[index];
+    const valPart = valParts[index]
+    const othPart = othParts[index]
 
-    if (valPart > othPart && othPart != 'prototype') {
-      return 1;
-    } else if (valPart < othPart && valPart != 'prototype') {
-      return -1;
+    if (valPart > othPart && othPart !== "prototype") {
+      return 1
+    } else if (valPart < othPart && valPart !== "prototype") {
+      return -1
     }
   }
-  return valLength > othLength ? 1 : (valLength < othLength ? -1 : 0);
+  return valLength > othLength ? 1 : valLength < othLength ? -1 : 0
 }
 
 /**
  * Performs common string formatting operations.
  *
  * @memberOf util
- * @param {string} string The string to format.
+ * @param {string} str The string to format.
  * @returns {string} Returns the formatted string.
  */
-function format(string) {
-  string = _.toString(string);
+function format(str) {
+  let copy = _.toString(str)
 
   // Replace all code snippets with a token.
-  var snippets = [];
-  string = string.replace(reCode, function(match) {
-    snippets.push(match);
-    return token;
-  });
+  let snippets = []
+  copy = copy.replace(reCode, function(match) {
+    snippets.push(match)
+    return token
+  })
 
-  return string
-    // Add line breaks.
-    .replace(/:\n(?=[\t ]*\S)/g, ':<br>\n')
-    .replace(/\n( *)[-*](?=[\t ]+\S)/g, '\n<br>\n$1*')
-    .replace(/^[\t ]*\n/gm, '<br>\n<br>\n')
-    // Normalize whitespace.
-    .replace(/\n +/g, ' ')
-    // Italicize parentheses.
-    .replace(/(^|\s)(\(.+\))/g, '$1*$2*')
-    // Mark numbers as inline code.
-    .replace(/[\t ](-?\d+(?:.\d+)?)(?!\.[^\n])/g, ' `$1`')
-    // Replace all tokens with code snippets.
-    .replace(reToken, function(match) {
-      return snippets.shift();
-    })
-    .trim();
+  return (
+    copy
+      // Add line breaks.
+      .replace(/:\n(?=[\t ]*\S)/g, ":<br>\n")
+      .replace(/\n( *)[-*](?=[\t ]+\S)/g, "\n<br>\n$1*")
+      .replace(/^[\t ]*\n/gm, "<br>\n<br>\n")
+      // Normalize whitespace.
+      .replace(/\n +/g, " ")
+      // Italicize parentheses.
+      .replace(/(^|\s)(\(.+\))/g, "$1*$2*")
+      // Mark numbers as inline code.
+      .replace(/[\t ](-?\d+(?:.\d+)?)(?!\.[^\n])/g, " `$1`")
+      // Replace all tokens with code snippets.
+      .replace(reToken, function(match) {
+        return snippets.shift()
+      })
+      .trim()
+  )
 }
 
 /**
@@ -82,15 +84,15 @@ function format(string) {
  * @param {string} comment The comment to parse.
  * @returns {Object} Returns the parsed object.
  */
-var parse = _.partial(doctrine.parse, _, {
-  'lineNumbers': true,
-  'recoverable': true,
-  'sloppy': true,
-  'unwrap': true
-});
+const parse = _.partial(doctrine.parse, _, {
+  lineNumbers: true,
+  recoverable: true,
+  sloppy: true,
+  unwrap: true,
+})
 
 module.exports = {
-  'compareNatural': compareNatural,
-  'format': format,
-  'parse': parse
-};
+  compareNatural,
+  format,
+  parse,
+}

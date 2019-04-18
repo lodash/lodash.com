@@ -1,10 +1,10 @@
-'use strict';
+"use strict"
 
-var _ = require('lodash'),
-    fp = require('lodash/fp'),
-    os = require('os'),
-    Alias = require('./alias.js'),
-    util = require('./util.js');
+const _ = require("lodash")
+const fp = require("lodash/fp")
+const os = require("os")
+const Alias = require("./alias.js")
+const util = require("./util.js")
 
 /*----------------------------------------------------------------------------*/
 
@@ -16,49 +16,52 @@ var _ = require('lodash'),
  * @returns {string} Returns the param type.
  */
 function getParamType(tag) {
-  var expression = tag.expression,
-      result = '',
-      type = tag.type;
+  let expression = tag.expression
+  let result = ""
+  const type = tag.type
 
   switch (type) {
-    case 'AllLiteral':
-      result = '*';
-      break;
+    case "AllLiteral":
+      result = "*"
+      break
 
-    case 'NameExpression':
-      result = _.toString(tag.name);
-      break;
+    case "NameExpression":
+      result = _.toString(tag.name)
+      break
 
-    case 'RestType':
-      result = '...' + result;
-      break;
+    case "RestType":
+      result = "..." + result
+      break
 
-    case 'TypeApplication':
-      expression = undefined;
+    case "TypeApplication":
+      expression = undefined
       result = _(tag)
         .chain()
-        .get('applications')
-        .map(_.flow(getParamType, fp.add(fp, '[]')))
+        .get("applications")
+        .map(
+          _.flow(
+            getParamType,
+            fp.add(fp, "[]")
+          )
+        )
         .sort(util.compareNatural)
-        .join('|')
-        .value();
-      break;
+        .join("|")
+        .value()
+      break
 
-    case 'UnionType':
+    case "UnionType":
       result = _(tag)
         .chain()
-        .get('elements')
+        .get("elements")
         .map(getParamType)
         .sort(util.compareNatural)
-        .join('|')
-        .value();
+        .join("|")
+        .value()
   }
   if (expression) {
-    result += getParamType(expression);
+    result += getParamType(expression)
   }
-  return type == 'UnionType'
-    ? ('(' + result + ')')
-    : result;
+  return type === "UnionType" ? "(" + result + ")" : result
 }
 
 /**
@@ -70,8 +73,8 @@ function getParamType(tag) {
  * @returns {null|Object} Returns the tag.
  */
 function getTag(entry, tagName) {
-  var parsed = entry.parsed;
-  return _.find(parsed.tags, ['title', tagName]) || null;
+  const parsed = entry.parsed
+  return _.find(parsed.tags, ["title", tagName]) || null
 }
 
 /**
@@ -83,29 +86,25 @@ function getTag(entry, tagName) {
  * @returns {string} Returns the tag value.
  */
 function getValue(entry, tagName) {
-  var parsed = entry.parsed,
-      result = parsed.description,
-      tag = getTag(entry, tagName);
+  const parsed = entry.parsed
+  let result = parsed.description
+  const tag = getTag(entry, tagName)
 
-  if (tagName == 'alias') {
-    result = _.get(tag, 'name') ;
+  if (tagName === "alias") {
+    result = _.get(tag, "name")
 
     // Doctrine can't parse alias tags containing multiple values so extract
     // them from the error message.
-    var error = _.first(_.get(tag, 'errors'));
+    const error = _.first(_.get(tag, "errors"))
     if (error) {
-      result += error.replace(/^[^']*'|'[^']*$/g, '');
+      result += error.replace(/^[^']*'|'[^']*$/g, "")
     }
+  } else if (tagName === "type") {
+    result = _.get(tag, "type.name")
+  } else if (tagName !== "description") {
+    result = _.get(tag, "name") || _.get(tag, "description")
   }
-  else if (tagName == 'type') {
-    result = _.get(tag, 'type.name');
-  }
-  else if (tagName != 'description') {
-    result = _.get(tag, 'name') || _.get(tag, 'description');
-  }
-  return tagName == 'example'
-    ? _.toString(result)
-    : util.format(result);
+  return tagName === "example" ? _.toString(result) : util.format(result)
 }
 
 /**
@@ -117,18 +116,18 @@ function getValue(entry, tagName) {
  * @returns {boolean} Returns `true` if the tag is found, else `false`.
  */
 function hasTag(entry, tagName) {
-  return getTag(entry, tagName) !== null;
+  return getTag(entry, tagName) !== null
 }
 
 /**
  * Converts CR+LF line endings to LF.
  *
  * @private
- * @param {string} string The string to convert.
+ * @param {string} str The string to convert.
  * @returns {string} Returns the converted string.
  */
-function normalizeEOL(string) {
-  return string.replace(/\r\n/g, '\n');
+function normalizeEOL(str) {
+  return str.replace(/\r\n/g, "\n")
 }
 
 /*----------------------------------------------------------------------------*/
@@ -142,31 +141,31 @@ function normalizeEOL(string) {
  * @param {string} [lang='js'] The language highlighter used for code examples.
  */
 function Entry(entry, source, lang) {
-  entry = normalizeEOL(entry);
+  const normalizedEntry = normalizeEOL(entry)
 
-  this.entry = entry;
-  this.lang = lang == null ? 'js' : lang;
-  this.parsed = util.parse(entry.replace(/(\*)\/\s*.+$/, '*'));
-  this.source = normalizeEOL(source);
-  this.getCall = _.memoize(this.getCall);
-  this.getCategory = _.memoize(this.getCategory);
-  this.getDesc = _.memoize(this.getDesc);
-  this.getExample = _.memoize(this.getExample);
-  this.getHash = _.memoize(this.getHash);
-  this.getLineNumber = _.memoize(this.getLineNumber);
-  this.getName = _.memoize(this.getName);
-  this.getRelated = _.memoize(this.getRelated);
-  this.getReturns = _.memoize(this.getReturns);
-  this.getSince = _.memoize(this.getSince);
-  this.getType = _.memoize(this.getType);
-  this.isAlias = _.memoize(this.isAlias);
-  this.isCtor = _.memoize(this.isCtor);
-  this.isFunction = _.memoize(this.isFunction);
-  this.isLicense = _.memoize(this.isLicense);
-  this.isPlugin = _.memoize(this.isPlugin);
-  this.isPrivate = _.memoize(this.isPrivate);
-  this.isStatic = _.memoize(this.isStatic);
-  this._aliases = this._members = this._params = undefined;
+  this.entry = normalizedEntry
+  this.lang = lang == null ? "js" : lang
+  this.parsed = util.parse(normalizedEntry.replace(/(\*)\/\s*.+$/, "*"))
+  this.source = normalizeEOL(source)
+  this.getCall = _.memoize(this.getCall)
+  this.getCategory = _.memoize(this.getCategory)
+  this.getDesc = _.memoize(this.getDesc)
+  this.getExample = _.memoize(this.getExample)
+  this.getHash = _.memoize(this.getHash)
+  this.getLineNumber = _.memoize(this.getLineNumber)
+  this.getName = _.memoize(this.getName)
+  this.getRelated = _.memoize(this.getRelated)
+  this.getReturns = _.memoize(this.getReturns)
+  this.getSince = _.memoize(this.getSince)
+  this.getType = _.memoize(this.getType)
+  this.isAlias = _.memoize(this.isAlias)
+  this.isCtor = _.memoize(this.isCtor)
+  this.isFunction = _.memoize(this.isFunction)
+  this.isLicense = _.memoize(this.isLicense)
+  this.isPlugin = _.memoize(this.isPlugin)
+  this.isPrivate = _.memoize(this.isPrivate)
+  this.isStatic = _.memoize(this.isStatic)
+  this._aliases = this._members = this._params = undefined
 }
 
 /**
@@ -178,7 +177,7 @@ function Entry(entry, source, lang) {
  * @returns {Array} Returns the array of entries.
  */
 function getEntries(source) {
-  return _.toString(source).match(/\/\*\*(?![-!])[\s\S]*?\*\/\s*.+/g) || [];
+  return _.toString(source).match(/\/\*\*(?![-!])[\s\S]*?\*\/\s*.+/g) || []
 }
 
 /**
@@ -190,16 +189,18 @@ function getEntries(source) {
  */
 function getAliases(index) {
   if (this._aliases === undefined) {
-    var owner = this;
-    this._aliases = _(getValue(this, 'alias'))
+    const owner = this
+    this._aliases = _(getValue(this, "alias"))
       .split(/,\s*/)
       .compact()
       .sort(util.compareNatural)
-      .map(function(value) { return new Alias(value, owner); })
-      .value();
+      .map(function(value) {
+        return new Alias(value, owner)
+      })
+      .value()
   }
-  var result = this._aliases;
-  return index === undefined ? result : result[index];
+  const result = this._aliases
+  return index === undefined ? result : result[index]
 }
 
 /**
@@ -209,37 +210,46 @@ function getAliases(index) {
  * @returns {string} Returns the function call.
  */
 function getCall() {
-  var result = _.trim(_.get(/\*\/\s*(?:function\s+)?([^\s(]+)\s*\(/.exec(this.entry), 1));
+  let result = _.trim(
+    _.get(/\*\/\s*(?:function\s+)?([^\s(]+)\s*\(/.exec(this.entry), 1)
+  )
   if (!result) {
-    result = _.trim(_.get(/\*\/\s*(.*?)[:=,]/.exec(this.entry), 1));
+    result = _.trim(_.get(/\*\/\s*(.*?)[:=,]/.exec(this.entry), 1))
     result = /['"]$/.test(result)
-      ? _.trim(result, '"\'')
-      : result.split('.').pop().split(/^(?:const|let|var) /).pop();
+      ? _.trim(result, "\"'")
+      : result
+          .split(".")
+          .pop()
+          .split(/^(?:const|let|var) /)
+          .pop()
   }
-  var name = getValue(this, 'name') || result;
+  const name = getValue(this, "name") || result
   if (!this.isFunction()) {
-    return name;
+    return name
   }
-  var params = this.getParams();
-  result = _.castArray(result);
+  const params = this.getParams()
+  result = _.castArray(result)
 
   // Compile the function call syntax.
   _.each(params, function(param) {
-    var paramValue = param[1],
-        parentParam = _.get(/\w+(?=\.[\w.]+)/.exec(paramValue), 0);
+    const paramValue = param[1]
+    const parentParam = _.get(/\w+(?=\.[\w.]+)/.exec(paramValue), 0)
 
-    var parentIndex = parentParam == null ? -1 : _.findIndex(params, function(param) {
-      return _.trim(param[1], '[]').split(/\s*=/)[0] == parentParam;
-    });
+    const parentIndex =
+      parentParam === null
+        ? -1
+        : _.findIndex(params, function(parameter) {
+            return _.trim(parameter[1], "[]").split(/\s*=/)[0] === parentParam
+          })
 
     // Skip params that are properties of other params (e.g. `options.leading`).
-    if (_.get(params[parentIndex], 0) != 'Object') {
-      result.push(paramValue);
+    if (_.get(params[parentIndex], 0) !== "Object") {
+      result.push(paramValue)
     }
-  });
+  })
 
   // Format the function call.
-  return name + '(' + result.slice(1).join(', ') + ')';
+  return name + "(" + result.slice(1).join(", ") + ")"
 }
 
 /**
@@ -249,8 +259,8 @@ function getCall() {
  * @returns {string} Returns the entry's `category` data.
  */
 function getCategory() {
-  var result = getValue(this, 'category');
-  return result || (this.getType() == 'Function' ? 'Methods' : 'Properties');
+  const result = getValue(this, "category")
+  return result || (this.getType() === "Function" ? "Methods" : "Properties")
 }
 
 /**
@@ -260,12 +270,12 @@ function getCategory() {
  * @returns {string} Returns the entry's description.
  */
 function getDesc() {
-  var type = this.getType(),
-      result = getValue(this, 'description');
+  const type = this.getType()
+  const result = getValue(this, "description")
 
-  return (!result || type == 'Function' || type == 'unknown')
+  return !result || type === "Function" || type === "unknown"
     ? result
-    : ('(' + _.trim(type.replace(/\|/g, ', '), '()') + '): ' + result);
+    : "(" + _.trim(type.replace(/\|/g, ", "), "()") + "): " + result
 }
 
 /**
@@ -275,8 +285,8 @@ function getDesc() {
  * @returns {string} Returns the entry's `example` data.
  */
 function getExample() {
-  var result = getValue(this, 'example');
-  return result && ('```' + this.lang + '\n' + result + '\n```');
+  const result = getValue(this, "example")
+  return result && "```" + this.lang + "\n" + result + "\n```"
 }
 
 /**
@@ -287,24 +297,22 @@ function getExample() {
  * @returns {string} Returns the entry's hash value (without a hash itself).
  */
 function getHash(style) {
-  var result = _.toString(this.getMembers(0));
-  if (style == 'github') {
+  let result = _.toString(this.getMembers(0))
+  if (style === "github") {
     if (result) {
-      result += this.isPlugin() ? 'prototype' : '';
+      result += this.isPlugin() ? "prototype" : ""
     }
-    result += this.getCall();
+    result += this.getCall()
     return result
-      .replace(/[\\.=|'"(){}\[\]\t ]/g, '')
-      .replace(/[#,]+/g, '-')
-      .toLowerCase();
+      .replace(/[\\.=|'"(){}\[\]\t ]/g, "")
+      .replace(/[#,]+/g, "-")
+      .toLowerCase()
   }
   if (result) {
-    result += '-' + (this.isPlugin() ? 'prototype-' : '');
+    result += "-" + (this.isPlugin() ? "prototype-" : "")
   }
-  result += this.isAlias() ? this.getOwner().getName() : this.getName();
-  return result
-    .replace(/\./g, '-')
-    .replace(/^_-/, '');
+  result += this.isAlias() ? this.getOwner().getName() : this.getName()
+  return result.replace(/\./g, "-").replace(/^_-/, "")
 }
 
 /**
@@ -314,14 +322,14 @@ function getHash(style) {
  * @returns {number} Returns the entry's line number.
  */
 function getLineNumber() {
-  var lines = this.source
+  const lines = this.source
     .slice(0, this.source.indexOf(this.entry) + this.entry.length)
     .match(/\n/g)
-    .slice(1);
+    .slice(1)
 
   // Offset by 2 because the first line number is before a line break and the
   // last line doesn't include a line break.
-  return lines.length + 2;
+  return lines.length + 2
 }
 
 /**
@@ -333,14 +341,14 @@ function getLineNumber() {
  */
 function getMembers(index) {
   if (this._members === undefined) {
-    this._members = _(getValue(this, 'member') || getValue(this, 'memberOf'))
+    this._members = _(getValue(this, "member") || getValue(this, "memberOf"))
       .split(/,\s*/)
       .compact()
       .sort(util.compareNatural)
-      .value();
+      .value()
   }
-  var result = this._members;
-  return index === undefined ? result : result[index];
+  const result = this._members
+  return index === undefined ? result : result[index]
 }
 
 /**
@@ -350,9 +358,9 @@ function getMembers(index) {
  * @returns {string} Returns the entry's `name` data.
  */
 function getName() {
-  return hasTag(this, 'name')
-    ? getValue(this, 'name')
-    : _.toString(_.first(this.getCall().split('(')));
+  return hasTag(this, "name")
+    ? getValue(this, "name")
+    : _.toString(_.first(this.getCall().split("(")))
 }
 
 /**
@@ -365,26 +373,26 @@ function getName() {
 function getParams(index) {
   if (this._params === undefined) {
     this._params = _(this.parsed.tags)
-      .filter(['title', 'param'])
-      .filter('name')
+      .filter(["title", "param"])
+      .filter("name")
       .map(function(tag) {
-        var defaultValue = tag['default'],
-            desc = util.format(tag.description),
-            name = _.toString(tag.name),
-            type = getParamType(tag.type);
+        const defaultValue = tag["default"]
+        const desc = util.format(tag.description)
+        let name = _.toString(tag.name)
+        const type = getParamType(tag.type)
 
         if (defaultValue != null) {
-          name += '=' + defaultValue;
+          name += "=" + defaultValue
         }
-        if (_.get(tag, 'type.type') == 'OptionalType') {
-          name = '[' + name + ']';
+        if (_.get(tag, "type.type") === "OptionalType") {
+          name = "[" + name + "]"
         }
-        return [type, name,  desc];
+        return [type, name, desc]
       })
-      .value();
+      .value()
   }
-  var result = this._params;
-  return index === undefined ? result : result[index];
+  const result = this._params
+  return index === undefined ? result : result[index]
 }
 
 /**
@@ -394,12 +402,16 @@ function getParams(index) {
  * @returns {array} Returns the entry's `see` data as links.
  */
 function getRelated() {
-  var relatedValues = getValue(this, 'see');
+  const relatedValues = getValue(this, "see")
   if (relatedValues && relatedValues.trim().length > 0) {
-    var relatedItems = relatedValues.split(',').map((relatedItem) => relatedItem.trim());
-    return relatedItems.map((relatedItem) => '[' + relatedItem + '](#' + relatedItem + ')');
+    const relatedItems = relatedValues
+      .split(",")
+      .map(relatedItem => relatedItem.trim())
+    return relatedItems.map(
+      relatedItem => "[" + relatedItem + "](#" + relatedItem + ")"
+    )
   } else {
-    return [];
+    return []
   }
 }
 
@@ -410,11 +422,11 @@ function getRelated() {
  * @returns {array} Returns the entry's `returns` data.
  */
 function getReturns() {
-  var tag = getTag(this, 'returns'),
-      desc = _.toString(_.get(tag, 'description')),
-      type = _.toString(_.get(tag, 'type.name')) || '*';
+  const tag = getTag(this, "returns")
+  const desc = _.toString(_.get(tag, "description"))
+  const type = _.toString(_.get(tag, "type.name")) || "*"
 
-  return tag ? [type, desc] : [];
+  return tag ? [type, desc] : []
 }
 
 /**
@@ -424,7 +436,7 @@ function getReturns() {
  * @returns {string} Returns the entry's `since` data.
  */
 function getSince() {
-  return getValue(this, 'since');
+  return getValue(this, "since")
 }
 
 /**
@@ -434,13 +446,13 @@ function getSince() {
  * @returns {string} Returns the entry's `type` data.
  */
 function getType() {
-  var result = getValue(this, 'type');
+  const result = getValue(this, "type")
   if (!result) {
-    return this.isFunction() ? 'Function' : 'unknown';
+    return this.isFunction() ? "Function" : "unknown"
   }
   return /^(?:array|function|object|regexp)$/.test(result)
     ? _.capitalize(result)
-    : result;
+    : result
 }
 
 /**
@@ -450,7 +462,7 @@ function getType() {
  * @type {Function}
  * @returns {boolean} Returns `false`.
  */
-var isAlias = _.constant(false);
+const isAlias = _.constant(false)
 
 /**
  * Checks if the entry is a constructor.
@@ -459,7 +471,7 @@ var isAlias = _.constant(false);
  * @returns {boolean} Returns `true` if a constructor, else `false`.
  */
 function isCtor() {
-  return hasTag(this, 'constructor');
+  return hasTag(this, "constructor")
 }
 
 /**
@@ -473,9 +485,9 @@ function isFunction() {
     this.isCtor() ||
     _.size(this.getParams()) ||
     _.size(this.getReturns()) ||
-    hasTag(this, 'function') ||
+    hasTag(this, "function") ||
     /\*\/\s*(?:function\s+)?[^\s(]+\s*\(/.test(this.entry)
-  );
+  )
 }
 
 /**
@@ -485,7 +497,7 @@ function isFunction() {
  * @returns {boolean} Returns `true` if a license, else `false`.
  */
 function isLicense() {
-  return hasTag(this, 'license');
+  return hasTag(this, "license")
 }
 
 /**
@@ -495,11 +507,7 @@ function isLicense() {
  * @returns {boolean} Returns `true` if assigned to a prototype, else `false`.
  */
 function isPlugin() {
-  return (
-    !this.isCtor() &&
-    !this.isPrivate() &&
-    !this.isStatic()
-  );
+  return !this.isCtor() && !this.isPrivate() && !this.isStatic()
 }
 
 /**
@@ -510,10 +518,8 @@ function isPlugin() {
  */
 function isPrivate() {
   return (
-    this.isLicense() ||
-    hasTag(this, 'private') ||
-    _.isEmpty(this.parsed.tags)
-  );
+    this.isLicense() || hasTag(this, "private") || _.isEmpty(this.parsed.tags)
+  )
 }
 
 /**
@@ -523,53 +529,53 @@ function isPrivate() {
  * @returns {boolean} Returns `true` if not assigned to a prototype, else `false`.
  */
 function isStatic() {
-  var isPublic = !this.isPrivate(),
-      result = isPublic && hasTag(this, 'static');
+  const isPublic = !this.isPrivate()
+  let result = isPublic && hasTag(this, "static")
 
   // Get the result in cases where it isn't explicitly stated.
   if (isPublic && !result) {
-    var parent = _.last(_.toString(this.getMembers(0)).split(/[#.]/));
+    const parent = _.last(_.toString(this.getMembers(0)).split(/[#.]/))
     if (!parent) {
-      return true;
+      return true
     }
-    var source = this.source;
+    const source = this.source
     _.each(getEntries(source), function(entry) {
-      entry = new Entry(entry, source);
-      if (entry.getName() == parent) {
-        result = !entry.isCtor();
-        return false;
+      entry = new Entry(entry, source)
+      if (entry.getName() === parent) {
+        result = !entry.isCtor()
+        return false
       }
-    });
+    })
   }
-  return result;
+  return result
 }
 
 /*----------------------------------------------------------------------------*/
 
-Entry.getEntries = getEntries;
+Entry.getEntries = getEntries
 
 _.assign(Entry.prototype, {
-  'getAliases': getAliases,
-  'getCall': getCall,
-  'getCategory': getCategory,
-  'getDesc': getDesc,
-  'getExample': getExample,
-  'getHash': getHash,
-  'getLineNumber': getLineNumber,
-  'getMembers': getMembers,
-  'getName': getName,
-  'getParams': getParams,
-  'getRelated': getRelated,
-  'getReturns': getReturns,
-  'getSince': getSince,
-  'getType': getType,
-  'isAlias': isAlias,
-  'isCtor': isCtor,
-  'isFunction': isFunction,
-  'isLicense': isLicense,
-  'isPlugin': isPlugin,
-  'isPrivate': isPrivate,
-  'isStatic': isStatic
-});
+  getAliases,
+  getCall,
+  getCategory,
+  getDesc,
+  getExample,
+  getHash,
+  getLineNumber,
+  getMembers,
+  getName,
+  getParams,
+  getRelated,
+  getReturns,
+  getSince,
+  getType,
+  isAlias,
+  isCtor,
+  isFunction,
+  isLicense,
+  isPlugin,
+  isPrivate,
+  isStatic,
+})
 
-module.exports = Entry;
+module.exports = Entry
