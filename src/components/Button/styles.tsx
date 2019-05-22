@@ -1,17 +1,11 @@
 import { darken } from "polished"
-import React from "react"
 import styled from "styled-components"
-
-interface ButtonProps {
-  type?: "primary" | "secondary"
-  onClick?: () => void
-  children: React.ReactNode
-}
+import { ButtonProps } from "./index"
 
 const primary = "#3492ff"
 const secondary = "#fff"
 
-const ButtonWrapper = styled.div<ButtonProps>`
+export const ButtonWrapper = styled.div<ButtonProps>`
   display: inline-flex;
   background: ${props => (props.type === "primary" ? primary : secondary)};
   color: ${props => (props.type === "primary" ? "#fff" : "#4b71ca")};
@@ -33,15 +27,3 @@ const ButtonWrapper = styled.div<ButtonProps>`
     margin-left: 8px;
   }
 `
-
-const Button = ({
-  type = "secondary",
-  children,
-  ...restProps
-}: ButtonProps): JSX.Element => (
-  <ButtonWrapper type={type} {...restProps}>
-    {children}
-  </ButtonWrapper>
-)
-
-export default Button

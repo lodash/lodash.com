@@ -1,15 +1,6 @@
-import React from "react"
-import Highlight from "react-highlight"
 import styled from "styled-components"
-import Container from "./Container"
 
-interface CodeProps {
-  children: React.ReactNode
-  lang?: string
-  withContainer?: boolean
-}
-
-const CodeWrapper = styled.div`
+export const CodeWrapper = styled.div`
   margin: 32px 0;
   padding: 32px 0;
   background: #1f2a34;
@@ -82,25 +73,3 @@ const CodeWrapper = styled.div`
     color: #ddd;
   }
 `
-
-const Code = ({
-  children,
-  withContainer = false,
-  lang = "js",
-  ...restProps
-}: CodeProps): JSX.Element => {
-  const MaybeContainer = withContainer ? Container : React.Fragment
-  const trimmedCode = React.Children.map(children, child => {
-    return typeof child === "string" ? child.trim() : child
-  })
-
-  return (
-    <CodeWrapper {...restProps}>
-      <MaybeContainer>
-        <Highlight children={trimmedCode} className={lang} />
-      </MaybeContainer>
-    </CodeWrapper>
-  )
-}
-
-export default Code
