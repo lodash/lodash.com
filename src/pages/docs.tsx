@@ -11,6 +11,9 @@ import Layout from "../components/Layout"
 import Method from "../components/Method"
 import SEO from "../components/SEO"
 
+// TODO: temporary polyfill currently preventing build
+import "../polyfills"
+
 const Wrapper = styled.div`
   display: flex;
   min-height: 100vh;
