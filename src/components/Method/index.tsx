@@ -28,8 +28,8 @@ const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
         <SC.MetaLink to="/">npm package</SC.MetaLink>
       </SC.MetaLinks>
 
-      {/* TODO: extract to sensible HTML */}
-      {method.desc}
+      {/* TODO: possibly switch to a lighter solution? */}
+      <SC.StyledMarkdown source={method.desc} escapeHtml={false} />
 
       <SC.Subtitle>Since</SC.Subtitle>
       <SC.SubContent>{method.since}</SC.SubContent>

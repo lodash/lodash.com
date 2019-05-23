@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import { lighten } from "polished"
-import styled from "styled-components"
+import Markdown from "react-markdown"
+import styled, { css } from "styled-components"
 import Code from "../Code"
 
 export const MethodWrapper = styled.div`
@@ -73,12 +74,16 @@ export const StyledCode = styled(Code)`
   background: #171f26;
 `
 
-export const InlineCode = styled.code`
+const inlineCode = css`
   border-radius: 4px;
   display: inline-block;
   background: #171f26;
   color: #74a9f2;
   padding: 6px 10px;
+`
+
+export const InlineCode = styled.code`
+  ${inlineCode};
 `
 
 export const Arguments = styled.div`
@@ -104,4 +109,12 @@ export const ArgumentValue = styled.div`
   color: #fff;
   margin-top: 8px;
   padding-right: 16px;
+`
+
+export const StyledMarkdown = styled(Markdown)`
+  code {
+    ${inlineCode};
+    display: inline;
+    padding: 5px 7px;
+  }
 `
