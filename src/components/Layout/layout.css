@@ -209,11 +209,6 @@ code {
     "Liberation Mono", Menlo, Courier, monospace;
   padding: 0;
 }
-code:before,
-code:after {
-  letter-spacing: -0.2em;
-  content: " ";
-}
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
