@@ -11,6 +11,7 @@ import Layout from "../components/Layout"
 import Method from "../components/Method"
 import SearchInput from "../components/SearchInput"
 import SEO from "../components/SEO"
+import { SearchProvider } from "../SearchProvider"
 
 // TODO: temporary polyfill currently preventing build
 import "../polyfills"
@@ -187,55 +188,57 @@ const DocsPage = (props: any): JSX.Element => {
           <Layout>
             <SEO title="Docs" />
             <Wrapper>
-              <Sidebar>
-                <SearchInput />
-                <PerfectScrollbar>
-                  {groups.map(group => {
-                    const { edges: groupMethods } = group
+              <SearchProvider>
+                <Sidebar>
+                  <SearchInput />
+                  <PerfectScrollbar>
+                    {groups.map(group => {
+                      const { edges: groupMethods } = group
 
-                    return (
-                      <MethodType>
-                        <MethodTypeTitle>
-                          {expanded ? <Min /> : <Max />} {group.fieldValue}
-                        </MethodTypeTitle>
-                        <Methods>
-                          {groupMethods.map(({ node: method }) => (
-                            <div>
-                              <StyledMethodLink
-                                // to={`/docs/${method.aliasOf || method.name}`}
-                                to={`/docs/${method.name}`}
-                                activeClassName="active"
-                              >
-                                _.{method.name}
-                                {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
-                              </StyledMethodLink>
-                            </div>
-                          ))}
-                        </Methods>
-                      </MethodType>
-                    )
-                  })}
-                </PerfectScrollbar>
-              </Sidebar>
-              <Main>
-                <Header />
-                <Content>
-                  {currentMethod && (
-                    <SeeAll onClick={() => navigate("/docs")} type="primary">
-                      ← See all
-                    </SeeAll>
-                  )}
-                  {/* TODO: optimize performance */}
-                  {methods
-                    .filter(
-                      ({ node: method }) =>
-                        !currentMethod || method.name === currentMethod
-                    )
-                    .map(({ node: method }) => (
-                      <Method method={method} />
-                    ))}
-                </Content>
-              </Main>
+                      return (
+                        <MethodType>
+                          <MethodTypeTitle>
+                            {expanded ? <Min /> : <Max />} {group.fieldValue}
+                          </MethodTypeTitle>
+                          <Methods>
+                            {groupMethods.map(({ node: method }) => (
+                              <div>
+                                <StyledMethodLink
+                                  // to={`/docs/${method.aliasOf || method.name}`}
+                                  to={`/docs/${method.name}`}
+                                  activeClassName="active"
+                                >
+                                  _.{method.name}
+                                  {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
+                                </StyledMethodLink>
+                              </div>
+                            ))}
+                          </Methods>
+                        </MethodType>
+                      )
+                    })}
+                  </PerfectScrollbar>
+                </Sidebar>
+                <Main>
+                  <Header />
+                  <Content>
+                    {currentMethod && (
+                      <SeeAll onClick={() => navigate("/docs")} type="primary">
+                        ← See all
+                      </SeeAll>
+                    )}
+                    {/* TODO: optimize performance */}
+                    {methods
+                      .filter(
+                        ({ node: method }) =>
+                          !currentMethod || method.name === currentMethod
+                      )
+                      .map(({ node: method }) => (
+                        <Method method={method} />
+                      ))}
+                  </Content>
+                </Main>
+              </SearchProvider>
             </Wrapper>
           </Layout>
         )

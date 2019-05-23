@@ -1,8 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { SearchContext } from "../../SearchProvider"
 import * as SC from "./styles"
 
 const SearchInput = (): JSX.Element => {
-  const [value, setValue] = useState("")
+  const searchContext = useContext(SearchContext)
+
+  if (!searchContext) {
+    throw Error("Need context")
+  }
+
+  const { state, actions } = searchContext
   const [focused, setFocused] = useState(false)
 
   function setFocus(): void {
@@ -14,14 +21,14 @@ const SearchInput = (): JSX.Element => {
   }
 
   function handleOnChange(event: KeyboardEvent<HTMLInputElement>): void {
-    setValue(event.target.value)
+    actions.update(event.target.value)
   }
 
   return (
     <SC.SearchInputWrapper focused={focused}>
       <SC.StyledSearchIcon />
       <SC.SearchInput
-        value={value}
+        value={state.input}
         onChange={handleOnChange}
         placeholder="Search"
         onFocus={setFocus}
