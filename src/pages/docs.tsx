@@ -9,6 +9,7 @@ import Button from "../components/Button"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
 import Method from "../components/Method"
+import SearchInput from "../components/SearchInput"
 import SEO from "../components/SEO"
 
 // TODO: temporary polyfill currently preventing build
@@ -187,6 +188,7 @@ const DocsPage = (props: any): JSX.Element => {
             <SEO title="Docs" />
             <Wrapper>
               <Sidebar>
+                <SearchInput />
                 <PerfectScrollbar>
                   {groups.map(group => {
                     const { edges: groupMethods } = group
