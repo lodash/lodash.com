@@ -1,9 +1,10 @@
 import { graphql, Link, navigate, StaticQuery } from "gatsby"
 import { darken } from "polished"
-import React from "react"
+import React, { useContext } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import styled from "styled-components"
+import { SearchContext, SearchProvider } from "../SearchProvider"
 
 import Button from "../components/Button"
 import Header from "../components/Header"
@@ -11,7 +12,6 @@ import Layout from "../components/Layout"
 import Method from "../components/Method"
 import SearchInput from "../components/SearchInput"
 import SEO from "../components/SEO"
-import { SearchProvider } from "../SearchProvider"
 
 // TODO: temporary polyfill currently preventing build
 import "../polyfills"
@@ -146,104 +146,123 @@ const methodFromPath = (props: any) => {
   return method
 }
 
-const DocsPage = (props: any): JSX.Element => {
+const Docs = (props: any): JSX.Element => {
+  const searchContext = useContext(SearchContext)
+
+  if (!searchContext) {
+    throw Error("Need context")
+  }
+
+  const { state } = searchContext
   const currentMethod = methodFromPath(props)
 
+  const filterMethods = (methods) => methods.filter(({ node: method }) => {
+    return method.name.includes(state.input)
+  })
+
+  const filterGroups = (groups) => groups.filter(({ edges: groupMethods }) => {
+    return filterMethods(groupMethods).length
+  })
+
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          allLodashMethod {
-            group(field: category) {
-              field
-              fieldValue
-              totalCount
-              edges {
-                node {
-                  id
-                  name
-                  category
-                  aliases
-                  desc
-                  example
-                  since
-                  params {
-                    type
+    <Layout>
+      <SEO title="Docs" />
+      <Wrapper>
+        <Sidebar>
+          <SearchInput />
+          <PerfectScrollbar>
+            {filterGroups(props.groups).map(group => {
+              const { edges: groupMethods } = group
+
+              return (
+                <MethodType>
+                  <MethodTypeTitle>
+                    {expanded ? <Min /> : <Max />} {group.fieldValue}
+                  </MethodTypeTitle>
+                  <Methods>
+                    {filterMethods(groupMethods).map(({ node: method }) => (
+                      <div>
+                        <StyledMethodLink
+                          // to={`/docs/${method.aliasOf || method.name}`}
+                          to={`/docs/${method.name}`}
+                          activeClassName="active"
+                        >
+                          _.{method.name}
+                          {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
+                        </StyledMethodLink>
+                      </div>
+                    ))}
+                  </Methods>
+                </MethodType>
+              )
+            })}
+          </PerfectScrollbar>
+        </Sidebar>
+        <Main>
+          <Header />
+          <Content>
+            {currentMethod && (
+              <SeeAll onClick={() => navigate("/docs")} type="primary">
+                ← See all
+              </SeeAll>
+            )}
+            {/* TODO: optimize performance */}
+            {props.methods
+              .filter(
+                ({ node: method }) =>
+                  !currentMethod || method.name === currentMethod
+              )
+              .map(({ node: method }) => (
+                <Method method={method} />
+              ))}
+          </Content>
+        </Main>
+      </Wrapper>
+    </Layout>
+  )
+}
+
+const DocsPage = (props: any): JSX.Element => {
+  return (
+    <SearchProvider>
+      <StaticQuery
+        query={graphql`
+          query {
+            allLodashMethod {
+              group(field: category) {
+                field
+                fieldValue
+                totalCount
+                edges {
+                  node {
+                    id
                     name
+                    category
+                    aliases
                     desc
+                    example
+                    since
+                    params {
+                      type
+                      name
+                      desc
+                    }
+                    call
                   }
-                  call
                 }
               }
             }
           }
-        }
-      `}
-      render={data => {
-        const groups = data.allLodashMethod.group
-        // TODO: optimize performance
-        const methods = groups.map(group => group.edges).flat()
+        `}
+        render={data => {
+          const groups = data.allLodashMethod.group
+          // TODO: optimize performance
+          const methods = groups.map(group => group.edges).flat()
 
-        return (
-          <Layout>
-            <SEO title="Docs" />
-            <Wrapper>
-              <SearchProvider>
-                <Sidebar>
-                  <SearchInput />
-                  <PerfectScrollbar>
-                    {groups.map(group => {
-                      const { edges: groupMethods } = group
-
-                      return (
-                        <MethodType>
-                          <MethodTypeTitle>
-                            {expanded ? <Min /> : <Max />} {group.fieldValue}
-                          </MethodTypeTitle>
-                          <Methods>
-                            {groupMethods.map(({ node: method }) => (
-                              <div>
-                                <StyledMethodLink
-                                  // to={`/docs/${method.aliasOf || method.name}`}
-                                  to={`/docs/${method.name}`}
-                                  activeClassName="active"
-                                >
-                                  _.{method.name}
-                                  {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
-                                </StyledMethodLink>
-                              </div>
-                            ))}
-                          </Methods>
-                        </MethodType>
-                      )
-                    })}
-                  </PerfectScrollbar>
-                </Sidebar>
-                <Main>
-                  <Header />
-                  <Content>
-                    {currentMethod && (
-                      <SeeAll onClick={() => navigate("/docs")} type="primary">
-                        ← See all
-                      </SeeAll>
-                    )}
-                    {/* TODO: optimize performance */}
-                    {methods
-                      .filter(
-                        ({ node: method }) =>
-                          !currentMethod || method.name === currentMethod
-                      )
-                      .map(({ node: method }) => (
-                        <Method method={method} />
-                      ))}
-                  </Content>
-                </Main>
-              </SearchProvider>
-            </Wrapper>
-          </Layout>
-        )
-      }}
-    />
+          return <Docs {...props} data={data} groups={groups} methods={methods} />
+        }}
+      />
+    </SearchProvider>
   )
 }
 

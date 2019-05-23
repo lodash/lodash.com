@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useContext, useState } from "react"
 import { SearchContext } from "../../SearchProvider"
 import * as SC from "./styles"
 
