@@ -1,12 +1,10 @@
-import { graphql, navigate, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 
-import Button from "../components/Button"
+import DocsContent from "../components/DocsContent"
 import DocsSidebar from "../components/DocsSidebar"
-import Header from "../components/Header"
 import Layout from "../components/Layout"
-import Method from "../components/Method"
 import SEO from "../components/SEO"
 import { SearchProvider } from "../SearchProvider"
 
@@ -18,70 +16,17 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `
 
-const Main = styled.main`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  margin-left: 320px;
-`
-
-const Content = styled.div`
-  background: #1e2933;
-  flex: 1 0 auto;
-  padding: 124px 24px 24px;
-`
-
-const SeeAll = styled(Button)`
-  margin-bottom: 24px;
-`
-
-const methodFromPath = (props: any) => {
-  const [, method] = props["*"].split("/")
-
-  return method
-}
-
-const Docs = (props: any): JSX.Element => {
-  const currentMethod = methodFromPath(props)
-
-  return (
-    <SearchProvider>
-      <Layout>
-        <SEO title="Docs" />
-        <Wrapper>
-          <DocsSidebar groups={props.groups} />
-          <Main>
-            <Header />
-            <Content>
-              {currentMethod && (
-                <SeeAll onClick={() => navigate("/docs")} type="primary">
-                  ← See all
-                </SeeAll>
-              )}
-              {/* TODO: optimize performance */}
-              {props.methods
-                .filter(
-                  ({ node: method }) =>
-                    !currentMethod || method.name === currentMethod
-                )
-                /* TODO: get rid of i, currently a dirty fix because Seq-chain is not unique */
-                .map((methodNode, i) => {
-                  const { node: method } = methodNode
-                  return (
-                    <Method
-                      key={`${method.category}-${method.name}-${i}`}
-                      method={method}
-                    />
-                  )
-                })}
-            </Content>
-          </Main>
-        </Wrapper>
-      </Layout>
-    </SearchProvider>
-  )
-}
+const Docs = ({ groups, methods, ...restProps }): JSX.Element => (
+  <SearchProvider>
+    <Layout>
+      <SEO title="Docs" />
+      <Wrapper>
+        <DocsSidebar groups={groups} />
+        <DocsContent {...restProps} methods={methods} />
+      </Wrapper>
+    </Layout>
+  </SearchProvider>
+)
 
 const DocsPage = (props: any): JSX.Element => {
   const data = useStaticQuery(graphql`
