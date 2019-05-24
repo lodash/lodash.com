@@ -1,4 +1,4 @@
-import { graphql, navigate, StaticQuery } from "gatsby"
+import { graphql, navigate, useStaticQuery } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 
@@ -84,45 +84,40 @@ const Docs = (props: any): JSX.Element => {
 }
 
 const DocsPage = (props: any): JSX.Element => {
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          allLodashMethod {
-            group(field: category) {
-              field
-              fieldValue
-              totalCount
-              edges {
-                node {
-                  id
-                  name
-                  category
-                  aliases
-                  desc
-                  example
-                  since
-                  params {
-                    type
-                    name
-                    desc
-                  }
-                  call
-                }
+  const data = useStaticQuery(graphql`
+    query {
+      allLodashMethod {
+        group(field: category) {
+          field
+          fieldValue
+          totalCount
+          edges {
+            node {
+              id
+              name
+              category
+              aliases
+              desc
+              example
+              since
+              params {
+                type
+                name
+                desc
               }
+              call
             }
           }
         }
-      `}
-      render={data => {
-        const groups = data.allLodashMethod.group
-        // TODO: optimize performance
-        const methods = groups.map(group => group.edges).flat()
+      }
+    }
+  `)
 
-        return <Docs {...props} data={data} groups={groups} methods={methods} />
-      }}
-    />
-  )
+  const groups = data.allLodashMethod.group
+  // TODO: optimize performance
+  const methods = groups.map(group => group.edges).flat()
+
+  return <Docs {...props} data={data} groups={groups} methods={methods} />
 }
 
 export default DocsPage
