@@ -50,6 +50,8 @@ export const MethodTypeTitle = styled.h4`
   margin: 0 0 16px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  user-select: none;
 `
 
 export const Methods = styled.div`
