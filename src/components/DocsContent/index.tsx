@@ -18,6 +18,11 @@ const DocsContent = (props: DocsContentProps): JSX.Element => {
   const currentMethod = methodFromPath(props)
   const { methods } = props
 
+  const SingleMethod = ({ name }) => {
+    const method = methods.find(({ node: method }) => method.name === name)
+    return <Method method={method.node} />
+  }
+
   return (
     <SC.DocsContentWrapper>
       <Header />
@@ -27,14 +32,13 @@ const DocsContent = (props: DocsContentProps): JSX.Element => {
             ← See all
           </SC.SeeAll>
         )}
+
         {/* TODO: optimize performance */}
-        {methods
-          .filter(
-            ({ node: method }) =>
-              !currentMethod || method.name === currentMethod
-          )
+        {currentMethod ? (
+          <SingleMethod name={currentMethod} />
+        ) : (
           /* TODO: get rid of i, currently a dirty fix because Seq-chain is not unique */
-          .map((methodNode, i) => {
+          methods.map((methodNode, i) => {
             const { node: method } = methodNode
             return (
               <Method
@@ -42,7 +46,8 @@ const DocsContent = (props: DocsContentProps): JSX.Element => {
                 method={method}
               />
             )
-          })}
+          })
+        )}
       </SC.Content>
     </SC.DocsContentWrapper>
   )
