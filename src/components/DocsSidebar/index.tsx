@@ -38,13 +38,13 @@ const DocsSidebar = ({ groups }: DocsSidebarProps): JSX.Element => {
           const { edges: groupMethods } = group
 
           return (
-            <SC.MethodType>
+            <SC.MethodType key={group.fieldValue}>
               <SC.MethodTypeTitle>
                 {expanded ? <SC.Min /> : <SC.Max />} {group.fieldValue}
               </SC.MethodTypeTitle>
               <SC.Methods>
                 {filterMethods(groupMethods).map(({ node: method }) => (
-                  <div>
+                  <div key={`${method.category}-${method.name}`}>
                     <SC.StyledMethodLink
                       // to={`/docs/${method.aliasOf || method.name}`}
                       to={`/docs/${method.name}`}

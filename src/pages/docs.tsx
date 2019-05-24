@@ -66,7 +66,10 @@ const Docs = (props: any): JSX.Element => {
                     !currentMethod || method.name === currentMethod
                 )
                 .map(({ node: method }) => (
-                  <Method method={method} />
+                  <Method
+                    key={`${method.category}-${method.name}`}
+                    method={method}
+                  />
                 ))}
             </Content>
           </Main>
