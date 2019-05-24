@@ -37,6 +37,7 @@ const Select = ({ options = [], ...restProps }: SelectProps): JSX.Element => {
             .filter(({ value }) => value !== selected)
             .map(({ value, text }) => (
               <SC.Option
+                key={value}
                 onClick={() => {
                   selectOption(value)
                 }}
