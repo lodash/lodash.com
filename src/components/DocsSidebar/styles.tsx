@@ -41,7 +41,11 @@ export const Sidebar = styled.aside`
   }
 `
 
-export const MethodType = styled.div``
+export const MethodType = styled.div`
+  & + & {
+    margin-top: 32px;
+  }
+`
 
 export const MethodTypeTitle = styled.h4`
   color: #fff;
