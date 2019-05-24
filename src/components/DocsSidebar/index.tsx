@@ -22,7 +22,7 @@ const DocsSidebar = ({ groups }: DocsSidebarProps): JSX.Element => {
 
   const filterMethods = m =>
     m.filter(({ node: method }) => {
-      return method.name.includes(state.input)
+      return method.name.toLowerCase().includes(state.input.toLowerCase())
     })
 
   const filterGroups = g =>
