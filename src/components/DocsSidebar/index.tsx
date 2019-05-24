@@ -43,18 +43,22 @@ const DocsSidebar = ({ groups }: DocsSidebarProps): JSX.Element => {
                 {expanded ? <SC.Min /> : <SC.Max />} {group.fieldValue}
               </SC.MethodTypeTitle>
               <SC.Methods>
-                {filterMethods(groupMethods).map(({ node: method }) => (
-                  <div key={`${method.category}-${method.name}`}>
-                    <SC.StyledMethodLink
-                      // to={`/docs/${method.aliasOf || method.name}`}
-                      to={`/docs/${method.name}`}
-                      activeClassName="active"
-                    >
-                      _.{method.name}
-                      {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
-                    </SC.StyledMethodLink>
-                  </div>
-                ))}
+                {/* TODO: get rid of i, currently a dirty fix because Seq-chain is not unique */}
+                {filterMethods(groupMethods).map((methodNode, i) => {
+                  const { node: method } = methodNode
+                  return (
+                    <div key={`${method.category}-${method.name}-${i}`}>
+                      <SC.StyledMethodLink
+                        // to={`/docs/${method.aliasOf || method.name}`}
+                        to={`/docs/${method.name}`}
+                        activeClassName="active"
+                      >
+                        _.{method.name}
+                        {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
+                      </SC.StyledMethodLink>
+                    </div>
+                  )
+                })}
               </SC.Methods>
             </SC.MethodType>
           )

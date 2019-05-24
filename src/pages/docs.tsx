@@ -65,12 +65,16 @@ const Docs = (props: any): JSX.Element => {
                   ({ node: method }) =>
                     !currentMethod || method.name === currentMethod
                 )
-                .map(({ node: method }) => (
-                  <Method
-                    key={`${method.category}-${method.name}`}
-                    method={method}
-                  />
-                ))}
+                /* TODO: get rid of i, currently a dirty fix because Seq-chain is not unique */
+                .map((methodNode, i) => {
+                  const { node: method } = methodNode
+                  return (
+                    <Method
+                      key={`${method.category}-${method.name}-${i}`}
+                      method={method}
+                    />
+                  )
+                })}
             </Content>
           </Main>
         </Wrapper>
