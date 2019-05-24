@@ -49,7 +49,7 @@
     "react-highlight": "^0.12.0",
     "react-markdown": "^4.0.8",
     "react-perfect-scrollbar": "^1.5.2",
-    "sharp": "^0.21.3",
+    "sharp": "^0.22.1",
     "styled-components": "^4.1.3"
   },
   "devDependencies": {
