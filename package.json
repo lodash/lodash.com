@@ -39,7 +39,7 @@
     "gatsby-plugin-styled-components": "^3.0.7",
     "gatsby-plugin-tslint": "0.0.2",
     "gatsby-plugin-typescript": "^2.0.14",
-    "gatsby-source-filesystem": "^2.0.24",
+    "gatsby-source-filesystem": "^2.0.37",
     "gatsby-transformer-sharp": "^2.1.17",
     "polished": "^3.0.3",
     "prop-types": "^15.7.2",
