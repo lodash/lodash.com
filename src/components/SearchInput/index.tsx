@@ -1,15 +1,9 @@
-import React, { useContext, useState } from "react"
-import { SearchContext } from "../../SearchProvider"
+import React, { useState } from "react"
+import { useSearch } from "../../hooks/useSearch"
 import * as SC from "./styles"
 
 const SearchInput = (): JSX.Element => {
-  const searchContext = useContext(SearchContext)
-
-  if (!searchContext) {
-    throw Error("Need context")
-  }
-
-  const { state, actions } = searchContext
+  const { state, actions } = useSearch()
   const [focused, setFocused] = useState(false)
 
   function setFocus(): void {

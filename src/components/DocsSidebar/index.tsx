@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
-import { SearchContext } from "../../SearchProvider"
+import { useSearch } from "../../hooks/useSearch"
 import { Group as GroupInterface, Method as MethodInterface } from "../../types"
 import SearchInput from "../SearchInput"
 import * as SC from "./styles"
@@ -69,13 +69,7 @@ const MethodGroup = ({
 }
 
 const DocsSidebar = ({ groups }: DocsSidebarProps): JSX.Element => {
-  const searchContext = useContext(SearchContext)
-
-  if (!searchContext) {
-    throw Error("Need context")
-  }
-
-  const { state } = searchContext
+  const { state } = useSearch()
 
   return (
     <SC.Sidebar>

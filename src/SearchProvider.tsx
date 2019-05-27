@@ -4,7 +4,7 @@ interface SearchProviderProps {
   children: React.ReactNode
 }
 
-interface SearchContextInterface {
+export interface SearchContextInterface {
   state: {
     input: string
   }
