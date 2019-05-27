@@ -1,11 +1,12 @@
 import { navigate } from "gatsby"
 import React from "react"
+import { Method as MethodInterface } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
 import * as SC from "./styles"
 
 interface DocsContentProps {
-  methods: any
+  methods: MethodInterface[]
 }
 
 const methodFromPath = (props: any) => {

@@ -1,21 +1,9 @@
 import React from "react"
+import { Method as MethodInterface } from "../../types"
 import * as SC from "./styles"
 
-interface Param {
-  name: string
-  type: string
-  desc: string
-}
-
 interface MethodProps {
-  method: {
-    name: string
-    call: string
-    desc: string
-    since: string
-    params: Param[]
-    example: string
-  }
+  method: MethodInterface["node"]
 }
 
 const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (

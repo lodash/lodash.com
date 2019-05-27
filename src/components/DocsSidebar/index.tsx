@@ -2,26 +2,36 @@ import React, { useContext, useState } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { SearchContext } from "../../SearchProvider"
+import { Group as GroupInterface, Method as MethodInterface } from "../../types"
 import SearchInput from "../SearchInput"
 import * as SC from "./styles"
 
 interface DocsSidebarProps {
-  groups: any
+  groups: GroupInterface[]
 }
 
 // TODO: refactor to avoid the weird need for input?
-const filterMethods = (m, input) =>
+const filterMethods = (
+  m: MethodInterface[],
+  input: string
+): MethodInterface[] =>
   m.filter(({ node: method }) => {
     return method.name.toLowerCase().includes(input.toLowerCase())
   })
 
 // TODO: refactor to avoid the weird need for input?
-const filterGroups = (g, input) =>
+const filterGroups = (g: GroupInterface[], input: string): GroupInterface[] =>
   g.filter(({ edges: groupMethods }) => {
     return filterMethods(groupMethods, input).length
   })
 
-const MethodGroup = ({ group, input }) => {
+const MethodGroup = ({
+  group,
+  input,
+}: {
+  group: GroupInterface
+  input: string
+}) => {
   const [expanded, setExpanded] = useState(true)
   const { edges: groupMethods } = group
 
