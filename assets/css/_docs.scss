@@ -77,7 +77,9 @@ html.docs {
       position: relative;
     }
 
-    h2, h3, h4 {
+    h2,
+    h3,
+    h4 {
       white-space: nowrap;
     }
 
@@ -170,6 +172,8 @@ html.docs {
   .search {
     position: relative;
     width: 100%;
+    margin: 2.4rem 0 0;
+    padding: 0 2.4rem;
 
     input {
       appearance: none;
@@ -189,30 +193,37 @@ html.docs {
     .fa-search {
       color: #979797;
       font-size: 1.5rem;
-      left: 7px;
+      left: 24px;
       position: absolute;
-      top: 5px;
+      top: 3px;
     }
   }
 
   .toc-container {
-    @include minimal-scrollbar();
-
     background-color: $foreground;
     display: none;
     flex: none;
     height: 100%;
     min-width: 310px;
-    overflow-y: auto;
-    padding: 2.4rem;
     position: absolute;
     right: 0;
     top: 0;
     transform: translateZ(0);
     white-space: nowrap;
-    will-change: scroll-position;
     z-index: 1;
-    -webkit-overflow-scrolling: touch;
+
+    .toc-menu-container {
+      height: 100%;
+    }
+
+    .react-menu-container {
+      @include minimal-scrollbar();
+      padding: 0 2.4rem 2.4rem;
+      overflow-y: auto;
+      height: calc(100% - 6rem);
+      will-change: scroll-position;
+      -webkit-overflow-scrolling: touch;
+    }
 
     &.open {
       display: block;
@@ -227,7 +238,7 @@ html.docs {
     }
 
     // Avoid page jank when the search bar initializes.
-    > div:first-child:not(.search):not(.react-menu-container) {
+    > div:first-child:not(.toc-menu-container):not(.search):not(.react-menu-container) {
       margin-top: calc(2.4rem + 33px);
 
       h2 {
@@ -270,7 +281,8 @@ html.docs {
       font-size: 1.4rem;
     }
 
-    .fa-minus-square-o, .fa-plus-square-o {
+    .fa-minus-square-o,
+    .fa-plus-square-o {
       cursor: pointer;
       font-size: 1.4rem;
       margin-right: 1.1rem;
