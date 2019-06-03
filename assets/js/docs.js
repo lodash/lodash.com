@@ -327,7 +327,7 @@
       return React.createElement(
         'div',
         {
-          'className': 'react-menu-container'
+          'className': 'toc-menu-container'
         },
         React.createElement(
           'div',
@@ -353,16 +353,21 @@
             }
           )
         ),
-        elements,
         React.createElement(
           'div',
           {
-            'className': className('empty-state', this.state.searchFound ? 'hidden' : '')
+            'className': 'react-menu-container'
           },
-          'Sorry, no matches.'
+          elements,
+          React.createElement(
+            'div',
+            {
+              'className': className('empty-state', this.state.searchFound ? 'hidden' : '')
+            },
+            'Sorry, no matches.'
+          )
         )
-      )
-    }
+      )}
   })
 
   /*--------------------------------------------------------------------------*/
