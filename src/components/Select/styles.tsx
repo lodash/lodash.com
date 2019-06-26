@@ -4,6 +4,7 @@ import Triangle from "../../images/triangle.svg"
 export const SelectWrapper = styled.div`
   position: relative;
   font-weight: bold;
+  user-select: none;
 `
 
 export const Arrow = styled(Triangle)`
