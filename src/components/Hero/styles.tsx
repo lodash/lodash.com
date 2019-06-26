@@ -33,6 +33,10 @@ export const Row = styled.div`
   display: flex;
   width: 100%;
 
+  @media screen and (max-width: 991px) {
+    flex-direction: column;
+  }
+
   & + & {
     margin-top: 32px;
   }
@@ -45,6 +49,13 @@ export const Aside = styled.aside`
   justify-content: flex-end;
   align-items: center;
   font-weight: 700;
+
+  @media screen and (max-width: 991px) {
+    justify-content: flex-start;
+    flex-basis: auto;
+    padding-right: 0;
+    padding-bottom: 32px;
+  }
 `
 
 export const AsideTitle = styled.h3`
@@ -61,6 +72,10 @@ export const Content = styled.div`
   flex: 1 0 65%;
   font-size: 17px;
   margin-left: 35%;
+
+  @media screen and (max-width: 991px) {
+    margin-left: 0;
+  }
 
   ${Aside} + & {
     margin-left: 0;

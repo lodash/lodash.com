@@ -16,6 +16,7 @@ export const StyledChevronRight = styled(ChevronRight)`
   display: inline-block;
   width: 10px;
   margin-right: 5px;
+  flex: 0 0 auto;
 
   path {
     fill: #96a4b2;

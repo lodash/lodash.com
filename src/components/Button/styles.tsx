@@ -16,6 +16,9 @@ export const ButtonWrapper = styled.div<ButtonProps>`
     0px 6px 10px rgba(51, 144, 252, 0.2);
   cursor: pointer;
   transition: 0.3s background;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
   &:hover,
   &:focus {
