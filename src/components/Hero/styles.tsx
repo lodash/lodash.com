@@ -14,7 +14,7 @@ export const HeroWrapper = styled.header`
     ),
     linear-gradient(180deg, rgba(34, 85, 144, 1) 0%, rgba(52, 146, 255, 1) 100%);
   color: #fff;
-  margin-bottom: 1.45rem;
+  margin-bottom: 64px;
 `
 
 export const StyledContainer = styled(Container)`
