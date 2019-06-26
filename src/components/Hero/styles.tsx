@@ -1,4 +1,5 @@
 import { Link } from "gatsby"
+import { darken } from "polished"
 import styled from "styled-components"
 import Logo from "../../images/lodash.svg"
 import { CodeWrapper } from "../Code/styles"
@@ -121,6 +122,13 @@ export const StyledLink = styled(Link)`
   border-bottom: 1px solid #75b5ff;
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.3s;
+
+  &:hover,
+  &:focus {
+    color: ${darken(0.12, "#ceddf7")};
+    transition: none;
+  }
 `
 
 export const Info = styled.p`

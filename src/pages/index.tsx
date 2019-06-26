@@ -1,4 +1,5 @@
 import { Link } from "gatsby"
+import { lighten } from "polished"
 import React, { Fragment } from "react"
 import styled from "styled-components"
 
@@ -23,6 +24,13 @@ const StyledLink = styled(Link)`
   color: #75b5ff;
   text-decoration: none;
   border-bottom: 1px solid;
+  transition: color 0.3s;
+
+  &:hover,
+  &:focus {
+    color: ${lighten(0.12, "#75b5ff")};
+    transition: none;
+  }
 `
 
 const IndexPage = (): JSX.Element => (
