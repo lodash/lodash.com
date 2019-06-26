@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import { useOnClickOutside } from "../../hooks/useOnClickOutside"
 import * as SC from "./styles"
 
 interface OptionItem {
@@ -11,8 +12,10 @@ interface SelectProps {
 }
 
 const Select = ({ options = [], ...restProps }: SelectProps): JSX.Element => {
+  const ref = useRef<HTMLDivElement>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const [open, setOpen] = useState<boolean>(false)
+  useOnClickOutside(ref, () => setOpen(false))
 
   useEffect(() => {
     if (options.length) {
@@ -26,7 +29,7 @@ const Select = ({ options = [], ...restProps }: SelectProps): JSX.Element => {
   }
 
   return (
-    <SC.SelectWrapper {...restProps}>
+    <SC.SelectWrapper {...restProps} ref={ref}>
       <SC.Selected onClick={() => setOpen(!open)}>
         {selected}
         <SC.Arrow />
