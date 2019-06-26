@@ -6,12 +6,6 @@ export const ULWrapper = styled.ul`
   margin-left: 16px;
 `
 
-export const LI = styled.li`
-  display: flex;
-  align-items: center;
-  margin-bottom: 0;
-`
-
 export const StyledChevronRight = styled(ChevronRight)`
   display: inline-block;
   width: 10px;
@@ -20,5 +14,15 @@ export const StyledChevronRight = styled(ChevronRight)`
 
   path {
     fill: #96a4b2;
+  }
+`
+
+export const LI = styled.li`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+
+  & > ${StyledChevronRight} + * + * {
+    margin-left: 8px;
   }
 `
