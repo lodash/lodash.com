@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import styled from "styled-components"
 import Logo from "../../images/lodash.svg"
+import { CodeWrapper } from "../Code/styles"
 import Container from "../Container"
 
 export const HeroWrapper = styled.header`
@@ -50,6 +51,7 @@ export const AsideTitle = styled.h3`
   font-size: 24px;
   font-weight: 500;
   align-self: flex-start;
+  margin-top: 0;
 `
 
 export const Content = styled.div`
@@ -62,6 +64,18 @@ export const Content = styled.div`
 
   ${Aside} + & {
     margin-left: 0;
+  }
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
+  ${CodeWrapper} {
+    margin-top: 0;
   }
 `
 
@@ -85,15 +99,6 @@ export const StyledLogo = styled(Logo)`
 
 export const ButtonsWrapper = styled.div`
   display: flex;
-`
-
-export const UL = styled.ul`
-  list-style: none;
-  margin-left: 0;
-
-  li {
-    margin: 0;
-  }
 `
 
 export const StyledLink = styled(Link)`

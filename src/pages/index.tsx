@@ -1,8 +1,7 @@
 import { Link } from "gatsby"
-import React from "react"
+import React, { Fragment } from "react"
 import styled from "styled-components"
 
-import Code from "../components/Code"
 import Container from "../components/Container"
 import Footer from "../components/Footer"
 import Hero from "../components/Hero"
@@ -33,43 +32,6 @@ const IndexPage = (): JSX.Element => (
     <Hero />
 
     <Container>
-      <Title>Installation</Title>
-      <p>In a browser:</p>
-    </Container>
-    <Code withContainer lang="html">{`<script src="lodash.js"></script>`}</Code>
-
-    <Container>
-      <p>Using npm:</p>
-    </Container>
-    <Code withContainer lang="bash">{`$ npm i -g npm
-$ npm i --save lodash`}</Code>
-
-    <Container>
-      <p>In Node.js:</p>
-    </Container>
-    <Code withContainer>{`// Load the full build.
-var _ = require('lodash');
-// Load the core build.
-var _ = require('lodash/core');
-// Load the FP build for immutable auto-curried iteratee-first data-last methods.
-var fp = require('lodash/fp');
- 
-// Load method categories.
-var array = require('lodash/array');
-var object = require('lodash/fp/object');
- 
-// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
-var at = require('lodash/at');
-var curryN = require('lodash/fp/curryN');
-`}</Code>
-
-    <Container>
-      <Subtitle>Note:</Subtitle>
-      <p>
-        Install <StyledLink to="/">n_</StyledLink> for Lodash use in the Node.js
-        &lt; 6 REPL.
-      </p>
-
       <Title>Why Lodash?</Title>
       <p>
         Lodash makes JavaScript easier by taking the hassle out of working with
@@ -85,6 +47,24 @@ var curryN = require('lodash/fp/curryN');
         ]}
       />
 
+      <Title>Conventional builds</Title>
+      <UL
+        items={[
+          <Fragment>
+            <StyledLink to="/">Core build</StyledLink>{" "}
+            <StyledLink to="/">~4kB gzipped</StyledLink>
+          </Fragment>,
+          <Fragment>
+            <StyledLink to="/">Full build</StyledLink>{" "}
+            <StyledLink to="/">~24kB gzipped</StyledLink>
+          </Fragment>,
+        ]}
+      />
+      <p>
+        Review the <StyledLink to="/">build differences</StyledLink> & pick one
+        that’s right for you.
+      </p>
+
       <Title>Module Formats</Title>
       <p>Lodash is available in a variety of builds & module formats.</p>
 
@@ -96,6 +76,12 @@ var curryN = require('lodash/fp/curryN');
           "lodash-amd",
         ]}
       />
+
+      <Subtitle>Note:</Subtitle>
+      <p>
+        Install <StyledLink to="/">n_</StyledLink> for Lodash use in the Node.js
+        &lt; 6 REPL.
+      </p>
 
       <Title>Further Reading</Title>
       <UL

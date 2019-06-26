@@ -1,6 +1,7 @@
 import { navigate } from "gatsby"
 import React from "react"
 import Button from "../Button"
+import Code from "../Code"
 import * as SC from "./styles"
 
 const Hero = (): JSX.Element => (
@@ -35,32 +36,39 @@ const Hero = (): JSX.Element => (
 
         <SC.Row>
           <SC.Aside>
-            <SC.AsideTitle>Download</SC.AsideTitle>
+            <SC.AsideTitle>Usage</SC.AsideTitle>
           </SC.Aside>
           <SC.Content>
-            <SC.UL>
-              <li>
-                <SC.StyledLink to="/">Core build</SC.StyledLink> (
-                <SC.StyledLink to="/">~4kB gzipped</SC.StyledLink>)
-              </li>
-              <li>
-                <SC.StyledLink to="/">Full build</SC.StyledLink> (
-                <SC.StyledLink to="/">~24kB gzipped</SC.StyledLink>)
-              </li>
-              <li>
-                <SC.StyledLink to="/">CDN copies</SC.StyledLink>
-              </li>
-            </SC.UL>
+            <Code withContainer lang="bash">{`
+$ npm i lodash
+# or
+yarn add lodash
+`}</Code>
+
+            <Code withContainer>{`
+// Load the full build.
+const _ = require('lodash');
+// Load the core build.
+const _ = require('lodash/core');
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+const fp = require('lodash/fp');
+ 
+// Load method categories.
+const array = require('lodash/array');
+const object = require('lodash/fp/object');
+ 
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+const at = require('lodash/at');
+const curryN = require('lodash/fp/curryN');
+`}</Code>
 
             <SC.Info>
+              Also available through{" "}
+              <SC.StyledLink to="/">CDN copies</SC.StyledLink>
+              <br />
               Lodash is released under the{" "}
               <SC.StyledLink to="/">MIT license</SC.StyledLink> & supports
               modern environments.
-              <br />
-              Review the <SC.StyledLink to="/">
-                build differences
-              </SC.StyledLink>{" "}
-              & pick one that’s right for you.
             </SC.Info>
           </SC.Content>
         </SC.Row>
