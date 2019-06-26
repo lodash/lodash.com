@@ -55,7 +55,7 @@
   "devDependencies": {
     "@types/react-helmet": "^5.0.8",
     "@types/react-highlight": "^0.12.1",
-    "@types/styled-components": "^4.1.15",
+    "@types/styled-components": "^4.1.16",
     "prettier": "^1.17.1",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
