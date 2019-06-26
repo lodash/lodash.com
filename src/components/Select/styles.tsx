@@ -36,6 +36,7 @@ export const Options = styled.div<{ open: boolean }>`
   right: 0;
   z-index: 10;
   margin-top: ${({ open }) => (open ? "4px" : "-30px")};
+  pointer-events: ${({ open }) => (open ? "auto" : "none")};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 7px 18px rgba(0, 0, 0, 0.2);
 `
 
