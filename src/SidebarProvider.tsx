@@ -1,7 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { Group as GroupInterface, Method as MethodInterface } from "./types"
 
 interface SidebarProviderProps {
   children: React.ReactNode
+  initialGroups: GroupInterface[]
+  searchInput: string
 }
 
 interface BaseInput {
@@ -33,6 +36,7 @@ export type Focus = FocusOnInput | FocusOnMethod | FocusOnNothing
 export interface SidebarContextInterface {
   state: {
     focus: Focus
+    filteredGroups: GroupInterface[]
   }
   actions: {
     focusPrevious: () => void
@@ -48,14 +52,52 @@ export const SidebarContext = React.createContext<SidebarContextInterface | null
   null
 )
 
+function filterMethod(method: MethodInterface, input: string): boolean {
+  return method.node.name.toLowerCase().includes(input.toLowerCase())
+}
+
+function filterMethods(
+  methods: MethodInterface[],
+  input: string
+): MethodInterface[] {
+  return methods.filter(method => filterMethod(method, input))
+}
+
+function filterGroups(
+  groups: GroupInterface[],
+  input: string
+): GroupInterface[] {
+  return groups
+    .map(group => {
+      return {
+        ...group,
+        edges: group.edges.filter(method => filterMethod(method, input)),
+      }
+    })
+    .filter(({ edges: groupMethods }) => {
+      return filterMethods(groupMethods, input).length
+    })
+}
+
 export function SidebarProvider({
   children,
+  initialGroups,
+  searchInput,
 }: SidebarProviderProps): JSX.Element {
+  const [filteredGroups, setFilteredGroups] = useState<GroupInterface[]>([])
   const [focus, setFocus] = useState<Focus>({
     type: "nothing",
     method: null,
     group: null,
   })
+
+  useEffect(() => {
+    setFilteredGroups(initialGroups)
+  }, [])
+
+  useEffect(() => {
+    setFilteredGroups(filterGroups(initialGroups, searchInput))
+  }, [searchInput])
 
   function focusPrevious(): void {
     if (focus.type === "method" && focus.method === 0 && focus.group === 0) {
@@ -110,6 +152,7 @@ export function SidebarProvider({
       value={{
         state: {
           focus,
+          filteredGroups,
         },
         actions: {
           focusPrevious,
