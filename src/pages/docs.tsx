@@ -7,6 +7,7 @@ import DocsSidebar from "../components/DocsSidebar"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { SearchProvider } from "../SearchProvider"
+import { SidebarProvider } from "../SidebarProvider"
 import { AllLodashMethodQuery } from "../types"
 
 // TODO: temporary polyfill currently preventing build
@@ -58,7 +59,9 @@ const DocsPage = (props: any): JSX.Element => {
       <Layout>
         <SEO title="Docs" />
         <Wrapper>
-          <DocsSidebar groups={groups} />
+          <SidebarProvider>
+            <DocsSidebar groups={groups} />
+          </SidebarProvider>
           <DocsContent {...props} methods={methods} />
         </Wrapper>
       </Layout>

@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import { darken } from "polished"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 export const Sidebar = styled.aside`
   background: #293845;
@@ -64,7 +64,7 @@ export const Methods = styled.div`
   padding-left: 16px;
 `
 
-export const StyledMethodLink = styled(Link)`
+export const StyledMethodLink = styled(Link)<{ isFocused: boolean }>`
   color: #91a0ae;
   font-size: 16px;
   line-height: 18px;
@@ -80,6 +80,14 @@ export const StyledMethodLink = styled(Link)`
   &:focus {
     color: ${darken(0.1, "#91a0ae")};
   }
+
+  ${props =>
+    props.isFocused &&
+    css`
+      background: #3492ff;
+      box-shadow: -2px 0 0 2px #3492ff, 2px 0 0 2px #3492ff;
+      color: #fff;
+    `}
 `
 
 const MinMax = styled.div`

@@ -1,32 +1,44 @@
-import React, { useState } from "react"
+import React from "react"
 import { useSearch } from "../../hooks/useSearch"
+import { useSidebar } from "../../hooks/useSidebar"
 import * as SC from "./styles"
 
 const SearchInput = (): JSX.Element => {
-  const { state, actions } = useSearch()
-  const [focused, setFocused] = useState(false)
+  const { state: searchState, actions: searchActions } = useSearch()
+  const { state: sidebarState, actions: sidebarActions } = useSidebar()
 
   function setFocus(): void {
-    setFocused(true)
+    sidebarActions.focusInput()
   }
 
   function clearFocus(): void {
-    setFocused(false)
+    sidebarActions.clearFocus()
   }
 
   function handleOnChange(event: KeyboardEvent<HTMLInputElement>): void {
-    actions.update(event.target.value)
+    searchActions.update(event.target.value)
+    clearFocus()
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>): void {
+    if (event.key === "ArrowUp") {
+      sidebarActions.focusPrevious()
+    }
+    if (event.key === "ArrowDown") {
+      sidebarActions.focusNext()
+    }
   }
 
   return (
-    <SC.SearchInputWrapper focused={focused}>
+    <SC.SearchInputWrapper focused={sidebarState.focus.type === "input"}>
       <SC.StyledSearchIcon />
       <SC.SearchInput
-        value={state.input}
+        value={searchState.input}
         onChange={handleOnChange}
         placeholder="Search"
         onFocus={setFocus}
         onBlur={clearFocus}
+        onKeyDown={handleKeyDown}
       />
     </SC.SearchInputWrapper>
   )
