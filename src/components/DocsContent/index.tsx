@@ -1,5 +1,5 @@
 import { navigate } from "gatsby"
-import React from "react"
+import React, { memo } from "react"
 import { Method as MethodInterface } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
@@ -54,4 +54,4 @@ const DocsContent = (props: DocsContentProps): JSX.Element => {
   )
 }
 
-export default DocsContent
+export default memo(DocsContent)
