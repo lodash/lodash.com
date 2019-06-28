@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { useSidebar } from "../../hooks/useSidebar"
-import { Focus } from "../../SidebarProvider"
 import { Group as GroupInterface, Method as MethodInterface } from "../../types"
 import SearchInput from "../SearchInput"
 import * as SC from "./styles"
@@ -43,18 +42,17 @@ const MethodLink = memo(
 const MethodGroup = memo(
   ({
     group,
-    focus,
     groupIndex,
     previousGroupLength,
   }: {
     group: GroupInterface
-    focus: Focus
     groupIndex: number
     previousGroupLength: number | null
   }) => {
-    const { actions: sidebarActions } = useSidebar()
+    const { state: sidebarState, actions: sidebarActions } = useSidebar()
     const [expanded, setExpanded] = useState(true)
     const { edges: groupMethods } = group
+    const { focus } = sidebarState
 
     const groupIsFocused = focus.type === "method" && focus.group === groupIndex
 
@@ -129,7 +127,6 @@ const DocsSidebar = (): JSX.Element => {
           return (
             <MethodGroup
               group={group}
-              focus={sidebarState.focus}
               previousGroupLength={previousGroupLength(groupIndex)}
               groupIndex={groupIndex}
             />
