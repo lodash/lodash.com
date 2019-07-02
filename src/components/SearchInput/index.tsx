@@ -29,8 +29,10 @@ const SearchInput = (): JSX.Element => {
     }
   }
 
+  const isFocused = sidebarState.focus.type === "input"
+
   return (
-    <SC.SearchInputWrapper focused={sidebarState.focus.type === "input"}>
+    <SC.SearchInputWrapper focused={isFocused}>
       <SC.StyledSearchIcon />
       <SC.SearchInput
         value={searchState.input}
@@ -40,6 +42,7 @@ const SearchInput = (): JSX.Element => {
         onBlur={clearFocus}
         onKeyDown={handleKeyDown}
       />
+      {!isFocused && <SC.FocusHint>/</SC.FocusHint>}
     </SC.SearchInputWrapper>
   )
 }

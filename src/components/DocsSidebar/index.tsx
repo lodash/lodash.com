@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
+import { useKeyboardEvent } from "../../hooks/useKeyboardEvent"
 import { useSidebar } from "../../hooks/useSidebar"
 import { Group as GroupInterface, Method as MethodInterface } from "../../types"
 import SearchInput from "../SearchInput"
@@ -108,8 +109,12 @@ const MethodGroup = memo(
 )
 
 const DocsSidebar = (): JSX.Element => {
-  const { state: sidebarState } = useSidebar()
+  const { actions: sidebarActions, state: sidebarState } = useSidebar()
+  const { focusInput } = sidebarActions
   const { filteredGroups } = sidebarState
+  useKeyboardEvent("/", () => {
+    focusInput()
+  })
 
   function previousGroupLength(groupIndex: number): number | null {
     if (groupIndex === 0) {

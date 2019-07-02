@@ -2,6 +2,7 @@ import styled from "styled-components"
 import SearchIcon from "../../images/search.svg"
 
 export const SearchInputWrapper = styled.div<{ focused: boolean }>`
+  position: relative;
   display: flex;
   background: #1f2a34;
   color: #fff;
@@ -31,4 +32,19 @@ export const SearchInput = styled.input`
   &:focus {
     outline: 0;
   }
+`
+
+export const FocusHint = styled.div`
+  background: #171f26;
+  color: #91a0ae;
+  position: absolute;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
 `
