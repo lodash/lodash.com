@@ -6,6 +6,14 @@ interface MethodProps {
   method: MethodInterface["node"]
 }
 
+function hasNPMPackage(method: MethodInterface["node"]): boolean {
+  if (method.name === "templateSettings") {
+    return true
+  }
+
+  return !["methods", "properties", "seq"].includes(method.category.toLowerCase())
+}
+
 const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
   <SC.MethodWrapper {...restProps}>
     <SC.Name>_.{method.call}</SC.Name>
@@ -18,12 +26,14 @@ const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
         >
           source
         </SC.MetaLink>
-        <SC.MetaLink
-          href={`https://www.npmjs.com/package/lodash.${method.name.toLowerCase()}`}
-          target="_blank"
-        >
-          npm package
-        </SC.MetaLink>
+        {hasNPMPackage(method) && (
+          <SC.MetaLink
+            href={`https://www.npmjs.com/package/lodash.${method.name.toLowerCase()}`}
+            target="_blank"
+          >
+            npm package
+          </SC.MetaLink>
+        )}
       </SC.MetaLinks>
 
       {/* TODO: possibly switch to a lighter solution? */}
