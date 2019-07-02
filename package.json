@@ -1,20 +1,22 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "lodash.com",
   "version": "0.1.0",
-  "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "private": false,
+  "description": "Lodash.com website and documentation",
   "keywords": [
+    "lodash",
+    "docs",
     "gatsby"
   ],
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/lodash/lodash.com/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/lodash/lodash.com"
   },
   "license": "MIT",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Jean-Philippe Sirois <jp@veksen.net>",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
