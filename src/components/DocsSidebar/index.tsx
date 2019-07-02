@@ -131,6 +131,7 @@ const DocsSidebar = (): JSX.Element => {
         {filteredGroups.map((group, groupIndex) => {
           return (
             <MethodGroup
+              key={group.fieldValue}
               group={group}
               previousGroupLength={previousGroupLength(groupIndex)}
               groupIndex={groupIndex}

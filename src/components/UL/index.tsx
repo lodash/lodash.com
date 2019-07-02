@@ -14,9 +14,9 @@ const UL = ({ items = [], ...restProps }: ULProps): JSX.Element | null => {
 
   return (
     <SC.ULWrapper {...restProps}>
-      {items.map(item => {
+      {items.map((item, index) => {
         return (
-          <SC.LI>
+          <SC.LI key={index}>
             <SC.StyledChevronRight />
             {item}
           </SC.LI>
