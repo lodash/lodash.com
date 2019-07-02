@@ -8,10 +8,7 @@ export const MethodWrapper = styled.div`
   flex-direction: column;
   background: #293845;
   padding: 11px 11px 24px;
-
-  & + & {
-    margin-top: 75px;
-  }
+  margin-bottom: 75px;
 `
 
 export const Name = styled.h2`
