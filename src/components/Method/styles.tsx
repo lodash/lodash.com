@@ -1,4 +1,3 @@
-import { Link } from "gatsby"
 import { lighten } from "polished"
 import Markdown from "react-markdown"
 import styled, { css } from "styled-components"
@@ -41,7 +40,7 @@ export const MetaLinks = styled.div`
   margin: 16px 0;
 `
 
-export const MetaLink = styled(Link)`
+export const MetaLink = styled.a`
   color: #75b5ff;
   text-decoration: none;
   border-bottom: 1px solid;

@@ -12,8 +12,18 @@ const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
 
     <SC.Content>
       <SC.MetaLinks>
-        <SC.MetaLink to="/">source</SC.MetaLink>
-        <SC.MetaLink to="/">npm package</SC.MetaLink>
+        <SC.MetaLink
+          href={`https://github.com/lodash/lodash/blob/4.17.11/lodash.js#L${method.lineNumber}`}
+          target="_blank"
+        >
+          source
+        </SC.MetaLink>
+        <SC.MetaLink
+          href={`https://www.npmjs.com/package/lodash.${method.name.toLowerCase()}`}
+          target="_blank"
+        >
+          npm package
+        </SC.MetaLink>
       </SC.MetaLinks>
 
       {/* TODO: possibly switch to a lighter solution? */}

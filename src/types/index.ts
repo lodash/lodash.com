@@ -15,6 +15,7 @@ export interface Method {
     name: string
     params: MethodParam[]
     since: string
+    lineNumber: number
   }
 }
 

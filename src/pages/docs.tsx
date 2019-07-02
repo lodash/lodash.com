@@ -41,6 +41,7 @@ const ALL_LODASH_METHOD_QUERY = graphql`
               desc
             }
             call
+            lineNumber
           }
         }
       }
