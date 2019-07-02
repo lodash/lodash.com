@@ -11,6 +11,7 @@ export const HeaderWrapper = styled.header<{ scrolled: boolean }>`
   top: 0;
   left: 320px;
   right: 0;
+  z-index: 10;
 
   &:after {
     content: "";

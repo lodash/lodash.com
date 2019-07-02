@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
+import "react-virtualized/styles.css"
 import styled from "styled-components"
 
 import DocsContent from "../components/DocsContent"
