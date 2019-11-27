@@ -1,0 +1,71 @@
+---
+id: per-method-packages
+title: Lodash per method packages
+layout: default
+---
+
+<section>
+  <h1>Per Method Packages</h1>
+  <p>
+    Lodash methods are available in standalone <a href="https://www.npmjs.com/browse/keyword/lodash-modularized">per method packages</a>
+    like <code>lodash.mapvalues</code>, <code>lodash.pickby</code>, etc.
+    These packages contain only the code the method depends on.
+  </p>
+  <p>
+    <strong>
+      However, use of these packages is discouraged and they <a href="https://github.com/lodash/lodash/issues/3838#issuecomment-398592530">will be removed in v5</a>.
+    </strong>
+  </p>
+  <p>
+    Although they may seem more lightweight, they will usually increase the size of
+    <code>node_modules</code> and webpack/rollup bundles in a project that
+    transitively depends on multiple per method packages and/or the main
+    <code>lodash</code> package.  Whereas many methods in the main
+    <code>lodash</code> package share code, the per method packages internally
+    bundle copies of any code they depend on.
+  </p>
+  <p>
+    For example, <code>throttle</code> uses <code>debounce</code> internally.
+    In a project using both methods from the main <code>lodash</code> package,
+    <code>throttle</code> will import the same <code>debounce</code> module as
+    any code that imports <code>debounce</code> directly, so only one copy of
+    <code>debounce</code> will wind up in a webpack bundle.
+  </p>
+  <p>
+    On the other hand, if a project imports <code>throttle</code> from
+    <code>lodash.throttle</code>, the extra copy of the <code>debounce</code>
+    code internally bundled into <code>lodash.throttle</code> will wind
+    up in the webpack bundle, in addition to <code>debounce</code> from the main
+    <code>lodash</code> package or <code>lodash.debounce</code>.
+  </p>
+</section>
+
+<section>
+  <h2>But <code>lodash</code> isn't lightweight enough!</h2>
+  <p>
+    Don't worry&mdash;if you import or require methods
+    directly, e.g. <code>const throttle = require('lodash/throttle')</code>, only
+    the subset of lodash code your package uses will be bundled
+    in projects that use your package.
+  </p>
+  <p>
+    If importing this way seems cumbersome, you can use
+    <a href="https://github.com/lodash/babel-plugin-lodash"><code>babel-plugin-lodash</code></a>
+    to transform named top-level imports like
+    <code>import { throttle, debounce } from 'lodash'</code> into direct import statements.
+  </p>
+  <p>
+    Furthermore, modern tree-shaking bundlers like webpack and rollup can avoid
+    bundling code you don't need even if you don't use direct imports or the babel plugin.
+  </p>
+</section>
+
+<section>
+  <h2>Migrating to the main <code>lodash</code> package</h2>
+  <p>
+    A <a href="https://github.com/jcoreio/jscodeshift-replace-lodash-method-packages">jscodeshift transform</a> is available to convert per method package imports
+    to main <code>lodash</code> package imports.
+  </p>
+  <p>
+  </p>
+</section>
