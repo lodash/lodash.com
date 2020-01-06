@@ -443,9 +443,11 @@
             'source': source,
             'theme': 'atom-light-syntax',
             'onLoad': function(notebook) {
-              var iframe = parent.lastElementChild
-              iframe.style.cssText = 'height:' + iframe.style.height
-              iframe.classList.add('repl')
+              if (!RunKit.version) {
+                var iframe = parent.lastElementChild
+                iframe.style.cssText = 'height:' + iframe.style.height
+                iframe.classList.add('repl')
+              }
               notebook.evaluate()
             }
           })
