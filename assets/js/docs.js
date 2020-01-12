@@ -122,7 +122,8 @@
       return {
         'content': [],
         'searchFound': true,
-        'searchValue': ''
+        'searchValue': '',
+        'allExpanded': true
       }
     },
 
@@ -192,12 +193,42 @@
       })
     },
 
+    'getAllExpandedState': function(content) {
+      if(_.every(content, { 'expanded': true })) {
+        return true;
+      }
+      else if(_.every(content, { 'expanded': false })) {
+        return false;
+      }
+      else {
+        return this.state.allExpanded;
+      }
+    },
+
     'onChangeExpanded': function(event, index) {
       var content = this.state.content.slice(),
           collection = content[index]
 
       content[index] = _.assign({}, collection, { 'expanded': !collection.expanded })
-      this.setState({ 'content': content })
+
+      this.setState({ 
+        'content': content,
+        'allExpanded': this.getAllExpandedState(content)
+      })
+    },
+
+    'onChangeExpandCollapseAll': function(event) {
+      const currentAllExpandedState = this.state.allExpanded
+
+      function expandCollapseAll(value) {
+        return _.assign({}, value, { 'expanded': !currentAllExpandedState })
+      }
+      var content = _.map(this.state.content, expandCollapseAll)
+
+      this.setState({
+        'allExpanded': !currentAllExpandedState,
+        'content': content
+      });
     },
 
     'onChangeSearch': function(event) {
@@ -351,6 +382,25 @@
               'onChange': this.onChangeSearch,
               'ref': this.onRefSearch
             }
+          )
+        ),
+        React.createElement(
+          'button',
+          {
+            'className': "expand-collapse-btn",
+            'onClick': this.onChangeExpandCollapseAll
+          },
+          React.createElement(
+            'i',
+            {
+              'aria-hidden': true,
+              'className': `fa fa-${this.state.allExpanded ? 'compress' : 'expand'}`
+            }
+          ),
+          React.createElement(
+            'p',
+            null,
+            this.state.allExpanded ? 'Collapse all' : 'Expand all'
           )
         ),
         elements,
