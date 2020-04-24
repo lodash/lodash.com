@@ -9,6 +9,8 @@ csp:
     'ms-appx-web:',
     'ghbtns.com',
     'runkit.com',
+    '*.runkit-embed.com',
+    'runkit-embed.com',
     'platform.twitter.com'
   ]
   connect-src: [
