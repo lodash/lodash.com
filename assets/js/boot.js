@@ -47,21 +47,6 @@
     iframe.src = '/appcache.html'
     document.body.appendChild(iframe)
   }
-  // Initialize Google Analytics.
-  if (navigator.onLine) {
-    var accounts = {{ site.google_analytics.accounts | jsonify }}
-    var commands = {{ site.google_analytics.commands | jsonify }}
-
-    commands[0][1] = accounts[location.hostname]
-
-    root[root.GoogleAnalyticsObject = '_ga'] = {
-      'l': Date.now(),
-      'q': commands
-    }
-    var script = document.createElement('script')
-    script.src = '{{ site.google_analytics.href }}'
-    head.appendChild(script)
-  }
   {% endif %}
 
   // Toggle offline status.
