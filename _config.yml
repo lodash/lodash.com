@@ -86,13 +86,6 @@ carbon_ads:
   href: https://cdn.carbonads.com/carbon.js?serve=CKYIEK37&placement=lodashcom
   id: _carbonads_js
 
-google_analytics:
-  href: https://www.google-analytics.com/analytics.js
-  commands: [['create', 'UA-ACCOUNT-ID', 'auto'], ['require', 'linkid'], ['send', 'pageview']]
-  accounts:
-    lodash.com: 'UA-6065217-64'
-    lodash.dev: 'UA-134340230-1'
-
 exclude:
   - node_modules
   - Gemfile
