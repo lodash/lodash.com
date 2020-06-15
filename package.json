@@ -55,7 +55,7 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^8.0.4",
+    "@testing-library/react": "^10.2.1",
     "@types/jest": "^24.0.15",
     "@types/react-helmet": "^5.0.8",
     "@types/react-highlight": "^0.12.1",
