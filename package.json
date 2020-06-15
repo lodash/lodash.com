@@ -42,7 +42,7 @@
     "gatsby-plugin-tslint": "0.0.2",
     "gatsby-plugin-typescript": "^2.4.6",
     "gatsby-source-filesystem": "^2.3.11",
-    "gatsby-transformer-sharp": "^2.2.0",
+    "gatsby-transformer-sharp": "^2.5.5",
     "polished": "^3.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
