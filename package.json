@@ -59,7 +59,7 @@
     "@types/jest": "^26.0.0",
     "@types/react-helmet": "^6.0.0",
     "@types/react-highlight": "^0.12.2",
-    "@types/react-virtualized": "^9.21.2",
+    "@types/react-virtualized": "^9.21.10",
     "@types/styled-components": "^4.1.16",
     "babel-jest": "^24.8.0",
     "babel-preset-gatsby": "^0.2.1",
