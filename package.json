@@ -72,6 +72,6 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-loader": "^3.5.4",
-    "typescript": "^3.5.2"
+    "typescript": "^3.9.5"
   }
 }
