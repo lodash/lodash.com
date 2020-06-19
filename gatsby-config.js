@@ -6,7 +6,6 @@ module.exports = {
     author: `@jdalton`,
   },
   plugins: [
-    `gatsby-plugin-tslint`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-create-client-paths`,
