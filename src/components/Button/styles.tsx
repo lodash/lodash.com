@@ -23,7 +23,7 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   text-align: center;
 
-  &.primary {
+  &.type-primary {
     background: ${primary.background};
     color: ${primary.foreground};
 
@@ -33,7 +33,7 @@ export const ButtonWrapper = styled.div`
     }
   }
 
-  &.secondary {
+  &.type-secondary {
     background: ${secondary.background};
     color: ${secondary.foreground};
 
