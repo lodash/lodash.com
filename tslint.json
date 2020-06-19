@@ -5,23 +5,17 @@
     "exclude": ["node_modules"]
   },
   "rules": {
-    "indent": [true, "spaces", 4],
+    "indent": [true, "spaces", 2],
     "no-constant-condition": true,
     "no-console": false,
-    "interface-name": [true, "never-prefix"],
+    "interface-name": [true, "always-prefix"],
     "object-curly-spacing": true,
     "object-literal-sort-keys": false,
 
     "member-access": [true, "no-public"],
     "no-var-keyword": true,
     "typedef": [true, "call-signature"],
-    "readonly-keyword": true,
-    "no-eval": true,
-    "no-parameter-reassignment": true,
-    "no-loop-statement": true,
-    "no-object-mutation": true,
-    "no-delete": true,
-    "no-method-signature": true
+    "no-eval": true
   },
   "rulesDirectory": ["node_modules/tslint-eslint-rules/dist/rules"]
 }
