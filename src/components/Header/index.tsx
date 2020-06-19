@@ -4,11 +4,11 @@ import React, { memo } from "react"
 import Select from "../Select"
 import * as SC from "./styles"
 
-interface HeaderProps {
+interface IHeaderProps {
   scrolled: boolean
 }
 
-const Header = ({ scrolled }: HeaderProps): JSX.Element => (
+const Header = ({ scrolled }: IHeaderProps): JSX.Element => (
   <SC.HeaderWrapper scrolled={scrolled}>
     <SC.LogoWrapper>
       <Link to="/">

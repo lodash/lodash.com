@@ -1,20 +1,22 @@
 import React from "react"
-import { Method as MethodInterface } from "../../types"
+import { IMethod as IMethodInterface } from "../../types"
 import * as SC from "./styles"
 
-interface MethodProps {
-  method: MethodInterface["node"]
+interface IMethodProps {
+  method: IMethodInterface["node"]
 }
 
-function hasNPMPackage(method: MethodInterface["node"]): boolean {
+function hasNPMPackage(method: IMethodInterface["node"]): boolean {
   if (method.name === "templateSettings") {
     return true
   }
 
-  return !["methods", "properties", "seq"].includes(method.category.toLowerCase())
+  return !["methods", "properties", "seq"].includes(
+    method.category.toLowerCase()
+  )
 }
 
-const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
+const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
   <SC.MethodWrapper {...restProps}>
     <SC.Name>_.{method.call}</SC.Name>
 
@@ -78,10 +80,7 @@ const Method = ({ method, ...restProps }: MethodProps): JSX.Element => (
 
       <SC.Subtitle>Example</SC.Subtitle>
       <SC.StyledCode>
-        {method.example
-          .replace(/```js/, "")
-          .replace(/```/, "")
-          .trim()}
+        {method.example.replace(/```js/, "").replace(/```/, "").trim()}
       </SC.StyledCode>
     </SC.Content>
   </SC.MethodWrapper>

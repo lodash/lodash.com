@@ -8,7 +8,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import Helmet from "react-helmet"
 
-interface SEOProps {
+interface ISEOProps {
   description?: string
   lang?: string
   meta?: any[]
@@ -22,7 +22,7 @@ const SEO = ({
   meta = [],
   keywords = [],
   title,
-}: SEOProps): JSX.Element => {
+}: ISEOProps): JSX.Element => {
   const { site } = useStaticQuery(graphql`
     query {
       site {

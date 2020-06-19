@@ -3,7 +3,7 @@ import Highlight from "react-highlight"
 import Container from "../Container"
 import * as SC from "./styles"
 
-interface CodeProps {
+interface ICodeProps {
   children: React.ReactNode
   lang?: string
   withContainer?: boolean
@@ -14,9 +14,9 @@ const Code = ({
   withContainer = false,
   lang = "js",
   ...restProps
-}: CodeProps): JSX.Element => {
+}: ICodeProps): JSX.Element => {
   const MaybeContainer = withContainer ? Container : React.Fragment
-  const trimmedCode = React.Children.map(children, child => {
+  const trimmedCode = React.Children.map(children, (child) => {
     return typeof child === "string" ? child.trim() : child
   })
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 
-interface SearchProviderProps {
+interface ISearchProviderProps {
   children: React.ReactNode
 }
 
-export interface SearchContextInterface {
+export interface ISearchContextInterface {
   state: {
     input: string
   }
@@ -13,11 +13,13 @@ export interface SearchContextInterface {
   }
 }
 
-export const SearchContext = React.createContext<SearchContextInterface | null>(
+export const SearchContext = React.createContext<ISearchContextInterface | null>(
   null
 )
 
-export function SearchProvider({ children }: SearchProviderProps): JSX.Element {
+export function SearchProvider({
+  children,
+}: ISearchProviderProps): JSX.Element {
   const [input, setInput] = useState("")
 
   const update = (value: string): void => {

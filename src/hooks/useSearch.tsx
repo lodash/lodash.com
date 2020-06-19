@@ -1,7 +1,7 @@
 import { useContext } from "react"
-import { SearchContext, SearchContextInterface } from "../SearchProvider"
+import { SearchContext, ISearchContextInterface } from "../SearchProvider"
 
-export function useSearch(): SearchContextInterface {
+export function useSearch(): ISearchContextInterface {
   const searchContext = useContext(SearchContext)
 
   if (!searchContext) {

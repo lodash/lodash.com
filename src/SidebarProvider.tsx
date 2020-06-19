@@ -1,42 +1,42 @@
 import React, { useEffect, useState } from "react"
-import { Group as GroupInterface, Method as MethodInterface } from "./types"
+import { IGroup as IGroupInterface, IMethod as IMethodInterface } from "./types"
 
-interface SidebarProviderProps {
+interface ISidebarProviderProps {
   children: React.ReactNode
-  initialGroups: GroupInterface[]
+  initialGroups: IGroupInterface[]
   searchInput: string
 }
 
-interface BaseInput {
+interface IBaseInput {
   type: "input" | "method" | "nothing"
   method: number | null
   group: number | null
 }
 
-interface FocusOnInput extends BaseInput {
+interface IFocusOnInput extends IBaseInput {
   type: "input"
   method: null
   group: null
 }
 
-interface FocusOnMethod extends BaseInput {
+interface IFocusOnMethod extends IBaseInput {
   type: "method"
   method: number
   group: number
 }
 
-interface FocusOnNothing extends BaseInput {
+interface IFocusOnNothing extends IBaseInput {
   type: "nothing"
   method: null
   group: null
 }
 
-export type Focus = FocusOnInput | FocusOnMethod | FocusOnNothing
+export type Focus = IFocusOnInput | IFocusOnMethod | IFocusOnNothing
 
-export interface SidebarContextInterface {
+export interface ISidebarContextInterface {
   state: {
     focus: Focus
-    filteredGroups: GroupInterface[]
+    filteredGroups: IGroupInterface[]
   }
   actions: {
     focusPrevious: () => void
@@ -48,30 +48,30 @@ export interface SidebarContextInterface {
   }
 }
 
-export const SidebarContext = React.createContext<SidebarContextInterface | null>(
+export const SidebarContext = React.createContext<ISidebarContextInterface | null>(
   null
 )
 
-function filterMethod(method: MethodInterface, input: string): boolean {
+function filterMethod(method: IMethodInterface, input: string): boolean {
   return method.node.name.toLowerCase().includes(input.toLowerCase())
 }
 
 function filterMethods(
-  methods: MethodInterface[],
+  methods: IMethodInterface[],
   input: string
-): MethodInterface[] {
-  return methods.filter(method => filterMethod(method, input))
+): IMethodInterface[] {
+  return methods.filter((method) => filterMethod(method, input))
 }
 
 function filterGroups(
-  groups: GroupInterface[],
+  groups: IGroupInterface[],
   input: string
-): GroupInterface[] {
+): IGroupInterface[] {
   return groups
-    .map(group => {
+    .map((group) => {
       return {
         ...group,
-        edges: group.edges.filter(method => filterMethod(method, input)),
+        edges: group.edges.filter((method) => filterMethod(method, input)),
       }
     })
     .filter(({ edges: groupMethods }) => {
@@ -83,8 +83,8 @@ export function SidebarProvider({
   children,
   initialGroups,
   searchInput,
-}: SidebarProviderProps): JSX.Element {
-  const [filteredGroups, setFilteredGroups] = useState<GroupInterface[]>([])
+}: ISidebarProviderProps): JSX.Element {
+  const [filteredGroups, setFilteredGroups] = useState<IGroupInterface[]>([])
   const [focus, setFocus] = useState<Focus>({
     type: "nothing",
     method: null,

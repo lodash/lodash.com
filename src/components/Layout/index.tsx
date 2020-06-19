@@ -8,11 +8,11 @@ import { graphql, StaticQuery } from "gatsby"
 import React from "react"
 import "./layout.css"
 
-interface LayoutProps {
+interface ILayoutProps {
   children: React.ReactNode
 }
 
-const Layout = ({ children }: LayoutProps): JSX.Element => (
+const Layout = ({ children }: ILayoutProps): JSX.Element => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {

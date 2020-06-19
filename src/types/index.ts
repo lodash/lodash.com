@@ -1,10 +1,10 @@
-interface MethodParam {
+interface IMethodParam {
   name: string
   type: string
   desc: string
 }
 
-export interface Method {
+export interface IMethod {
   node: {
     aliases: string[]
     call: string
@@ -13,21 +13,21 @@ export interface Method {
     example: string
     id: string
     name: string
-    params: MethodParam[]
+    params: IMethodParam[]
     since: string
     lineNumber: number
   }
 }
 
-export interface Group {
-  edges: Method[]
+export interface IGroup {
+  edges: IMethod[]
   field: string
   fieldValue: string
   totalCount: number
 }
 
-export interface AllLodashMethodQuery {
+export interface IAllLodashMethodQuery {
   allLodashMethod: {
-    group: Group[]
+    group: IGroup[]
   }
 }

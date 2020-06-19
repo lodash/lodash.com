@@ -3,11 +3,11 @@ import * as SC from "./styles"
 
 type Item = React.ReactElement | string
 
-interface ULProps {
+interface IULProps {
   items?: Item[]
 }
 
-const UL = ({ items = [], ...restProps }: ULProps): JSX.Element | null => {
+const UL = ({ items = [], ...restProps }: IULProps): JSX.Element | null => {
   if (!items.length) {
     return null
   }

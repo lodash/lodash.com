@@ -7,13 +7,13 @@ import {
   List,
   ListRowProps,
 } from "react-virtualized"
-import { Method as MethodInterface } from "../../types"
+import { IMethod as IMethodInterface } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
 import * as SC from "./styles"
 
-interface DocsContentProps {
-  methods: MethodInterface[]
+interface IDocsContentProps {
+  methods: IMethodInterface[]
 }
 
 const methodFromPath = (props: any) => {
@@ -22,7 +22,7 @@ const methodFromPath = (props: any) => {
   return method
 }
 
-const DocsContent = (props: DocsContentProps): JSX.Element => {
+const DocsContent = (props: IDocsContentProps): JSX.Element => {
   const currentMethod = methodFromPath(props)
   const { methods } = props
   const cache = new CellMeasurerCache({ defaultHeight: 700, fixedWidth: true })
@@ -30,7 +30,7 @@ const DocsContent = (props: DocsContentProps): JSX.Element => {
   const SingleMethod = ({ name }) => {
     const method = methods.find(
       ({ node: method }) => method.name === name
-    ) as MethodInterface
+    ) as IMethodInterface
     return <Method method={method.node} />
   }
 

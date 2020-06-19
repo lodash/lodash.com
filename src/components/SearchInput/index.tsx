@@ -15,12 +15,12 @@ const SearchInput = (): JSX.Element => {
     sidebarActions.clearFocus()
   }
 
-  function handleOnChange(event: KeyboardEvent<HTMLInputElement>): void {
+  function handleOnChange(event: React.KeyboardEvent<HTMLInputElement>): void {
     searchActions.update(event.target.value)
     clearFocus()
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>): void {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void {
     if (event.key === "ArrowUp") {
       sidebarActions.focusPrevious()
     }

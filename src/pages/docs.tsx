@@ -10,7 +10,7 @@ import SEO from "../components/SEO"
 import { useSearch } from "../hooks/useSearch"
 import { SearchProvider } from "../SearchProvider"
 import { SidebarProvider } from "../SidebarProvider"
-import { AllLodashMethodQuery } from "../types"
+import { IAllLodashMethodQuery } from "../types"
 
 // TODO: temporary polyfill currently preventing build
 import "../polyfills"
@@ -68,7 +68,7 @@ const WrappedLayout = (props: any): JSX.Element => {
 }
 
 const DocsPage = (props: any): JSX.Element => {
-  const data: AllLodashMethodQuery = useStaticQuery(ALL_LODASH_METHOD_QUERY)
+  const data: IAllLodashMethodQuery = useStaticQuery(ALL_LODASH_METHOD_QUERY)
 
   const groups = data.allLodashMethod.group
   // TODO: optimize performance

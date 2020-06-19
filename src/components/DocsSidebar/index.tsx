@@ -3,7 +3,7 @@ import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { useKeyboardEvent } from "../../hooks/useKeyboardEvent"
 import { useSidebar } from "../../hooks/useSidebar"
-import { Group as GroupInterface, Method as MethodInterface } from "../../types"
+import { IGroup as IGroupInterface, IMethod as MethodInterface } from "../../types"
 import SearchInput from "../SearchInput"
 import * as SC from "./styles"
 
@@ -46,7 +46,7 @@ const MethodGroup = memo(
     groupIndex,
     previousGroupLength,
   }: {
-    group: GroupInterface
+    group: IGroupInterface
     groupIndex: number
     previousGroupLength: number | null
   }) => {
