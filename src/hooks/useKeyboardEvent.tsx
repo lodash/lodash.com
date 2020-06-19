@@ -2,7 +2,10 @@ import { useEffect } from "react"
 
 type noop = () => void
 
-export function useKeyboardEvent(key: string, callback: noop) {
+export function useKeyboardEvent(key: string, callback: noop): void {
+  // necessary because Gatsby statically built does not have access to window
+  const windowGlobal = typeof window !== "undefined" && window
+
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       if (event.key === key) {
@@ -10,9 +13,13 @@ export function useKeyboardEvent(key: string, callback: noop) {
       }
     }
 
-    window.addEventListener("keydown", handler)
+    if (windowGlobal) {
+      windowGlobal.addEventListener("keydown", handler)
+    }
     return () => {
-      window.removeEventListener("keydown", handler)
+      if (windowGlobal) {
+        windowGlobal.removeEventListener("keydown", handler)
+      }
     }
   }, [])
 }

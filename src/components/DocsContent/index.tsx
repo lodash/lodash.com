@@ -16,7 +16,7 @@ interface IDocsContentProps {
   methods: IMethodInterface[]
 }
 
-const methodFromPath = (props: any) => {
+const methodFromPath = (props: any): string => {
   const [, method] = props["*"].split("/")
 
   return method
@@ -24,12 +24,11 @@ const methodFromPath = (props: any) => {
 
 const DocsContent = (props: IDocsContentProps): JSX.Element => {
   const currentMethod = methodFromPath(props)
-  const { methods } = props
   const cache = new CellMeasurerCache({ defaultHeight: 700, fixedWidth: true })
 
-  const SingleMethod = ({ name }) => {
-    const method = methods.find(
-      ({ node: method }) => method.name === name
+  const SingleMethod = ({ name }: { name: string }) => {
+    const method = props.methods.find(
+      ({ node: m }) => m.name === name
     ) as IMethodInterface
     return <Method method={method.node} />
   }
@@ -40,7 +39,7 @@ const DocsContent = (props: IDocsContentProps): JSX.Element => {
     parent,
     style,
   }: ListRowProps): JSX.Element {
-    const { node: method } = methods[index]
+    const { node: method } = props.methods[index]
 
     // If row content is complex, consider rendering a light-weight placeholder while scrolling.
     const content = (
@@ -83,7 +82,7 @@ const DocsContent = (props: IDocsContentProps): JSX.Element => {
                 width={width}
                 height={height}
                 rowHeight={cache.rowHeight}
-                rowCount={methods.length}
+                rowCount={props.methods.length}
               />
             )}
           </AutoSizer>
