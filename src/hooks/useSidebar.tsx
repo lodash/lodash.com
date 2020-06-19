@@ -1,7 +1,7 @@
 import { useContext } from "react"
-import { SidebarContext, ISidebarContextInterface } from "../SidebarProvider"
+import { SidebarContext, ISidebarContext } from "../SidebarProvider"
 
-export function useSidebar(): ISidebarContextInterface {
+export function useSidebar(): ISidebarContext {
   const sidebarContext = useContext(SidebarContext)
 
   if (!sidebarContext) {

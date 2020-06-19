@@ -28,7 +28,7 @@ interface IFocusOnNothing extends IBaseInput {
 
 export type Focus = IFocusOnInput | IFocusOnMethod | IFocusOnNothing
 
-export interface ISidebarContextInterface {
+export interface ISidebarContext {
   state: {
     focus: Focus
     filteredGroups: IGroup[]
@@ -42,7 +42,7 @@ export interface ISidebarContextInterface {
   }
 }
 
-export const SidebarContext = React.createContext<ISidebarContextInterface | null>(null)
+export const SidebarContext = React.createContext<ISidebarContext | null>(null)
 
 function filterMethod(method: IMethod, input: string): boolean {
   return method.node.name.toLowerCase().includes(input.toLowerCase())

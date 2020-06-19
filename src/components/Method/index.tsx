@@ -1,12 +1,12 @@
 import React from "react"
-import { IMethod as IMethodInterface } from "../../types"
+import { IMethodNode } from "../../types"
 import * as SC from "./styles"
 
 interface IMethodProps {
-  method: IMethodInterface["node"]
+  method: IMethodNode
 }
 
-function hasNPMPackage(method: IMethodInterface["node"]): boolean {
+function hasNPMPackage(method: IMethodNode): boolean {
   if (method.name === "templateSettings") {
     return true
   }

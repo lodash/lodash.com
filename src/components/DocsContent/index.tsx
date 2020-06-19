@@ -1,13 +1,13 @@
 import { navigate } from "gatsby"
 import React, { memo } from "react"
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, ListRowProps } from "react-virtualized"
-import { IMethod as IMethodInterface } from "../../types"
+import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
 import * as SC from "./styles"
 
 interface IDocsContentProps {
-  methods: IMethodInterface[]
+  methods: IMethod[]
 }
 
 const methodFromPath = (props: any): string => {
@@ -19,7 +19,7 @@ const DocsContent = (props: IDocsContentProps): JSX.Element => {
   const cache = new CellMeasurerCache({ defaultHeight: 700, fixedWidth: true })
 
   const SingleMethod = ({ name }: { name: string }) => {
-    const method = props.methods.find(({ node: m }) => m.name === name) as IMethodInterface
+    const method = props.methods.find(({ node: m }) => m.name === name) as IMethod
     return <Method method={method.node} />
   }
 

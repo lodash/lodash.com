@@ -4,7 +4,7 @@ interface ISearchProviderProps {
   children: React.ReactNode
 }
 
-export interface ISearchContextInterface {
+export interface ISearchContext {
   state: {
     input: string
   }
@@ -13,13 +13,9 @@ export interface ISearchContextInterface {
   }
 }
 
-export const SearchContext = React.createContext<ISearchContextInterface | null>(
-  null
-)
+export const SearchContext = React.createContext<ISearchContext | null>(null)
 
-export function SearchProvider({
-  children,
-}: ISearchProviderProps): JSX.Element {
+export function SearchProvider({ children }: ISearchProviderProps): JSX.Element {
   const [input, setInput] = useState("")
 
   const update = (value: string): void => {
