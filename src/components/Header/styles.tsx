@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Logo from "../../images/lodash.svg"
 
-export const HeaderWrapper = styled.header<{ scrolled: boolean }>`
+export const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   background: #171f26;
@@ -22,8 +22,12 @@ export const HeaderWrapper = styled.header<{ scrolled: boolean }>`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
     height: 45px;
     pointer-events: none;
-    opacity: ${({ scrolled }) => (scrolled ? 1 : 0)};
+    opacity: 0;
     transition: opacity 0.3s;
+  }
+
+  &.is-scrolled:after {
+    opacity: 1;
   }
 `
 

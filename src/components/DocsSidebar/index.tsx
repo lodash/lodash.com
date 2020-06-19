@@ -1,3 +1,4 @@
+import cx from "classnames"
 import React, { memo, useEffect, useState } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
@@ -28,7 +29,7 @@ const MethodLink = memo(
           // to={`/docs/${method.aliasOf || method.name}`}
           to={`/docs/${method.name}`}
           activeClassName="active"
-          isFocused={isFocused}
+          className={cx({ "is-focused": isFocused })}
         >
           _.{method.name}
           {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}

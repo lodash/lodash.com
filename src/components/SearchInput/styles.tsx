@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import SearchIcon from "../../images/search.svg"
 
-export const SearchInputWrapper = styled.div<{ focused: boolean }>`
+export const SearchInputWrapper = styled.div`
   position: relative;
   display: flex;
   background: #1f2a34;
@@ -12,7 +12,11 @@ export const SearchInputWrapper = styled.div<{ focused: boolean }>`
   transition: 0.3s background;
   align-items: center;
   margin-bottom: 32px;
-  border: 2px solid ${(props) => (props.focused ? "#3492ff" : "#1f2a34")};
+  border: 2px solid #1f2a34;
+
+  &.is-focused {
+    border-color: "#3492ff";
+  }
 `
 
 export const StyledSearchIcon = styled(SearchIcon)`

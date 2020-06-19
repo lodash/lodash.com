@@ -1,3 +1,4 @@
+import cx from "classnames"
 import React from "react"
 import { useSearch } from "../../hooks/useSearch"
 import { useSidebar } from "../../hooks/useSidebar"
@@ -32,7 +33,7 @@ const SearchInput = (): JSX.Element => {
   const isFocused = sidebarState.focus.type === "input"
 
   return (
-    <SC.SearchInputWrapper focused={isFocused}>
+    <SC.SearchInputWrapper className={cx({ "is-focused": isFocused })}>
       <SC.StyledSearchIcon />
       <SC.SearchInput
         value={searchState.input}

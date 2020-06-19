@@ -1,3 +1,4 @@
+import cx from "classnames"
 import React, { useEffect, useRef, useState } from "react"
 import { useOnClickOutside } from "../../hooks/useOnClickOutside"
 import * as SC from "./styles"
@@ -35,7 +36,7 @@ const Select = ({ options = [], ...restProps }: ISelectProps): JSX.Element => {
         <SC.Arrow />
       </SC.Selected>
       {options.length ? (
-        <SC.Options open={open}>
+        <SC.Options className={cx({ "is-open": open })}>
           {options
             .filter(({ value }) => value !== selected)
             .map(({ value, text }) => (

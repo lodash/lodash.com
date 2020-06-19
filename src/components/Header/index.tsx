@@ -1,15 +1,16 @@
 import useWindowScrollPosition from "@rehooks/window-scroll-position"
+import cx from "classnames"
 import { Link } from "gatsby"
 import React, { memo } from "react"
 import Select from "../Select"
 import * as SC from "./styles"
 
 interface IHeaderProps {
-  scrolled: boolean
+  isScrolled: boolean
 }
 
-const Header = ({ scrolled }: IHeaderProps): JSX.Element => (
-  <SC.HeaderWrapper scrolled={scrolled}>
+const Header = ({ isScrolled }: IHeaderProps): JSX.Element => (
+  <SC.HeaderWrapper className={cx({ "is-scrolled": isScrolled })}>
     <SC.LogoWrapper>
       <Link to="/">
         <SC.StyledLogo />
@@ -35,9 +36,9 @@ const HeaderWrapper = (): JSX.Element => {
   // we pass it a fallback dummy object
   const position =
     typeof useWindowScrollPosition === "function" ? useWindowScrollPosition() : { x: 0, y: 0 }
-  const scrolled = position.y !== 0
+  const isScrolled = position.y !== 0
 
-  return <MemodHeader scrolled={scrolled} />
+  return <MemodHeader isScrolled={isScrolled} />
 }
 
 export default HeaderWrapper
