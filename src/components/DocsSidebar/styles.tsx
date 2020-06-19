@@ -72,17 +72,15 @@ export const StyledMethodLink = styled(Link)`
     color: #fff !important;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: ${darken(0.1, "#91a0ae")};
   }
 
-  &.is-focused,
-  &.is-focused:hover,
-  &.is-focused:focus {
+  &:focus {
     background: #3492ff;
     box-shadow: -2px 0 0 2px #3492ff, 2px 0 0 2px #3492ff;
     color: #fff;
+    outline: none;
   }
 `
 

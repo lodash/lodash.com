@@ -1,35 +1,43 @@
 import cx from "classnames"
-import React, { memo, useEffect, useState } from "react"
+import React, { memo, useState, useRef, useEffect } from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
-import { useKeyboardEvent } from "../../hooks/useKeyboardEvent"
 import { useSidebar } from "../../hooks/useSidebar"
-import { IGroup as IGroupInterface, IMethod as MethodInterface } from "../../types"
+import { IGroup, IMethodNode } from "../../types"
 import SearchInput from "../SearchInput"
 import * as SC from "./styles"
 
 const MethodLink = memo(
   ({
     method,
-    index,
-    groupIsFocused,
+    setCurrentFocus,
   }: {
-    method: MethodInterface["node"]
-    index: number
-    groupIsFocused: boolean
+    method: IMethodNode
+    setCurrentFocus: (methodId: string) => void
   }): JSX.Element => {
     const { state: sidebarState } = useSidebar()
+    const linkRef = useRef<HTMLAnchorElement | undefined>(undefined)
 
     const isFocused =
-      groupIsFocused && sidebarState.focus.type === "method" && sidebarState.focus.method === index
+      sidebarState.focus.type === "method" && sidebarState.focus.methodId === method.id
+
+    useEffect(() => {
+      if (isFocused) {
+        linkRef.current?.focus()
+      }
+    }, [isFocused])
 
     return (
-      <div key={`${method.category}-${method.name}-${index}`}>
+      <div key={method.id}>
         <SC.StyledMethodLink
+          innerRef={linkRef}
           // to={`/docs/${method.aliasOf || method.name}`}
           to={`/docs/${method.name}`}
           activeClassName="active"
           className={cx({ "is-focused": isFocused })}
+          onFocus={() => {
+            setCurrentFocus(method.id)
+          }}
         >
           _.{method.name}
           {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
@@ -40,40 +48,11 @@ const MethodLink = memo(
 )
 
 const MethodGroup = memo(
-  ({
-    group,
-    groupIndex,
-    previousGroupLength,
-  }: {
-    group: IGroupInterface
-    groupIndex: number
-    previousGroupLength: number | null
-  }) => {
-    const { state: sidebarState, actions: sidebarActions } = useSidebar()
+  ({ group, setCurrentFocus }: { group: IGroup; setCurrentFocus: (methodId: string) => void }) => {
+    const { state: sidebarState } = useSidebar()
     const [expanded, setExpanded] = useState(true)
     const { edges: groupMethods } = group
     const { focus } = sidebarState
-
-    const groupIsFocused = focus.type === "method" && focus.group === groupIndex
-
-    useEffect(() => {
-      if (!groupIsFocused) {
-        return
-      }
-
-      // TODO: this should hopefully infer the type
-      const focusingFirstMethod = (focus.method as number) < 0
-      const focusingLastMethod = focus.method === group.edges.length
-
-      if (focusingFirstMethod) {
-        const previousGroupIndex = previousGroupLength ? previousGroupLength - 1 : 0
-        sidebarActions.focusPreviousGroup(previousGroupIndex)
-      }
-
-      if (focusingLastMethod) {
-        sidebarActions.focusNextGroup()
-      }
-    }, [groupIsFocused, focus])
 
     function toggleExpanded(): void {
       setExpanded((state) => !state)
@@ -86,16 +65,10 @@ const MethodGroup = memo(
         </SC.MethodTypeTitle>
         {expanded && (
           <SC.Methods>
-            {/* TODO: get rid of i, currently a dirty fix because Seq-chain is not unique */}
-            {groupMethods.map((methodNode, index) => {
+            {groupMethods.map((methodNode) => {
               const { node: method } = methodNode
               return (
-                <MethodLink
-                  key={index}
-                  method={method}
-                  groupIsFocused={groupIsFocused}
-                  index={index}
-                />
+                <MethodLink key={method.id} method={method} setCurrentFocus={setCurrentFocus} />
               )
             })}
           </SC.Methods>
@@ -107,31 +80,17 @@ const MethodGroup = memo(
 
 const DocsSidebar = (): JSX.Element => {
   const { actions: sidebarActions, state: sidebarState } = useSidebar()
-  const { focusInput } = sidebarActions
-  const { filteredGroups } = sidebarState
-  useKeyboardEvent("/", () => {
-    focusInput()
-  })
-
-  function previousGroupLength(groupIndex: number): number | null {
-    if (groupIndex === 0) {
-      return null
-    }
-
-    return filteredGroups[groupIndex - 1].edges.length
-  }
 
   return (
     <SC.Sidebar>
       <SearchInput />
       <PerfectScrollbar>
-        {filteredGroups.map((group, groupIndex) => {
+        {sidebarState.filteredGroups.map((group) => {
           return (
             <MethodGroup
               key={group.fieldValue}
               group={group}
-              previousGroupLength={previousGroupLength(groupIndex)}
-              groupIndex={groupIndex}
+              setCurrentFocus={sidebarActions.focusMethod}
             />
           )
         })}

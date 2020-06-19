@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from "react"
-import { IGroup as IGroupInterface, IMethod as IMethodInterface } from "./types"
+import React, { useEffect, useState, useMemo } from "react"
+import { useKeyboardEvent } from "./hooks/useKeyboardEvent"
+import { IGroup, IMethod, IMethodNode } from "./types"
 
 interface ISidebarProviderProps {
   children: React.ReactNode
-  initialGroups: IGroupInterface[]
+  initialGroups: IGroup[]
   searchInput: string
 }
 
 interface IBaseInput {
   type: "input" | "method" | "nothing"
-  method: number | null
-  group: number | null
+  methodId?: string
 }
 
 interface IFocusOnInput extends IBaseInput {
   type: "input"
-  method: null
-  group: null
 }
 
 interface IFocusOnMethod extends IBaseInput {
   type: "method"
-  method: number
-  group: number
+  methodId: string
 }
 
 interface IFocusOnNothing extends IBaseInput {
   type: "nothing"
-  method: null
-  group: null
 }
 
 export type Focus = IFocusOnInput | IFocusOnMethod | IFocusOnNothing
@@ -36,37 +31,28 @@ export type Focus = IFocusOnInput | IFocusOnMethod | IFocusOnNothing
 export interface ISidebarContextInterface {
   state: {
     focus: Focus
-    filteredGroups: IGroupInterface[]
+    filteredGroups: IGroup[]
   }
   actions: {
+    focusMethod: (methodId: string) => void
     focusPrevious: () => void
     focusNext: () => void
-    focusPreviousGroup: (atIndex: number) => void
-    focusNextGroup: () => void
     clearFocus: () => void
     focusInput: () => void
   }
 }
 
-export const SidebarContext = React.createContext<ISidebarContextInterface | null>(
-  null
-)
+export const SidebarContext = React.createContext<ISidebarContextInterface | null>(null)
 
-function filterMethod(method: IMethodInterface, input: string): boolean {
+function filterMethod(method: IMethod, input: string): boolean {
   return method.node.name.toLowerCase().includes(input.toLowerCase())
 }
 
-function filterMethods(
-  methods: IMethodInterface[],
-  input: string
-): IMethodInterface[] {
+function filterMethods(methods: IMethod[], input: string): IMethod[] {
   return methods.filter((method) => filterMethod(method, input))
 }
 
-function filterGroups(
-  groups: IGroupInterface[],
-  input: string
-): IGroupInterface[] {
+function filterGroups(groups: IGroup[], input: string): IGroup[] {
   return groups
     .map((group) => {
       return {
@@ -84,11 +70,9 @@ export function SidebarProvider({
   initialGroups,
   searchInput,
 }: ISidebarProviderProps): JSX.Element {
-  const [filteredGroups, setFilteredGroups] = useState<IGroupInterface[]>([])
+  const [filteredGroups, setFilteredGroups] = useState<IGroup[]>([])
   const [focus, setFocus] = useState<Focus>({
     type: "nothing",
-    method: null,
-    group: null,
   })
 
   useEffect(() => {
@@ -99,72 +83,69 @@ export function SidebarProvider({
     setFilteredGroups(filterGroups(initialGroups, searchInput))
   }, [searchInput])
 
-  function focusPrevious(): void {
-    if (focus.type === "method" && focus.method === 0 && focus.group === 0) {
+  const flattenedMethods = useMemo<IMethodNode[]>(() => {
+    return filteredGroups.flatMap((group) => group.edges.map((edge) => edge.node))
+  }, [JSON.stringify(filteredGroups)])
+
+  const methodIdx = flattenedMethods.map((m) => m.id)
+
+  const focusPrevious = () => {
+    const currentIndex = methodIdx.findIndex((id) => id === focus.methodId)
+    const previousId = methodIdx[currentIndex - 1]
+    const isFirst = currentIndex === 0
+
+    if (focus.type !== "method") {
+      return
+    }
+
+    if (isFirst) {
       focusInput()
-    } else if (focus.type === "method") {
-      focusMethod({ method: focus.method - 1, group: focus.group })
+    } else {
+      focusMethod(previousId)
     }
   }
 
-  function focusNext(): void {
-    if (focus.type === "nothing" || focus.type === "input") {
-      focusMethod({ method: 0, group: 0 })
-    } else if (focus.type === "method") {
-      focusMethod({ method: focus.method + 1, group: focus.group })
+  const focusNext = () => {
+    const currentIndex = methodIdx.findIndex((id) => id === focus.methodId)
+    const nextId = methodIdx[currentIndex + 1]
+    const isLast = currentIndex === methodIdx.length - 1
+
+    if (!isLast) {
+      focusMethod(nextId)
     }
   }
 
-  function focusPreviousGroup(atIndex: number): void {
-    focusMethod({
-      method: atIndex,
-      group: (focus.group as number) - 1,
-    })
-  }
-
-  function focusNextGroup(): void {
-    focusMethod({
-      method: 0,
-      group: (focus.group as number) + 1,
-    })
-  }
+  useKeyboardEvent("/", focusInput)
+  useKeyboardEvent("ArrowUp", focusPrevious, [flattenedMethods, focus.type, focus.methodId])
+  useKeyboardEvent("ArrowDown", focusNext, [flattenedMethods, focus.type, focus.methodId])
 
   function clearFocus(): void {
-    setFocus({ type: "nothing", method: null, group: null })
+    setFocus({ type: "nothing" })
   }
 
   function focusInput(): void {
-    setFocus({ type: "input", method: null, group: null })
+    setFocus({ type: "input" })
   }
 
-  function focusMethod({
-    method,
-    group,
-  }: {
-    method: number
-    group: number
-  }): void {
-    setFocus({ type: "method", method, group })
+  function focusMethod(methodId: string): void {
+    setFocus({ type: "method", methodId })
   }
 
-  return (
-    <SidebarContext.Provider
-      value={{
-        state: {
-          focus,
-          filteredGroups,
-        },
-        actions: {
-          focusPrevious,
-          focusNext,
-          focusPreviousGroup,
-          focusNextGroup,
-          clearFocus,
-          focusInput,
-        },
-      }}
-    >
-      {children}
-    </SidebarContext.Provider>
-  )
+  const memoizedValue = useMemo(() => {
+    return {
+      state: {
+        focus,
+        filteredGroups,
+      },
+      actions: {
+        focusMethod,
+        focusPrevious,
+        focusNext,
+        clearFocus,
+        focusInput,
+      },
+    }
+  }, [JSON.stringify(focus), JSON.stringify(filteredGroups)])
+
+  return <SidebarContext.Provider value={memoizedValue}>{children}</SidebarContext.Provider>
 }

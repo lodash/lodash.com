@@ -1,5 +1,5 @@
 import cx from "classnames"
-import React from "react"
+import React, { useEffect } from "react"
 import { useSearch } from "../../hooks/useSearch"
 import { useSidebar } from "../../hooks/useSidebar"
 import * as SC from "./styles"
@@ -16,32 +16,30 @@ const SearchInput = (): JSX.Element => {
     sidebarActions.clearFocus()
   }
 
-  function handleOnChange(event: React.KeyboardEvent<HTMLInputElement>): void {
-    searchActions.update(event.target.value)
-    clearFocus()
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void {
-    if (event.key === "ArrowUp") {
-      sidebarActions.focusPrevious()
-    }
-    if (event.key === "ArrowDown") {
-      sidebarActions.focusNext()
-    }
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    searchActions.update(event.currentTarget.value)
   }
 
   const isFocused = sidebarState.focus.type === "input"
+
+  useEffect(() => {
+    if (isFocused) {
+      // I would rather use a ref, but GatsbyLink seems to be improperly typed
+      // see https://github.com/gatsbyjs/gatsby/issues/16682
+      document.querySelector<HTMLInputElement>(".search-input")?.focus()
+    }
+  }, [isFocused])
 
   return (
     <SC.SearchInputWrapper className={cx({ "is-focused": isFocused })}>
       <SC.StyledSearchIcon />
       <SC.SearchInput
+        className="search-input"
         value={searchState.input}
         onChange={handleOnChange}
         placeholder="Search"
         onFocus={setFocus}
         onBlur={clearFocus}
-        onKeyDown={handleKeyDown}
       />
       {!isFocused && <SC.FocusHint>/</SC.FocusHint>}
     </SC.SearchInputWrapper>

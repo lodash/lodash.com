@@ -19,6 +19,8 @@ export interface IMethod {
   }
 }
 
+export type IMethodNode = IMethod["node"]
+
 export interface IGroup {
   edges: IMethod[]
   field: string
