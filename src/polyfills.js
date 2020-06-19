@@ -1,5 +1,5 @@
 if (!Array.prototype.flat) {
-  Array.prototype.flat = function(depth) {
+  Array.prototype.flat = function (depth) {
     var flattend = []
     ;(function flat(array, depth) {
       for (let el of array) {

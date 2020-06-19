@@ -42,9 +42,8 @@ const IndexPage = (): JSX.Element => (
     <Container>
       <Title>Why Lodash?</Title>
       <p>
-        Lodash makes JavaScript easier by taking the hassle out of working with
-        arrays, numbers, objects, strings, etc. Lodash’s modular methods are
-        great for:
+        Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers,
+        objects, strings, etc. Lodash’s modular methods are great for:
       </p>
 
       <UL
@@ -59,18 +58,16 @@ const IndexPage = (): JSX.Element => (
       <UL
         items={[
           <Fragment>
-            <StyledLink to="/">Core build</StyledLink>{" "}
-            <StyledLink to="/">~4kB gzipped</StyledLink>
+            <StyledLink to="/">Core build</StyledLink> <StyledLink to="/">~4kB gzipped</StyledLink>
           </Fragment>,
           <Fragment>
-            <StyledLink to="/">Full build</StyledLink>{" "}
-            <StyledLink to="/">~24kB gzipped</StyledLink>
+            <StyledLink to="/">Full build</StyledLink> <StyledLink to="/">~24kB gzipped</StyledLink>
           </Fragment>,
         ]}
       />
       <p>
-        Review the <StyledLink to="/">build differences</StyledLink> & pick one
-        that’s right for you.
+        Review the <StyledLink to="/">build differences</StyledLink> & pick one that’s right for
+        you.
       </p>
 
       <Title>Module Formats</Title>
@@ -87,8 +84,7 @@ const IndexPage = (): JSX.Element => (
 
       <Subtitle>Note:</Subtitle>
       <p>
-        Install <StyledLink to="/">n_</StyledLink> for Lodash use in the Node.js
-        &lt; 6 REPL.
+        Install <StyledLink to="/">n_</StyledLink> for Lodash use in the Node.js &lt; 6 REPL.
       </p>
 
       <Title>Further Reading</Title>
@@ -102,9 +98,8 @@ const IndexPage = (): JSX.Element => (
 
       <Title>Support</Title>
       <p>
-        Tested in Chrome 54-55, Firefox 49-50, IE 11, Edge 14, Safari 9-10,
-        Node.js 6-7, & PhantomJS 2.1.1. Automated browser & CI test runs are
-        available.
+        Tested in Chrome 54-55, Firefox 49-50, IE 11, Edge 14, Safari 9-10, Node.js 6-7, & PhantomJS
+        2.1.1. Automated browser & CI test runs are available.
       </p>
     </Container>
 

@@ -7,11 +7,7 @@ export interface IButtonProps {
   children: React.ReactNode
 }
 
-const Button = ({
-  type = "secondary",
-  children,
-  ...restProps
-}: IButtonProps): JSX.Element => (
+const Button = ({ type = "secondary", children, ...restProps }: IButtonProps): JSX.Element => (
   <SC.ButtonWrapper type={type} {...restProps}>
     {children}
   </SC.ButtonWrapper>

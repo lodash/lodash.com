@@ -72,7 +72,7 @@ const DocsPage = (props: any): JSX.Element => {
 
   const groups = data.allLodashMethod.group
   // TODO: optimize performance
-  const methods = groups.map(group => group.edges).flat()
+  const methods = groups.map((group) => group.edges).flat()
 
   return (
     <SearchProvider>

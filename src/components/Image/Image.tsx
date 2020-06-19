@@ -25,7 +25,7 @@ const Image = (): JSX.Element => (
         }
       }
     `}
-    render={data => <Img fluid={data.placeholderImage.childImageSharp.fluid} />}
+    render={(data) => <Img fluid={data.placeholderImage.childImageSharp.fluid} />}
   />
 )
 

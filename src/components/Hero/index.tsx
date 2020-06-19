@@ -16,8 +16,7 @@ const Hero = (): JSX.Element => (
             <SC.Title>
               Lodash
               <small>
-                A modern JavaScript utility library delivering modularity,
-                performance & extras.
+                A modern JavaScript utility library delivering modularity, performance & extras.
               </small>
             </SC.Title>
           </SC.Content>
@@ -63,12 +62,10 @@ const curryN = require('lodash/fp/curryN');
 `}</Code>
 
             <SC.Info>
-              Also available through{" "}
-              <SC.StyledLink to="/">CDN copies</SC.StyledLink>
+              Also available through <SC.StyledLink to="/">CDN copies</SC.StyledLink>
               <br />
-              Lodash is released under the{" "}
-              <SC.StyledLink to="/">MIT license</SC.StyledLink> & supports
-              modern environments.
+              Lodash is released under the <SC.StyledLink to="/">MIT license</SC.StyledLink> &
+              supports modern environments.
             </SC.Info>
           </SC.Content>
         </SC.Row>

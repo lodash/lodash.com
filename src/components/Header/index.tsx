@@ -34,9 +34,7 @@ const HeaderWrapper = (): JSX.Element => {
   // HACK: since useWindowScrollPosition cannot compile on Node and is replaced,
   // we pass it a fallback dummy object
   const position =
-    typeof useWindowScrollPosition === "function"
-      ? useWindowScrollPosition()
-      : { x: 0, y: 0 }
+    typeof useWindowScrollPosition === "function" ? useWindowScrollPosition() : { x: 0, y: 0 }
   const scrolled = position.y !== 0
 
   return <MemodHeader scrolled={scrolled} />

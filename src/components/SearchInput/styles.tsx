@@ -12,7 +12,7 @@ export const SearchInputWrapper = styled.div<{ focused: boolean }>`
   transition: 0.3s background;
   align-items: center;
   margin-bottom: 32px;
-  border: 2px solid ${props => (props.focused ? "#3492ff" : "#1f2a34")};
+  border: 2px solid ${(props) => (props.focused ? "#3492ff" : "#1f2a34")};
 `
 
 export const StyledSearchIcon = styled(SearchIcon)`

@@ -20,9 +20,7 @@ const MethodLink = memo(
     const { state: sidebarState } = useSidebar()
 
     const isFocused =
-      groupIsFocused &&
-      sidebarState.focus.type === "method" &&
-      sidebarState.focus.method === index
+      groupIsFocused && sidebarState.focus.type === "method" && sidebarState.focus.method === index
 
     return (
       <div key={`${method.category}-${method.name}-${index}`}>
@@ -67,9 +65,7 @@ const MethodGroup = memo(
       const focusingLastMethod = focus.method === group.edges.length
 
       if (focusingFirstMethod) {
-        const previousGroupIndex = previousGroupLength
-          ? previousGroupLength - 1
-          : 0
+        const previousGroupIndex = previousGroupLength ? previousGroupLength - 1 : 0
         sidebarActions.focusPreviousGroup(previousGroupIndex)
       }
 
@@ -79,7 +75,7 @@ const MethodGroup = memo(
     }, [groupIsFocused, focus])
 
     function toggleExpanded(): void {
-      setExpanded(state => !state)
+      setExpanded((state) => !state)
     }
 
     return (

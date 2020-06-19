@@ -28,11 +28,7 @@ export const Sidebar = styled.aside`
     bottom: 0;
     width: 320px;
     height: 142px;
-    background: linear-gradient(
-      0deg,
-      rgba(41, 56, 69, 1) 30%,
-      rgba(41, 56, 69, 0) 100%
-    );
+    background: linear-gradient(0deg, rgba(41, 56, 69, 1) 30%, rgba(41, 56, 69, 0) 100%);
     transition: opacity 1s;
   }
 
@@ -81,7 +77,7 @@ export const StyledMethodLink = styled(Link)<{ isFocused: boolean }>`
     color: ${darken(0.1, "#91a0ae")};
   }
 
-  ${props =>
+  ${(props) =>
     props.isFocused &&
     css`
       background: #3492ff;

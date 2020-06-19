@@ -22,10 +22,12 @@ module.exports = {
     {
       resolve: "gatsby-source-lodash",
       options: {
-        versions: [{
-          version: '4.17.11',
-          url: 'https://raw.githubusercontent.com/lodash/lodash/4.17.11-npm/lodash.js',
-        }]
+        versions: [
+          {
+            version: "4.17.11",
+            url: "https://raw.githubusercontent.com/lodash/lodash/4.17.11-npm/lodash.js",
+          },
+        ],
       },
     },
     `gatsby-plugin-react-svg`,

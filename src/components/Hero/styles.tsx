@@ -8,11 +8,7 @@ import Container from "../Container"
 export const HeroWrapper = styled.header`
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(
-      135deg,
-      rgba(60, 69, 78, 1) 0%,
-      rgba(60, 69, 78, 0) 150%
-    ),
+  background: linear-gradient(135deg, rgba(60, 69, 78, 1) 0%, rgba(60, 69, 78, 0) 150%),
     linear-gradient(180deg, rgba(34, 85, 144, 1) 0%, rgba(52, 146, 255, 1) 100%);
   color: #fff;
   margin-bottom: 64px;

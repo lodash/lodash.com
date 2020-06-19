@@ -20,7 +20,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "format": "prettier --write src/**/**/*.{ts,tsx} src/**/*.{ts,tsx}",
     "serve": "gatsby serve",
     "start": "npm run develop",
     "test": "jest"

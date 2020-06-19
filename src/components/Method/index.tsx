@@ -11,9 +11,7 @@ function hasNPMPackage(method: IMethodInterface["node"]): boolean {
     return true
   }
 
-  return !["methods", "properties", "seq"].includes(
-    method.category.toLowerCase()
-  )
+  return !["methods", "properties", "seq"].includes(method.category.toLowerCase())
 }
 
 const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
@@ -79,9 +77,7 @@ const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
       </SC.SubContent>
 
       <SC.Subtitle>Example</SC.Subtitle>
-      <SC.StyledCode>
-        {method.example.replace(/```js/, "").replace(/```/, "").trim()}
-      </SC.StyledCode>
+      <SC.StyledCode>{method.example.replace(/```js/, "").replace(/```/, "").trim()}</SC.StyledCode>
     </SC.Content>
   </SC.MethodWrapper>
 )

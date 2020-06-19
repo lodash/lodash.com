@@ -6,10 +6,7 @@ import React, { useEffect } from "react"
 // ... callback/cleanup to run every render. It's not a big deal ...
 // ... but to optimize you can wrap handler in useCallback before ...
 // ... passing it into this hook.
-export function useOnClickOutside(
-  ref: React.RefObject<any>,
-  handler: () => any
-): void {
+export function useOnClickOutside(ref: React.RefObject<any>, handler: () => any): void {
   useEffect(() => {
     const listener = (event: Event) => {
       // Do nothing if clicking ref's element or descendent elements

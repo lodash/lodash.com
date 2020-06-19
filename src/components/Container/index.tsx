@@ -5,10 +5,7 @@ interface IContainerProps {
   children: React.ReactNode
 }
 
-const Container = ({
-  children,
-  ...restProps
-}: IContainerProps): JSX.Element => (
+const Container = ({ children, ...restProps }: IContainerProps): JSX.Element => (
   <SC.ContainerWrapper {...restProps}>{children}</SC.ContainerWrapper>
 )
 
