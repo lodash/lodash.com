@@ -11,9 +11,7 @@ interface IDocsContentProps {
 }
 
 const methodFromPath = (props: any): string => {
-  const [, method] = props["*"].split("/")
-
-  return method
+  return props["*"]
 }
 
 const DocsContent = (props: IDocsContentProps): JSX.Element => {
