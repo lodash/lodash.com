@@ -14,6 +14,14 @@ function hasNPMPackage(method: IMethodNode): boolean {
   return !["methods", "properties", "seq"].includes(method.category.toLowerCase())
 }
 
+function formatExample(example: IMethodNode["example"]): string {
+  // this is a temporary hack, should be eventually removed directly in gatsby-source-plugin
+  const removeLastStar = (str: string) => str.split("\n").slice(0, -1).join("\n")
+  const trimmedExample = example.replace(/```js/, "").replace(/```/, "").trim()
+
+  return removeLastStar(trimmedExample)
+}
+
 const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
   <SC.MethodWrapper {...restProps}>
     <SC.Name>_.{method.call}</SC.Name>
@@ -72,7 +80,7 @@ const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
       </SC.SubContent>
 
       <SC.Subtitle>Example</SC.Subtitle>
-      <SC.StyledCode>{method.example.replace(/```js/, "").replace(/```/, "").trim()}</SC.StyledCode>
+      <SC.StyledCode>{formatExample(method.example)}</SC.StyledCode>
     </SC.Content>
   </SC.MethodWrapper>
 )
