@@ -14,8 +14,9 @@ export const SearchInputWrapper = styled.div`
   margin-bottom: 32px;
   border: 2px solid #1f2a34;
 
-  &.is-focused {
-    border-color: "#3492ff";
+  &.is-focused,
+  &:focus-within {
+    border-color: #3492ff;
   }
 `
 
