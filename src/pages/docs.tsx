@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, PageProps } from "gatsby"
 import React from "react"
 import "react-virtualized/styles.css"
 import styled from "styled-components"
@@ -10,7 +10,7 @@ import SEO from "../components/SEO"
 import { useSearch } from "../hooks/useSearch"
 import { SearchProvider } from "../SearchProvider"
 import { SidebarProvider } from "../SidebarProvider"
-import { IAllLodashMethodQuery } from "../types"
+import { IAllLodashMethodQuery, IGroup, IMethod } from "../types"
 
 // TODO: temporary polyfill currently preventing build
 import "../polyfills"
@@ -50,7 +50,14 @@ const ALL_LODASH_METHOD_QUERY = graphql`
   }
 `
 
-const WrappedLayout = (props: any): JSX.Element => {
+type IDocsPageProps = PageProps & IAllLodashMethodQuery
+
+interface IWrappedLayout extends IDocsPageProps {
+  groups: IGroup[]
+  methods: IMethod[]
+}
+
+const WrappedLayout = (props: IWrappedLayout): JSX.Element => {
   const { state: searchState } = useSearch()
   const { groups, methods, ...restProps } = props
 
@@ -67,7 +74,7 @@ const WrappedLayout = (props: any): JSX.Element => {
   )
 }
 
-const DocsPage = (props: any): JSX.Element => {
+const DocsPage = (props: IDocsPageProps): JSX.Element => {
   const data: IAllLodashMethodQuery = useStaticQuery(ALL_LODASH_METHOD_QUERY)
 
   const groups = data.allLodashMethod.group

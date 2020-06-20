@@ -1,4 +1,4 @@
-import { navigate } from "gatsby"
+import { navigate, PageProps } from "gatsby"
 import React, { memo } from "react"
 import { AutoSizer, CellMeasurer, CellMeasurerCache, List, ListRowProps } from "react-virtualized"
 import { IMethod } from "../../types"
@@ -6,18 +6,18 @@ import Header from "../Header"
 import Method from "../Method"
 import * as SC from "./styles"
 
-interface IDocsContentProps {
+interface IDocsContentProps extends PageProps {
   methods: IMethod[]
 }
 
-const methodFromPath = (props: any): string => {
-  const [, , method] = props.location.pathname.split("/")
+const methodFromPath = (location: PageProps["location"]): string => {
+  const [, , method] = location.pathname.split("/")
 
   return method
 }
 
 const DocsContent = (props: IDocsContentProps): JSX.Element => {
-  const currentMethod = methodFromPath(props)
+  const currentMethod = methodFromPath(props.location)
   const cache = new CellMeasurerCache({ defaultHeight: 700, fixedWidth: true })
 
   const SingleMethod = ({ name }: { name: string }) => {

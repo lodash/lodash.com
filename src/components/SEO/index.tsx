@@ -6,12 +6,12 @@
  */
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
-import { Helmet } from "react-helmet"
+import { Helmet, HelmetProps } from "react-helmet"
 
 interface ISEOProps {
   description?: string
   lang?: string
-  meta?: any[]
+  meta?: HelmetProps["meta"][]
   keywords?: string[]
   title: string
 }
