@@ -9,7 +9,7 @@ export const HeroWrapper = styled.header`
   display: flex;
   min-height: calc(100vh - 128px);
   padding: 64px 0;
-  background: linear-gradient(135deg, rgba(60, 69, 78, 1) 0%, rgba(60, 69, 78, 0) 150%),
+  background: linear-gradient(135deg, rgba(44, 67, 109, 1) 0%, rgba(60, 69, 78, 0) 150%),
     linear-gradient(180deg, rgba(34, 85, 144, 1) 0%, rgba(52, 146, 255, 1) 100%);
   color: #fff;
   margin-bottom: 64px;
