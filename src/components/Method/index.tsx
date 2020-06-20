@@ -45,28 +45,22 @@ const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
       <SC.Subtitle>Arguments</SC.Subtitle>
       <SC.SubContent>
         <SC.Arguments>
-          <SC.ArgumentCol>
-            <SC.ArgumentHeader>argument</SC.ArgumentHeader>
-            {method.params.map((param, i) => (
-              <SC.ArgumentValue key={i}>
-                <SC.InlineCode>{param.name}</SC.InlineCode>
-              </SC.ArgumentValue>
-            ))}
-          </SC.ArgumentCol>
+          <SC.ArgumentHeader>argument</SC.ArgumentHeader>
+          {method.params.map((param, i) => (
+            <SC.ArgumentValue key={i}>
+              <SC.InlineCode>{param.name}</SC.InlineCode>
+            </SC.ArgumentValue>
+          ))}
 
-          <SC.ArgumentCol>
-            <SC.ArgumentHeader>type</SC.ArgumentHeader>
-            {method.params.map((param, i) => (
-              <SC.ArgumentValue key={i}>{param.type}</SC.ArgumentValue>
-            ))}
-          </SC.ArgumentCol>
+          <SC.ArgumentHeader>type</SC.ArgumentHeader>
+          {method.params.map((param, i) => (
+            <SC.ArgumentValue key={i}>{param.type}</SC.ArgumentValue>
+          ))}
 
-          <SC.ArgumentCol>
-            <SC.ArgumentHeader>description</SC.ArgumentHeader>
-            {method.params.map((param, i) => (
-              <SC.ArgumentValue key={i}>{param.desc}</SC.ArgumentValue>
-            ))}
-          </SC.ArgumentCol>
+          <SC.ArgumentHeader>description</SC.ArgumentHeader>
+          {method.params.map((param, i) => (
+            <SC.ArgumentValue key={i}>{param.desc}</SC.ArgumentValue>
+          ))}
         </SC.Arguments>
       </SC.SubContent>
 

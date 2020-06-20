@@ -83,15 +83,12 @@ export const InlineCode = styled.code`
 `
 
 export const Arguments = styled.div`
-  display: flex;
-`
-
-export const ArgumentCol = styled.div`
-  flex: 0 0 auto;
-
-  &:last-child {
-    flex-grow: 1;
-  }
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: min-content min-content;
+  align-items: center;
+  row-gap: 8px;
 `
 
 export const ArgumentHeader = styled.div`
@@ -103,7 +100,6 @@ export const ArgumentHeader = styled.div`
 
 export const ArgumentValue = styled.div`
   color: #fff;
-  margin-top: 8px;
   padding-right: 16px;
 `
 
