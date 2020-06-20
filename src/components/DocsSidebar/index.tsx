@@ -49,10 +49,8 @@ const MethodLink = memo(
 
 const MethodGroup = memo(
   ({ group, setCurrentFocus }: { group: IGroup; setCurrentFocus: (methodId: string) => void }) => {
-    const { state: sidebarState } = useSidebar()
     const [expanded, setExpanded] = useState(true)
     const { edges: groupMethods } = group
-    const { focus } = sidebarState
 
     function toggleExpanded(): void {
       setExpanded((state) => !state)
