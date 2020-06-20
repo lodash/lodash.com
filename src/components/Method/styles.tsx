@@ -85,7 +85,6 @@ export const InlineCode = styled.code`
 export const Arguments = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: min-content min-content;
   align-items: center;
   row-gap: 8px;
@@ -101,6 +100,10 @@ export const ArgumentHeader = styled.div`
 export const ArgumentValue = styled.div`
   color: #fff;
   padding-right: 16px;
+
+  ${InlineCode} {
+    white-space: nowrap;
+  }
 `
 
 export const StyledMarkdown = styled(Markdown)`

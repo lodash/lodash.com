@@ -44,7 +44,8 @@ const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
 
       <SC.Subtitle>Arguments</SC.Subtitle>
       <SC.SubContent>
-        <SC.Arguments>
+        {/* I would rather not have to do this */}
+        <SC.Arguments style={{ gridTemplateRows: `repeat(${method.params.length + 1}, 1fr)` }}>
           <SC.ArgumentHeader>argument</SC.ArgumentHeader>
           {method.params.map((param, i) => (
             <SC.ArgumentValue key={i}>
