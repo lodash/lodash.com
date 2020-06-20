@@ -9,7 +9,8 @@
   "contributors": [
     "John-David Dalton <john.david.dalton@gmail.com>",
     "Mathias Bynens <mathias@qiwi.be>",
-    "Zack Hall <zack@zthall.com>"
+    "Zack Hall <zack@zthall.com>",
+    "Jean-Philippe Sirois <jp@veksen.net>"
   ],
   "license": "MIT",
   "dependencies": {
