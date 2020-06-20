@@ -7,7 +7,8 @@ import Container from "../Container"
 
 export const HeroWrapper = styled.header`
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 128px);
+  padding: 64px 0;
   background: linear-gradient(135deg, rgba(60, 69, 78, 1) 0%, rgba(60, 69, 78, 0) 150%),
     linear-gradient(180deg, rgba(34, 85, 144, 1) 0%, rgba(52, 146, 255, 1) 100%);
   color: #fff;
@@ -19,56 +20,34 @@ export const StyledContainer = styled(Container)`
 `
 
 export const HeroInner = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 auto;
-  flex-wrap: wrap;
-`
-
-export const Row = styled.div`
-  display: flex;
-  width: 100%;
-
-  @media screen and (max-width: 991px) {
-    flex-direction: column;
-  }
-
-  & + & {
-    margin-top: 32px;
-  }
+  display: grid;
+  grid-template-columns: 125px auto;
+  grid-template-areas:
+    "logo        intro"
+    "aside       buttons"
+    "usage-title usage";
+  row-gap: 32px;
+  column-gap: 32px;
 `
 
 export const Aside = styled.aside`
+  grid-area: aside;
   display: flex;
-  flex: 0 0 35%;
-  padding-right: 32px;
   justify-content: flex-end;
   align-items: center;
   font-weight: 700;
 
   @media screen and (max-width: 991px) {
     justify-content: flex-start;
-    flex-basis: auto;
-    padding-right: 0;
-    padding-bottom: 32px;
   }
 `
 
-export const AsideTitle = styled.h3`
-  font-size: 24px;
-  font-weight: 500;
-  align-self: flex-start;
-  margin-top: 0;
-`
-
 export const Content = styled.div`
+  grid-area: content;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  flex: 1 0 65%;
   font-size: 17px;
-  margin-left: 35%;
 
   @media screen and (max-width: 991px) {
     margin-left: 0;
@@ -91,6 +70,29 @@ export const Content = styled.div`
   }
 `
 
+export const LogoWrapper = styled(Aside)`
+  grid-area: logo;
+`
+
+export const Intro = styled(Content)`
+  grid-area: intro;
+`
+
+export const Usage = styled(Content)`
+  grid-area: usage;
+`
+
+export const AsideTitleWrapper = styled(Aside)`
+  grid-area: usage-title;
+`
+
+export const AsideTitle = styled.h3`
+  font-size: 24px;
+  font-weight: 500;
+  align-self: flex-start;
+  margin-top: 0;
+`
+
 export const Title = styled.h1`
   font-size: 28px;
   font-weight: 500;
@@ -109,8 +111,11 @@ export const StyledLogo = styled(Logo)`
   width: 125px;
 `
 
-export const ButtonsWrapper = styled.div`
+export const Buttons = styled(Content)`
+  grid-area: buttons;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 `
 
 export const StyledLink = styled(Link)`

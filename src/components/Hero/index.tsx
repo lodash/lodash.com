@@ -8,43 +8,38 @@ const Hero = (): JSX.Element => (
   <SC.HeroWrapper>
     <SC.StyledContainer>
       <SC.HeroInner>
-        <SC.Row>
-          <SC.Aside>
-            <SC.StyledLogo />
-          </SC.Aside>
-          <SC.Content>
-            <SC.Title>
-              Lodash
-              <small>
-                A modern JavaScript utility library delivering modularity, performance & extras.
-              </small>
-            </SC.Title>
-          </SC.Content>
-        </SC.Row>
+        <SC.LogoWrapper>
+          <SC.StyledLogo />
+        </SC.LogoWrapper>
 
-        <SC.Row>
-          <SC.Content>
-            <SC.ButtonsWrapper>
-              <Button type="primary" onClick={() => navigate("/docs")}>
-                Documentation
-              </Button>
-              <Button type="secondary">FP Guide</Button>
-            </SC.ButtonsWrapper>
-          </SC.Content>
-        </SC.Row>
+        <SC.Intro>
+          <SC.Title>
+            Lodash
+            <small>
+              A modern JavaScript utility library delivering modularity, performance & extras.
+            </small>
+          </SC.Title>
+        </SC.Intro>
 
-        <SC.Row>
-          <SC.Aside>
-            <SC.AsideTitle>Usage</SC.AsideTitle>
-          </SC.Aside>
-          <SC.Content>
-            <Code withContainer lang="bash">{`
+        <SC.Buttons>
+          <Button type="primary" onClick={() => navigate("/docs")}>
+            Documentation
+          </Button>
+          <Button type="secondary">FP Guide</Button>
+        </SC.Buttons>
+
+        <SC.AsideTitleWrapper>
+          <SC.AsideTitle>Usage</SC.AsideTitle>
+        </SC.AsideTitleWrapper>
+
+        <SC.Usage>
+          <Code withContainer lang="bash">{`
 $ npm i lodash
 # or
 yarn add lodash
 `}</Code>
 
-            <Code withContainer>{`
+          <Code withContainer>{`
 // Load the full build.
 const _ = require('lodash');
 // Load the core build.
@@ -61,14 +56,13 @@ const at = require('lodash/at');
 const curryN = require('lodash/fp/curryN');
 `}</Code>
 
-            <SC.Info>
-              Also available through <SC.StyledLink to="/">CDN copies</SC.StyledLink>
-              <br />
-              Lodash is released under the <SC.StyledLink to="/">MIT license</SC.StyledLink> &
-              supports modern environments.
-            </SC.Info>
-          </SC.Content>
-        </SC.Row>
+          <SC.Info>
+            Also available through <SC.StyledLink to="/">CDN copies</SC.StyledLink>
+            <br />
+            Lodash is released under the <SC.StyledLink to="/">MIT license</SC.StyledLink> &
+            supports modern environments.
+          </SC.Info>
+        </SC.Usage>
       </SC.HeroInner>
     </SC.StyledContainer>
   </SC.HeroWrapper>
