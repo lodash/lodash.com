@@ -43,6 +43,7 @@ const ALL_LODASH_METHOD_QUERY = graphql`
             }
             call
             lineNumber
+            version
           }
         }
       }
@@ -61,14 +62,21 @@ const WrappedLayout = (props: IWrappedLayout): JSX.Element => {
   const { state: searchState } = useSearch()
   const { groups, methods, ...restProps } = props
 
+  // this is short-lived, will be moved in the GraphQL query
+  const filteredMethods = methods.filter((method) => method.node.version === searchState.version)
+
   return (
     <Layout>
       <SEO title="Docs" />
       <Wrapper>
-        <SidebarProvider initialGroups={groups} searchInput={searchState.input}>
+        <SidebarProvider
+          initialGroups={groups}
+          searchInput={searchState.input}
+          version={searchState.version}
+        >
           <DocsSidebar />
         </SidebarProvider>
-        <DocsContent {...restProps} methods={methods} />
+        <DocsContent {...restProps} methods={filteredMethods} />
       </Wrapper>
     </Layout>
   )

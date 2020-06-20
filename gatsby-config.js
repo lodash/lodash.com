@@ -26,6 +26,18 @@ module.exports = {
             version: "4.17.11",
             url: "https://raw.githubusercontent.com/lodash/lodash/4.17.11-npm/lodash.js",
           },
+          {
+            version: "3.10.1",
+            url: "https://raw.githubusercontent.com/lodash/lodash/3.10.1-npm/index.js",
+          },
+          {
+            version: "2.4.2",
+            url: "https://raw.githubusercontent.com/lodash/lodash/2.4.2/lodash.js",
+          },
+          {
+            version: "1.3.1",
+            url: "https://raw.githubusercontent.com/lodash/lodash/1.3.1/lodash.js",
+          },
         ],
       },
     },

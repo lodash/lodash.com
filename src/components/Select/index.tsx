@@ -10,27 +10,33 @@ interface IOptionItem {
 
 interface ISelectProps {
   options: IOptionItem[]
+  value: string
+  onChange?: (value: string) => void
 }
 
-const Select = ({ options = [], ...restProps }: ISelectProps): JSX.Element => {
+const Select = ({ options = [], onChange, ...props }: ISelectProps): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const [open, setOpen] = useState<boolean>(false)
   useOnClickOutside(ref, () => setOpen(false))
 
   useEffect(() => {
-    if (options.length) {
-      setSelected(options[0].value)
+    if (options.length && props.value) {
+      setSelected(props.value)
     }
-  }, [])
+  }, [props.value])
 
-  const selectOption = (value: string) => {
+  const selectOption = (newValue: string) => {
     setOpen(false)
-    setSelected(value)
+    setSelected(newValue)
+
+    if (onChange) {
+      onChange(newValue)
+    }
   }
 
   return (
-    <SC.SelectWrapper {...restProps} ref={ref}>
+    <SC.SelectWrapper {...props} ref={ref}>
       <SC.Selected onClick={() => setOpen(!open)}>
         {selected}
         <SC.Arrow />

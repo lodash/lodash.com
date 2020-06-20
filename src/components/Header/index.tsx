@@ -4,29 +4,38 @@ import { Link } from "gatsby"
 import React, { memo } from "react"
 import Select from "../Select"
 import * as SC from "./styles"
+import { useSearch } from "../../hooks/useSearch"
 
 interface IHeaderProps {
   isScrolled: boolean
 }
 
-const Header = ({ isScrolled }: IHeaderProps): JSX.Element => (
-  <SC.HeaderWrapper className={cx({ "is-scrolled": isScrolled })}>
-    <SC.LogoWrapper>
-      <Link to="/">
-        <SC.StyledLogo />
-      </Link>
-    </SC.LogoWrapper>
+const Header = ({ isScrolled }: IHeaderProps): JSX.Element => {
+  const { state: searchState, actions: searchActions } = useSearch()
 
-    <Select
-      options={[
-        { value: "4.17.11", text: "4.17.11" },
-        { value: "3.10.1", text: "3.10.1" },
-        { value: "2.4.2", text: "2.4.2" },
-        { value: "1.3.1", text: "1.3.1" },
-      ]}
-    />
-  </SC.HeaderWrapper>
-)
+  return (
+    <SC.HeaderWrapper className={cx({ "is-scrolled": isScrolled })}>
+      <SC.LogoWrapper>
+        <Link to="/">
+          <SC.StyledLogo />
+        </Link>
+      </SC.LogoWrapper>
+
+      <Select
+        options={[
+          { value: "4.17.11", text: "4.17.11" },
+          { value: "3.10.1", text: "3.10.1" },
+          { value: "2.4.2", text: "2.4.2" },
+          { value: "1.3.1", text: "1.3.1" },
+        ]}
+        value={searchState.version}
+        onChange={(value) => {
+          searchActions.updateVersion(value)
+        }}
+      />
+    </SC.HeaderWrapper>
+  )
+}
 
 // to avoid excessive rerenders, Header is wrapped into React.memo
 const MemodHeader: React.MemoExoticComponent<typeof Header> = memo(Header)

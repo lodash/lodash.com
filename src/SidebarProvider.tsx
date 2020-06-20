@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useMemo } from "react"
 import { useKeyboardEvent } from "./hooks/useKeyboardEvent"
-import { IGroup, IMethod, IMethodNode } from "./types"
+import { IGroup, IMethodNode } from "./types"
+import { filterGroups } from "./utils"
 
 interface ISidebarProviderProps {
   children: React.ReactNode
   initialGroups: IGroup[]
   searchInput: string
+  version: string
 }
 
 interface IBaseInput {
@@ -44,48 +46,23 @@ export interface ISidebarContext {
 
 export const SidebarContext = React.createContext<ISidebarContext | null>(null)
 
-function filterMethod(method: IMethod, input: string): boolean {
-  return method.node.name.toLowerCase().includes(input.toLowerCase())
-}
-
-function filterMethods(methods: IMethod[], input: string): IMethod[] {
-  return methods.filter((method) => filterMethod(method, input))
-}
-
-function filterGroups(groups: IGroup[], input: string): IGroup[] {
-  return groups
-    .map((group) => {
-      return {
-        ...group,
-        edges: group.edges.filter((method) => filterMethod(method, input)),
-      }
-    })
-    .filter(({ edges: groupMethods }) => {
-      return filterMethods(groupMethods, input).length
-    })
-}
-
 export function SidebarProvider({
   children,
   initialGroups,
   searchInput,
+  version,
 }: ISidebarProviderProps): JSX.Element {
-  const [filteredGroups, setFilteredGroups] = useState<IGroup[]>([])
   const [focus, setFocus] = useState<Focus>({
     type: "nothing",
   })
 
-  useEffect(() => {
-    setFilteredGroups(initialGroups)
-  }, [])
-
-  useEffect(() => {
-    setFilteredGroups(filterGroups(initialGroups, searchInput))
-  }, [searchInput])
+  const filteredGroups = useMemo<IGroup[]>(() => {
+    return filterGroups(initialGroups, searchInput, version)
+  }, [JSON.stringify(initialGroups), searchInput, version])
 
   const flattenedMethods = useMemo<IMethodNode[]>(() => {
     return filteredGroups.flatMap((group) => group.edges.map((edge) => edge.node))
-  }, [JSON.stringify(filteredGroups)])
+  }, [JSON.stringify(filteredGroups), version])
 
   const methodIdx = flattenedMethods.map((m) => m.id)
 
