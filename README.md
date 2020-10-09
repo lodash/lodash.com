@@ -4,7 +4,7 @@ The Lodash website.
 
 ## Running Locally
 
-1. Clone the repository locally.
+1. Clone the repository locally it will help you a lot .
 
 2. Install required [gems](http://bundler.io/) & [packages](https://www.npmjs.com/) in the repository directory.
     ```shell
@@ -23,7 +23,7 @@ The Lodash website.
 
 2. Copy the generated documentation from `lodash/doc/` to `lodash.com/docs/`.
 
-3. Update `_config.yml` for the release.
+3. Update this `_config.yml` for the release.
     ```shell
     $ npm run build:config <version>
     ```
