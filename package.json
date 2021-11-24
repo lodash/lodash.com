@@ -52,7 +52,7 @@
     "react-highlight": "^0.14.0",
     "react-markdown": "^7.1.0",
     "react-perfect-scrollbar": "^1.5.8",
-    "react-virtualized": "^9.21.2",
+    "react-virtualized": "^9.22.3",
     "sharp": "^0.25.4",
     "styled-components": "^5.1.1"
   },
