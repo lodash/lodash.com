@@ -63,7 +63,7 @@
     "@types/react-helmet": "^6.1.4",
     "@types/react-highlight": "^0.12.5",
     "@types/react-virtualized": "^9.21.15",
-    "@types/styled-components": "^5.1.0",
+    "@types/styled-components": "^5.1.15",
     "babel-jest": "^26.0.1",
     "babel-plugin-polished": "^1.1.0",
     "babel-plugin-styled-components": "^2.0.1",
