@@ -33,7 +33,7 @@
     "classnames": "^2.3.1",
     "gatsby": "^4.2.0",
     "gatsby-image": "^3.11.0",
-    "gatsby-plugin-create-client-paths": "^2.3.4",
+    "gatsby-plugin-create-client-paths": "^4.2.0",
     "gatsby-plugin-manifest": "^4.2.0",
     "gatsby-plugin-mdx": "^3.2.0",
     "gatsby-plugin-offline": "^3.2.9",
