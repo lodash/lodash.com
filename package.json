@@ -59,7 +59,7 @@
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
     "@types/classnames": "^2.3.0",
-    "@types/jest": "^26.0.0",
+    "@types/jest": "^27.0.3",
     "@types/react-helmet": "^6.0.0",
     "@types/react-highlight": "^0.12.2",
     "@types/react-virtualized": "^9.21.10",
