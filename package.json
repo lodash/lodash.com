@@ -30,7 +30,7 @@
     "@mdx-js/react": "^1.6.22",
     "@rehooks/window-scroll-position": "^1.0.1",
     "babel-plugin-styled-components": "^2.0.1",
-    "classnames": "^2.2.6",
+    "classnames": "^2.3.1",
     "gatsby": "^4.2.0",
     "gatsby-image": "^2.4.7",
     "gatsby-plugin-create-client-paths": "^2.3.4",
