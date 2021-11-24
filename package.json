@@ -57,7 +57,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@testing-library/react": "^10.2.1",
+    "@testing-library/react": "^12.1.2",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^26.0.0",
     "@types/react-helmet": "^6.0.0",
