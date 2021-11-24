@@ -14,12 +14,6 @@ export const Content = styled.div`
   background: #1e2933;
   flex: 1 0 auto;
   padding: 124px 24px 24px;
-
-  /* removes the odd focus ring around react-virtualized */
-  & > div:focus,
-  & > div > div:focus {
-    outline: none;
-  }
 `
 
 export const SeeAll = styled(Button)`
