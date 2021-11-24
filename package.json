@@ -72,7 +72,7 @@
     "jest": "^27.3.1",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
-    "ts-jest": "^26.1.0",
+    "ts-jest": "^27.0.7",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
