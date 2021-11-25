@@ -1,4 +1,5 @@
 import React from "react"
+import rehypeRaw from "rehype-raw"
 import { IMethodNode } from "../../types"
 import * as SC from "./styles"
 
@@ -45,7 +46,7 @@ const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
       </SC.MetaLinks>
 
       {/* TODO: possibly switch to a lighter solution? */}
-      <SC.StyledMarkdown source={method.desc} escapeHtml={false} />
+      <SC.StyledMarkdown rehypePlugins={[rehypeRaw]}>{method.desc}</SC.StyledMarkdown>
 
       <SC.Subtitle>Since</SC.Subtitle>
       <SC.SubContent>{method.since}</SC.SubContent>
