@@ -4,6 +4,7 @@ import { useLayout } from "../../hooks/useLayout"
 import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
+import Spacer from "../Spacer"
 import * as SC from "./styles"
 
 interface IAllMethodsProps {
@@ -23,10 +24,10 @@ const AllMethods = (props: IAllMethodsProps): JSX.Element => {
         Header: () => (
           <>
             <Header />
-            <div style={{ height: "124px" }} />
+            <Spacer height={124} />
           </>
         ),
-        Footer: () => <div style={{ height: "24px" }} />,
+        Footer: () => <Spacer height={124} />,
         List: React.forwardRef((listProps, ref) => {
           return <SC.ContentWrapper {...listProps} ref={ref} />
         }),
