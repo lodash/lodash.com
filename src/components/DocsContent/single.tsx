@@ -16,7 +16,7 @@ const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
       <SC.SeeAll onClick={() => navigate("/docs")} type="primary">
         ← See all
       </SC.SeeAll>
-      <Method method={props.method.node} />
+      <Method method={props.method.node} isSingle={true} />
     </SC.ContentWrapper>
   )
 }

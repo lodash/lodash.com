@@ -1,6 +1,7 @@
-import { lighten } from "polished"
+import { darken, lighten } from "polished"
 import Markdown from "react-markdown"
 import styled, { css } from "styled-components"
+import Button from "../Button"
 import Code from "../Code"
 
 export const MethodWrapper = styled.div`
@@ -64,11 +65,50 @@ export const SubContent = styled.div`
   font-size: 16px;
 `
 
+export const CodeWrapper = styled.div`
+  position: relative;
+  margin-left: -29px;
+  margin-right: -29px;
+`
+
 export const StyledCode = styled(Code)`
-  margin: 0 calc(-18px - 11px);
+  margin: 0;
   padding-left: calc(18px + 11px);
   padding-right: calc(18px + 11px);
   background: #171f26;
+`
+
+export const REPLButton = styled(Button)`
+  position: absolute;
+  bottom: 20px;
+  right: 36px;
+  padding: 12px 21px;
+  background: #293845;
+  box-shadow: inset 0 -3px 0 #acbcca, 0px 6px 10px #171f26, 2px 2px 3px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(3px);
+    background: ${darken(0.05, "#293845")};
+    color: #fff;
+    box-shadow: inset 0 0 0 #acbcca, 0px 6px 10px #171f26, 2px 2px 3px rgba(0, 0, 0, 0.15);
+  }
+`
+
+export const CloseREPLButton = styled(Button)`
+  position: absolute;
+  top: -38px;
+  right: 28px;
+  background: #171f26;
+  box-shadow: none;
+  padding: 2px 7px;
+  font-weight: 700;
+  font-size: 14px;
+
+  &:hover {
+    color: #fff;
+  }
 `
 
 const inlineCode = css`
@@ -117,4 +157,9 @@ export const StyledMarkdown = styled(Markdown)`
     display: inline;
     padding: 5px 7px;
   }
+`
+
+export const RunkitEmbedWrapper = styled.div`
+  padding-left: 29px;
+  padding-right: 29px;
 `

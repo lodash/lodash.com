@@ -38,7 +38,13 @@ const AllMethods = (props: IAllMethodsProps): JSX.Element => {
       itemContent={(index, item) => {
         const method = item.node
 
-        return <Method key={`${method.category}-${method.name}-${index}`} method={method} />
+        return (
+          <Method
+            key={`${method.category}-${method.name}-${index}`}
+            method={method}
+            isSingle={false}
+          />
+        )
       }}
       increaseViewportBy={10}
     />
