@@ -64,7 +64,7 @@ const Method = ({ method, ...restProps }: IMethodProps): JSX.Element => (
 
           <SC.ArgumentHeader>type</SC.ArgumentHeader>
           {method.params.map((param, i) => (
-            <SC.ArgumentValue key={i}>{param.type}</SC.ArgumentValue>
+            <SC.ArgumentValueCode key={i}>{param.type}</SC.ArgumentValueCode>
           ))}
 
           <SC.ArgumentHeader>description</SC.ArgumentHeader>

@@ -99,12 +99,16 @@ export const ArgumentHeader = styled.div`
 `
 
 export const ArgumentValue = styled.div`
-  color: #fff;
   padding-right: 16px;
 
   ${InlineCode} {
     white-space: nowrap;
   }
+`
+
+export const ArgumentValueCode = styled(ArgumentValue)`
+  color: #fff;
+  font-family: var(--font-mono);
 `
 
 export const StyledMarkdown = styled(Markdown)`
