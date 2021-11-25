@@ -1,5 +1,5 @@
 import cx from "classnames"
-import React, { useEffect } from "react"
+import React from "react"
 import { useSearch } from "../../hooks/useSearch"
 import { useSidebar } from "../../hooks/useSidebar"
 import * as SC from "./styles"
@@ -22,7 +22,7 @@ const SearchInput = (): JSX.Element => {
 
   const isFocused = sidebarState.focus.type === "input"
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isFocused) {
       // I would rather use a ref, but GatsbyLink seems to be improperly typed
       // see https://github.com/gatsbyjs/gatsby/issues/16682

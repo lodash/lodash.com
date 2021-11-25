@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import { lighten } from "polished"
-import React, { Fragment } from "react"
+import React from "react"
 import styled from "styled-components"
 
 import Container from "../components/Container"
@@ -57,12 +57,12 @@ const IndexPage = (): JSX.Element => (
       <Title>Conventional builds</Title>
       <UL
         items={[
-          <Fragment>
+          <>
             <StyledLink to="/">Core build</StyledLink> <StyledLink to="/">~4kB gzipped</StyledLink>
-          </Fragment>,
-          <Fragment>
+          </>,
+          <>
             <StyledLink to="/">Full build</StyledLink> <StyledLink to="/">~24kB gzipped</StyledLink>
-          </Fragment>,
+          </>,
         ]}
       />
       <p>

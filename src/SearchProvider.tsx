@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 interface ISearchProviderProps {
   children: React.ReactNode
@@ -18,10 +18,10 @@ export interface ISearchContext {
 export const SearchContext = React.createContext<ISearchContext | null>(null)
 
 export function SearchProvider({ children }: ISearchProviderProps): JSX.Element {
-  const [input, setInput] = useState("")
+  const [input, setInput] = React.useState("")
 
   // this is short-lived, will eventually be moved to routing
-  const [version, setVersion] = useState("4.17.11")
+  const [version, setVersion] = React.useState("4.17.11")
 
   const update = (value: string): void => {
     setInput(value)

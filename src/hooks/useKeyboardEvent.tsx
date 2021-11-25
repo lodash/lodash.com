@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React from "react"
 
 type noop = () => void
 
@@ -10,7 +10,7 @@ export function useKeyboardEvent(
   // necessary because Gatsby statically built does not have access to window
   const windowGlobal = typeof window !== "undefined" && window
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       if (event.key === key) {
         event.preventDefault()

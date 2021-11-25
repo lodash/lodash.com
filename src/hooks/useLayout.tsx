@@ -1,8 +1,8 @@
-import { useContext } from "react"
+import React from "react"
 import { LayoutContext, ILayoutContext } from "../LayoutProvider"
 
 export function useLayout(): ILayoutContext {
-  const layoutContext = useContext(LayoutContext)
+  const layoutContext = React.useContext(LayoutContext)
 
   if (!layoutContext) {
     throw Error("Need context")

@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React from "react"
 import { Virtuoso } from "react-virtuoso"
 import { useLayout } from "../../hooks/useLayout"
 import { IMethod } from "../../types"
@@ -44,4 +44,4 @@ const AllMethods = (props: IAllMethodsProps): JSX.Element => {
   )
 }
 
-export default memo(AllMethods)
+export default React.memo(AllMethods)

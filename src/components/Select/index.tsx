@@ -1,5 +1,5 @@
 import cx from "classnames"
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 import { useOnClickOutside } from "../../hooks/useOnClickOutside"
 import * as SC from "./styles"
 
@@ -15,12 +15,12 @@ interface ISelectProps {
 }
 
 const Select = ({ options = [], onChange, ...props }: ISelectProps): JSX.Element => {
-  const ref = useRef<HTMLDivElement>(null)
-  const [selected, setSelected] = useState<string | null>(null)
-  const [open, setOpen] = useState<boolean>(false)
+  const ref = React.useRef<HTMLDivElement>(null)
+  const [selected, setSelected] = React.useState<string | null>(null)
+  const [open, setOpen] = React.useState<boolean>(false)
   useOnClickOutside(ref, () => setOpen(false))
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (options.length && props.value) {
       setSelected(props.value)
     }

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import React from "react"
 
 interface ILayoutProviderProps {
   children: React.ReactNode
@@ -20,10 +20,10 @@ export interface ILayoutContext {
 export const LayoutContext = React.createContext<ILayoutContext | null>(null)
 
 export function LayoutProvider({ children }: ILayoutProviderProps): JSX.Element {
-  const [type, setType] = useState<ELayoutType>("regular")
-  const [scrolled, setScrolled] = useState(false)
+  const [type, setType] = React.useState<ELayoutType>("regular")
+  const [scrolled, setScrolled] = React.useState(false)
 
-  const memoizedValue = useMemo(() => {
+  const memoizedValue = React.useMemo(() => {
     return {
       state: {
         layoutType: type,

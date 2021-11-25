@@ -1,5 +1,5 @@
 import { navigate } from "gatsby"
-import React, { memo } from "react"
+import React from "react"
 import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
@@ -21,4 +21,4 @@ const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
   )
 }
 
-export default memo(SingleMethod)
+export default React.memo(SingleMethod)

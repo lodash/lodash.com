@@ -2,7 +2,7 @@ import useWindowScrollPosition from "@rehooks/window-scroll-position"
 import useScrollbarSize from "react-scrollbar-size"
 import cx from "classnames"
 import { Link } from "gatsby"
-import React, { memo } from "react"
+import React from "react"
 import Select from "../Select"
 import * as SC from "./styles"
 import { useSearch } from "../../hooks/useSearch"
@@ -41,7 +41,7 @@ const Header = ({ isScrolled, style }: IHeaderProps): JSX.Element => {
 }
 
 // to avoid excessive rerenders, Header is wrapped into React.memo
-const MemodHeader: React.MemoExoticComponent<typeof Header> = memo(Header)
+const MemodHeader: React.MemoExoticComponent<typeof Header> = React.memo(Header)
 
 const HeaderWrapper = (): JSX.Element => {
   const { state: layoutState } = useLayout()

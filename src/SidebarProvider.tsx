@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react"
+import React from "react"
 import { useKeyboardEvent } from "./hooks/useKeyboardEvent"
 import { IGroup, IMethodNode } from "./types"
 import { filterGroups } from "./utils"
@@ -52,15 +52,15 @@ export function SidebarProvider({
   searchInput,
   version,
 }: ISidebarProviderProps): JSX.Element {
-  const [focus, setFocus] = useState<Focus>({
+  const [focus, setFocus] = React.useState<Focus>({
     type: "nothing",
   })
 
-  const filteredGroups = useMemo<IGroup[]>(() => {
+  const filteredGroups = React.useMemo<IGroup[]>(() => {
     return filterGroups(initialGroups, searchInput, version)
   }, [JSON.stringify(initialGroups), searchInput, version])
 
-  const flattenedMethods = useMemo<IMethodNode[]>(() => {
+  const flattenedMethods = React.useMemo<IMethodNode[]>(() => {
     return filteredGroups.flatMap((group) => group.edges.map((edge) => edge.node))
   }, [JSON.stringify(filteredGroups), version])
 
@@ -108,7 +108,7 @@ export function SidebarProvider({
     setFocus({ type: "method", methodId })
   }
 
-  const memoizedValue = useMemo(() => {
+  const memoizedValue = React.useMemo(() => {
     return {
       state: {
         focus,

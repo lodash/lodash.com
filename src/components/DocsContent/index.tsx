@@ -1,5 +1,5 @@
 import { PageProps } from "gatsby"
-import React, { memo, useEffect, useMemo } from "react"
+import React from "react"
 import { useLayout } from "../../hooks/useLayout"
 import { IMethod } from "../../types"
 import SingleMethod from "./single"
@@ -20,12 +20,12 @@ const DocsContent = (props: IDocsContentProps): JSX.Element => {
   const { actions: layoutActions } = useLayout()
   const currentMethod = methodFromPath(props.location)
 
-  useEffect(() => {
+  React.useEffect(() => {
     layoutActions.setLayoutType(currentMethod ? "regular" : "virtual")
   }, [currentMethod])
 
   // TODO: support method non-found for current version
-  const method = useMemo(() => {
+  const method = React.useMemo(() => {
     return props.methods.find(({ node: m }) => m.name === currentMethod) as IMethod
   }, [currentMethod, props.methods])
 
@@ -38,4 +38,4 @@ const DocsContent = (props: IDocsContentProps): JSX.Element => {
   )
 }
 
-export default memo(DocsContent)
+export default React.memo(DocsContent)

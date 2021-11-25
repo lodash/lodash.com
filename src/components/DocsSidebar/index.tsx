@@ -1,5 +1,5 @@
 import cx from "classnames"
-import React, { memo, useState, useRef, useEffect } from "react"
+import React from "react"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { useSidebar } from "../../hooks/useSidebar"
@@ -7,7 +7,7 @@ import { IGroup, IMethodNode } from "../../types"
 import SearchInput from "../SearchInput"
 import * as SC from "./styles"
 
-const MethodLink = memo(
+const MethodLink = React.memo(
   ({
     method,
     setCurrentFocus,
@@ -16,12 +16,12 @@ const MethodLink = memo(
     setCurrentFocus: (methodId: string) => void
   }): JSX.Element => {
     const { state: sidebarState } = useSidebar()
-    const linkRef = useRef<HTMLAnchorElement | undefined>(undefined)
+    const linkRef = React.useRef<HTMLAnchorElement | undefined>(undefined)
 
     const isFocused =
       sidebarState.focus.type === "method" && sidebarState.focus.methodId === method.id
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (isFocused) {
         linkRef.current?.focus()
       }
@@ -47,9 +47,9 @@ const MethodLink = memo(
   }
 )
 
-const MethodGroup = memo(
+const MethodGroup = React.memo(
   ({ group, setCurrentFocus }: { group: IGroup; setCurrentFocus: (methodId: string) => void }) => {
-    const [expanded, setExpanded] = useState(true)
+    const [expanded, setExpanded] = React.useState(true)
     const { edges: groupMethods } = group
 
     function toggleExpanded(): void {
@@ -97,4 +97,4 @@ const DocsSidebar = (): JSX.Element => {
   )
 }
 
-export default memo(DocsSidebar)
+export default React.memo(DocsSidebar)
