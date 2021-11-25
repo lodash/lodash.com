@@ -7,10 +7,12 @@ import DocsSidebar from "../components/DocsSidebar"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { useSearch } from "../hooks/useSearch"
+import { useData } from "../hooks/useData"
 import { LayoutProvider } from "../LayoutProvider"
 import { SearchProvider } from "../SearchProvider"
 import { SidebarProvider } from "../SidebarProvider"
-import { IAllLodashMethodQuery, IGroup, IMethod } from "../types"
+import { DataProvider } from "../DataProvider"
+import { IAllLodashMethodQuery } from "../types"
 
 // TODO: temporary polyfill currently preventing build
 import "../polyfills"
@@ -51,33 +53,25 @@ const ALL_LODASH_METHOD_QUERY = graphql`
   }
 `
 
-type IDocsPageProps = PageProps & IAllLodashMethodQuery
+type IDocsPageProps = PageProps
 
-interface IWrappedLayout extends IDocsPageProps {
-  groups: IGroup[]
-  methods: IMethod[]
-}
-
-const WrappedLayout = (props: IWrappedLayout): JSX.Element => {
+const WrappedLayout = (props: IDocsPageProps): JSX.Element => {
   const { state: searchState } = useSearch()
-  const { groups, methods, ...restProps } = props
-
-  // this is short-lived, will be moved in the GraphQL query
-  const filteredMethods = methods.filter((method) => method.node.version === searchState.version)
+  const { state: dataState } = useData()
 
   return (
     <Layout>
       <SEO title="Docs" />
       <Wrapper>
         <SidebarProvider
-          initialGroups={groups}
+          initialGroups={dataState.groups}
           searchInput={searchState.input}
           version={searchState.version}
         >
           <DocsSidebar />
         </SidebarProvider>
         <LayoutProvider>
-          <DocsContent {...restProps} methods={filteredMethods} />
+          <DocsContent {...props} methods={dataState.methodsFromVersion} />
         </LayoutProvider>
       </Wrapper>
     </Layout>
@@ -87,13 +81,13 @@ const WrappedLayout = (props: IWrappedLayout): JSX.Element => {
 const DocsPage = (props: IDocsPageProps): JSX.Element => {
   const data: IAllLodashMethodQuery = useStaticQuery(ALL_LODASH_METHOD_QUERY)
 
-  const groups = data.allLodashMethod.group
-  // TODO: optimize performance
-  const methods = groups.map((group) => group.edges).flat()
+  const methodGroups = data.allLodashMethod.group
 
   return (
     <SearchProvider>
-      <WrappedLayout {...props} groups={groups} methods={methods} />
+      <DataProvider groups={methodGroups}>
+        <WrappedLayout {...props} />
+      </DataProvider>
     </SearchProvider>
   )
 }
