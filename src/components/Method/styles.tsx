@@ -16,8 +16,9 @@ export const Name = styled.h2`
   align-items: center;
   background: #171f26;
   border-radius: 3px;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 31px;
+  font-family: var(--font-mono);
   font-weight: 400;
   color: #bfd0e0;
   padding: 16px 26px;
