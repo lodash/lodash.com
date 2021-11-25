@@ -1,6 +1,7 @@
 import { navigate, PageProps } from "gatsby"
-import React, { memo } from "react"
+import React, { memo, useEffect } from "react"
 import { Virtuoso } from "react-virtuoso"
+import { useLayout } from "../../hooks/useLayout"
 import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
@@ -17,7 +18,14 @@ const methodFromPath = (location: PageProps["location"]): string => {
 }
 
 const DocsContent = (props: IDocsContentProps): JSX.Element => {
+  const {
+    actions: { setLayoutType, setScrolled },
+  } = useLayout()
   const currentMethod = methodFromPath(props.location)
+
+  useEffect(() => {
+    setLayoutType(currentMethod ? "regular" : "virtual")
+  }, [currentMethod])
 
   const SingleMethod = ({ name }: { name: string }) => {
     const method = props.methods.find(({ node: m }) => m.name === name) as IMethod
@@ -26,23 +34,37 @@ const DocsContent = (props: IDocsContentProps): JSX.Element => {
 
   return (
     <SC.DocsContentWrapper>
-      <Header />
       <SC.Content>
         {currentMethod && (
-          <SC.SeeAll onClick={() => navigate("/docs")} type="primary">
-            ← See all
-          </SC.SeeAll>
+          <SC.ContentWrapper>
+            <Header />
+            <SC.SeeAll onClick={() => navigate("/docs")} type="primary">
+              ← See all
+            </SC.SeeAll>
+            <SingleMethod name={currentMethod} />
+          </SC.ContentWrapper>
         )}
 
-        {currentMethod ? (
-          <SingleMethod name={currentMethod} />
-        ) : (
+        {/* HACK: in order to replicate standard browser behavior */}
+        {/* the List element cannot receive top/bottom padding, because it uses padding itself to offset the content inside, so a fake header and footer are used,
+        furthermore, the Header component needs to be offset by the width of the scrollbar, for which there is no natural way to get */}
+        {!currentMethod && (
           <Virtuoso
             data={props.methods}
             components={{
+              Header: () => (
+                <>
+                  <Header />
+                  <div style={{ height: "124px" }} />
+                </>
+              ),
+              Footer: () => <div style={{ height: "24px" }} />,
               List: React.forwardRef((listProps, ref) => {
-                return <div {...listProps} ref={ref} />
+                return <SC.ContentWrapper {...listProps} ref={ref} />
               }),
+            }}
+            atTopStateChange={(isTop) => {
+              setScrolled(!isTop)
             }}
             itemContent={(index, item) => {
               const method = item.node

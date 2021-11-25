@@ -7,6 +7,7 @@ import DocsSidebar from "../components/DocsSidebar"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { useSearch } from "../hooks/useSearch"
+import { LayoutProvider } from "../LayoutProvider"
 import { SearchProvider } from "../SearchProvider"
 import { SidebarProvider } from "../SidebarProvider"
 import { IAllLodashMethodQuery, IGroup, IMethod } from "../types"
@@ -75,7 +76,9 @@ const WrappedLayout = (props: IWrappedLayout): JSX.Element => {
         >
           <DocsSidebar />
         </SidebarProvider>
-        <DocsContent {...restProps} methods={filteredMethods} />
+        <LayoutProvider>
+          <DocsContent {...restProps} methods={filteredMethods} />
+        </LayoutProvider>
       </Wrapper>
     </Layout>
   )

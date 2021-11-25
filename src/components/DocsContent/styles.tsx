@@ -13,6 +13,9 @@ export const DocsContentWrapper = styled.main`
 export const Content = styled.div`
   background: #1e2933;
   flex: 1 0 auto;
+`
+
+export const ContentWrapper = styled.div`
   padding: 124px 24px 24px;
 `
 
