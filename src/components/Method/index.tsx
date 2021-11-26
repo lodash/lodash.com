@@ -68,6 +68,7 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
           <SC.MetaLink
             href={`https://github.com/lodash/lodash/blob/4.17.11/lodash.js#L${method.lineNumber}`}
             target="_blank"
+            rel="noopener"
           >
             source
           </SC.MetaLink>
@@ -75,6 +76,7 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
             <SC.MetaLink
               href={`https://www.npmjs.com/package/lodash.${method.name.toLowerCase()}`}
               target="_blank"
+              rel="noopener"
             >
               npm package
             </SC.MetaLink>
