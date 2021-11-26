@@ -23,7 +23,12 @@ const Code = ({
   return (
     <SC.CodeWrapper {...restProps}>
       <MaybeContainer>
-        <Highlight children={trimmedCode} className={lang} />
+        <Highlight
+          /* key is necessary to force a rerender */
+          key={trimmedCode?.join("")}
+          children={trimmedCode}
+          className={lang}
+        />
       </MaybeContainer>
     </SC.CodeWrapper>
   )
