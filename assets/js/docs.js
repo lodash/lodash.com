@@ -113,6 +113,25 @@
     return string.replace(/^\s+|\s+$/g, '')
   }
 
+  /**
+   * credit: https://stackoverflow.com/a/13348618
+   */
+  function isChrome() {
+    const isChromium = window.chrome;
+    const winNav = window.navigator;
+    const vendorName = winNav.vendor;
+    const isOpera = typeof window.opr !== "undefined";
+    const isIEedge = winNav.userAgent.indexOf("Edge") > -1;
+    const isIOSChrome = winNav.userAgent.match("CriOS");
+    return (
+      isIOSChrome ||
+      (isChromium !== null &&
+        isChromium !== undefined &&
+        vendorName === "Google Inc." &&
+        isOpera === false &&
+        isIEedge === false)
+    );
+  }
   /*--------------------------------------------------------------------------*/
 
   var Menu = React.createClass({
@@ -454,6 +473,13 @@
         })
         parent.appendChild(button)
       })
+    }
+
+    if (location.hash && isChrome()) {
+      const hash = document.querySelector(location.hash);
+      if (hash) {
+        hash.scrollIntoView();
+      }
     }
   }
 
