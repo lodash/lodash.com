@@ -10,10 +10,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     {
-      resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/docs/*`] },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,

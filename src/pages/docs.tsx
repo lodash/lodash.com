@@ -71,7 +71,7 @@ const WrappedLayout = (props: IDocsPageProps): JSX.Element => {
           <DocsSidebar />
         </SidebarProvider>
         <LayoutProvider>
-          <DocsContent {...props} />
+          <DocsContent />
         </LayoutProvider>
       </Wrapper>
     </Layout>
