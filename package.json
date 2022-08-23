@@ -49,7 +49,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-highlight": "^0.14.0",
-    "react-markdown": "^7.1.0",
+    "react-markdown": "^8.0.3",
     "react-perfect-scrollbar": "^1.5.8",
     "react-runkit": "^0.9.0",
     "react-scrollbar-size": "^4.0.0",
