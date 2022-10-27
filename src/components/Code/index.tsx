@@ -1,10 +1,11 @@
 import React from "react"
-import Highlight from "react-highlight"
+import Highlight from "react-syntax-highlighter"
 import Container from "../Container"
+import lodashSyntaxHighlighting from "./lodash-syntax-highlighting"
 import * as SC from "./styles"
 
 interface ICodeProps {
-  children: React.ReactNode
+  children: string
   lang?: string
   withContainer?: boolean
 }
@@ -12,23 +13,17 @@ interface ICodeProps {
 const Code = ({
   children,
   withContainer = false,
-  lang = "js",
+  lang = "javascript",
   ...restProps
 }: ICodeProps): JSX.Element => {
   const MaybeContainer = withContainer ? Container : React.Fragment
-  const trimmedCode = React.Children.map(children, (child) => {
-    return typeof child === "string" ? child.trim() : child
-  })
 
   return (
     <SC.CodeWrapper {...restProps}>
       <MaybeContainer>
-        <Highlight
-          /* key is necessary to force a rerender */
-          key={trimmedCode?.join("")}
-          children={trimmedCode}
-          className={lang}
-        />
+        <Highlight language={lang} style={lodashSyntaxHighlighting}>
+          {children.trim()}
+        </Highlight>
       </MaybeContainer>
     </SC.CodeWrapper>
   )
