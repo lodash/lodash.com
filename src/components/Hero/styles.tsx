@@ -1,138 +1,137 @@
 import { Link } from "gatsby"
 import { darken } from "polished"
-import styled from "styled-components"
+import { styled } from "@stitches/react"
 import Logo from "../../images/lodash.svg"
 import { CodeWrapper } from "../Code/styles"
 import Container from "../Container"
 
-export const HeroWrapper = styled.header`
-  display: flex;
-  min-height: calc(100vh - 128px);
-  padding: 64px 0;
-  background: linear-gradient(135deg, rgba(44, 67, 109, 1) 0%, rgba(60, 69, 78, 0) 150%),
-    linear-gradient(180deg, rgba(34, 85, 144, 1) 0%, rgba(52, 146, 255, 1) 100%);
-  color: #fff;
-  margin-bottom: 64px;
-`
+export const HeroWrapper = styled("header", {
+  display: "flex",
+  minHeight: "calc(100vh - 128px)",
+  padding: "64px 0",
+  background: `linear-gradient(135deg, rgba(44, 67, 109, 1) 0%, rgba(60, 69, 78, 0) 150%),
+    linear-gradient(180deg, rgba(34, 85, 144, 1) 0%, rgba(52, 146, 255, 1) 100%)`,
+  color: "#fff",
+  marginBottom: "64px",
+})
 
-export const StyledContainer = styled(Container)`
-  justify-content: center;
-`
+export const StyledContainer = styled(Container, {
+  justifyContent: "center",
+})
 
-export const HeroInner = styled.div`
-  display: grid;
-  grid-template-columns: 125px auto;
-  grid-template-areas:
+export const HeroInner = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "125px auto",
+  gridTemplateAreas: `
     "logo        intro"
     "aside       buttons"
-    "usage-title usage";
-  row-gap: 32px;
-  column-gap: 32px;
-`
+    "usage-title usage"`,
+  rowGap: "32px",
+  columnGap: "32px",
+})
 
-export const Aside = styled.aside`
-  grid-area: aside;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-weight: 700;
+export const Aside = styled("aside", {
+  gridArea: "aside",
+  display: "flex",
+  justifyContent: "flex-end",
+  alignItems: "center",
+  fontWeight: 700,
 
-  @media screen and (max-width: 991px) {
-    justify-content: flex-start;
-  }
-`
+  "@media screen and (max-width: 991px)": {
+    justifyContent: "flex-start",
+  },
+})
 
-export const Content = styled.div`
-  grid-area: content;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 17px;
+export const Content = styled("div", {
+  gridArea: "content",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  fontSize: "17px",
 
-  @media screen and (max-width: 991px) {
-    margin-left: 0;
-  }
+  "@media screen and (max-width: 991px)": {
+    marginLeft: 0,
+  },
 
-  ${Aside} + & {
-    margin-left: 0;
-  }
+  [`${Aside} + &`]: {
+    marginLeft: 0,
+  },
 
-  & > :first-child {
-    margin-top: 0;
-  }
+  "& > :first-child": {
+    marginTop: 0,
+  },
 
-  & > :last-child {
-    margin-bottom: 0;
-  }
+  "& > :last-child": {
+    marginBottom: 0,
+  },
 
-  ${CodeWrapper} {
-    margin-top: 0;
-  }
-`
+  [`${CodeWrapper}`]: {
+    marginTop: 0,
+  },
+})
 
-export const LogoWrapper = styled(Aside)`
-  grid-area: logo;
-`
+export const LogoWrapper = styled(Aside, {
+  gridArea: "logo",
+})
 
-export const Intro = styled(Content)`
-  grid-area: intro;
-`
+export const Intro = styled(Content, {
+  gridArea: "intro",
+})
 
-export const Usage = styled(Content)`
-  grid-area: usage;
-`
+export const Usage = styled(Content, {
+  gridArea: "usage",
+})
 
-export const AsideTitleWrapper = styled(Aside)`
-  grid-area: usage-title;
-`
+export const AsideTitleWrapper = styled(Aside, {
+  gridArea: "usage-title",
+})
 
-export const AsideTitle = styled.h3`
-  font-size: 24px;
-  font-weight: 500;
-  align-self: flex-start;
-  margin-top: 0;
-`
+export const AsideTitle = styled("h3", {
+  fontSize: "24px",
+  fontWeight: 500,
+  alignSelf: "flex-start",
+  marginTop: 0,
+})
 
-export const Title = styled.h1`
-  font-size: 28px;
-  font-weight: 500;
-  margin: 0;
+export const Title = styled("h1", {
+  fontSize: "28px",
+  fontWeight: 500,
+  margin: 0,
 
-  small {
-    margin-top: 8px;
-    font-size: 20px;
-    color: #b6c7d9;
-    display: block;
-    font-weight: 400;
-  }
-`
+  small: {
+    marginTop: "8px",
+    fontSize: "20px",
+    color: "#b6c7d9",
+    display: "block",
+    fontWeight: 400,
+  },
+})
 
-export const StyledLogo = styled(Logo)`
-  width: 125px;
-`
+export const StyledLogo = styled(Logo, {
+  width: "125px",
+})
 
-export const Buttons = styled(Content)`
-  grid-area: buttons;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-`
+export const Buttons = styled(Content, {
+  gridArea: "buttons",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "flex-start",
+})
 
-export const StyledLink = styled(Link)`
-  color: #fff;
-  border-bottom: 1px solid #75b5ff;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color 0.3s;
+export const StyledLink = styled(Link, {
+  color: "#fff",
+  borderBottom: "1px solid #75b5ff",
+  textDecoration: "none",
+  whiteSpace: "nowrap",
+  transition: "color 0.3s",
 
-  &:hover,
-  &:focus {
-    color: ${darken(0.12, "#ceddf7")};
-    transition: none;
-  }
-`
+  "&:hover, &:focus": {
+    color: darken(0.12, "#ceddf7"),
+    transition: "none",
+  },
+})
 
-export const Info = styled.p`
-  color: #ceddf7;
-  font-size: 15px;
-`
+export const Info = styled("p", {
+  color: "#ceddf7",
+  fontSize: "15px",
+})

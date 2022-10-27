@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery, PageProps } from "gatsby"
 import React from "react"
-import styled from "styled-components"
+import { styled } from "@stitches/react"
 
 import DocsContent from "../components/DocsContent"
 import DocsSidebar from "../components/DocsSidebar"
@@ -17,10 +17,10 @@ import { IAllLodashMethodQuery } from "../types"
 // TODO: temporary polyfill currently preventing build
 import "../polyfills"
 
-const Wrapper = styled.div`
-  display: flex;
-  min-height: 100vh;
-`
+const Wrapper = styled("div", {
+  display: "flex",
+  minHeight: "100vh",
+})
 
 const ALL_LODASH_METHOD_QUERY = graphql`
   query {

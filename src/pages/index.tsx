@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import { lighten } from "polished"
 import React from "react"
-import styled from "styled-components"
+import { styled } from "@stitches/react"
 
 import Container from "../components/Container"
 import Footer from "../components/Footer"
@@ -10,28 +10,27 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import UL from "../components/UL"
 
-const Title = styled.h2`
-  font-size: 24px;
-  font-weight: 500;
-`
+const Title = styled("h2", {
+  fontSize: "24px",
+  fontWeight: 500,
+})
 
-const Subtitle = styled.h3`
-  font-size: 17px;
-  font-weight: 500;
-`
+const Subtitle = styled("h3", {
+  fontSize: "17px",
+  fontWeight: 500,
+})
 
-const StyledLink = styled(Link)`
-  color: #75b5ff;
-  text-decoration: none;
-  border-bottom: 1px solid;
-  transition: color 0.3s;
+const StyledLink = styled(Link, {
+  color: "#75b5ff",
+  textDecoration: "none",
+  borderBottom: "1px solid",
+  transition: "color 0.3s",
 
-  &:hover,
-  &:focus {
-    color: ${lighten(0.12, "#75b5ff")};
-    transition: none;
-  }
-`
+  "&:hover, &:focus": {
+    color: lighten(0.12, "#75b5ff"),
+    transition: "none",
+  },
+})
 
 const IndexPage = (): JSX.Element => (
   <Layout>

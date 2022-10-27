@@ -42,7 +42,6 @@ module.exports = {
     `gatsby-plugin-react-svg`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-styled-components`,
     `gatsby-plugin-polished`,
     {
       resolve: `gatsby-plugin-manifest`,
