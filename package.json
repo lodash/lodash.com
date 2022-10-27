@@ -41,7 +41,7 @@
     "gatsby-plugin-sharp": "^4.24.0",
     "gatsby-plugin-sitemap": "^5.24.0",
     "gatsby-source-filesystem": "^4.24.0",
-    "gatsby-transformer-sharp": "^4.21.0",
+    "gatsby-transformer-sharp": "^4.24.0",
     "polished": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
