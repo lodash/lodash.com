@@ -1,4 +1,3 @@
-import useWindowScrollPosition from "@rehooks/window-scroll-position"
 import useScrollbarSize from "react-scrollbar-size"
 import cx from "classnames"
 import { Link } from "gatsby"
@@ -7,6 +6,7 @@ import Select from "../Select"
 import * as SC from "./styles"
 import { useSearch } from "../../hooks/useSearch"
 import { useLayout } from "../../hooks/useLayout"
+import { useScrollPosition } from "../../hooks/useScrollPosition"
 
 interface IHeaderProps {
   isScrolled: boolean
@@ -47,17 +47,16 @@ const HeaderWrapper = (): JSX.Element => {
   const { state: layoutState } = useLayout()
   const { width: scrollbarWidth } = useScrollbarSize()
 
-  // HACK: since useWindowScrollPosition cannot compile on Node and is replaced,
+  // HACK: since useOnWindowScroll cannot compile on Node and is replaced,
   // we pass it a fallback dummy object
-  const scrollPosition =
-    typeof useWindowScrollPosition === "function" ? useWindowScrollPosition() : { x: 0, y: 0 }
+  const scrollPosition = typeof useScrollPosition === "function" ? useScrollPosition() : 0
 
   const isScrolledByLayout = React.useMemo(() => {
     if (layoutState.layoutType === "virtual") {
       return layoutState.isScrolled
     }
 
-    return scrollPosition.y !== 0
+    return scrollPosition !== 0
   }, [layoutState.isScrolled, scrollPosition])
 
   return (
