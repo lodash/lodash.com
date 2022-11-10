@@ -3,7 +3,7 @@ import React from "react"
 import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface ISingleMethodProps {
   method: IMethod["node"]
@@ -11,16 +11,16 @@ interface ISingleMethodProps {
 
 const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
   return (
-    <SC.ContentWrapper>
+    <S.ContentWrapper>
       <Header />
-      <SC.SeeAll
+      <S.SeeAll
         onClick={() => navigate(`/docs/${props.method.category.toLowerCase()}`)}
         type="primary"
       >
         ← See all
-      </SC.SeeAll>
+      </S.SeeAll>
       <Method method={props.method} isSingle={true} />
-    </SC.ContentWrapper>
+    </S.ContentWrapper>
   )
 }
 

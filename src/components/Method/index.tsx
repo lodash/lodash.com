@@ -5,7 +5,7 @@ import rehypeRaw from "rehype-raw"
 import { useScript } from "../../hooks/useScript"
 import { useSearch } from "../../hooks/useSearch"
 import { IMethodNode } from "../../types"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface IMethodProps {
   method: IMethodNode
@@ -60,76 +60,76 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
   }, [])
 
   return (
-    <SC.MethodWrapper {...restProps}>
-      <SC.Name>_.{method.call}</SC.Name>
+    <S.MethodWrapper {...restProps}>
+      <S.Name>_.{method.call}</S.Name>
 
-      <SC.Content>
-        <SC.MetaLinks>
-          <SC.MetaLink
+      <S.Content>
+        <S.MetaLinks>
+          <S.MetaLink
             href={`https://github.com/lodash/lodash/blob/4.17.11/lodash.js#L${method.lineNumber}`}
             target="_blank"
             rel="noopener"
           >
             source
-          </SC.MetaLink>
+          </S.MetaLink>
           {hasNPMPackage(method) && (
-            <SC.MetaLink
+            <S.MetaLink
               href={`https://www.npmjs.com/package/lodash.${method.name.toLowerCase()}`}
               target="_blank"
               rel="noopener"
             >
               npm package
-            </SC.MetaLink>
+            </S.MetaLink>
           )}
-        </SC.MetaLinks>
+        </S.MetaLinks>
 
         {/* TODO: possibly switch to a lighter solution? */}
-        <SC.StyledMarkdown rehypePlugins={[rehypeRaw]}>{method.desc}</SC.StyledMarkdown>
+        <S.StyledMarkdown rehypePlugins={[rehypeRaw]}>{method.desc}</S.StyledMarkdown>
 
-        <SC.Subtitle>Since</SC.Subtitle>
-        <SC.SubContent>{method.since}</SC.SubContent>
+        <S.Subtitle>Since</S.Subtitle>
+        <S.SubContent>{method.since}</S.SubContent>
 
-        <SC.Subtitle>Arguments</SC.Subtitle>
-        <SC.SubContent>
+        <S.Subtitle>Arguments</S.Subtitle>
+        <S.SubContent>
           {/* I would rather not have to do this */}
-          <SC.Arguments style={{ gridTemplateRows: `repeat(${method.params.length + 1}, 1fr)` }}>
-            <SC.ArgumentHeader>argument</SC.ArgumentHeader>
+          <S.Arguments style={{ gridTemplateRows: `repeat(${method.params.length + 1}, 1fr)` }}>
+            <S.ArgumentHeader>argument</S.ArgumentHeader>
             {method.params.map((param, i) => (
-              <SC.ArgumentValue key={i}>
-                <SC.InlineCode>{param.name}</SC.InlineCode>
-              </SC.ArgumentValue>
+              <S.ArgumentValue key={i}>
+                <S.InlineCode>{param.name}</S.InlineCode>
+              </S.ArgumentValue>
             ))}
 
-            <SC.ArgumentHeader>type</SC.ArgumentHeader>
+            <S.ArgumentHeader>type</S.ArgumentHeader>
             {method.params.map((param, i) => (
-              <SC.ArgumentValueCode key={i}>{param.type}</SC.ArgumentValueCode>
+              <S.ArgumentValueCode key={i}>{param.type}</S.ArgumentValueCode>
             ))}
 
-            <SC.ArgumentHeader>description</SC.ArgumentHeader>
+            <S.ArgumentHeader>description</S.ArgumentHeader>
             {method.params.map((param, i) => (
-              <SC.ArgumentValue key={i}>{param.desc}</SC.ArgumentValue>
+              <S.ArgumentValue key={i}>{param.desc}</S.ArgumentValue>
             ))}
-          </SC.Arguments>
-        </SC.SubContent>
+          </S.Arguments>
+        </S.SubContent>
 
         {/* TODO: reimplement? */}
-        <SC.Subtitle>Returns</SC.Subtitle>
-        <SC.SubContent>
-          <SC.InlineCode>(array)</SC.InlineCode>
-        </SC.SubContent>
+        <S.Subtitle>Returns</S.Subtitle>
+        <S.SubContent>
+          <S.InlineCode>(array)</S.InlineCode>
+        </S.SubContent>
 
-        <SC.Subtitle>Example</SC.Subtitle>
-        <SC.CodeWrapper>
+        <S.Subtitle>Example</S.Subtitle>
+        <S.CodeWrapper>
           {!repl && (
             <>
-              <SC.StyledCode>{formattedExample}</SC.StyledCode>
-              <SC.REPLButton onClick={enableRepl}>Try in REPL →</SC.REPLButton>
+              <S.StyledCode>{formattedExample}</S.StyledCode>
+              <S.REPLButton onClick={enableRepl}>Try in REPL →</S.REPLButton>
             </>
           )}
 
           {runkitScriptStatus === "ready" && repl && (
-            <SC.RunkitEmbedWrapper>
-              <SC.CloseREPLButton onClick={disableRepl}>Exit REPL</SC.CloseREPLButton>
+            <S.RunkitEmbedWrapper>
+              <S.CloseREPLButton onClick={disableRepl}>Exit REPL</S.CloseREPLButton>
               <RunkitEmbed
                 nodeVersion="16"
                 source={formattedExample}
@@ -139,11 +139,11 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
                 Object.observe = _.noop
               `}
               />
-            </SC.RunkitEmbedWrapper>
+            </S.RunkitEmbedWrapper>
           )}
-        </SC.CodeWrapper>
-      </SC.Content>
-    </SC.MethodWrapper>
+        </S.CodeWrapper>
+      </S.Content>
+    </S.MethodWrapper>
   )
 }
 

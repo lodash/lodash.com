@@ -1,5 +1,5 @@
 import React from "react"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface IDocsContentProps {
   children: React.ReactNode
@@ -7,9 +7,9 @@ interface IDocsContentProps {
 
 const DocsContent = (props: IDocsContentProps): JSX.Element => {
   return (
-    <SC.DocsContentWrapper>
-      <SC.Content>{props.children}</SC.Content>
-    </SC.DocsContentWrapper>
+    <S.DocsContentWrapper>
+      <S.Content>{props.children}</S.Content>
+    </S.DocsContentWrapper>
   )
 }
 

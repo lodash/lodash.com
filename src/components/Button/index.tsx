@@ -1,6 +1,6 @@
 import cx from "classnames"
 import React from "react"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 export interface IButtonProps {
   type?: "primary" | "secondary"
@@ -9,12 +9,12 @@ export interface IButtonProps {
 }
 
 const Button = ({ type = "secondary", children, ...restProps }: IButtonProps): JSX.Element => (
-  <SC.ButtonWrapper
+  <S.ButtonWrapper
     className={cx({ "type-primary": type === "primary", "type-secondary": type === "secondary" })}
     {...restProps}
   >
     {children}
-  </SC.ButtonWrapper>
+  </S.ButtonWrapper>
 )
 
 export default Button

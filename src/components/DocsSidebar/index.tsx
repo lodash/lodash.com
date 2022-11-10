@@ -5,7 +5,7 @@ import "react-perfect-scrollbar/dist/css/styles.css"
 import { useSidebar } from "../../hooks/useSidebar"
 import { IGroup, IMethodNode } from "../../types"
 import SearchInput from "../SearchInput"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 const MethodLink = React.memo(
   ({
@@ -29,7 +29,7 @@ const MethodLink = React.memo(
 
     return (
       <div key={method.id}>
-        <SC.StyledMethodLink
+        <S.StyledMethodLink
           innerRef={linkRef}
           // to={`/docs/${method.aliasOf || method.name}`}
           to={`/docs/${method.category.toLowerCase()}/${method.name}`}
@@ -41,7 +41,7 @@ const MethodLink = React.memo(
         >
           _.{method.name}
           {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
-        </SC.StyledMethodLink>
+        </S.StyledMethodLink>
       </div>
     )
   }
@@ -57,21 +57,21 @@ const MethodGroup = React.memo(
     }
 
     return (
-      <SC.MethodType key={group.fieldValue}>
-        <SC.MethodTypeTitle onClick={toggleExpanded}>
-          {expanded ? <SC.Min /> : <SC.Max />} {group.fieldValue}
-        </SC.MethodTypeTitle>
+      <S.MethodType key={group.fieldValue}>
+        <S.MethodTypeTitle onClick={toggleExpanded}>
+          {expanded ? <S.Min /> : <S.Max />} {group.fieldValue}
+        </S.MethodTypeTitle>
         {expanded && (
-          <SC.Methods>
+          <S.Methods>
             {groupMethods.map((methodNode) => {
               const { node: method } = methodNode
               return (
                 <MethodLink key={method.id} method={method} setCurrentFocus={setCurrentFocus} />
               )
             })}
-          </SC.Methods>
+          </S.Methods>
         )}
-      </SC.MethodType>
+      </S.MethodType>
     )
   }
 )
@@ -80,7 +80,7 @@ const DocsSidebar = (): JSX.Element => {
   const { actions: sidebarActions, state: sidebarState } = useSidebar()
 
   return (
-    <SC.Sidebar>
+    <S.Sidebar>
       <SearchInput />
       <PerfectScrollbar>
         {sidebarState.filteredGroups.map((group) => {
@@ -93,7 +93,7 @@ const DocsSidebar = (): JSX.Element => {
           )
         })}
       </PerfectScrollbar>
-    </SC.Sidebar>
+    </S.Sidebar>
   )
 }
 

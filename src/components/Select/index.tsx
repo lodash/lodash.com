@@ -1,7 +1,7 @@
 import cx from "classnames"
 import React from "react"
 import { useOnClickOutside } from "../../hooks/useOnClickOutside"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface IOptionItem {
   value: string
@@ -36,28 +36,28 @@ const Select = ({ options = [], onChange, ...props }: ISelectProps): JSX.Element
   }
 
   return (
-    <SC.SelectWrapper {...props} ref={ref}>
-      <SC.Selected onClick={() => setOpen(!open)}>
+    <S.SelectWrapper {...props} ref={ref}>
+      <S.Selected onClick={() => setOpen(!open)}>
         {selected}
-        <SC.Arrow />
-      </SC.Selected>
+        <S.Arrow />
+      </S.Selected>
       {options.length ? (
-        <SC.Options className={cx({ "is-open": open })}>
+        <S.Options className={cx({ "is-open": open })}>
           {options
             .filter(({ value }) => value !== selected)
             .map(({ value, text }) => (
-              <SC.Option
+              <S.Option
                 key={value}
                 onClick={() => {
                   selectOption(value)
                 }}
               >
                 {text}
-              </SC.Option>
+              </S.Option>
             ))}
-        </SC.Options>
+        </S.Options>
       ) : null}
-    </SC.SelectWrapper>
+    </S.SelectWrapper>
   )
 }
 

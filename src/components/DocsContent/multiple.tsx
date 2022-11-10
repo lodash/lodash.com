@@ -2,7 +2,7 @@ import React from "react"
 import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface IMultipleMethodProps {
   methods: IMethod[]
@@ -10,7 +10,7 @@ interface IMultipleMethodProps {
 
 const MultipleMethod = (props: IMultipleMethodProps): JSX.Element => {
   return (
-    <SC.ContentWrapper>
+    <S.ContentWrapper>
       <Header />
 
       {props.methods.map((m, index) => {
@@ -24,7 +24,7 @@ const MultipleMethod = (props: IMultipleMethodProps): JSX.Element => {
           />
         )
       })}
-    </SC.ContentWrapper>
+    </S.ContentWrapper>
   )
 }
 

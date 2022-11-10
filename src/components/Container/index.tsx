@@ -1,12 +1,12 @@
 import React from "react"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface IContainerProps {
   children: React.ReactNode
 }
 
 const Container = ({ children, ...restProps }: IContainerProps): JSX.Element => (
-  <SC.ContainerWrapper {...restProps}>{children}</SC.ContainerWrapper>
+  <S.ContainerWrapper {...restProps}>{children}</S.ContainerWrapper>
 )
 
 export default Container

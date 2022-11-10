@@ -2,7 +2,7 @@ import cx from "classnames"
 import React from "react"
 import { useSearch } from "../../hooks/useSearch"
 import { useSidebar } from "../../hooks/useSidebar"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 const SearchInput = (): JSX.Element => {
   const { state: searchState, actions: searchActions } = useSearch()
@@ -31,9 +31,9 @@ const SearchInput = (): JSX.Element => {
   }, [isFocused])
 
   return (
-    <SC.SearchInputWrapper className={cx({ "is-focused": isFocused })}>
-      <SC.StyledSearchIcon />
-      <SC.SearchInput
+    <S.SearchInputWrapper className={cx({ "is-focused": isFocused })}>
+      <S.StyledSearchIcon />
+      <S.SearchInput
         className="search-input"
         value={searchState.input}
         onChange={handleOnChange}
@@ -41,8 +41,8 @@ const SearchInput = (): JSX.Element => {
         onFocus={setFocus}
         onBlur={clearFocus}
       />
-      {!isFocused && <SC.FocusHint>/</SC.FocusHint>}
-    </SC.SearchInputWrapper>
+      {!isFocused && <S.FocusHint>/</S.FocusHint>}
+    </S.SearchInputWrapper>
   )
 }
 

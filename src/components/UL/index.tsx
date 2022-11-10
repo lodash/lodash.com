@@ -1,5 +1,5 @@
 import React from "react"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 type Item = React.ReactElement | string
 
@@ -13,16 +13,16 @@ const UL = ({ items = [], ...restProps }: IULProps): JSX.Element | null => {
   }
 
   return (
-    <SC.ULWrapper {...restProps}>
+    <S.ULWrapper {...restProps}>
       {items.map((item, index) => {
         return (
-          <SC.LI key={index}>
-            <SC.StyledChevronRight />
+          <S.LI key={index}>
+            <S.StyledChevronRight />
             {item}
-          </SC.LI>
+          </S.LI>
         )
       })}
-    </SC.ULWrapper>
+    </S.ULWrapper>
   )
 }
 

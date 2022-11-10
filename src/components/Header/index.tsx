@@ -3,7 +3,7 @@ import cx from "classnames"
 import { Link } from "gatsby"
 import React from "react"
 import Select from "../Select"
-import * as SC from "./styles"
+import * as S from "./styles"
 import { useSearch } from "../../hooks/useSearch"
 import { useLayout } from "../../hooks/useLayout"
 import { useScrollPosition } from "../../hooks/useScrollPosition"
@@ -17,12 +17,12 @@ const Header = ({ isScrolled, style }: IHeaderProps): JSX.Element => {
   const { state: searchState, actions: searchActions } = useSearch()
 
   return (
-    <SC.HeaderWrapper style={style} className={cx({ "is-scrolled": isScrolled })}>
-      <SC.LogoWrapper>
+    <S.HeaderWrapper style={style} className={cx({ "is-scrolled": isScrolled })}>
+      <S.LogoWrapper>
         <Link to="/">
-          <SC.StyledLogo />
+          <S.StyledLogo />
         </Link>
-      </SC.LogoWrapper>
+      </S.LogoWrapper>
 
       <Select
         options={[
@@ -36,7 +36,7 @@ const Header = ({ isScrolled, style }: IHeaderProps): JSX.Element => {
           searchActions.updateVersion(value)
         }}
       />
-    </SC.HeaderWrapper>
+    </S.HeaderWrapper>
   )
 }
 

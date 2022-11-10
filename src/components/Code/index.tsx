@@ -2,7 +2,7 @@ import React from "react"
 import Highlight from "react-syntax-highlighter"
 import Container from "../Container"
 import lodashSyntaxHighlighting from "./lodash-syntax-highlighting"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface ICodeProps {
   children: string
@@ -19,13 +19,13 @@ const Code = ({
   const MaybeContainer = withContainer ? Container : React.Fragment
 
   return (
-    <SC.CodeWrapper {...restProps}>
+    <S.CodeWrapper {...restProps}>
       <MaybeContainer>
         <Highlight language={lang} style={lodashSyntaxHighlighting}>
           {children.trim()}
         </Highlight>
       </MaybeContainer>
-    </SC.CodeWrapper>
+    </S.CodeWrapper>
   )
 }
 

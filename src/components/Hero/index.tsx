@@ -2,37 +2,37 @@ import { navigate } from "gatsby"
 import React from "react"
 import Button from "../Button"
 import Code from "../Code"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 const Hero = (): JSX.Element => (
-  <SC.HeroWrapper>
-    <SC.StyledContainer>
-      <SC.HeroInner>
-        <SC.LogoWrapper>
-          <SC.StyledLogo />
-        </SC.LogoWrapper>
+  <S.HeroWrapper>
+    <S.StyledContainer>
+      <S.HeroInner>
+        <S.LogoWrapper>
+          <S.StyledLogo />
+        </S.LogoWrapper>
 
-        <SC.Intro>
-          <SC.Title>
+        <S.Intro>
+          <S.Title>
             Lodash
             <small>
               A modern JavaScript utility library delivering modularity, performance & extras.
             </small>
-          </SC.Title>
-        </SC.Intro>
+          </S.Title>
+        </S.Intro>
 
-        <SC.Buttons>
+        <S.Buttons>
           <Button type="primary" onClick={() => navigate("/docs")}>
             Documentation
           </Button>
           <Button type="secondary">FP Guide</Button>
-        </SC.Buttons>
+        </S.Buttons>
 
-        <SC.AsideTitleWrapper>
-          <SC.AsideTitle>Usage</SC.AsideTitle>
-        </SC.AsideTitleWrapper>
+        <S.AsideTitleWrapper>
+          <S.AsideTitle>Usage</S.AsideTitle>
+        </S.AsideTitleWrapper>
 
-        <SC.Usage>
+        <S.Usage>
           <Code withContainer lang="bash">{`
 $ npm i lodash
 # or
@@ -56,16 +56,16 @@ const at = require('lodash/at');
 const curryN = require('lodash/fp/curryN');
 `}</Code>
 
-          <SC.Info>
-            Also available through <SC.StyledLink to="/">CDN copies</SC.StyledLink>
+          <S.Info>
+            Also available through <S.StyledLink to="/">CDN copies</S.StyledLink>
             <br />
-            Lodash is released under the <SC.StyledLink to="/">MIT license</SC.StyledLink> &
-            supports modern environments.
-          </SC.Info>
-        </SC.Usage>
-      </SC.HeroInner>
-    </SC.StyledContainer>
-  </SC.HeroWrapper>
+            Lodash is released under the <S.StyledLink to="/">MIT license</S.StyledLink> & supports
+            modern environments.
+          </S.Info>
+        </S.Usage>
+      </S.HeroInner>
+    </S.StyledContainer>
+  </S.HeroWrapper>
 )
 
 export default Hero

@@ -5,7 +5,7 @@ import { IMethod } from "../../types"
 import Header from "../Header"
 import Method from "../Method"
 import Spacer from "../Spacer"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 interface IAllMethodsProps {
   methods: IMethod[]
@@ -29,7 +29,7 @@ const AllMethods = (props: IAllMethodsProps): JSX.Element => {
         ),
         Footer: () => <Spacer height={124} />,
         List: React.forwardRef((listProps, ref) => {
-          return <SC.ContentWrapper {...listProps} ref={ref} />
+          return <S.ContentWrapper {...listProps} ref={ref} />
         }),
       }}
       atTopStateChange={(isTop) => {

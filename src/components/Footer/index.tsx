@@ -1,19 +1,19 @@
 import React from "react"
 import Container from "../Container"
-import * as SC from "./styles"
+import * as S from "./styles"
 
 const Footer = (): JSX.Element => (
-  <SC.FooterWrapper>
+  <S.FooterWrapper>
     <Container>
       <p>
-        Site made with ❤️ by <SC.StyledLink to="/">@veksenn</SC.StyledLink> &{" "}
-        <SC.StyledLink to="/">@zthall</SC.StyledLink>.
+        Site made with ❤️ by <S.StyledLink to="/">@veksenn</S.StyledLink> &{" "}
+        <S.StyledLink to="/">@zthall</S.StyledLink>.
         <br />
-        Maintained by the <SC.StyledLink to="/">core team</SC.StyledLink> with help from{" "}
-        <SC.StyledLink to="/">our contributors</SC.StyledLink>.
+        Maintained by the <S.StyledLink to="/">core team</S.StyledLink> with help from{" "}
+        <S.StyledLink to="/">our contributors</S.StyledLink>.
       </p>
     </Container>
-  </SC.FooterWrapper>
+  </S.FooterWrapper>
 )
 
 export default Footer
