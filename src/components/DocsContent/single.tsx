@@ -6,7 +6,7 @@ import Method from "../Method"
 import * as SC from "./styles"
 
 interface ISingleMethodProps {
-  method: IMethod
+  method: IMethod["node"]
 }
 
 const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
@@ -16,7 +16,7 @@ const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
       <SC.SeeAll onClick={() => navigate("/docs")} type="primary">
         ← See all
       </SC.SeeAll>
-      <Method method={props.method.node} isSingle={true} />
+      <Method method={props.method} isSingle={true} />
     </SC.ContentWrapper>
   )
 }

@@ -1,14 +1,12 @@
 import { graphql } from "gatsby"
 import React from "react"
+import SingleMethod from "../components/DocsContent/single"
+import { IMethod } from "../types"
 
 const MethodPage = (props: any) => {
-  console.log(props)
+  const method = props.data.lodashMethod as IMethod["node"]
 
-  return (
-    <>
-      page for <b>{props.data.lodashMethod.name}</b> method
-    </>
-  )
+  return <SingleMethod method={method} />
 }
 
 export default MethodPage
