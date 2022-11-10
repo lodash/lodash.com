@@ -80,7 +80,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Create pages for each category.
   const methodCategoryPageTemplate = path.resolve(`src/templates/method-category-page.tsx`)
   const categories = uniq(allMethods.map((method) => method.node.category))
-  console.log(categories)
   categories.forEach((category) => {
     createPage({
       path: `/docs/${category.toLowerCase()}`,
