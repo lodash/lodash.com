@@ -1,21 +1,12 @@
 import { graphql } from "gatsby"
 import React from "react"
-import Method from "../components/Method"
+import MultipleMethod from "../components/DocsContent/multiple"
 import { IMethod } from "../types"
 
 const MethodCategoryPage = (props: any) => {
-  console.log(props.data.allLodashMethod.edges)
-
   const methods = props.data.allLodashMethod.edges as IMethod[]
 
-  return (
-    <>
-      page for <b>xx</b> category
-      {methods.map((method) => (
-        <Method method={method.node} isSingle={false} />
-      ))}
-    </>
-  )
+  return <MultipleMethod methods={methods} />
 }
 
 export default MethodCategoryPage

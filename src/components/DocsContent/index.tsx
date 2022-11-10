@@ -1,17 +1,14 @@
 import React from "react"
-import { useData } from "../../hooks/useData"
-import AllMethods from "./all"
 import * as SC from "./styles"
 
-const DocsContent = (): JSX.Element => {
-  const { state: dataState } = useData()
-  const methods = dataState.methodsFromVersion
+interface IDocsContentProps {
+  children: React.ReactNode
+}
 
+const DocsContent = (props: IDocsContentProps): JSX.Element => {
   return (
     <SC.DocsContentWrapper>
-      <SC.Content>
-        <AllMethods methods={methods} />
-      </SC.Content>
+      <SC.Content>{props.children}</SC.Content>
     </SC.DocsContentWrapper>
   )
 }

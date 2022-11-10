@@ -88,6 +88,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       // In your blog post template's graphql query, you can use pagePath
       // as a GraphQL variable to query for data from the markdown file.
       context: {
+        layout: "docs",
         categoryName: category,
       },
     })
@@ -109,6 +110,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       // In your blog post template's graphql query, you can use pagePath
       // as a GraphQL variable to query for data from the markdown file.
       context: {
+        layout: "docs",
         methodName,
       },
     })

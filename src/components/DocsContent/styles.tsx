@@ -8,6 +8,7 @@ export const DocsContentWrapper = styled("main", {
   flexDirection: "column",
   flex: "1 1 auto",
   marginLeft: "320px",
+  width: "calc(100% - 320px)",
 })
 
 export const Content = styled("div", {
