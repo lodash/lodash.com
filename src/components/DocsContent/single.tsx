@@ -13,7 +13,10 @@ const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
   return (
     <SC.ContentWrapper>
       <Header />
-      <SC.SeeAll onClick={() => navigate("/docs")} type="primary">
+      <SC.SeeAll
+        onClick={() => navigate(`/docs/${props.method.category.toLowerCase()}`)}
+        type="primary"
+      >
         ← See all
       </SC.SeeAll>
       <Method method={props.method} isSingle={true} />

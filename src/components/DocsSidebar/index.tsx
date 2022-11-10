@@ -32,7 +32,7 @@ const MethodLink = React.memo(
         <SC.StyledMethodLink
           innerRef={linkRef}
           // to={`/docs/${method.aliasOf || method.name}`}
-          to={`/docs/${method.name}`}
+          to={`/docs/${method.category.toLowerCase()}/${method.name}`}
           activeClassName="active"
           className={cx({ "is-focused": isFocused })}
           onFocus={() => {
