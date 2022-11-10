@@ -7,6 +7,7 @@
 // You can delete this file if you're not using it
 
 const path = require("path")
+const uniq = require("lodash/uniq")
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
@@ -76,16 +77,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     component: path.resolve(`src/pages/docs.tsx`),
   })
 
+  // Create pages for each category.
+  const methodCategoryPageTemplate = path.resolve(`src/templates/method-category-page.tsx`)
+  const categories = uniq(allMethods.map((method) => method.node.category))
+  console.log(categories)
+  categories.forEach((category) => {
+    createPage({
+      path: `/docs/${category.toLowerCase()}`,
+      component: methodCategoryPageTemplate,
+      // In your blog post template's graphql query, you can use pagePath
+      // as a GraphQL variable to query for data from the markdown file.
+      context: {
+        categoryName: category,
+      },
+    })
+  })
+
   // Create pages for each markdown file.
   const methodPageTemplate = path.resolve(`src/templates/method-page.tsx`)
   allMethods.forEach((method) => {
     const methodName = method.node.name
+    const category = method.node.category
+
     if (!methodName) {
       return
     }
 
     createPage({
-      path: `/docs/${methodName}`,
+      path: `/docs/${category}/${methodName}`,
       component: methodPageTemplate,
       // In your blog post template's graphql query, you can use pagePath
       // as a GraphQL variable to query for data from the markdown file.
