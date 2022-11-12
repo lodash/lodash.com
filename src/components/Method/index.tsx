@@ -34,6 +34,8 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
   const { state: stateSearch } = useSearch()
   const [repl, setRepl] = React.useState(false)
 
+  const version = stateSearch.version
+
   const formattedExample = React.useMemo(() => {
     return formatExample(method.example)
   }, [method.example])
@@ -51,7 +53,7 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
     if (isSingle) {
       setRepl(true)
     } else {
-      navigate(`/docs/${method.category.toLowerCase()}/${method.name}?repl=true`)
+      navigate(`/docs/${version}/${method.category.toLowerCase()}/${method.name}?repl=true`)
     }
   }, [])
 
@@ -66,7 +68,7 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
       <S.Content>
         <S.MetaLinks>
           <S.MetaLink
-            href={`https://github.com/lodash/lodash/blob/4.17.11/lodash.js#L${method.lineNumber}`}
+            href={`https://github.com/lodash/lodash/blob/${version}/lodash.js#L${method.lineNumber}`}
             target="_blank"
             rel="noopener"
           >
