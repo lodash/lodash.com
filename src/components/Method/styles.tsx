@@ -1,6 +1,6 @@
 import { darken, lighten } from "polished"
 import Markdown from "react-markdown"
-import { styled, css } from "@stitches/react"
+import { styled, css, CSS } from "@stitches/react"
 import Button from "../Button"
 import Code from "../Code"
 
@@ -110,13 +110,15 @@ export const CloseREPLButton = styled(Button, {
   },
 })
 
-const inlineCode = css({
+const rawInlineCode: CSS = {
   borderRadius: "4px",
   display: "inline-block",
   background: "#171f26",
   color: "#74a9f2",
   padding: "6px 10px",
-})
+}
+
+const inlineCode = css(rawInlineCode)
 
 export const InlineCode = styled("code", inlineCode)
 
@@ -150,7 +152,7 @@ export const ArgumentValueCode = styled(ArgumentValue, {
 
 export const StyledMarkdown = styled(Markdown, {
   code: {
-    ...inlineCode,
+    ...rawInlineCode,
     display: "inline",
     padding: "5px 7px",
   },
