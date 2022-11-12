@@ -21,6 +21,12 @@ export const Sidebar = styled("aside", {
     backgroundColor: "#1f2a34 !important",
   },
 
+  ".scrollbar-container": {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  },
+
   ".scrollbar-container::before": {
     pointerEvents: "none",
     position: "fixed",
@@ -46,16 +52,16 @@ export const ScrollbarWrapper = styled("div", {
 })
 
 export const MethodType = styled("div", {
-  "& + &": {
-    marginTop: "32px",
-  },
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
 })
 
 export const MethodTypeTitle = styled("h4", {
   color: "#fff",
   fontSize: "16px",
   fontWeight: 400,
-  margin: "0 0 16px",
+  margin: "0",
   display: "flex",
   alignItems: "center",
   cursor: "pointer",
