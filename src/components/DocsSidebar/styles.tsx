@@ -3,10 +3,12 @@ import { darken } from "polished"
 import { styled } from "@stitches/react"
 
 export const Sidebar = styled("aside", {
+  display: "flex",
+  flexDirection: "column",
   background: "#293845",
   flex: "0 0 320px",
   width: "320px",
-  padding: "32px 16px",
+  padding: "32px 16px 0 16px",
   position: "fixed",
   height: "100vh",
   zIndex: 1,
@@ -25,16 +27,22 @@ export const Sidebar = styled("aside", {
     content: "",
     display: "block",
     left: 0,
-    bottom: 0,
+    bottom: "32px",
     width: "320px",
     height: "142px",
-    background: "linear-gradient(0deg, rgba(41, 56, 69, 1) 30%, rgba(41, 56, 69, 0) 100%)",
+    background: "linear-gradient(0deg, rgba(41, 56, 69, 1) 20%, rgba(41, 56, 69, 0) 100%)",
     transition: "opacity 1s",
   },
 
   "&:hover .scrollbar-container::before": {
     opacity: 0,
   },
+})
+
+export const ScrollbarWrapper = styled("div", {
+  flex: "1 1 calc(100% - 58px - 32px)",
+  height: "calc(100% - 58px - 32px)",
+  paddingBottom: "32px",
 })
 
 export const MethodType = styled("div", {

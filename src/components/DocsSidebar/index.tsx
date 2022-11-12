@@ -96,17 +96,19 @@ const DocsSidebar = (): JSX.Element => {
   return (
     <S.Sidebar>
       <SearchInput />
-      <PerfectScrollbar>
-        {sidebarState.filteredGroups.map((group) => {
-          return (
-            <MethodGroup
-              key={group.fieldValue}
-              group={group}
-              setCurrentFocus={sidebarActions.focusMethod}
-            />
-          )
-        })}
-      </PerfectScrollbar>
+      <S.ScrollbarWrapper>
+        <PerfectScrollbar>
+          {sidebarState.filteredGroups.map((group) => {
+            return (
+              <MethodGroup
+                key={group.fieldValue}
+                group={group}
+                setCurrentFocus={sidebarActions.focusMethod}
+              />
+            )
+          })}
+        </PerfectScrollbar>
+      </S.ScrollbarWrapper>
     </S.Sidebar>
   )
 }

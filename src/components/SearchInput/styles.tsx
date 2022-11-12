@@ -7,6 +7,7 @@ export const SearchInputWrapper = styled("div", {
   background: "#1f2a34",
   color: "#fff",
   fontSize: "17px",
+  lineHeight: "28px",
   padding: "12px 16px",
   cursor: "pointer",
   transition: "0.3s background",
