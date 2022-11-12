@@ -16,7 +16,7 @@ interface ISelectProps {
 
 const Select = ({ options = [], onChange, ...props }: ISelectProps): JSX.Element => {
   const ref = React.useRef<HTMLDivElement>(null)
-  const [selected, setSelected] = React.useState<string | null>(null)
+  const [selected, setSelected] = React.useState<string | null>(props.value)
   const [open, setOpen] = React.useState<boolean>(false)
   useOnClickOutside(ref, () => setOpen(false))
 
