@@ -60,12 +60,21 @@ const MethodLink = React.memo(
 )
 
 const MethodGroup = React.memo(
-  ({ group, setCurrentFocus }: { group: IGroup; setCurrentFocus: (methodId: string) => void }) => {
+  ({
+    group,
+    setCurrentFocus,
+    onCollapse,
+  }: {
+    group: IGroup
+    setCurrentFocus: (methodId: string) => void
+    onCollapse: () => void
+  }) => {
     const [expanded, setExpanded] = React.useState(true)
     const { edges: groupMethods } = group
 
     function toggleExpanded(): void {
       setExpanded((state) => !state)
+      onCollapse()
     }
 
     const categoryName = normalizeCategory(group.fieldValue)
@@ -91,18 +100,24 @@ const MethodGroup = React.memo(
 )
 
 const DocsSidebar = (): JSX.Element => {
+  const scrollbarRef = React.useRef<PerfectScrollbar>(null)
   const { actions: sidebarActions, state: sidebarState } = useSidebar()
+
+  const onCollapse = React.useCallback(() => {
+    scrollbarRef.current?.updateScroll()
+  }, [scrollbarRef.current?.updateScroll])
 
   return (
     <S.Sidebar>
       <SearchInput />
       <S.ScrollbarWrapper>
-        <PerfectScrollbar>
+        <PerfectScrollbar ref={scrollbarRef}>
           {sidebarState.filteredGroups.map((group) => {
             return (
               <MethodGroup
                 key={group.fieldValue}
                 group={group}
+                onCollapse={onCollapse}
                 setCurrentFocus={sidebarActions.focusMethod}
               />
             )
