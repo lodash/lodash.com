@@ -51,7 +51,7 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
     if (isSingle) {
       setRepl(true)
     } else {
-      navigate(`/docs/${method.name}?repl=true`)
+      navigate(`/docs/${method.category.toLowerCase()}/${method.name}?repl=true`)
     }
   }, [])
 
