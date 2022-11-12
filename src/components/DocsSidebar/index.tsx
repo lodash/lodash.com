@@ -28,12 +28,23 @@ const MethodLink = React.memo(
       }
     }, [isFocused])
 
+    // TODO: extract, very temporary
+    const latestVersion = "4.17.11"
+
+    const lowerCategoryName = method.category.toLowerCase()
+
+    const toUrl =
+      method.version === latestVersion
+        ? `/docs/${lowerCategoryName}/${method.name}`
+        : `/docs/${method.version}/${lowerCategoryName}/${method.name}`
+
     return (
       <div key={method.id}>
         <S.StyledMethodLink
           innerRef={linkRef}
           // to={`/docs/${method.aliasOf || method.name}`}
-          to={`/docs/${method.category.toLowerCase()}/${method.name}`}
+          // TODO: remove version if latest
+          to={toUrl}
           activeClassName="active"
           className={cx({ "is-focused": isFocused })}
           onFocus={() => {
