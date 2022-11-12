@@ -4,6 +4,7 @@ import PerfectScrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { useSidebar } from "../../hooks/useSidebar"
 import { IGroup, IMethodNode } from "../../types"
+import { normalizeCategory } from "../../utils"
 import SearchInput from "../SearchInput"
 import * as S from "./styles"
 
@@ -56,10 +57,12 @@ const MethodGroup = React.memo(
       setExpanded((state) => !state)
     }
 
+    const categoryName = normalizeCategory(group.fieldValue)
+
     return (
-      <S.MethodType key={group.fieldValue}>
+      <S.MethodType key={categoryName}>
         <S.MethodTypeTitle onClick={toggleExpanded}>
-          {expanded ? <S.Min /> : <S.Max />} {group.fieldValue}
+          {expanded ? <S.Min /> : <S.Max />} {categoryName}
         </S.MethodTypeTitle>
         {expanded && (
           <S.Methods>
