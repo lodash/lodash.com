@@ -30,3 +30,8 @@ export const SeeAll = styled(Button, {
     background: lighten(0.08, "#293845"),
   },
 })
+
+export const Heading = styled("h2", {
+  fontSize: "24px",
+  margin: "0 11px 24px",
+})

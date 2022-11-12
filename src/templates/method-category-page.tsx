@@ -6,7 +6,7 @@ import { IMethod } from "../types"
 const MethodCategoryPage = (props: any) => {
   const methods = props.data.allLodashMethod.edges as IMethod[]
 
-  return <MultipleMethod methods={methods} />
+  return <MultipleMethod category={props.pageContext.categoryName} methods={methods} />
 }
 
 export default MethodCategoryPage
