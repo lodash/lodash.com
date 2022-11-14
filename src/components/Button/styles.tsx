@@ -16,7 +16,8 @@ const tertiary = {
   foreground: "#fff",
 }
 
-export const ButtonWrapper = styled("div", {
+export const ButtonWrapper = styled("button", {
+  border: "none",
   display: "inline-flex",
   fontSize: "17px",
   padding: "16px 32px",
