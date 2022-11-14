@@ -1,20 +1,18 @@
-import cx from "classnames"
 import React from "react"
 import * as S from "./styles"
 
 export interface IButtonProps {
-  type?: "primary" | "secondary"
+  variant?: "primary" | "secondary" | "tertiary"
   onClick?: () => void
   children: React.ReactNode
 }
 
-const Button = ({ type = "secondary", children, ...restProps }: IButtonProps): JSX.Element => (
-  <S.ButtonWrapper
-    className={cx({ "type-primary": type === "primary", "type-secondary": type === "secondary" })}
-    {...restProps}
-  >
-    {children}
-  </S.ButtonWrapper>
-)
+const Button = ({ variant = "secondary", children, ...restProps }: IButtonProps): JSX.Element => {
+  return (
+    <S.ButtonWrapper variant={variant} {...restProps}>
+      {children}
+    </S.ButtonWrapper>
+  )
+}
 
 export default Button

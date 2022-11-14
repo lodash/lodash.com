@@ -22,10 +22,10 @@ const Hero = (): JSX.Element => (
         </S.Intro>
 
         <S.Buttons>
-          <Button type="primary" onClick={() => navigate("/docs")}>
+          <Button variant="primary" onClick={() => navigate("/docs")}>
             Documentation
           </Button>
-          <Button type="secondary">FP Guide</Button>
+          <Button variant="secondary">FP Guide</Button>
         </S.Buttons>
 
         <S.AsideTitleWrapper>

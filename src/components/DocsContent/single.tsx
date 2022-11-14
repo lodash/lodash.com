@@ -15,7 +15,7 @@ const SingleMethod = (props: ISingleMethodProps): JSX.Element => {
       <Header />
       <S.SeeAll
         onClick={() => navigate(`/docs/${props.method.category.toLowerCase()}`)}
-        type="primary"
+        variant="tertiary"
       >
         ← See all
       </S.SeeAll>

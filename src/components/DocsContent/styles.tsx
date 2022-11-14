@@ -1,6 +1,5 @@
 import { styled } from "@stitches/react"
 import Button from "../Button"
-import { lighten } from "polished"
 
 export const DocsContentWrapper = styled("main", {
   position: "relative",
@@ -22,13 +21,6 @@ export const ContentWrapper = styled("div", {
 
 export const SeeAll = styled(Button, {
   marginBottom: "24px",
-  background: "#293845",
-  boxShadow: "2px 2px 3px rgba(0, 0, 0, 0.15), 0px 6px 10px #171f26",
-  borderRadius: "3px",
-
-  "&:hover, &:focus": {
-    background: lighten(0.08, "#293845"),
-  },
 })
 
 export const Heading = styled("h2", {
