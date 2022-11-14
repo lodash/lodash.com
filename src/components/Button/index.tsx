@@ -1,9 +1,10 @@
 import React from "react"
+import Stitches from "@stitches/react"
 import * as S from "./styles"
 
-export interface IButtonProps {
-  variant?: "primary" | "secondary" | "tertiary" | "3d"
-  size?: "small" | "medium" | "large"
+type StyledButtonVariants = Stitches.VariantProps<typeof S.ButtonWrapper>
+
+export interface IButtonProps extends StyledButtonVariants {
   onClick?: () => void
   children: React.ReactNode
 }
