@@ -125,13 +125,17 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
           {!repl && (
             <>
               <S.StyledCode>{formattedExample}</S.StyledCode>
-              <S.REPLButton onClick={enableRepl}>Try in REPL →</S.REPLButton>
+              <S.REPLButton variant="3d" size="medium" onClick={enableRepl}>
+                Try in REPL →
+              </S.REPLButton>
             </>
           )}
 
           {runkitScriptStatus === "ready" && repl && (
             <S.RunkitEmbedWrapper>
-              <S.CloseREPLButton onClick={disableRepl}>Exit REPL</S.CloseREPLButton>
+              <S.CloseREPLButton size="small" onClick={disableRepl}>
+                Exit REPL
+              </S.CloseREPLButton>
               <RunkitEmbed
                 nodeVersion="16"
                 source={formattedExample}

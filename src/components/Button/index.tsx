@@ -2,14 +2,15 @@ import React from "react"
 import * as S from "./styles"
 
 export interface IButtonProps {
-  variant?: "primary" | "secondary" | "tertiary"
+  variant?: "primary" | "secondary" | "tertiary" | "3d"
+  size?: "small" | "medium" | "large"
   onClick?: () => void
   children: React.ReactNode
 }
 
-const Button = ({ variant = "secondary", children, ...restProps }: IButtonProps): JSX.Element => {
+const Button = ({ variant, size, children, ...restProps }: IButtonProps): JSX.Element => {
   return (
-    <S.ButtonWrapper variant={variant} {...restProps}>
+    <S.ButtonWrapper variant={variant} size={size} {...restProps}>
       {children}
     </S.ButtonWrapper>
   )

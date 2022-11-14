@@ -1,4 +1,4 @@
-import { darken, lighten } from "polished"
+import { lighten } from "polished"
 import Markdown from "react-markdown"
 import { styled, css, CSS } from "@stitches/react"
 import Button from "../Button"
@@ -81,18 +81,6 @@ export const REPLButton = styled(Button, {
   position: "absolute",
   bottom: "20px",
   right: "36px",
-  padding: "12px 21px",
-  background: "#293845",
-  boxShadow: "inset 0 -3px 0 #acbcca, 0px 6px 10px #171f26, 2px 2px 3px rgba(0, 0, 0, 0.15)",
-  borderRadius: "3px",
-  transition: "all 0.3s ease-in-out",
-
-  "&:hover": {
-    transform: "translateY(3px)",
-    background: darken(0.05, "#293845"),
-    color: "#fff",
-    boxShadow: "inset 0 0 0 #acbcca, 0px 6px 10px #171f26, 2px 2px 3px rgba(0, 0, 0, 0.15)",
-  },
 })
 
 export const CloseREPLButton = styled(Button, {
@@ -100,10 +88,8 @@ export const CloseREPLButton = styled(Button, {
   top: "-38px",
   right: "28px",
   background: "#171f26",
-  boxShadow: "none",
-  padding: "2px 7px",
+  color: "#a0afbd",
   fontWeight: 700,
-  fontSize: "14px",
 
   "&:hover": {
     color: "#fff",
