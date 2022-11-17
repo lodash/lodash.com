@@ -3,6 +3,7 @@ import { darken } from "polished"
 import { styled } from "@stitches/react"
 
 export const Sidebar = styled("aside", {
+  "--offset": 0,
   display: "flex",
   flexDirection: "column",
   background: "#293845",
@@ -12,6 +13,18 @@ export const Sidebar = styled("aside", {
   position: "fixed",
   height: "100vh",
   zIndex: 1,
+  transform: "translateX(var(--offset))",
+  transition: "transform 0.2s ease-in-out",
+
+  "@media screen and (max-width: 768px)": {
+    "--offset": "-100%",
+    zIndex: 100,
+    boxShadow: "0 0 20px rgba(0, 0, 0, 0.4)",
+
+    ".menu-open &": {
+      "--offset": 0,
+    },
+  },
 
   ".ps__rail-y": {
     backgroundColor: "transparent !important",

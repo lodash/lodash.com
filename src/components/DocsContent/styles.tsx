@@ -2,12 +2,18 @@ import { styled } from "@stitches/react"
 import Button from "../Button"
 
 export const DocsContentWrapper = styled("main", {
+  "--offset": "320px",
   position: "relative",
   display: "flex",
   flexDirection: "column",
   flex: "1 1 auto",
-  marginLeft: "320px",
-  width: "calc(100% - 320px)",
+  marginLeft: "var(--offset)",
+  width: "calc(100% - var(--offset))",
+  transition: "width 0.2s ease-in-out, margin-left 0.2s ease-in-out",
+
+  "@media screen and (max-width: 768px)": {
+    "--offset": 0,
+  },
 })
 
 export const Content = styled("div", {

@@ -8,10 +8,23 @@ import { useSearch } from "../../hooks/useSearch"
 import { useScrollPosition } from "../../hooks/useScrollPosition"
 
 const Header = (): JSX.Element => {
+  const [menuOpen, setMenuOpen] = React.useState(getMenuState())
   const { state: searchState, actions: searchActions } = useSearch()
   const scrollPosition = typeof useScrollPosition === "function" ? useScrollPosition() : 0
 
   const isScrolled = scrollPosition !== 0
+
+  React.useEffect(() => {
+    document.documentElement.classList.toggle("menu-open", menuOpen)
+  }, [menuOpen])
+
+  function getMenuState() {
+    return document.documentElement.classList.contains("menu-open")
+  }
+
+  function toggleSidebar() {
+    setMenuOpen((prevMenuOpen) => !prevMenuOpen)
+  }
 
   return (
     <S.HeaderWrapper className={cx({ "is-scrolled": isScrolled })}>
@@ -33,6 +46,8 @@ const Header = (): JSX.Element => {
           searchActions.updateVersion(value)
         }}
       />
+
+      <S.Burger onClick={toggleSidebar} open={menuOpen} />
     </S.HeaderWrapper>
   )
 }

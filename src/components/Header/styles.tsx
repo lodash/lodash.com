@@ -2,6 +2,7 @@ import { styled } from "@stitches/react"
 import Logo from "../../images/lodash.svg"
 
 export const HeaderWrapper = styled("header", {
+  "--offset": "320px",
   display: "flex",
   alignItems: "center",
   background: "#171f26",
@@ -9,9 +10,13 @@ export const HeaderWrapper = styled("header", {
   height: "100px",
   position: "fixed",
   top: 0,
-  left: "320px",
+  left: "var(--offset)",
   right: 0,
   zIndex: 10,
+
+  "@media screen and (max-width: 768px)": {
+    "--offset": 0,
+  },
 
   "&:after": {
     content: "",
@@ -41,4 +46,55 @@ export const LogoWrapper = styled("div", {
 
 export const StyledLogo = styled(Logo, {
   width: "58px",
+})
+
+export const Burger = styled("button", {
+  position: "relative",
+  display: "none",
+  background: "none",
+  border: "none",
+  padding: "10px",
+  width: "44px",
+  height: "44px",
+  marginLeft: "auto",
+  cursor: "pointer",
+
+  "@media screen and (max-width: 768px)": {
+    display: "block",
+  },
+
+  "&::before, &::after": {
+    position: "absolute",
+    content: "",
+    height: "2px",
+    background: "#fff",
+    left: "10px",
+    right: "10px",
+    transformOrigin: "center",
+    transition: "transform 0.20s ease-in-out",
+  },
+
+  "&::before": {
+    top: "15px",
+  },
+
+  "&::after": {
+    bottom: "15px",
+  },
+
+  variants: {
+    open: {
+      true: {
+        "&::before": {
+          transform: "rotate(45deg) translateX(8.5px)",
+          transformOrigin: "top 0",
+        },
+
+        "&::after": {
+          transform: "rotate(-45deg) translateX(8.5px)",
+          transformOrigin: "bottom 0",
+        },
+      },
+    },
+  },
 })
