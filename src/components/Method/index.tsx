@@ -7,6 +7,8 @@ import { useSearch } from "../../hooks/useSearch"
 import { IMethodNode } from "../../types"
 import * as S from "./styles"
 
+const isBrowser = typeof window !== "undefined"
+
 interface IMethodProps {
   method: IMethodNode
   isSingle: boolean
@@ -41,12 +43,14 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
   }, [method.example])
 
   React.useEffect(() => {
-    const qs = new URLSearchParams(window.location.search)
+    if (isBrowser) {
+      const qs = new URLSearchParams(window.location.search)
 
-    if (qs.get("repl")) {
-      setRepl(true)
+      if (qs.get("repl")) {
+        setRepl(true)
+      }
     }
-  }, [window.location.href])
+  }, [isBrowser])
 
   const enableRepl = React.useCallback(() => {
     // because of virtual scroll, we can't append the runkit embed, only allow when single
