@@ -1,0 +1,35 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "import/order": [
+      2,
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "never",
+        "pathGroups": [
+          {
+            "group": "external",
+            "pattern": "gatsby*",
+            "position": "before"
+          },
+          {
+            "group": "external",
+            "pattern": "react*",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react*", "gatsby*", "external, builtin"]
+      }
+    ]
+  }
+}
