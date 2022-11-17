@@ -52,7 +52,9 @@ const ALL_LODASH_METHOD_QUERY = graphql`
   }
 `
 
-type IDocsPageProps = PageProps
+interface IDocsPageProps extends Omit<PageProps, "children"> {
+  children: React.ReactNode
+}
 
 const WrappedLayout = (props: IDocsPageProps): JSX.Element => {
   const { state: searchState } = useSearch()
@@ -69,13 +71,13 @@ const WrappedLayout = (props: IDocsPageProps): JSX.Element => {
         >
           <DocsSidebar />
         </SidebarProvider>
-        <DocsContent />
+        <DocsContent>{props.children}</DocsContent>
       </Wrapper>
     </Layout>
   )
 }
 
-const DocsPage = (props: IDocsPageProps): JSX.Element => {
+const DocsPage = (props: PageProps): JSX.Element => {
   const data: IAllLodashMethodQuery = useStaticQuery(ALL_LODASH_METHOD_QUERY)
 
   const methodGroups = data.allLodashMethod.group
@@ -83,7 +85,7 @@ const DocsPage = (props: IDocsPageProps): JSX.Element => {
   return (
     <SearchProvider>
       <DataProvider groups={methodGroups}>
-        <WrappedLayout {...props} />
+        <WrappedLayout {...props}>Docs home</WrappedLayout>
       </DataProvider>
     </SearchProvider>
   )

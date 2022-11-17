@@ -11,9 +11,7 @@ interface IMultipleMethodProps {
 
 const MultipleMethod = (props: IMultipleMethodProps): JSX.Element => {
   return (
-    <S.ContentWrapper>
-      <Header />
-
+    <>
       <S.Heading>{props.category} methods</S.Heading>
 
       {props.methods.map((m, index) => {
@@ -27,7 +25,7 @@ const MultipleMethod = (props: IMultipleMethodProps): JSX.Element => {
           />
         )
       })}
-    </S.ContentWrapper>
+    </>
   )
 }
 

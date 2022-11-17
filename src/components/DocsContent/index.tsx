@@ -1,4 +1,5 @@
 import React from "react"
+import Header from "../Header"
 import * as S from "./styles"
 
 interface IDocsContentProps {
@@ -8,7 +9,12 @@ interface IDocsContentProps {
 const DocsContent = (props: IDocsContentProps): JSX.Element => {
   return (
     <S.DocsContentWrapper>
-      <S.Content>{props.children}</S.Content>
+      <S.Content>
+        <S.ContentWrapper>
+          <Header />
+          {props.children}
+        </S.ContentWrapper>
+      </S.Content>
     </S.DocsContentWrapper>
   )
 }
