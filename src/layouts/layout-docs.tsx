@@ -8,7 +8,6 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { useSearch } from "../hooks/useSearch"
 import { useData } from "../hooks/useData"
-import { LayoutProvider } from "../LayoutProvider"
 import { SearchProvider } from "../SearchProvider"
 import { SidebarProvider } from "../SidebarProvider"
 import { DataProvider } from "../DataProvider"
@@ -70,9 +69,7 @@ const WrappedLayout = (props: IDocsPageProps): JSX.Element => {
         >
           <DocsSidebar />
         </SidebarProvider>
-        <LayoutProvider>
-          <DocsContent>{props.children}</DocsContent>
-        </LayoutProvider>
+        <DocsContent>{props.children}</DocsContent>
       </Wrapper>
     </Layout>
   )

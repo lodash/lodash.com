@@ -1,23 +1,20 @@
-import useScrollbarSize from "react-scrollbar-size"
+// import useScrollbarSize from "react-scrollbar-size"
 import cx from "classnames"
 import { Link } from "gatsby"
 import React from "react"
 import Select from "../Select"
 import * as S from "./styles"
 import { useSearch } from "../../hooks/useSearch"
-import { useLayout } from "../../hooks/useLayout"
 import { useScrollPosition } from "../../hooks/useScrollPosition"
 
-interface IHeaderProps {
-  isScrolled: boolean
-  style?: React.CSSProperties
-}
-
-const Header = ({ isScrolled, style }: IHeaderProps): JSX.Element => {
+const Header = (): JSX.Element => {
   const { state: searchState, actions: searchActions } = useSearch()
+  const scrollPosition = typeof useScrollPosition === "function" ? useScrollPosition() : 0
+
+  const isScrolled = scrollPosition !== 0
 
   return (
-    <S.HeaderWrapper style={style} className={cx({ "is-scrolled": isScrolled })}>
+    <S.HeaderWrapper className={cx({ "is-scrolled": isScrolled })}>
       <S.LogoWrapper>
         <Link to="/">
           <S.StyledLogo />
@@ -40,31 +37,4 @@ const Header = ({ isScrolled, style }: IHeaderProps): JSX.Element => {
   )
 }
 
-// to avoid excessive rerenders, Header is wrapped into React.memo
-const MemodHeader: React.MemoExoticComponent<typeof Header> = React.memo(Header)
-
-const HeaderWrapper = (): JSX.Element => {
-  const { state: layoutState } = useLayout()
-  const { width: scrollbarWidth } = useScrollbarSize()
-
-  // HACK: since useOnWindowScroll cannot compile on Node and is replaced,
-  // we pass it a fallback dummy object
-  const scrollPosition = typeof useScrollPosition === "function" ? useScrollPosition() : 0
-
-  const isScrolledByLayout = React.useMemo(() => {
-    if (layoutState.layoutType === "virtual") {
-      return layoutState.isScrolled
-    }
-
-    return scrollPosition !== 0
-  }, [layoutState.isScrolled, scrollPosition])
-
-  return (
-    <MemodHeader
-      style={{ right: layoutState.layoutType === "virtual" ? scrollbarWidth : 0 }}
-      isScrolled={isScrolledByLayout}
-    />
-  )
-}
-
-export default HeaderWrapper
+export default React.memo(Header)
