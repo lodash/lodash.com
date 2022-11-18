@@ -15,10 +15,13 @@ const Header = (): JSX.Element => {
   const isScrolled = scrollPosition !== 0
 
   React.useEffect(() => {
-    document.documentElement.classList.toggle("menu-open", menuOpen)
+    if (document) {
+      document.documentElement.classList.toggle("menu-open", menuOpen)
+    }
   }, [menuOpen])
 
   function getMenuState() {
+    if (!document) return false
     return document.documentElement.classList.contains("menu-open")
   }
 
