@@ -7,6 +7,8 @@ import * as S from "./styles"
 import { useSearch } from "../../hooks/useSearch"
 import { useScrollPosition } from "../../hooks/useScrollPosition"
 
+const isBrowser = typeof window !== "undefined"
+
 const Header = (): JSX.Element => {
   const [menuOpen, setMenuOpen] = React.useState(getMenuState())
   const { state: searchState, actions: searchActions } = useSearch()
@@ -15,13 +17,13 @@ const Header = (): JSX.Element => {
   const isScrolled = scrollPosition !== 0
 
   React.useEffect(() => {
-    if (document) {
+    if (isBrowser) {
       document.documentElement.classList.toggle("menu-open", menuOpen)
     }
   }, [menuOpen])
 
   function getMenuState() {
-    if (!document) return false
+    if (!isBrowser) return false
     return document.documentElement.classList.contains("menu-open")
   }
 
