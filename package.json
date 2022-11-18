@@ -39,7 +39,7 @@
     "gatsby-plugin-polished": "^1.0.4",
     "gatsby-plugin-react-helmet": "^6.0.0",
     "gatsby-plugin-react-svg": "^3.3.0",
-    "gatsby-plugin-sharp": "^4.24.0",
+    "gatsby-plugin-sharp": "^5.0.0",
     "gatsby-plugin-sitemap": "^5.24.0",
     "gatsby-source-filesystem": "^4.24.0",
     "gatsby-transformer-sharp": "^4.24.0",
