@@ -32,7 +32,7 @@
     "classnames": "^2.3.2",
     "gatsby": "^5.2.0",
     "gatsby-image": "^3.11.0",
-    "gatsby-plugin-layout": "^4.0.0",
+    "gatsby-plugin-layout": "^4.2.0",
     "gatsby-plugin-manifest": "^5.0.0",
     "gatsby-plugin-mdx": "^5.0.0",
     "gatsby-plugin-offline": "^6.0.0",
