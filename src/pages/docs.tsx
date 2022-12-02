@@ -24,7 +24,7 @@ const Wrapper = styled("div", {
 const ALL_LODASH_METHOD_QUERY = graphql`
   query {
     allLodashMethod {
-      group(field: category) {
+      group(field: { category: SELECT }) {
         field
         fieldValue
         totalCount
