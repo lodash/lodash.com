@@ -9,6 +9,19 @@
 const path = require("path")
 const uniq = require("lodash/uniq")
 const uniqBy = require("lodash/uniqBy")
+const { getCssText } = require('./stitches.config');
+
+module.onBodyRender = ({ setHeadComponents }) => {
+  setHeadComponents([
+    `<style
+      id="stitches"
+      // rome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: ${getCssText()},
+      }}
+    />`,
+  ]);
+};
 
 // TODO: use from src/utils once gatsby-node.js is converted to TypeScript
 // duplicated for now

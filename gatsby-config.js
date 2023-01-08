@@ -7,6 +7,7 @@ module.exports = {
     author: `@jdalton`,
   },
   plugins: [
+    'gatsby-theme-stitches',
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     {
