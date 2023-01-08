@@ -34,7 +34,7 @@
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-layout": "^4.3.0",
     "gatsby-plugin-manifest": "^5.3.1",
-    "gatsby-plugin-mdx": "^5.2.0",
+    "gatsby-plugin-mdx": "^5.3.1",
     "gatsby-plugin-offline": "^6.2.0",
     "gatsby-plugin-polished": "^1.0.4",
     "gatsby-plugin-react-helmet": "^6.2.0",
