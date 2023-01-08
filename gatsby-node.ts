@@ -9,23 +9,10 @@
 const path = require("path")
 const uniq = require("lodash/uniq")
 const uniqBy = require("lodash/uniqBy")
-const { getCssText } = require('./stitches.config');
-
-module.onBodyRender = ({ setHeadComponents }) => {
-  setHeadComponents([
-    `<style
-      id="stitches"
-      // rome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-      dangerouslySetInnerHTML={{
-        __html: ${getCssText()},
-      }}
-    />`,
-  ]);
-};
 
 // TODO: use from src/utils once gatsby-node.js is converted to TypeScript
 // duplicated for now
-function normalizeCategory(category) {
+function normalizeCategory(category: string) {
   switch (category) {
     case "Arrays":
       return "Array"
@@ -100,7 +87,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const allMethods = result.data.allLodashMethod.group.map((group) => group.edges).flat()
+  const allMethods = result.data.allLodashMethod.group.flatMap((group) => group.edges)
   const allVersions = uniqBy(allMethods, "node.version").map((method) => method.node.version)
   const latestVersion = allVersions.sort().at(-1)
   const allMethodsFromLatest = allMethods.filter((method) => method.node.version === latestVersion)

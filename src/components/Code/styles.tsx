@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 
 export const CodeWrapper = styled("div", {
   margin: "32px 0",

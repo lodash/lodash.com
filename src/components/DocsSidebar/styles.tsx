@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import { darken } from "polished"
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 
 export const Sidebar = styled("aside", {
   "--offset": 0,

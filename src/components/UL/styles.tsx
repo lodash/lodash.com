@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 import ChevronRight from "../../images/right-chevron.svg"
 
 export const ULWrapper = styled("ul", {

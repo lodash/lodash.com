@@ -1,5 +1,5 @@
 import { darken, lighten } from "polished"
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 
 const primary = {
   background: "#3492ff",

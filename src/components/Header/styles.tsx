@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 import Logo from "../../images/lodash.svg"
 
 export const HeaderWrapper = styled("header", {

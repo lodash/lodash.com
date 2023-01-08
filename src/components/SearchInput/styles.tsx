@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 import SearchIcon from "../../images/search.svg"
 
 export const SearchInputWrapper = styled("div", {

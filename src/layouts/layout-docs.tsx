@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery, PageProps } from "gatsby"
 import React from "react"
-import { styled } from "@stitches/react"
+import { styled } from "../stitches.config"
 
 import DocsContent from "../components/DocsContent"
 import DocsSidebar from "../components/DocsSidebar"

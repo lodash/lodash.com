@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 import Button from "../Button"
 
 export const DocsContentWrapper = styled("main", {

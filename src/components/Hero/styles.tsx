@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import { darken } from "polished"
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 import Logo from "../../images/lodash.svg"
 import { CodeWrapper } from "../Code/styles"
 import Container from "../Container"

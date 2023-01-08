@@ -1,4 +1,4 @@
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 import Triangle from "../../images/triangle.svg"
 
 export const SelectWrapper = styled("div", {

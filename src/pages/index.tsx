@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import { lighten } from "polished"
 import React from "react"
-import { styled } from "@stitches/react"
+import { styled } from "../stitches.config"
 
 import Container from "../components/Container"
 import Footer from "../components/Footer"

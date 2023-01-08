@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import { lighten } from "polished"
-import { styled } from "@stitches/react"
+import { styled } from "../../stitches.config"
 
 export const FooterWrapper = styled("footer", {
   marginTop: "32px",
