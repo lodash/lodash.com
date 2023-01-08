@@ -6,12 +6,16 @@ import Container from "../Container"
 import lodashSyntaxHighlighting from "./lodash-syntax-highlighting"
 import * as S from "./styles"
 
-function formatByWidth(code, width) {
-  return prettier.format(code, {
-    parser: "babel",
-    printWidth: width,
-    plugins: [plugins],
-  })
+function formatByWidth(code: string, width: number) {
+  try {
+    return prettier.format(code, {
+      parser: "babel",
+      printWidth: width,
+      plugins: [plugins],
+    })
+  } catch (err) {
+    return code
+  }
 }
 
 interface ICodeProps {
