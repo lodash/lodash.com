@@ -1,7 +1,9 @@
-import { graphql, useStaticQuery, PageProps } from "gatsby"
+import { graphql, useStaticQuery, PageProps, Link } from "gatsby"
 import React from "react"
+import { lighten } from "polished"
 import { styled } from "@stitches/react"
 
+import Code from "../components/Code"
 import DocsContent from "../components/DocsContent"
 import DocsSidebar from "../components/DocsSidebar"
 import Layout from "../components/Layout"
@@ -20,6 +22,43 @@ const Wrapper = styled("div", {
   display: "flex",
   minHeight: "100vh",
 })
+
+const Title = styled("h2", {
+  fontSize: "24px",
+  fontWeight: 500,
+})
+
+const Subtitle = styled("h3", {
+  fontSize: "17px",
+  fontWeight: 500,
+})
+
+const StyledLink = styled(Link, {
+  color: "#75b5ff",
+  textDecoration: "none",
+  borderBottom: "1px solid",
+  transition: "color 0.3s",
+
+  "&:hover, &:focus": {
+    color: lighten(0.12, "#75b5ff"),
+    transition: "none",
+  },
+})
+
+const CodeWrapper = styled("div", {
+  margin: "0 -24px",
+})
+
+function trimLines(code: string): string {
+  return (
+    code
+      .split("\n")
+      .map((line) => line.trim())
+      // get rid of empty lines
+      .filter(Boolean)
+      .join("\n")
+  )
+}
 
 const ALL_LODASH_METHOD_QUERY = graphql`
   query {
@@ -85,7 +124,31 @@ const DocsPage = (props: PageProps): JSX.Element => {
   return (
     <SearchProvider>
       <DataProvider groups={methodGroups}>
-        <WrappedLayout {...props}>Docs home</WrappedLayout>
+        <WrappedLayout {...props}>
+          <Title>Getting started</Title>
+
+          <CodeWrapper>
+            <Code lang="bash" withContainer={true}>
+              {trimLines(`
+              npm install lodash
+              # or yarn
+              yarn add lodash
+            `)}
+            </Code>
+          </CodeWrapper>
+
+          <Subtitle>TypeScript</Subtitle>
+
+          <CodeWrapper>
+            <Code lang="bash" withContainer={true}>
+              {trimLines(`
+              npm install @types/lodash
+              # or yarn
+              yarn add @types/lodash
+            `)}
+            </Code>
+          </CodeWrapper>
+        </WrappedLayout>
       </DataProvider>
     </SearchProvider>
   )
