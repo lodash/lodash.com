@@ -30,7 +30,7 @@
     "@mdx-js/react": "^2.2.1",
     "@stitches/react": "^1.2.8",
     "classnames": "^2.3.2",
-    "gatsby": "^5.2.0",
+    "gatsby": "^5.3.3",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-layout": "^4.2.0",
     "gatsby-plugin-manifest": "^5.2.0",
