@@ -31,7 +31,7 @@ const MethodLink = React.memo(
     // TODO: extract, very temporary
     const latestVersion = "4.17.11"
 
-    const lowerCategoryName = method.category.toLowerCase()
+    const lowerCategoryName = normalizeCategory(method.category).toLowerCase()
 
     const toUrl =
       method.version === latestVersion

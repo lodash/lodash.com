@@ -102,10 +102,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // for example, latest version has "Array" category, but older versions have "Arrays"
   // some are even quite different, like "Chaining" vs "Seq"
   const methodCategoryPageTemplate = path.resolve(`src/templates/method-category-page.tsx`)
-  const categories = uniq(allMethodsFromLatest.map((method) => method.node.category))
+  const getNormalizedCategory = (method) => normalizeCategory(method.node.category)
+  const categories = uniq(allMethodsFromLatest.map(getNormalizedCategory))
   categories.forEach((category) => {
+    const path = `/docs/${category.toLowerCase()}`
+    console.log(`Creating page for category ${path}`)
     createPage({
-      path: `/docs/${category.toLowerCase()}`,
+      path,
       component: methodCategoryPageTemplate,
       // In your blog post template's graphql query, you can use pagePath
       // as a GraphQL variable to query for data from the markdown file.
@@ -122,14 +125,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const methodName = method.node.name
     const category = method.node.category
     const version = method.node.version
+    const normalizedCategory = normalizeCategory(category)
 
     if (!methodName) {
       return
     }
 
     if (version === latestVersion) {
+      const path = `/docs/${normalizedCategory.toLowerCase()}/${methodName}`
+      console.log(`Creating page for method ${path}`)
       createPage({
-        path: `/docs/${category.toLowerCase()}/${methodName}`,
+        path,
         component: methodPageTemplate,
         // In your blog post template's graphql query, you can use pagePath
         // as a GraphQL variable to query for data from the markdown file.
@@ -140,8 +146,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     }
 
+    const path = `/docs/${version}/${normalizedCategory.toLowerCase()}/${methodName}`
+    console.log(`Creating page for method ${path}`)
     createPage({
-      path: `/docs/${version}/${category.toLowerCase()}/${methodName}`,
+      path,
       component: methodPageTemplate,
       // In your blog post template's graphql query, you can use pagePath
       // as a GraphQL variable to query for data from the markdown file.
