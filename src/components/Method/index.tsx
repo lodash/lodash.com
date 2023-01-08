@@ -92,31 +92,39 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
         {/* TODO: possibly switch to a lighter solution? */}
         <S.StyledMarkdown rehypePlugins={[rehypeRaw]}>{method.desc}</S.StyledMarkdown>
 
-        <S.Subtitle>Since</S.Subtitle>
-        <S.SubContent>{method.since}</S.SubContent>
+        {method.since && (
+          <>
+            <S.Subtitle>Since</S.Subtitle>
+            <S.SubContent>{method.since}</S.SubContent>
+          </>
+        )}
 
-        <S.Subtitle>Arguments</S.Subtitle>
-        <S.SubContent>
-          {/* I would rather not have to do this */}
-          <S.Arguments style={{ gridTemplateRows: `repeat(${method.params.length + 1}, 1fr)` }}>
-            <S.ArgumentHeader>argument</S.ArgumentHeader>
-            {method.params.map((param, i) => (
-              <S.ArgumentValue key={i}>
-                <S.InlineCode>{param.name}</S.InlineCode>
-              </S.ArgumentValue>
-            ))}
+        {method.params.length > 0 && (
+          <>
+            <S.Subtitle>Arguments</S.Subtitle>
+            <S.SubContent>
+              {/* I would rather not have to do this */}
+              <S.Arguments style={{ gridTemplateRows: `repeat(${method.params.length + 1}, 1fr)` }}>
+                <S.ArgumentHeader>argument</S.ArgumentHeader>
+                {method.params.map((param, i) => (
+                  <S.ArgumentValue key={i}>
+                    <S.InlineCode>{param.name}</S.InlineCode>
+                  </S.ArgumentValue>
+                ))}
 
-            <S.ArgumentHeader>type</S.ArgumentHeader>
-            {method.params.map((param, i) => (
-              <S.ArgumentValueCode key={i}>{param.type}</S.ArgumentValueCode>
-            ))}
+                <S.ArgumentHeader>type</S.ArgumentHeader>
+                {method.params.map((param, i) => (
+                  <S.ArgumentValueCode key={i}>{param.type}</S.ArgumentValueCode>
+                ))}
 
-            <S.ArgumentHeader>description</S.ArgumentHeader>
-            {method.params.map((param, i) => (
-              <S.ArgumentValue key={i}>{param.desc}</S.ArgumentValue>
-            ))}
-          </S.Arguments>
-        </S.SubContent>
+                <S.ArgumentHeader>description</S.ArgumentHeader>
+                {method.params.map((param, i) => (
+                  <S.ArgumentValue key={i}>{param.desc}</S.ArgumentValue>
+                ))}
+              </S.Arguments>
+            </S.SubContent>
+          </>
+        )}
 
         {/* TODO: reimplement? */}
         <S.Subtitle>Returns</S.Subtitle>
@@ -124,34 +132,38 @@ const Method = ({ method, isSingle, ...restProps }: IMethodProps): JSX.Element =
           <S.InlineCode>(array)</S.InlineCode>
         </S.SubContent>
 
-        <S.Subtitle>Example</S.Subtitle>
-        <S.CodeWrapper>
-          {!repl && (
-            <>
-              <S.StyledCode>{formattedExample}</S.StyledCode>
-              <S.REPLButton variant="3d" size="medium" onClick={enableRepl}>
-                Try in REPL →
-              </S.REPLButton>
-            </>
-          )}
+        {method.example && (
+          <>
+            <S.Subtitle>Example</S.Subtitle>
+            <S.CodeWrapper>
+              {!repl && (
+                <>
+                  <S.StyledCode>{formattedExample}</S.StyledCode>
+                  <S.REPLButton variant="3d" size="medium" onClick={enableRepl}>
+                    Try in REPL →
+                  </S.REPLButton>
+                </>
+              )}
 
-          {runkitScriptStatus === "ready" && repl && (
-            <S.RunkitEmbedWrapper>
-              <S.CloseREPLButton size="small" onClick={disableRepl}>
-                Exit REPL
-              </S.CloseREPLButton>
-              <RunkitEmbed
-                nodeVersion="16"
-                source={formattedExample}
-                preamble={`
+              {runkitScriptStatus === "ready" && repl && (
+                <S.RunkitEmbedWrapper>
+                  <S.CloseREPLButton size="small" onClick={disableRepl}>
+                    Exit REPL
+                  </S.CloseREPLButton>
+                  <RunkitEmbed
+                    nodeVersion="16"
+                    source={formattedExample}
+                    preamble={`
                 var _ = require("lodash@${stateSearch.version}")
                 _.assign(global, require("lodash-doc-globals"))
                 Object.observe = _.noop
               `}
-              />
-            </S.RunkitEmbedWrapper>
-          )}
-        </S.CodeWrapper>
+                  />
+                </S.RunkitEmbedWrapper>
+              )}
+            </S.CodeWrapper>
+          </>
+        )}
       </S.Content>
     </S.MethodWrapper>
   )
