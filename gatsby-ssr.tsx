@@ -5,10 +5,11 @@
  */
 
 // You can delete this file if you're not using it
+import { GatsbySSR } from 'gatsby';
 import React from 'react'
 import { getCssText } from './src/stitches.config';
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHeadComponents }) => {
   setHeadComponents([
     <style
       id="stitches"

@@ -4,11 +4,11 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+import { GatsbyNode } from "gatsby"
 // You can delete this file if you're not using it
-
-const path = require("path")
-const uniq = require("lodash/uniq")
-const uniqBy = require("lodash/uniqBy")
+import path from 'path'
+import uniq from 'lodash/uniq'
+import uniqBy from 'lodash/uniqBy'
 
 // TODO: use from src/utils once gatsby-node.js is converted to TypeScript
 // duplicated for now
@@ -29,7 +29,7 @@ function normalizeCategory(category: string) {
   }
 }
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
       module: {
@@ -44,13 +44,13 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   }
 }
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Query for markdown nodes to use in creating pages.
-  const result = await graphql(
+  const result = await graphql<Queries.AllMethodsQuery>(
     `
-      {
+      query AllMethods {
         allLodashMethod {
           group(field: { category: SELECT }) {
             field
@@ -87,6 +87,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
+  if (!result.data) {
+    reporter.panicOnBuild(`Could not get data out of the query`)
+    return
+  }
+
   const allMethods = result.data.allLodashMethod.group.flatMap((group) => group.edges)
   const allVersions = uniqBy(allMethods, "node.version").map((method) => method.node.version)
   const latestVersion = allVersions.sort().at(-1)
@@ -102,7 +107,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // for example, latest version has "Array" category, but older versions have "Arrays"
   // some are even quite different, like "Chaining" vs "Seq"
   const methodCategoryPageTemplate = path.resolve(`src/templates/method-category-page.tsx`)
-  const getNormalizedCategory = (method) => normalizeCategory(method.node.category)
+  const getNormalizedCategory = (method: typeof allMethodsFromLatest[number]) => {
+    if (!method.node.category) {
+      reporter.panicOnBuild(`Category of '${method.node.name}' was null`)
+      throw Error()
+    }
+    return normalizeCategory(method.node.category)
+  }
   const categories = uniq(allMethodsFromLatest.map(getNormalizedCategory))
   categories.forEach((category) => {
     const path = `/docs/${category.toLowerCase()}`
@@ -125,7 +136,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const methodName = method.node.name
     const category = method.node.category
     const version = method.node.version
-    const normalizedCategory = normalizeCategory(category)
+    const normalizedCategory = normalizeCategory(category!)
 
     if (!methodName) {
       return

@@ -1,4 +1,6 @@
-module.exports = {
+import type { GatsbyConfig } from "gatsby";
+
+const config: GatsbyConfig = {
   siteMetadata: {
     title: `Lodash documentation`,
     siteUrl: `https://lodash-gatsby.netlify.app/`,
@@ -61,4 +63,7 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // 'gatsby-plugin-offline',
   ],
+  graphqlTypegen: true,
 }
+
+export default config;
