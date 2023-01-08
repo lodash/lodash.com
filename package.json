@@ -41,7 +41,7 @@
     "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-sharp": "^5.3.2",
     "gatsby-plugin-sitemap": "^6.3.1",
-    "gatsby-source-filesystem": "^5.2.0",
+    "gatsby-source-filesystem": "^5.3.1",
     "gatsby-transformer-sharp": "^5.2.0",
     "graphql": "^16.6.0",
     "polished": "^4.2.2",
