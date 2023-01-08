@@ -39,8 +39,6 @@ const Code = ({
     }
   }, [lang, children])
 
-  console.log(formattedCode)
-
   return (
     <S.CodeWrapper {...restProps}>
       <MaybeContainer>
