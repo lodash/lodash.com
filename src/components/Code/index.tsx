@@ -30,10 +30,10 @@ const Code = ({
 
   const formattedCode = React.useMemo(() => {
     return {
-      40: formatByWidth(children, 40),
-      80: formatByWidth(children, 80),
+      40: lang === "javascript" ? formatByWidth(children, 40) : children,
+      80: lang === "javascript" ? formatByWidth(children, 80) : children,
     }
-  }, [children])
+  }, [lang, children])
 
   console.log(formattedCode)
 
