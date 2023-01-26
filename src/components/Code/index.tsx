@@ -18,6 +18,18 @@ function formatByWidth(code: string, width: number) {
   }
 }
 
+function trimmedFirstLine(code: string) {
+  return code
+    .split("\n")
+    .filter((line, index) => {
+      if (index === 0 && line.trim() === "") {
+        return false
+      }
+      return true
+    })
+    .join("\n")
+}
+
 interface ICodeProps {
   children: string
   lang?: string
@@ -33,9 +45,10 @@ const Code = ({
   const MaybeContainer = withContainer ? Container : React.Fragment
 
   const formattedCode = React.useMemo(() => {
+    const code = trimmedFirstLine(children)
     return {
-      40: lang === "javascript" ? formatByWidth(children, 40) : children,
-      80: lang === "javascript" ? formatByWidth(children, 80) : children,
+      40: lang === "javascript" ? formatByWidth(code, 40) : code,
+      80: lang === "javascript" ? formatByWidth(code, 80) : code,
     }
   }, [lang, children])
 

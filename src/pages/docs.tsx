@@ -50,14 +50,10 @@ const CodeWrapper = styled("div", {
 })
 
 function trimLines(code: string): string {
-  return (
-    code
-      .split("\n")
-      .map((line) => line.trim())
-      // get rid of empty lines
-      .filter(Boolean)
-      .join("\n")
-  )
+  return code
+    .split("\n")
+    .map((line) => line.trim())
+    .join("\n")
 }
 
 const ALL_LODASH_METHOD_QUERY = graphql`
