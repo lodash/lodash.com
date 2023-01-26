@@ -42,6 +42,7 @@ const ALL_LODASH_METHOD_QUERY = graphql`
               name
               desc
             }
+            returns
             call
             lineNumber
             version

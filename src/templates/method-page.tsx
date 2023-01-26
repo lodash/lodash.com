@@ -32,6 +32,7 @@ export const query = graphql`
         name
         desc
       }
+      returns
       call
       lineNumber
       version

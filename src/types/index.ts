@@ -14,6 +14,7 @@ export interface IMethod {
     id: string
     name: string
     params: IMethodParam[]
+    returns: string[]
     since: string
     lineNumber: number
     version: string
