@@ -40,7 +40,7 @@ const MethodLink = React.memo(
 
     return (
       <div key={method.id}>
-        <S.StyledMethodLink
+        <S.StyledSidebarLink
           innerRef={linkRef}
           // to={`/docs/${method.aliasOf || method.name}`}
           // TODO: remove version if latest
@@ -53,7 +53,7 @@ const MethodLink = React.memo(
         >
           _.{method.name}
           {/* {method.aliasOf && ` -> ${method.aliasOf}`} */}
-        </S.StyledMethodLink>
+        </S.StyledSidebarLink>
       </div>
     )
   }
@@ -112,6 +112,7 @@ const DocsSidebar = (): JSX.Element => {
       <SearchInput />
       <S.ScrollbarWrapper>
         <PerfectScrollbar ref={scrollbarRef}>
+          <S.StyledSidebarLink to="/docs">Getting started</S.StyledSidebarLink>
           {sidebarState.filteredGroups.map((group) => {
             return (
               <MethodGroup

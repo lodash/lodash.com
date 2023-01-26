@@ -87,13 +87,14 @@ export const Methods = styled("div", {
   paddingLeft: "16px",
 })
 
-export const StyledMethodLink = styled(Link, {
+export const StyledSidebarLink = styled(Link, {
   color: "#91a0ae",
   fontSize: "16px",
   lineHeight: "18px",
   padding: "4px 0",
   textDecoration: "none",
   letterSpacing: "1px",
+  alignSelf: "flex-start",
 
   "&.active": {
     color: "#fff !important",
