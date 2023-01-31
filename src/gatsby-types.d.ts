@@ -2635,7 +2635,7 @@ type MethodQueryQueryVariables = Exact<{
 }>;
 
 
-type MethodQueryQuery = { readonly lodashMethod: { readonly id: string, readonly name: string | null, readonly category: string | null, readonly aliases: ReadonlyArray<string | null> | null, readonly desc: string | null, readonly example: string | null, readonly since: string | null, readonly call: string | null, readonly lineNumber: number | null, readonly version: string | null, readonly params: ReadonlyArray<{ readonly type: string | null, readonly name: string | null, readonly desc: string | null } | null> | null } | null };
+type MethodQueryQuery = { readonly lodashMethod: { readonly id: string, readonly name: string | null, readonly category: string | null, readonly aliases: ReadonlyArray<string | null> | null, readonly desc: string | null, readonly example: string | null, readonly since: string | null, readonly returns: ReadonlyArray<string | null> | null, readonly call: string | null, readonly lineNumber: number | null, readonly version: string | null, readonly params: ReadonlyArray<{ readonly type: string | null, readonly name: string | null, readonly desc: string | null } | null> | null } | null };
 
 type SiteTitleQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
