@@ -1639,7 +1639,7 @@ elements of each group: <em>(...group)</em>.</p>
 <h3 id="countBy"><a href="#countBy" class="fa fa-link"></a><code>_.countBy(collection, [iteratee=_.identity])</code></h3>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L9077">source</a> <a href="https://www.npmjs.com/package/lodash.countby">npm package</a></p>
 <p>Creates an object composed of keys generated from the results of running
-each element of <code>collection</code> thru <code>iteratee</code>. The corresponding value of
+each element of <code>collection</code> through <code>iteratee</code>. The corresponding value of
 each key is the number of times the key was returned by <code>iteratee</code>. The
 iteratee is invoked with one argument: <em>(value)</em>.</p>
 <h4>Since</h4>
@@ -1745,7 +1745,7 @@ arguments: <em>(value, index|key, collection)</em>.</p>
 <h3 id="flatMap"><a href="#flatMap" class="fa fa-link"></a><code>_.flatMap(collection, [iteratee=_.identity])</code></h3>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L9256">source</a> <a href="https://www.npmjs.com/package/lodash.flatmap">npm package</a></p>
 <p>Creates a flattened array of values by running each element in <code>collection</code>
-thru <code>iteratee</code> and flattening the mapped results. The iteratee is invoked
+through <code>iteratee</code> and flattening the mapped results. The iteratee is invoked
 with three arguments: <em>(value, index|key, collection)</em>.</p>
 <h4>Since</h4>
 <p>4.0.0</p>
@@ -1847,7 +1847,7 @@ or <a href="#forOwn"><code>_.forOwn</code></a> for object iteration.</p>
 <h3 id="groupBy"><a href="#groupBy" class="fa fa-link"></a><code>_.groupBy(collection, [iteratee=_.identity])</code></h3>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L9393">source</a> <a href="https://www.npmjs.com/package/lodash.groupby">npm package</a></p>
 <p>Creates an object composed of keys generated from the results of running
-each element of <code>collection</code> thru <code>iteratee</code>. The order of grouped values
+each element of <code>collection</code> through <code>iteratee</code>. The order of grouped values
 is determined by the order they occur in <code>collection</code>. The corresponding
 value of each key is an array of elements responsible for generating the
 key. The iteratee is invoked with one argument: <em>(value)</em>.</p>
@@ -1911,7 +1911,7 @@ for, and <code>this</code> bound to, each element in <code>collection</code>.</p
 <h3 id="keyBy"><a href="#keyBy" class="fa fa-link"></a><code>_.keyBy(collection, [iteratee=_.identity])</code></h3>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L9506">source</a> <a href="https://www.npmjs.com/package/lodash.keyby">npm package</a></p>
 <p>Creates an object composed of keys generated from the results of running
-each element of <code>collection</code> thru <code>iteratee</code>. The corresponding value of
+each element of <code>collection</code> through <code>iteratee</code>. The corresponding value of
 each key is the last element responsible for generating the key. The
 iteratee is invoked with one argument: <em>(value)</em>.</p>
 <h4>Since</h4>
@@ -2002,7 +2002,7 @@ invoked with one argument: <em>(value)</em>.</p>
 <h3 id="reduce"><a href="#reduce" class="fa fa-link"></a><code>_.reduce(collection, [iteratee=_.identity], [accumulator])</code></h3>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L9677">source</a> <a href="https://www.npmjs.com/package/lodash.reduce">npm package</a></p>
 <p>Reduces <code>collection</code> to a value which is the accumulated result of running
-each element in <code>collection</code> thru <code>iteratee</code>, where each successive
+each element in <code>collection</code> through <code>iteratee</code>, where each successive
 invocation is supplied the return value of the previous. If <code>accumulator</code>
 is not given, the first element of <code>collection</code> is used as the initial
 value. The iteratee is invoked with four arguments:<br>
@@ -4481,7 +4481,7 @@ property assignments of previous values.</p>
 <h3 id="invertBy"><a href="#invertBy" class="fa fa-link"></a><code>_.invertBy(object, [iteratee=_.identity])</code></h3>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L13245">source</a> <a href="https://www.npmjs.com/package/lodash.invertby">npm package</a></p>
 <p>This method is like <a href="#invert"><code>_.invert</code></a> except that the inverted object is generated
-from the results of running each element of <code>object</code> thru <code>iteratee</code>. The
+from the results of running each element of <code>object</code> through <code>iteratee</code>. The
 corresponding inverted value of each inverted key is an array of keys
 responsible for generating the inverted value. The iteratee is invoked
 with one argument: <em>(value)</em>.</p>
@@ -4561,7 +4561,7 @@ for more details.</p>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L13358">source</a> <a href="https://www.npmjs.com/package/lodash.mapkeys">npm package</a></p>
 <p>The opposite of <a href="#mapValues"><code>_.mapValues</code></a>; this method creates an object with the
 same values as <code>object</code> and keys generated by running each own enumerable
-string keyed property of <code>object</code> thru <code>iteratee</code>. The iteratee is invoked
+string keyed property of <code>object</code> through <code>iteratee</code>. The iteratee is invoked
 with three arguments: <em>(value, key, object)</em>.</p>
 <h4>Since</h4>
 <p>3.8.0</p>
@@ -4837,7 +4837,7 @@ or set, its entries are returned.</p>
 <p><a href="https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L13788">source</a> <a href="https://www.npmjs.com/package/lodash.transform">npm package</a></p>
 <p>An alternative to <a href="#reduce"><code>_.reduce</code></a>; this method transforms <code>object</code> to a new
 <code>accumulator</code> object which is the result of running each of its own
-enumerable string keyed properties thru <code>iteratee</code>, with each invocation
+enumerable string keyed properties through <code>iteratee</code>, with each invocation
 potentially mutating the <code>accumulator</code> object. If <code>accumulator</code> is not
 provided, a new object with the same <code>[[Prototype]]</code> will be used. The
 iteratee is invoked with four arguments: <em>(accumulator, value, key, object)</em>.
