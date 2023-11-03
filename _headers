@@ -26,6 +26,7 @@ csp:
     '*.buysellads.com',
     '*.buysellads.net',
     '*.c3tag.com',
+    '*.carbonads.net',
     '*.convertro.com',
     'ad.doubleclick.net',
     'www.google-analytics.com',
@@ -59,6 +60,7 @@ csp:
     'srv.carbonads.net',
     'adn.fusionads.net',
     'www.google-analytics.com',
+    'www.googletagmanager.com',
     'cdn.jsdelivr.net',
     'embed.runkit.com'
   ]
