@@ -196,6 +196,26 @@ html.docs {
     }
   }
 
+  .expand-collapse-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 2.4rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: #5f5f5f;
+    cursor: pointer;
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+    .fa {
+      color: #979797;
+      font-size: 1.5rem;
+      margin-right: 6px;
+    }
+  }
+
   .toc-container {
     @include minimal-scrollbar();
 
