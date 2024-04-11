@@ -20,9 +20,11 @@ addEventListener('load', function() {
     FRM_OPEN + TWT_CLS + 'share '      + TWT_SRC + 'tweet' + TWT_QRY + 'true&amp;url=' + location.origin + '/&amp;text=' + DSC + FRM_CLOSE
 
   var container = document.getElementById('social')
-  if (navigator.onLine && typeof phantom == 'undefined') {
-    container.innerHTML = html
-  } else {
-    container.parentNode.style.display = 'none'
+  if (container) {
+    if (navigator.onLine && typeof phantom == 'undefined') {
+      container.innerHTML = html
+    } else {
+      container.parentNode.style.display = 'none'
+    }
   }
 })
