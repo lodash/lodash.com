@@ -39,7 +39,13 @@
       script.id = '{{ site.carbon_ads.id }}'
       script.src = '{{ site.carbon_ads.href }}'
       toc.style.transform = 'none'
-      toc.insertBefore(script, toc.firstChild)
+      var adTarget = document.querySelector('.doc-container > div:first-of-type > div:nth-child(2)')
+      if (adTarget && adTarget.parentNode) {
+        adTarget.parentNode.insertBefore(script, adTarget.nextSibling)
+      } else {
+        // Fallback: place at top of docs content
+        docs.insertBefore(script, docs.firstChild)
+      }
     }
   }
 
