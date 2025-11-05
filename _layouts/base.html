@@ -27,6 +27,17 @@
   <link rel="prerender" href="/docs/{{ site.release }}" pr="1.0">
   {% endif %}
   <link rel="stylesheet" href="/assets/css/main.css">
+  <script>
+    // Initialize dark mode immediately to prevent flash
+    (function() {
+      var darkMode = localStorage.getItem('lodash-dark-mode');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = darkMode !== null ? darkMode === 'true' : prefersDark;
+      if (isDark) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>
   <noscript>
   {% for res in site.vendor.css %}
     {% assign protocol = res.href | slice:0,6 %}

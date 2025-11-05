@@ -1,0 +1,338 @@
+// Dark mode styles
+// Smooth transitions for theme changes (selective to avoid performance issues)
+html, body, header, a, button, .container, .highlight, footer, select, input {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+html.dark-mode {
+  background-color: $darkBackground;
+  color: $darkDefaultColor;
+
+  body {
+    background-color: $darkBackground;
+    color: $darkDefaultColor;
+  }
+
+  header {
+    background-color: $darkForeground;
+    box-shadow: 0 0 2.25rem $darkShadow;
+
+    .logo {
+      border-right-color: $darkDefaultLiteColor;
+    }
+  }
+
+  a {
+    color: $darkLinkColor;
+    border-bottom-color: $darkLinkUnderline;
+
+    &:hover {
+      border-bottom-color: darken($darkLinkUnderline, 20%);
+      color: lighten($darkLinkColor, 15%);
+    }
+  }
+
+  a.btn {
+    background-color: $darkBtnBg;
+    color: $darkBtnColor;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($darkBtnBg, 10%);
+      color: lighten($darkBtnColor, 10%);
+    }
+
+    &.primary {
+      background-color: $btnPrimaryBg;
+      color: $btnPrimaryColor;
+
+      &:hover,
+      &:focus {
+        background-color: darken($btnPrimaryBg, 10%);
+      }
+    }
+  }
+
+  h1, h2, h3, h4 {
+    color: $darkDefaultColor;
+  }
+
+  .container.main {
+    background-color: $darkForeground;
+    box-shadow: 0 4px 2.4rem -0.4rem $darkShadow;
+  }
+
+  .highlight {
+    background-color: $darkCodeBg;
+    color: $darkCodeColor;
+  }
+
+  footer {
+    color: $darkDefaultColor;
+  }
+
+  // Home page specific dark mode styles
+  &.home {
+    section:first-of-type {
+      background: $darkCodeBg;
+      color: $darkCodeColor;
+    }
+
+    #download-links .fa {
+      color: $darkDefaultNearColor;
+    }
+  }
+
+  // Docs specific dark mode styles
+  &.docs {
+    header {
+      .header-group {
+        display: flex;
+        align-items: center;
+
+        select + .dark-mode-toggle {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    select {
+      background-color: $darkForeground;
+      border-color: $darkForeground;
+      color: $darkDefaultColor;
+
+      &:focus {
+        border-color: $brandMain;
+      }
+    }
+
+    .doc-container {
+      background-color: $darkBackground;
+      color: $darkDefaultColor;
+
+      h2, h3, h4 {
+        color: $darkDefaultColor;
+      }
+
+      h3 {
+        background-color: $darkForeground;
+      }
+
+      h3 + p a {
+        color: $darkDefaultLiteColor;
+
+        &:hover {
+          color: lighten($darkDefaultLiteColor, 15%);
+        }
+      }
+
+      h4 + ol code,
+      h4 + ol em,
+      h4 + p em {
+        color: lighten($darkLinkColor, 10%);
+      }
+
+      ol, ul, p {
+        color: $darkDefaultColor;
+      }
+
+      a {
+        color: $darkLinkColor;
+        border-bottom-color: $darkLinkUnderline;
+
+        &:hover {
+          color: lighten($darkLinkColor, 15%);
+          border-bottom-color: lighten($darkLinkUnderline, 20%);
+        }
+      }
+
+      .highlight {
+        background-color: $darkCodeBg;
+        color: $darkCodeColor;
+
+        &.js {
+          .comment {
+            color: #888;
+          }
+
+          .numeric,
+          .modifier,
+          .type {
+            color: #ffd700;
+          }
+
+          .name,
+          .support {
+            color: #6ba3ff;
+          }
+
+          .console {
+            color: #d4d4d4;
+          }
+
+          .string {
+            color: #98fb98;
+          }
+        }
+
+        &.html {
+          .string {
+            color: #98fb98;
+          }
+        }
+      }
+    }
+
+    .doc-main {
+      background-color: $darkForeground;
+    }
+
+    .toc-container {
+      background-color: $darkForeground;
+
+      // Dark mode scrollbar
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: $darkForeground;
+      }
+
+      h2 {
+        color: $darkDefaultColor;
+      }
+
+      ul {
+        border-left-color: $darkDefaultLiteColor;
+
+        li a {
+          color: $darkDefaultColor;
+
+          &:hover {
+            color: lighten($darkDefaultColor, 30%);
+          }
+        }
+      }
+
+      .empty-state {
+        color: $darkDefaultLiteColor;
+      }
+
+      .react-menu-container {
+        .search {
+          input {
+            border-bottom-color: $darkDefaultLiteColor;
+            color: $darkDefaultColor;
+            background-color: transparent;
+
+            &:focus {
+              border-bottom-color: $darkDefaultNearColor;
+            }
+          }
+
+          .fa-search {
+            color: $darkDefaultLiteColor;
+          }
+        }
+      }
+    }
+
+    .search {
+      input {
+        border-bottom-color: $darkDefaultLiteColor;
+        color: $darkDefaultColor;
+        background-color: transparent;
+
+        &:focus {
+          border-bottom-color: $darkDefaultNearColor;
+        }
+      }
+
+      .fa-search {
+        color: $darkDefaultLiteColor;
+      }
+    }
+
+    .mobile-menu {
+      a {
+        color: $darkDefaultColor;
+      }
+    }
+  }
+}
+
+// Dark mode toggle button - subtle and non-intrusive
+.dark-mode-toggle {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: $defaultColor;
+  cursor: pointer;
+  font-size: 1.6rem;
+  height: 36px;
+  line-height: 1;
+  padding: 0;
+  position: relative;
+  transition: all 0.2s ease;
+  width: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.8rem;
+  opacity: 0.7;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    outline: none;
+    opacity: 1;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .icon {
+    display: block;
+    line-height: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .sun-icon {
+    display: none;
+  }
+
+  .moon-icon {
+    display: block;
+  }
+}
+
+html.dark-mode .dark-mode-toggle {
+  color: $darkDefaultColor;
+  opacity: 0.8;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+  }
+
+  .sun-icon {
+    display: block;
+  }
+
+  .moon-icon {
+    display: none;
+  }
+}
+
+// Mobile adjustments for toggle button
+@media (max-width: $screen-sm-max) {
+  .dark-mode-toggle {
+    margin-left: 0.5rem;
+    height: 32px;
+    width: 32px;
+    font-size: 1.4rem;
+  }
+}
+
