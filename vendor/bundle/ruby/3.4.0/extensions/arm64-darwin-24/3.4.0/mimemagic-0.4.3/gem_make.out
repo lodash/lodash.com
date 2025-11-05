@@ -1,0 +1,3 @@
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/mimemagic-0.4.3/ext/mimemagic
+/opt/homebrew/opt/ruby/bin/ruby -rrubygems /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/rake-13.1.0/exe/rake RUBYARCHDIR\=/Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/extensions/arm64-darwin-24/3.4.0/mimemagic-0.4.3 RUBYLIBDIR\=/Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/extensions/arm64-darwin-24/3.4.0/mimemagic-0.4.3
+mkdir -p /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/extensions/arm64-darwin-24/3.4.0/mimemagic-0.4.3/mimemagic

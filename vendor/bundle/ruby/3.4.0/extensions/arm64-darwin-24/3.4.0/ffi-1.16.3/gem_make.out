@@ -1,0 +1,50 @@
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/ffi-1.16.3/ext/ffi_c
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+checking for pkg-config for libffi... not found
+checking for ffi.h... no
+checking for ffi.h in /usr/local/include,/usr/include/ffi,/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/ffi,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/ffi... yes
+checking for ffi_prep_closure_loc() in -lffi... yes
+checking for ffi_prep_cif_var()... yes
+checking for ffi_raw_call()... yes
+checking for ffi_prep_raw_closure()... yes
+checking for rb_gc_mark_movable()... yes
+checking for whether -pthread is accepted as LDFLAGS... yes
+creating extconf.h
+creating Makefile
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/ffi-1.16.3/ext/ffi_c
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-qihkyl sitelibdir\=./.gem.20251105-9419-qihkyl clean
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/ffi-1.16.3/ext/ffi_c
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-qihkyl sitelibdir\=./.gem.20251105-9419-qihkyl
+compiling AbstractMemory.c
+compiling ArrayType.c
+compiling Buffer.c
+compiling Call.c
+compiling ClosurePool.c
+compiling DynamicLibrary.c
+compiling Function.c
+compiling FunctionInfo.c
+compiling LastError.c
+compiling LongDouble.c
+compiling MappedType.c
+compiling MemoryPointer.c
+compiling MethodHandle.c
+compiling Platform.c
+compiling Pointer.c
+compiling Struct.c
+compiling StructByValue.c
+compiling StructLayout.c
+compiling Thread.c
+compiling Type.c
+compiling Types.c
+compiling Variadic.c
+compiling ffi.c
+linking shared-object ffi_c.bundle
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/ffi-1.16.3/ext/ffi_c
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-qihkyl sitelibdir\=./.gem.20251105-9419-qihkyl install
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20251105-9419-qihkyl
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/ffi-1.16.3/ext/ffi_c
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-qihkyl sitelibdir\=./.gem.20251105-9419-qihkyl clean
