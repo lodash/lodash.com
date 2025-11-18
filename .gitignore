@@ -5,3 +5,5 @@
 *.log
 _site
 node_modules
+.bundle/*
+!.bundle/config

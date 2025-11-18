@@ -100,7 +100,7 @@ exclude:
   - icons.js
   - LICENSE
   - package.json
-  - vendor
+  - package-lock.json
   - .bundle
   - "*.lock"
   - "*.log"
