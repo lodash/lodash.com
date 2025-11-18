@@ -21,7 +21,6 @@ const imagemin = require('gulp-imagemin')
 const jsonmin = require('gulp-jsonmin')
 const purify = require('gulp-purifycss')
 const responsive = require('gulp-responsive')
-const sequence = require('gulp-sequence')
 const uglify = require('gulp-uglify')
 
 const base = './'
@@ -281,32 +280,7 @@ gulp.task('build-vendor', () =>
 
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'))
-gulp.task('build-css', ['minify-css'])
-gulp.task('build-headers', () => cleanFile('_site/_headers'))
-gulp.task('build-html', ['minify-html'])
-gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'))
-gulp.task('build-js', sequence('build-sw'))
-gulp.task('build-metadata', ['build-appcache', 'minify-json', 'minify-xml'])
-gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
-
-gulp.task('build-app-icons', () =>
-  pump([
-    gulpSrc(['**/*.{png,svg}', '!_site/**/*'], opts),
-    responsive(require('./icons'), plugins.responsive),
-    gulp.dest('_site/icons/')
-  ], cb)
-)
-
-gulp.task('build-favicon', () =>
-  globby('_site/icons/favicon-*.png')
-    .then(files => Promise.all(files.map(file => fs.readFile(file))))
-    .then(toIco)
-    .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
-)
-
-/*----------------------------------------------------------------------------*/
-
+// Minify tasks (must be defined first)
 gulp.task('minify-css', () =>
   pump([
     gulpSrc('_site/**/*.css', opts),
@@ -366,7 +340,39 @@ gulp.task('minify-xml', () =>
 
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build', sequence(
-  ['build-headers', 'build-metadata', 'build-redirects'],
-  ['build-css', 'build-html', 'build-images', 'build-js']
+// Individual build tasks
+gulp.task('build-app-icons', () =>
+  pump([
+    gulpSrc(['**/*.{png,svg}', '!_site/**/*'], opts),
+    responsive(require('./icons'), plugins.responsive),
+    gulp.dest('_site/icons/')
+  ], cb)
+)
+
+gulp.task('build-favicon', () =>
+  globby('_site/icons/favicon-*.png')
+    .then(files => Promise.all(files.map(file => fs.readFile(file))))
+    .then(toIco)
+    .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
+)
+
+gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'))
+gulp.task('build-headers', () => cleanFile('_site/_headers'))
+gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
+
+/*----------------------------------------------------------------------------*/
+
+// Composite build tasks
+gulp.task('build-css', gulp.series('minify-css'))
+gulp.task('build-html', gulp.series('minify-html'))
+gulp.task('build-images', gulp.series('build-app-icons', 'build-favicon', 'minify-images'))
+gulp.task('build-js', gulp.series('build-sw', 'minify-js', 'minify-sw'))
+gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-json', 'minify-xml'))
+
+/*----------------------------------------------------------------------------*/
+
+// Main build task
+gulp.task('build', gulp.series(
+  gulp.parallel('build-headers', 'build-metadata', 'build-redirects'),
+  gulp.parallel('build-css', 'build-html', 'build-images', 'build-js')
 ))
