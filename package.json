@@ -24,6 +24,7 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.3.0",
     "gulp-jsonmin": "^1.1.0",
+    "gulp-purgecss": "^7.0.2",
     "gulp-purifycss": "~0.2.0",
     "gulp-responsive": "^2.11.0",
     "gulp-uglify": "^3.0.0",

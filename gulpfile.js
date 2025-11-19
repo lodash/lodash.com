@@ -20,6 +20,7 @@ const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
 const jsonmin = require('gulp-jsonmin')
 const purify = require('gulp-purifycss')
+const purgeCss = require('gulp-purgecss')
 // const responsive = require('gulp-responsive') // Disabled: old Sharp version incompatible with Node 22
 const uglify = require('gulp-uglify')
 
@@ -93,9 +94,7 @@ const plugins = {
     })
   ],
 
-  'purify': {
-    'rejected': true,
-    'whitelist': ['*carbon*']
+  'purgeCss': {
   },
 
   'responsive': {
@@ -284,7 +283,10 @@ gulp.task('build-vendor', () =>
 gulp.task('minify-css', () =>
   pump([
     gulpSrc('_site/**/*.css', opts),
-    purify(['_site/**/*.html', '_site/assets/**/*.js'], plugins.purify),
+    purgeCss({
+      content: ['_site/**/*.html', '_site/assets/**/*.js'], 
+      safelist: { greedy: [/carbon/] }
+    }),
     cssnano(plugins.cssnano),
     gulp.dest(base)
   ])
