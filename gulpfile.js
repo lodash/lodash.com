@@ -22,7 +22,7 @@ const jsonmin = require('gulp-jsonmin')
 const purify = require('gulp-purifycss')
 const purgeCss = require('gulp-purgecss')
 // const responsive = require('gulp-responsive') // Disabled: old Sharp version incompatible with Node 22
-const uglify = require('gulp-uglify')
+const terser = require('gulp-terser')
 
 const base = './'
 const opts = { base }
@@ -105,13 +105,12 @@ const plugins = {
     'withoutEnlargement': false
   },
 
-  'uglify': {
+  'terser': {
     'compress': {
       'collapse_vars': true,
       'negate_iife': false,
       'pure_getters': true,
-      'unsafe': true,
-      'warnings': false
+      'unsafe': true
     }
   }
 }
@@ -311,7 +310,7 @@ gulp.task('minify-images', () =>
 gulp.task('minify-js', () =>
   pump([
     gulpSrc(['_site/**/*.js', '!_site/sw.js'], opts),
-    uglify(plugins.uglify),
+    terser(plugins.terser),
     gulp.dest(base)
   ], cb)
 )
