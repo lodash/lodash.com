@@ -17,7 +17,6 @@ const fs = require('fs-extra')
 const cssnano = require('gulp-cssnano')
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
-const jsonmin = require('gulp-jsonmin')
 const purgeCss = require('gulp-purgecss')
 // const responsive = require('gulp-responsive') // Disabled: old Sharp version incompatible with Node 22
 const terser = require('gulp-terser')
@@ -308,14 +307,6 @@ gulp.task('minify-js', () =>
   ], cb)
 )
 
-gulp.task('minify-json', () =>
-  pump([
-    gulpSrc('_site/**/*.json', opts),
-    jsonmin(),
-    gulp.dest(base)
-  ], cb)
-)
-
 gulp.task('minify-xml', () =>
   pump([
     gulpSrc('_site/**/*.xml', opts),
@@ -354,7 +345,7 @@ gulp.task('build-css', gulp.series('minify-css'))
 gulp.task('build-html', gulp.series('minify-html'))
 gulp.task('build-images', gulp.series('build-favicon', 'minify-images')) // build-app-icons disabled
 gulp.task('build-js', gulp.series('build-sw', 'minify-js'))
-gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-json', 'minify-xml'))
+gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-xml'))
 
 /*----------------------------------------------------------------------------*/
 

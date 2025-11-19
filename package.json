@@ -20,7 +20,6 @@
     "gulp-cssnano": "^2.1.2",
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.3.0",
-    "gulp-jsonmin": "^1.1.0",
     "gulp-purgecss": "^7.0.2",
     "gulp-responsive": "^2.11.0",
     "gulp-terser": "^2.1.0",
