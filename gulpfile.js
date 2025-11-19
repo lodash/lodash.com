@@ -14,12 +14,10 @@ const yamljs = require('js-yaml')
 
 const fs = require('fs-extra')
 
-const babel = require('gulp-babel')
 const cssnano = require('gulp-cssnano')
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
 const jsonmin = require('gulp-jsonmin')
-const purify = require('gulp-purifycss')
 const purgeCss = require('gulp-purgecss')
 // const responsive = require('gulp-responsive') // Disabled: old Sharp version incompatible with Node 22
 const terser = require('gulp-terser')
@@ -37,11 +35,6 @@ const negatedGlobs = [
 ]
 
 const plugins = {
-  'babel': {
-    'comments': false,
-    'presets': ['babili']
-  },
-
   'cssnano': {
     'autoprefixer': {
       'add': true,
@@ -309,7 +302,7 @@ gulp.task('minify-images', () =>
 
 gulp.task('minify-js', () =>
   pump([
-    gulpSrc(['_site/**/*.js', '!_site/sw.js'], opts),
+    gulpSrc('_site/**/*.js', opts),
     terser(plugins.terser),
     gulp.dest(base)
   ], cb)
@@ -319,14 +312,6 @@ gulp.task('minify-json', () =>
   pump([
     gulpSrc('_site/**/*.json', opts),
     jsonmin(),
-    gulp.dest(base)
-  ], cb)
-)
-
-gulp.task('minify-sw', () =>
-  pump([
-    gulpSrc('_site/sw.js', opts),
-    babel(plugins.babel),
     gulp.dest(base)
   ], cb)
 )
@@ -368,7 +353,7 @@ gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
 gulp.task('build-css', gulp.series('minify-css'))
 gulp.task('build-html', gulp.series('minify-html'))
 gulp.task('build-images', gulp.series('build-favicon', 'minify-images')) // build-app-icons disabled
-gulp.task('build-js', gulp.series('build-sw', 'minify-js', 'minify-sw'))
+gulp.task('build-js', gulp.series('build-sw', 'minify-js'))
 gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-json', 'minify-xml'))
 
 /*----------------------------------------------------------------------------*/
