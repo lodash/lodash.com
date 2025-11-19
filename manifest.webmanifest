@@ -12,6 +12,21 @@
   "theme_color": "#3492ff",
   "icons": [
     {
+      "src": "/icons/chrome-launcher-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-home-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-splash-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
       "src": "/assets/img/lodash.svg",
       "sizes": "any",
       "type": "image/svg+xml"
