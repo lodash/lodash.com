@@ -85,9 +85,6 @@ const plugins = {
     })
   ],
 
-  'purgeCss': {
-  },
-
   'terser': {
     'compress': {
       'collapse_vars': true,
@@ -334,5 +331,6 @@ gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-xml'))
 // Main build task
 gulp.task('build', gulp.series(
   gulp.parallel('build-headers', 'build-metadata', 'build-redirects'),
-  gulp.parallel('build-css', 'build-html', 'build-images', 'build-js')
+  gulp.parallel('build-html', 'build-js', 'build-images'),
+  'build-css' // run after build-html and build-js, dependent on their output
 ))

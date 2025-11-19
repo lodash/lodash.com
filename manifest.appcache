@@ -8,9 +8,7 @@ ignored: [
 ]
 cache: [
   '/docs/',
-  '/favicon.ico',
-  '/icons/apple-touch-180x180.png',
-  '/icons/favicon-32x32.png'
+  '/favicon.ico'
 ]
 ---
 CACHE MANIFEST
