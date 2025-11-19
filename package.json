@@ -21,7 +21,6 @@
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-purgecss": "^7.0.2",
-    "gulp-responsive": "^2.11.0",
     "gulp-terser": "^2.1.0",
     "js-yaml": "^3.8.4",
     "lodash": "^4.17.15",

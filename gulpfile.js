@@ -18,7 +18,6 @@ const cssnano = require('gulp-cssnano')
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
 const purgeCss = require('gulp-purgecss')
-// const responsive = require('gulp-responsive') // Disabled: old Sharp version incompatible with Node 22
 const terser = require('gulp-terser')
 
 const base = './'
@@ -87,14 +86,6 @@ const plugins = {
   ],
 
   'purgeCss': {
-  },
-
-  'responsive': {
-    'errorOnEnlargement': false,
-    'errorOnUnusedImage': false,
-    'silent': true,
-    'stats': false,
-    'withoutEnlargement': false
   },
 
   'terser': {
@@ -318,15 +309,6 @@ gulp.task('minify-xml', () =>
 /*----------------------------------------------------------------------------*/
 
 // Individual build tasks
-// Disabled: gulp-responsive uses old Sharp incompatible with Node 22
-// gulp.task('build-app-icons', () =>
-//   pump([
-//     gulpSrc(['**/*.{png,svg}', '!_site/**/*'], opts),
-//     responsive(require('./icons'), plugins.responsive),
-//     gulp.dest('_site/icons/')
-//   ], cb)
-// )
-
 gulp.task('build-favicon', () =>
   globby('_site/icons/favicon-*.png')
     .then(files => Promise.all(files.map(file => fs.readFile(file))))
@@ -343,7 +325,7 @@ gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
 // Composite build tasks
 gulp.task('build-css', gulp.series('minify-css'))
 gulp.task('build-html', gulp.series('minify-html'))
-gulp.task('build-images', gulp.series('build-favicon', 'minify-images')) // build-app-icons disabled
+gulp.task('build-images', gulp.series('build-favicon', 'minify-images'))
 gulp.task('build-js', gulp.series('build-sw', 'minify-js'))
 gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-xml'))
 
