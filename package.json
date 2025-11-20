@@ -30,7 +30,7 @@
     "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^3.0.0",
     "js-yaml": "^3.8.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-fetch": "^1.7.1",
     "pump": "^1.0.2",
     "sri-toolbox": "~0.2.0",
