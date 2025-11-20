@@ -6,6 +6,12 @@
   var head = document.head,
       rootEl = document.documentElement
 
+  // Load dark mode script early to prevent flash
+  var darkModeScript = document.createElement('script')
+  darkModeScript.src = '/assets/js/dark-mode.js'
+  darkModeScript.async = false
+  head.appendChild(darkModeScript)
+
   function addStyleSheet(res) {
     var link = document.createElement('link')
 
