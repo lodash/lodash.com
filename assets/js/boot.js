@@ -9,6 +9,10 @@
   function addStyleSheet(res) {
     var link = document.createElement('link')
 
+    // Note: crossOrigin is only needed for cross-origin requests with SRI.
+    // Since vendor assets are now served from same origin (/vendor/...),
+    // this condition won't match and crossOrigin won't be set - which is correct.
+    // If loading from external CDNs again, this enables CORS for SRI verification.
     if (res.integrity &&
         res.href.slice(0, 6) === 'https:') {
       link.crossOrigin = 'anonymous'
