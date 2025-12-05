@@ -2,8 +2,7 @@ html.docs {
 	@import 'carbon';
 
 	&.offline {
-		#carbonads,
-		.btn-repl {
+		#carbonads {
 			display: none;
 		}
 
@@ -36,14 +35,6 @@ html.docs {
 			border-color: $brandMain;
 			outline: 0;
 		}
-	}
-
-	.btn-repl {
-		bottom: 2.4rem;
-		color: $foreground;
-		font-size: 1.3rem;
-		position: absolute;
-		right: 0;
 	}
 
 	.container {
@@ -160,13 +151,6 @@ html.docs {
 				margin-right: 1rem;
 			}
 		}
-	}
-
-	.repl {
-		background-color: transparent;
-		margin: 0 0 0 -75px;
-		padding: 0;
-		width: calc(100% + 175px);
 	}
 
 	.search {
