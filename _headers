@@ -176,11 +176,6 @@ Add link header for doc pages.
 /docs/*
   Link: {{ docs | join:', ' }}
 
-{% for res in site.builds %}
-/docs/{{ res[0] }}*
-  Link: <{{ res[1].href }}>; rel=preload; as=script; pr=1.0; crossorigin
-{% endfor %}
-
 {% comment %}
 Add CSP header directives.
 {% endcomment %}

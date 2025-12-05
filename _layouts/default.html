@@ -32,10 +32,3 @@ layout: base
     <p>Maintained by the <a href="{{ site.links.org }}/people">core team</a> with help from <a href="{{ site.links.repo }}/graphs/contributors">our contributors</a>.
   </div>
 </footer>
-{% assign res = site.builds[site.release] %}
-{% assign protocol = res.href | slice:0,6 %}
-{% if res.integrity and protocol == 'https:' %}
-<script src="{{ res.href }}" integrity="{{ res.integrity }}" async crossorigin></script>
-{% else %}
-<script src="{{ res.href }}" async></script>
-{% endif %}

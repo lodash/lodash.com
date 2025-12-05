@@ -196,13 +196,8 @@ function toRegExp(string) {
 /*----------------------------------------------------------------------------*/
 
 gulp.task('build-config', () => {
-  const update = (config, oldVer, newVer) => config
-    // Update `release` anchor value.
-    .replace(/(&release +)\S+/, (match, prelude) => prelude + newVer)
-    // Update `release` alias build href.
-    .replace(/(\*release:[\s\S]+?\bhref: *)(\S+)/, (match, prelude, href) =>
-      prelude + href.replace(toRegExp(oldVer), newVer)
-    )
+  const update = (config, oldVer, newVer) => 
+    config.replace(/(&release +)\S+/, (match, prelude) => prelude + newVer) // Update `release` anchor value.
 
   return readSource('_config.yml').then(config => {
     const args = process.argv.slice(3)
@@ -215,7 +210,6 @@ gulp.task('build-config', () => {
     const parsed = parseYAML(config)
     const push = ({ href, integrity }) => entries.push({ href, integrity })
 
-    _.forOwn(parsed.builds, push)
     _.forOwn(parsed.vendor, items => items.forEach(push))
 
     return Promise.all(entries.map(({ href }) => fetch(href)))
@@ -259,7 +253,6 @@ gulp.task('build-vendor', () =>
     const parsed = parseYAML(config)
     const push = value => hrefs.push(value.href || value)
 
-    _.forOwn(parsed.builds, push)
     _.forOwn(parsed['font-face'], styles => _.forOwn(styles, hrefs => hrefs.forEach(push)))
     _.forOwn(parsed.vendor, items => items.forEach(push))
     _.remove(hrefs, href => href.endsWith('/'))

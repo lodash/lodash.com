@@ -45,19 +45,6 @@ sass:
   sass_dir:
     assets/css
 
-builds:
-  *release:
-    href: https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
-    integrity: sha384-H6KKS1H1WwuERMSm+54dYLzjg0fKqRK5ZRyASdbrI/lwrCc6bXEmtGYr5SwvP1pZ
-
-  3.10.1:
-    href: https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js
-    integrity: sha384-0BrUT26SU4JPtbvE/hI6oj4mbEXE32qhRoD51rUTB+QFrg6ViIceJR8op6FmEIA1
-
-  2.4.2:
-    href: https://cdn.jsdelivr.net/npm/lodash@2.4.2/dist/lodash.min.js
-    integrity: sha384-i14qZ6FYmJXQABb+YG5tH4NXjKOLznxsr5jFsNiJNRcQ77978BoUif762EQyydgt
-
 font-face:
   fontawesome:
     regular:
