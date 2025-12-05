@@ -81,6 +81,9 @@ Add html pages to cache.
 {% comment %}
 Add Lodash scripts to cache.
 {% endcomment %}
+{% for res in site.builds %}
+  {% assign cache = cache | push:res[1].href %}
+{% endfor %}
 
 {% comment %}
 Add vendor files to cache.
