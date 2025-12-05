@@ -421,46 +421,6 @@
     if (!document.hidden) {
       carbonate()
     }
-    // Add REPL buttons.
-    if ('innerText' in docs) {
-      _.each(docs.querySelectorAll('.highlight.js'), function(div) {
-        var button = document.createElement('a'),
-            parent = div.parentNode
-
-        button.classList.add('btn-repl')
-        button.textContent = 'Try in REPL'
-        button.style.display = navigator.onLine ? '' : 'none'
-        button.addEventListener('click', function() {
-          if (typeof RunKit == 'undefined') {
-            return
-          }
-
-          var source = div.innerText
-          parent.removeChild(div)
-          parent.removeChild(button)
-          RunKit.createNotebook({
-            'element': parent,
-            'nodeVersion': '*',
-            'preamble': [
-              'var _ = require("lodash@' + versionSelect.value + '")',
-              '_.assign(global, require("lodash-doc-globals"))',
-              'Object.observe = _.noop'
-            ].join('\n'),
-            'source': source,
-            'theme': 'atom-light-syntax',
-            'onLoad': function(notebook) {
-              if (!RunKit.version) {
-                var iframe = parent.lastElementChild
-                iframe.style.cssText = 'height:' + iframe.style.height
-                iframe.classList.add('repl')
-              }
-              notebook.evaluate()
-            }
-          })
-        })
-        parent.appendChild(button)
-      })
-    }
   }
 
   if (document.readyState == 'loading') {
