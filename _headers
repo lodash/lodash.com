@@ -8,9 +8,6 @@ csp:
     'data:',
     'ms-appx-web:',
     'ghbtns.com',
-    'runkit.com',
-    '*.runkit-embed.com',
-    'runkit-embed.com',
     'platform.twitter.com'
   ]
   connect-src: [
@@ -46,9 +43,6 @@ csp:
     'data:',
     'ms-appx-web:',
     'ghbtns.com',
-    'runkit.com',
-    '*.runkit-embed.com',
-    'runkit-embed.com',
     'platform.twitter.com'
   ]
   manifest-src: [
@@ -62,7 +56,6 @@ csp:
     'www.google-analytics.com',
     'www.googletagmanager.com',
     'cdn.jsdelivr.net',
-    'embed.runkit.com'
   ]
   style-src: [
     "'self'",
@@ -72,7 +65,6 @@ hints:
   all: [
     '</sw.js>; rel=serviceworker',
     '<https://cdn.jsdelivr.net/>; rel=preconnect; pr=1.0; crossorigin',
-    '<//runkit.com/>; rel=dns-prefetch; pr=0.25; crossorigin',
     '<//cdn.carbonads.com/>; rel=dns-prefetch; pr=0.25',
     '<//srv.carbonads.net/>; rel=dns-prefetch; pr=0.25'
   ]

@@ -45,11 +45,6 @@
     display: inline;
   }
 
-  html.docs {
-    .btn-repl {
-      display: none;
-    }
-  }
 }
 
 @media (max-width: $screen-md-max) {
@@ -130,7 +125,6 @@
 
     header,
     h3 a,
-    .btn-repl,
     .doc-container h3 + p a,
     .toc-container {
       display: none !important;
