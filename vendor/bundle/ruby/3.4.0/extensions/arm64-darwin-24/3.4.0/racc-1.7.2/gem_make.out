@@ -1,0 +1,18 @@
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/racc-1.7.2/ext/racc/cparse
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/racc-1.7.2/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-yb0n7p sitelibdir\=./.gem.20251105-9419-yb0n7p clean
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/racc-1.7.2/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-yb0n7p sitelibdir\=./.gem.20251105-9419-yb0n7p
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/racc-1.7.2/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-yb0n7p sitelibdir\=./.gem.20251105-9419-yb0n7p install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20251105-9419-yb0n7p/racc
+
+current directory: /Users/prempyla/Desktop/lodash.com/vendor/bundle/ruby/3.4.0/gems/racc-1.7.2/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20251105-9419-yb0n7p sitelibdir\=./.gem.20251105-9419-yb0n7p clean
