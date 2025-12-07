@@ -281,7 +281,7 @@ gulp.task('minify-html', () =>
 
 gulp.task('minify-images', () =>
   pump([
-    gulpSrc('_site/**/*.{png,svg}', opts),
+    gulpSrc('_site/**/*.{png,svg}', { ...opts, encoding: false }),
     imagemin(plugins.imagemin),
     gulp.dest(base)
   ], cb)
