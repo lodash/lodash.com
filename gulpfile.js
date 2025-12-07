@@ -14,15 +14,11 @@ const yamljs = require('js-yaml')
 
 const fs = require('fs-extra')
 
-const babel = require('gulp-babel')
 const cssnano = require('gulp-cssnano')
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
-const jsonmin = require('gulp-jsonmin')
-const purify = require('gulp-purifycss')
-const responsive = require('gulp-responsive')
-const sequence = require('gulp-sequence')
-const uglify = require('gulp-uglify')
+const purgeCss = require('gulp-purgecss')
+const terser = require('gulp-terser')
 
 const base = './'
 const opts = { base }
@@ -37,11 +33,6 @@ const negatedGlobs = [
 ]
 
 const plugins = {
-  'babel': {
-    'comments': false,
-    'presets': ['babili']
-  },
-
   'cssnano': {
     'autoprefixer': {
       'add': true,
@@ -94,26 +85,12 @@ const plugins = {
     })
   ],
 
-  'purify': {
-    'rejected': true,
-    'whitelist': ['*carbon*']
-  },
-
-  'responsive': {
-    'errorOnEnlargement': false,
-    'errorOnUnusedImage': false,
-    'silent': true,
-    'stats': false,
-    'withoutEnlargement': false
-  },
-
-  'uglify': {
+  'terser': {
     'compress': {
       'collapse_vars': true,
       'negate_iife': false,
       'pure_getters': true,
-      'unsafe': true,
-      'warnings': false
+      'unsafe': true
     }
   }
 }
@@ -281,36 +258,14 @@ gulp.task('build-vendor', () =>
 
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'))
-gulp.task('build-css', ['minify-css'])
-gulp.task('build-headers', () => cleanFile('_site/_headers'))
-gulp.task('build-html', ['minify-html'])
-gulp.task('build-images', sequence('build-app-icons', 'build-favicon', 'minify-images'))
-gulp.task('build-js', sequence('build-sw'))
-gulp.task('build-metadata', ['build-appcache', 'minify-json', 'minify-xml'])
-gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
-
-gulp.task('build-app-icons', () =>
-  pump([
-    gulpSrc(['**/*.{png,svg}', '!_site/**/*'], opts),
-    responsive(require('./icons'), plugins.responsive),
-    gulp.dest('_site/icons/')
-  ], cb)
-)
-
-gulp.task('build-favicon', () =>
-  globby('_site/icons/favicon-*.png')
-    .then(files => Promise.all(files.map(file => fs.readFile(file))))
-    .then(toIco)
-    .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
-)
-
-/*----------------------------------------------------------------------------*/
-
+// Minify tasks (must be defined first)
 gulp.task('minify-css', () =>
   pump([
     gulpSrc('_site/**/*.css', opts),
-    purify(['_site/**/*.html', '_site/assets/**/*.js'], plugins.purify),
+    purgeCss({
+      content: ['_site/**/*.html', '_site/assets/**/*.js'], 
+      safelist: { greedy: [/carbon/] }
+    }),
     cssnano(plugins.cssnano),
     gulp.dest(base)
   ])
@@ -334,24 +289,8 @@ gulp.task('minify-images', () =>
 
 gulp.task('minify-js', () =>
   pump([
-    gulpSrc(['_site/**/*.js', '!_site/sw.js'], opts),
-    uglify(plugins.uglify),
-    gulp.dest(base)
-  ], cb)
-)
-
-gulp.task('minify-json', () =>
-  pump([
-    gulpSrc('_site/**/*.json', opts),
-    jsonmin(),
-    gulp.dest(base)
-  ], cb)
-)
-
-gulp.task('minify-sw', () =>
-  pump([
-    gulpSrc('_site/sw.js', opts),
-    babel(plugins.babel),
+    gulpSrc('_site/**/*.js', opts),
+    terser(plugins.terser),
     gulp.dest(base)
   ], cb)
 )
@@ -366,7 +305,32 @@ gulp.task('minify-xml', () =>
 
 /*----------------------------------------------------------------------------*/
 
-gulp.task('build', sequence(
-  ['build-headers', 'build-metadata', 'build-redirects'],
-  ['build-css', 'build-html', 'build-images', 'build-js']
+// Individual build tasks
+gulp.task('build-favicon', () =>
+  globby('_site/icons/favicon-*.png')
+    .then(files => Promise.all(files.map(file => fs.readFile(file))))
+    .then(toIco)
+    .then(buffer => fs.writeFile('_site/favicon.ico', buffer))
+)
+
+gulp.task('build-appcache', () => cleanFile('_site/manifest.appcache'))
+gulp.task('build-headers', () => cleanFile('_site/_headers'))
+gulp.task('build-redirects', () => cleanFile('_site/_redirects'))
+
+/*----------------------------------------------------------------------------*/
+
+// Composite build tasks
+gulp.task('build-css', gulp.series('minify-css'))
+gulp.task('build-html', gulp.series('minify-html'))
+gulp.task('build-images', gulp.series('build-favicon', 'minify-images'))
+gulp.task('build-js', gulp.series('build-sw', 'minify-js'))
+gulp.task('build-metadata', gulp.parallel('build-appcache', 'minify-xml'))
+
+/*----------------------------------------------------------------------------*/
+
+// Main build task
+gulp.task('build', gulp.series(
+  gulp.parallel('build-headers', 'build-metadata', 'build-redirects'),
+  gulp.parallel('build-html', 'build-js', 'build-images'),
+  'build-css' // run after build-html and build-js, dependent on their output
 ))
