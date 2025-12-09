@@ -248,8 +248,8 @@
     },
 
     'shouldComponentUpdate': function(nextProps, nextState) {
-      return (this.state.searchFound || nextState.searchFound) &&
-        (normalize(this.state.searchValue) !== normalize(nextState.searchValue) ||
+      return this.state.searchValue !== nextState.searchValue ||
+        ((this.state.searchFound || nextState.searchFound) &&
           !_.isEqual(this.state.content, nextState.content))
     },
 
