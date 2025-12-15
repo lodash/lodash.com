@@ -47,16 +47,16 @@ sass:
 
 builds:
   *release:
-    href: https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
-    integrity: sha384-H6KKS1H1WwuERMSm+54dYLzjg0fKqRK5ZRyASdbrI/lwrCc6bXEmtGYr5SwvP1pZ
+    href: https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.js
+    integrity: sha384-l3ZPesZ3gDMDOrzjEodAMRyQlQnAR6KFZN2hnIr+h8Y80fuKlD1jsjdxJpKr9XgP
 
   3.10.1:
-    href: https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js
-    integrity: sha384-0BrUT26SU4JPtbvE/hI6oj4mbEXE32qhRoD51rUTB+QFrg6ViIceJR8op6FmEIA1
+    href: https://cdn.jsdelivr.net/lodash/3.10.1/lodash.js
+    integrity: sha384-Ttnm2H4AwtbOQtv9MhMtaiQESoDpIaUkjBikyZkN/ViPWCJPc0tN2Y+6LEB2xOvW
 
   2.4.2:
-    href: https://cdn.jsdelivr.net/npm/lodash@2.4.2/dist/lodash.min.js
-    integrity: sha384-i14qZ6FYmJXQABb+YG5tH4NXjKOLznxsr5jFsNiJNRcQ77978BoUif762EQyydgt
+    href: https://cdn.jsdelivr.net/npm/lodash@2.4.2/dist/lodash.js
+    integrity: sha384-dHt0zhrUjipKqd+3ge2VoJVUN8P9+oRNNwMgOYkwED5zlnhMR7bunXrmegF2MFJv
 
 font-face:
   fontawesome:
