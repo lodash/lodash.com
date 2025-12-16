@@ -61,10 +61,14 @@ csp:
     "'self'",
     'cdn.jsdelivr.net'
   ]
-  # Allow inline style attributes for Carbon Ads dynamic branding colors.
-  # Dynamic hex values (e.g., style="background: #ABC123") cannot be hashed
-  # since they change per ad impression. Using style-src-attr instead of
-  # style-src 'unsafe-inline' maintains protection for <style> blocks.
+  # Carbon Ads applies dynamic branding colors that can't be hashed
+  # (they change per ad impression). Different ad formats use different methods:
+  # - cover format: injects <style> blocks (needs style-src-elem)
+  # - classic/responsive formats: uses style="" attributes (needs style-src-attr)
+  style-src-elem: [
+    "'self'",
+    "'unsafe-inline'",
+  ]
   style-src-attr: [
     "'unsafe-inline'"
   ]
