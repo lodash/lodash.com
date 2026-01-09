@@ -1,0 +1,27 @@
+html.version-support {
+  .support-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6rem 0;
+
+    th, td {
+      padding: 1.2rem 1.6rem;
+      text-align: left;
+      border-bottom: 1px solid $linkUnderline;
+    }
+
+    th {
+      font-weight: 600;
+      color: $defaultColor;
+    }
+
+    td:first-child {
+      font-weight: 600;
+    }
+
+    .ongoing {
+      color: $brandMain;
+      font-weight: 600;
+    }
+  }
+}
